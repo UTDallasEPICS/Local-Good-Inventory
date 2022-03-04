@@ -9,17 +9,17 @@ create a basic UI/UX design of the website for the front end, and a database des
 aspects of the design to construct a basic prototype of the website by the end of the semester.
 
 Spring'22 Team:
-Sagar Dhaduk - Financial Officer
-Veeren Patel - Project Partner Liaison
-Nikhil Dasari - Project Webmaster
-Adwaith Moothezhath - Project Leader
-Michael Ross - Project Webmaster
-Al Wasee Mahmood - Document Manager
+Sagar Dhaduk - Financial Officer,
+Veeren Patel - Project Partner Liaison,
+Nikhil Dasari - Project Webmaster,
+Adwaith Moothezhath - Project Leader,
+Michael Ross - Project Webmaster,
+Al Wasee Mahmood - Document Manager.
 
 
 Software tools to be used:
-Atom
-Vs Code
-Figma
+Atom,
+Vs Code,
+Figma,
 MongoDB
 
