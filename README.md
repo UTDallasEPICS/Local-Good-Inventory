@@ -12,7 +12,7 @@ aspects of the design to construct a basic prototype of the website by the end o
 
 In order to run this application, make sure you have node installed on your computer. The link can be found [here.](https://nodejs.org/en/download/)  
 Next, you're going to want to either download this directory through git or clone it through the command line.  
-Afterwards, you need to cd into the "app" directory, and run `node index.js`. Then if you navigate to `https://localhost:3000`, you should see the sample React wbsite being served.
+Afterwards, you need to cd into the "app" directory, and run `node index.js`. Then if you navigate to [https://localhost:3000](https://localhost:3000), you should see the sample React wbsite being served.
 
 ## Spring'22 Team
 
@@ -21,13 +21,11 @@ Veeren Patel - Project Partner Liaison\
 Nikhil Dasari - Project Webmaster\
 Adwaith Moothezhath - Project Leader\
 Michael Ross - Project Webmaster\
-Al Wasee Mahmood - Document Manager\
-
+Al Wasee Mahmood - Document Manager
 
 ## Software tools to be used
 
 Atom\
 Vs Code\
 Figma\
-MongoDB\
-
+MongoDB
