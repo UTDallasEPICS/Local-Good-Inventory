@@ -1,0 +1,49 @@
+body {
+  background-color: #E8F5F9;
+  margin: 0 0 0 0;
+}
+
+.header {
+  position: relative;
+  background-color: #28487B;
+  width: 100%;
+  height: 160px;
+}
+
+.middle {
+  position: relative;
+  text-align: center;
+}
+
+.footer {
+  position: fixed;
+  background-color: #E4AC3C;
+  bottom: 0;
+  height: 70px;
+  width: 100%
+}
+
+.logo {
+  position: absolute;
+  left: 30px;
+  top: 10px;
+  height: 130px;
+  width: 230px;
+}
+
+.welcome {
+  width: 100%;
+  height: 1200px;
+  opacity: 0.65;
+}
+
+.welcome_text {
+  position: absolute;
+  left: 40%;
+  top: 85px;
+  font-family: 'Georgia', Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 4rem;
+  color: #141C29;
+}
