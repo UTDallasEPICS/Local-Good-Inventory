@@ -12,9 +12,21 @@ aspects of the design to construct a basic prototype of the website by the end o
 
 In order to run this application, make sure you have node installed on your computer. The link can be found [here.](https://nodejs.org/en/download/)  
 Next, you're going to want to either download this directory through git or clone it through the command line.  
-Afterwards, you need to cd into the "app" directory, and run `node index.js`. Then if you navigate to [https://localhost:3000](https://localhost:3000), you should see the sample React wbsite being served.
 
-## Spring'22 Team
+### Back End
+
+To run the back-end of this app, which just connects to the database and displays no website or graphical interface, in your terminal, you want to
+    cd app
+    node index.js 
+
+### Front End
+
+To see the front end, the angular website and it's component, running, in your terminal,
+    cd client
+    ng serve
+Then navigate to [http://localhost:4200](http://localhost:4200), and you should see the website being served.
+
+## Spring '22 Team
 
 Sagar Dhaduk - Financial Officer\
 Veeren Patel - Project Partner Liaison\
@@ -28,4 +40,6 @@ Al Wasee Mahmood - Document Manager
 Atom\
 Vs Code\
 Figma\
-MongoDB
+MongoDB\
+Node.js\
+Angular
