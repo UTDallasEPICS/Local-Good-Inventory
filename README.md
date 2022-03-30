@@ -16,14 +16,19 @@ Next, you're going to want to either download this directory through git or clon
 ### Back End
 
 To run the back-end of this app, which just connects to the database and displays no website or graphical interface, in your terminal, you want to
-    cd app
-    node index.js 
+```
+cd app
+node index.js 
+```
 
 ### Front End
 
 To see the front end, the angular website and it's component, running, in your terminal,
-    cd client
-    ng serve
+```
+cd client
+ng serve
+```
+
 Then navigate to [http://localhost:4200](http://localhost:4200), and you should see the website being served.
 
 ## Spring '22 Team
