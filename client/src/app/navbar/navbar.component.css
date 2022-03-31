@@ -1,0 +1,13 @@
+div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: blue;
+    color: white;
+
+}
+
+div p {
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
