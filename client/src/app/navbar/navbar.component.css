@@ -1,5 +1,14 @@
 .navbar {
     background-color: #28487B;
-    height: 4rem;
+    height: 6rem;
     padding: 0 0 0 0;
+}
+
+.navbar-item img {
+    max-height: 3.5rem;
+}
+
+.logo {
+  height: 180px;
+  width: 140px;
 }

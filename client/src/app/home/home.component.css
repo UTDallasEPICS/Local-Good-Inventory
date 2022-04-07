@@ -1,5 +1,28 @@
-.hero {
-    background-image: url('https://downloadhdwallpapers.in/wp-content/uploads/2017/12/Colorful-Tree.jpg') !important;
-    background-size: cover;
+.hero-body {
+    background-image: url('https://images.squarespace-cdn.com/content/v1/605de134d463f363dd19bd79/801aa7f7-30b2-4608-90c5-6f81954647b3/AC-Local-Good-Center-Homepage-Slides-LOBBY.jpg?format=2500w') !important;
+    background-repeat: no-repeat;
+    background-size: contain;
     background-position: center center;
+    opacity: 0.95;
+    background-color: #28487B;
+}
+
+.language-section {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+}
+
+.language-title {
+    font-size: 3rem;
+    padding-bottom: 4rem;
+    color: #28487B;
+    font-weight: bolder;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.button {
+    background-color: #28487B;
+    color: white;
+    width: 10rem;
 }
