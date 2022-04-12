@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+}
+div {
+    width: 50%;
+    margin: 10rem auto;
+    padding: 10px;
+    outline: 1px solid black;
+}
+button {
+    display: inline;
+    margin: auto;
+}
+#changes {
+    text-align: center;
+}

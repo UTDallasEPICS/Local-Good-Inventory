@@ -1,0 +1,18 @@
+<h1> Hello {{family.name}} Family!</h1>
+<div>
+    <p>Name: {{family.name}} Family</p>
+    <p>Phone Number: 
+        ({{family.phoneNumber.substring(0,3)}})-{{family.phoneNumber.substring(3,6)}}-{{family.phoneNumber.substring(6,10)}}</p>
+    <p>ZIP Code: </p>
+    <p>People:</p>
+    <p *ngFor="let member of family.members">&nbsp;&nbsp;&nbsp;&nbsp;{{member.name}} age {{member.age}}</p>
+</div>
+
+<div id="changes">
+    <h1>Have there been any changes in family members since your last visit?</h1>
+    <button>Yes</button>
+    <button>No</button>
+
+</div>
+
+<router-outlet></router-outlet>
