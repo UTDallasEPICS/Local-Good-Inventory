@@ -1,13 +1,14 @@
-div {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background-color: blue;
-    color: white;
-
+.navbar {
+    background-color: #28487B;
+    height: 6rem;
+    padding: 0 0 0 0;
 }
 
-div p {
-    padding: 10px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.navbar-item img {
+    max-height: 3.5rem;
+}
+
+.logo {
+  height: 180px;
+  width: 140px;
 }
