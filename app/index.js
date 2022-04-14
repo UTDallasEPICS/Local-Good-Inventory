@@ -3,9 +3,16 @@
  */
 
 const express = require('express');
+const { MongoClient } = require('mongodb');
 const app = express();
-const path = require('path');
 const port = 3000;
+
+const mongoClient = new MongoClient("mongodb+srv://user1:UTDallas1@cluster0.yjnoy.mongodb.net/")
+
+mongoClient.connect();
+
+const familiesCollection = mongoClient.db('TestDatabase').collection('CollectionOne');
+
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -18,27 +25,20 @@ app.use((req, res, next) => {
 
 app.use('/family', (req, res) => {
   family = {phoneNumber: "", name: "", members: [] }
+  
   if(req.query.phoneNumber) {
-    family = {
-      phoneNumber: "5128391223",
-      name: "Ross",
-      members: [
-        { name: "Michael", age: "18-59", allergies: ["nuts"]},
-        { name: "Diane", age: "60+", allergies: []}
-      ]
-    }
+    const query = { phoneNumber: req.query.phoneNumber };
+    familiesCollection.findOne(query).then((family) => {
+      this.family = family;
+      console.log(family);
+      res.status(200).json({
+        family
+      });
+    });
   } else {
-    family = {
-      phoneNumber: "2817443226",
-      name: "Villegas",
-      members: [
-        { name: "Isabelle", age: "18-59", allergies: [] }
-      ]
-    }
+    res.status(404);
   }
-  res.status(200).json({
-      family
-  });
+  
 });
 
 app.listen(port, () => {
