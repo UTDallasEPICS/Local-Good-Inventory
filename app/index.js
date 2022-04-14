@@ -9,8 +9,18 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.use((req, res) => {
-   res.send('Hello world!');
+app.use('/family', (req, res) => {
+    const family = {
+        phoneNumber: "5128391223",
+        name: "Ross",
+        members: [
+          { name: "Michael", age: "18-59", allergies: ["nuts"]},
+          { name: "Diane", age: "60+", allergies: []}
+        ]
+      }
+    res.status(200).json({
+        family
+    });
 });
 
 app.listen(port, () => {

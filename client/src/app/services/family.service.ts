@@ -1,24 +1,17 @@
 import { Family } from "../models/family.model"
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
+import { Injectable } from "@angular/core";
 
+@Injectable({providedIn: 'root'})
 export class FamilyService {
     private family: Family = {name: "", phoneNumber: "", members: []};
     private familyUpdated = new Subject<Family>();
 
-    constructor(private http: HttpClient) {
-        this.family = {
-            phoneNumber: "5128391223",
-            name: "Ross",
-            members: [
-              { name: "Michael", age: "18-59", allergies: ["nuts"]},
-              { name: "Diane", age: "60+", allergies: []}
-            ]
-          }
-    }
+    constructor(private http: HttpClient) { }
 
     getFamily() {
-        return this.family;
+        return {...this.family};
     }
 
     getFamilyUpdateListener() {
@@ -30,5 +23,6 @@ export class FamilyService {
         .subscribe((family) => {
             this.family = family;
         });
+        this.familyUpdated.next({...this.family});
     }
 }
