@@ -19,10 +19,19 @@ export class FamilyService {
     }
 
     updateFamily(phoneNumber: string) {
-        this.http.get<Family>('http://localhost:3000/family')
-        .subscribe((family) => {
-            this.family = family;
-        });
-        this.familyUpdated.next({...this.family});
+        if(phoneNumber.length == 10) {
+            this.http.get<{family: Family}>(`http://localhost:3000/family?phoneNumber=${phoneNumber}`)
+            .subscribe((family) => {
+                this.family = family.family;
+                this.familyUpdated.next({...this.family});
+            });
+        } else {
+            this.http.get<{family: Family}>('http://localhost:3000/family')
+            .subscribe((family) => {
+                this.family = family.family;
+                this.familyUpdated.next({...this.family});
+            });
+        }
+        
     }
 }

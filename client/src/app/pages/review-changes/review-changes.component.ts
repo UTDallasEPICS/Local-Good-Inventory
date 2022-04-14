@@ -22,6 +22,7 @@ export class ReviewChangesComponent implements OnInit {
       .subscribe((family: Family) => {
         this.family = family;
       });
+    this.familyService.updateFamily("5128391223");
   }
 
   ngOnDestroy() {
