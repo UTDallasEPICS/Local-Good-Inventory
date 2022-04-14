@@ -1,0 +1,9 @@
+<h1>CHECK IN</h1>
+
+<form>
+<input type="text" [(ngModel)]="phoneNumber" name="PhoneNumber" value="" placeholder="Enter phone number">
+<br><br>
+<button (click)="updatePhoneNumber()" routerLink="/review">Submit</button>
+</form>
+
+<router-outlet></router-outlet>

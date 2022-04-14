@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
   selector: 'app-checkin',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckinComponent implements OnInit {
 
-  constructor() { }
+  phoneNumber: string = "";
+
+  constructor(public familyService: FamilyService) { }
 
   ngOnInit(): void {
+  }
+
+  updatePhoneNumber() {
+    this.familyService.updateFamily(this.phoneNumber);
   }
 
   
