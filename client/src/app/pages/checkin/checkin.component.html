@@ -3,7 +3,7 @@
 <form>
 <input type="text" [(ngModel)]="phoneNumber" name="PhoneNumber" value="" placeholder="Enter phone number">
 <br><br>
-<button (click)="updatePhoneNumber()" routerLink="/review">Submit</button>
+<button class ="button is-rounded fab fa-check" (click)="updatePhoneNumber()" routerLink="/review">Submit</button>
 </form>
 
 <router-outlet></router-outlet>

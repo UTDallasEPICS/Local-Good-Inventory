@@ -3,9 +3,8 @@ h1 {
 }
 div {
     width: 50%;
-    margin: 10rem auto;
+    margin: auto;
     padding: 10px;
-    outline: 1px solid black;
 }
 button {
     display: inline;
