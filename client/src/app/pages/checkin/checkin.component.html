@@ -1,9 +1,13 @@
-<h1>CHECK IN</h1>
+<div class="box">
+
+<h1 class="title">Check In</h1>
 
 <form>
-<input type="text" [(ngModel)]="phoneNumber" name="PhoneNumber" value="" placeholder="Enter phone number">
+<input class = "input" type="tel" [(ngModel)]="phoneNumber" name="PhoneNumber" value="" placeholder="Enter phone number">
 <br><br>
-<button class ="button is-rounded fab fa-check" (click)="updatePhoneNumber()" routerLink="/review">Submit</button>
+<button class ="button" (click)="updatePhoneNumber()" routerLink="/review">Submit</button>
 </form>
+</div>
+
 
 <router-outlet></router-outlet>

@@ -30,7 +30,6 @@ app.use('/family', (req, res) => {
     const query = { phoneNumber: req.query.phoneNumber };
     familiesCollection.findOne(query).then((family) => {
       this.family = family;
-      console.log(family);
       res.status(200).json({
         family
       });
