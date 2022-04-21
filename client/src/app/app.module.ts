@@ -10,6 +10,9 @@ import { CheckinComponent } from './checkin/checkin.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { AppointmentComponent } from './Appointment/appointment.component';
+import { Appointment2Component } from './Appointment2/appointment2.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { NgForm } from '@angular/forms';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    CheckinComponent
+    CheckinComponent,
+    AppointmentComponent,
+    Appointment2Component,
+    DatepickerComponent
   ],
   imports: [
     BrowserModule,
