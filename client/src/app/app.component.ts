@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ɵflushModuleScopingQueueAsMuchAsPossible } from '@angular/core';
+import { Family } from './models/family.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'client';
+
 }

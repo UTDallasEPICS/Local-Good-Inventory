@@ -3,14 +3,41 @@
  */
 
 const express = require('express');
+const { MongoClient } = require('mongodb');
 const app = express();
-const path = require('path');
 const port = 3000;
 
-app.use(express.static(path.join(__dirname, '../client/build')));
+const mongoClient = new MongoClient("mongodb+srv://user1:UTDallas1@cluster0.yjnoy.mongodb.net/")
 
-app.use((req, res) => {
-   res.send('Hello world!');
+mongoClient.connect();
+
+const familiesCollection = mongoClient.db('TestDatabase').collection('CollectionOne');
+
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Header', 
+    'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  next();
+});
+
+app.use('/family', (req, res) => {
+  family = {phoneNumber: "", name: "", members: [] }
+  
+  if(req.query.phoneNumber) {
+    const query = { phoneNumber: req.query.phoneNumber };
+    familiesCollection.findOne(query).then((family) => {
+      this.family = family;
+      res.status(200).json({
+        family
+      });
+    });
+  } else {
+    res.status(404);
+  }
+  
 });
 
 app.listen(port, () => {

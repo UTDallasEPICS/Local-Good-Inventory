@@ -1,0 +1,18 @@
+<div>
+    Hello {{family.name}} Family!
+</div>
+<div class="box">
+    <p>Name: {{family.name}} Family</p>
+    <p>Phone Number: 
+        ({{family.phoneNumber.substring(0,3)}})-{{family.phoneNumber.substring(3,6)}}-{{family.phoneNumber.substring(6,10)}}</p>
+    <p>People:</p>
+    <p *ngFor="let member of family.members">&nbsp;&nbsp;&nbsp;&nbsp;{{member.name}} age {{member.age}}</p>
+</div>
+
+<div class="box" id="changes">
+    <h1>Have there been any changes in family members since your last visit?</h1>
+    <button class="button">Yes</button>
+    <button class="button" routerLink='/Appointment'>No</button>
+
+</div>
+
