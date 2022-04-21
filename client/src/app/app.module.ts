@@ -13,6 +13,9 @@ import { NgxMaskModule } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { AppointmentComponent } from './pages/Appointment/appointment.component';
+import { Appointment2Component } from './pages/Appointment2/appointment2.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { NgForm } from '@angular/forms';
     ReviewChangesComponent,
     FooterComponent,
     HomeComponent,
-    CheckinComponent
+    CheckinComponent,
+    AppointmentComponent,
+    Appointment2Component,
+    DatepickerComponent
   ],
   imports: [
     BrowserModule,
