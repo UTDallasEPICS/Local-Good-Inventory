@@ -13,6 +13,8 @@ import { NgForm } from '@angular/forms';
 import { AppointmentComponent } from './Appointment/appointment.component';
 import { Appointment2Component } from './Appointment2/appointment2.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { NewFamilyMemberComponent } from './New-Family-Member/newfamilymember.component';
+import { ChangeMemberInfo2Component } from './Change-Member-Info2/changememberinfo2.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
     CheckinComponent,
     AppointmentComponent,
     Appointment2Component,
-    DatepickerComponent
+    DatepickerComponent,
+    NewFamilyMemberComponent,
+    ChangeMemberInfo2Component
   ],
   imports: [
     BrowserModule,
