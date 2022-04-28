@@ -5,12 +5,12 @@
     </span>
   </section>
   <section class="section">
-    <form accept-charset="utf-8" action="sendmail.php" method="post" enctype="multipart/form-data" #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+    <form accept-charset="utf-8" enctype="multipart/form-data" #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
       <div class="field">
           <label class="label is-large" for="number">Phone Number</label>
           <div class="control has-icons-right has-icons-left" style="width: 40%;">
               <input class="input is-large"
-              [ngModel]="user.mobileNumber"
+              [(ngModel)]="user.mobileNumber"
               [pattern]="mobNumberPattern"
               #mobNumber="ngModel" 
                type="text"
@@ -33,14 +33,14 @@
       </div>
         
         <div class="field is-grouped mt-6">
-          <div class="control">
-            <button class="button is-link is-medium" type="submit" [disabled]="userForm.invalid">Submit</button>
-          </div>
-          <div class="control">
-          <a routerLink = "/">
-            <button class="button is-link is-medium is-light ml-6">Cancel</button>
-          </a>
-          </div>
+            <div class="control">
+                <button class="button is-link is-medium" type="submit" [disabled]="userForm.invalid">Submit</button>
+            </div>
+            <div class="control">
+                <a routerLink = "/">
+                    <button class="button is-link is-medium is-light ml-6">Cancel</button>
+                </a>
+            </div>
         </div>
     </form>
   </section>

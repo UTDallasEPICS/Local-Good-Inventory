@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FamilyService } from 'src/app/services/family.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,11 +11,14 @@ import { NgForm } from '@angular/forms';
 })
 export class CheckinComponent implements OnInit {
 
+  phoneNumber: string = "";
+
+
   mobNumberPattern = "^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$";  
   isValidFormSubmitted = false;  
   user = new User();
 
-  constructor() { }
+  constructor(public familyService: FamilyService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -31,21 +36,21 @@ export class CheckinComponent implements OnInit {
     return true;
   }
 
-    
-
   onFormSubmit(form: NgForm) {  
     this.isValidFormSubmitted = false;  
     if (form.invalid) {  
-       return;  
+      return;  
     }  
     this.isValidFormSubmitted = true;  
-    form.resetForm();  
- }
-  
-  
+    this.familyService.updateFamily(this.user.mobileNumber);
     
+    form.resetForm(); 
+
+    this.router.navigate(['/review']);
+ }
+   
 }
 
 export class User {  
-  mobileNumber ?: string;  
+  mobileNumber: string = "";  
  }  
