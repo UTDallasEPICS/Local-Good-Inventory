@@ -8,6 +8,7 @@ import { NewFamilyMemberComponent } from './New-Family-Member/newfamilymember.co
 import { ChangeMemberInfo1Component } from './Change-Member-Info1/changememberinfo1.component';  
 import { ChangeMemberInfo2Component } from './Change-Member-Info2/changememberinfo2.component'; 
 import { FamilyOrMemberComponent } from './Family-or-Member/family-or-member.component'; 
+import { NewRegistrationComponent } from './new-registration/new-registration.component';
 
 
 const routes: Routes = [
@@ -18,8 +19,8 @@ const routes: Routes = [
   {path:'New-Family-Member', component:NewFamilyMemberComponent},
   {path:'Change-Member-Info2', component:ChangeMemberInfo2Component},
   {path:'Change-Member-Info1', component:ChangeMemberInfo1Component},
-  {path:'Family-or-Member', component:FamilyOrMemberComponent}
-  
+  {path:'Family-or-Member', component:FamilyOrMemberComponent},
+  {path:'new-registration', component:NewRegistrationComponent}
 ];
 
 @NgModule({
