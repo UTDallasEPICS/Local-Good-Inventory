@@ -1,0 +1,148 @@
+.footer {
+    padding: 0 0 0 0;
+    bottom: 0;
+    background-color: #E4AC3C;
+    width: 100%;
+    display:ruby;
+    height: 3.5rem;
+    justify-content: center;
+    position: fixed;
+}
+
+.body {
+    padding-bottom: 300px;
+}
+
+
+.navbar {
+    background-color: #28487B;
+    height: 6rem;
+    padding-bottom: 20px;
+    padding: 0 0 0 0;
+}
+
+.navbar-item img {
+    max-height: 3.5rem;
+}
+
+.logo {
+  height: 180px;
+  width: 140px;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+.mainImg{
+    opacity: 0.5;
+}
+
+.welcome{
+    font-size: 75px;
+}
+.center {
+    text-align: center;
+   
+  }
+
+  #form{
+      /* padding-bottom: 200px; */
+      text-align: left;
+      padding-left: 5%;
+      font-weight: bold;
+      
+  }
+
+  h1{
+      font-weight: lighter;
+      font-size: 50px;
+  }
+
+  .btn-group button {
+    background-color: #28487B; /* Green background */
+
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    /* margin: 175px; */
+    margin-top: 100px;
+    margin-left: 160px;
+    margin-right: 175px;
+    margin-bottom: 75px;
+  }
+  
+  .btn-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+  }
+  
+  /* Clear floats (clearfix hack) */
+  .btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  /* Add a background color on hover */
+  .btn-group button:hover {
+    background-color: #3e8e41;
+  }
+  .btn-group :last-child{
+    background-color: white; /* Green background */
+
+    color: #28487B;
+  }
+  .dob{
+      /* float: left; */
+      
+  }
+
+  #footer{
+      padding-top: 100px;
+      background-color: #E4AC3C;
+      
+  }
+
+
+  .btn-group2 button {
+    background-color: #28487B; /* Green background */
+
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    /* margin: 175px; */
+    margin-top: 75px;
+    margin-left: 350px;
+    /* margin-right: 175px; */
+    margin-bottom: 75px;
+  }
+  .btn-group2 button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+  }
+  
+  /* Clear floats (clearfix hack) */
+  .btn-group2:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  /* Add a background color on hover */
+  .btn-group2 button:hover {
+    background-color: #3e8e41;
+  }
+  .btn-group2 :last-child{
+    background-color: white; /* Green background */
+
+    color: #28487B;
+  }
+
+  h3{
+      font-weight: lighter;
+      font-size: 25px;
+  }
