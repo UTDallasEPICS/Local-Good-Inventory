@@ -10,6 +10,7 @@ import { CheckinComponent } from './checkin/checkin.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { NewRegistrationComponent } from './new-registration/new-registration.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NgForm } from '@angular/forms';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    CheckinComponent
+    CheckinComponent,
+    NewRegistrationComponent
   ],
   imports: [
     BrowserModule,
