@@ -15,6 +15,7 @@ import { Appointment2Component } from './Appointment2/appointment2.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { NewFamilyMemberComponent } from './New-Family-Member/newfamilymember.component';
 import { ChangeMemberInfo2Component } from './Change-Member-Info2/changememberinfo2.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ChangeMemberInfo2Component } from './Change-Member-Info2/changememberin
     FontAwesomeModule,
     FormsModule,
     NgxMaskModule.forRoot(),
+    TranslateModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
