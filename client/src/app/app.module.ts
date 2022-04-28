@@ -14,8 +14,9 @@ import { AppointmentComponent } from './Appointment/appointment.component';
 import { Appointment2Component } from './Appointment2/appointment2.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { NewFamilyMemberComponent } from './New-Family-Member/newfamilymember.component';
+import { ChangeMemberInfo1Component } from './Change-Member-Info1/changememberinfo1.component';
 import { ChangeMemberInfo2Component } from './Change-Member-Info2/changememberinfo2.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { FamilyOrMemberComponent } from './Family-or-Member/family-or-member.component'; 
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { TranslateModule } from '@ngx-translate/core';
     Appointment2Component,
     DatepickerComponent,
     NewFamilyMemberComponent,
-    ChangeMemberInfo2Component
+    ChangeMemberInfo1Component,
+    ChangeMemberInfo2Component,
+    FamilyOrMemberComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,6 @@ import { TranslateModule } from '@ngx-translate/core';
     FontAwesomeModule,
     FormsModule,
     NgxMaskModule.forRoot(),
-    TranslateModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
