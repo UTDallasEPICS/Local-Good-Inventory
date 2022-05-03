@@ -1,0 +1,19 @@
+.input {
+    width: 40%;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:1rem;
+    height:1rem;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+input[type='checkbox']:checked {
+    background: rgb(83, 116, 181);
+}
+
+.field {
+    margin: 2rem;
+}
