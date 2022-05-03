@@ -5,9 +5,9 @@ import { Family } from 'src/app/models/family.model';
 import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
-  selector: 'app-review-changes',
-  templateUrl: './review-changes.component.html',
-  styleUrls: ['./review-changes.component.css']
+  selector: 'change',
+  templateUrl: './change.component.html',
+  styleUrls: ['./change.component.css']
 })
 export class ReviewChangesComponent implements OnInit {
 

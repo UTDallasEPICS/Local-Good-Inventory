@@ -13,13 +13,14 @@ import { NgxMaskModule } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
-import { NewFamilyMemberComponent } from './New-Family-Member/newfamilymember.component';
-import { ChangeMemberInfo1Component } from './Change-Member-Info1/changememberinfo1.component';
-import { ChangeMemberInfo2Component } from './Change-Member-Info2/changememberinfo2.component';
-import { FamilyOrMemberComponent } from './Family-or-Member/family-or-member.component'; 
+import { NewFamilyMemberComponent } from './pages/New-Family-Member/newfamilymember.component';
+import { ChangeMemberInfo1Component } from './pages/Change-Member-Info1/changememberinfo1.component';
+import { ChangeMemberInfo2Component } from './pages/Change-Member-Info2/changememberinfo2.component';
+import { FamilyOrMemberComponent } from './pages/Family-or-Member/family-or-member.component'; 
 import { AppointmentComponent } from './pages/Appointment/appointment.component';
 import { Appointment2Component } from './pages/Appointment2/appointment2.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
     NewFamilyMemberComponent,
     ChangeMemberInfo1Component,
     ChangeMemberInfo2Component,
-    FamilyOrMemberComponent
+    FamilyOrMemberComponent,
+    RemoveFamilyMemberComponent
   ],
   imports: [
     BrowserModule,
