@@ -12,7 +12,6 @@ import { CheckinComponent } from './pages/checkin/checkin.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { NgForm } from '@angular/forms';
 import { NewFamilyMemberComponent } from './pages/New-Family-Member/newfamilymember.component';
 import { ChangeMemberInfo1Component } from './pages/Change-Member-Info1/changememberinfo1.component';
 import { ChangeMemberInfo2Component } from './pages/Change-Member-Info2/changememberinfo2.component';
@@ -21,6 +20,7 @@ import { AppointmentComponent } from './pages/Appointment/appointment.component'
 import { Appointment2Component } from './pages/Appointment2/appointment2.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
+import { NewRegistrationComponent } from './pages/new-registration/new-registration.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/remo
     ChangeMemberInfo1Component,
     ChangeMemberInfo2Component,
     FamilyOrMemberComponent,
-    RemoveFamilyMemberComponent
+    RemoveFamilyMemberComponent,
+    NewRegistrationComponent
   ],
   imports: [
     BrowserModule,
