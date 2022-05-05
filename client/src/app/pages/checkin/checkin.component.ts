@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FamilyService } from 'src/app/services/family.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
+import { Family } from 'src/app/models/family.model';
 
 
 @Component({
@@ -17,10 +19,12 @@ export class CheckinComponent implements OnInit {
   mobNumberPattern = "^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$";  
   isValidFormSubmitted = false;  
   user = new User();
+  family: Family = {name: "", phoneNumber: "", members: [], checkedIn: [], nextAppointment: ""};
 
   constructor(public familyService: FamilyService, private router: Router) { }
 
   ngOnInit(): void {
+    this.user.mobileNumber = "";
   }
 
   OnlyNumbersAllowed(event: { which: any; keyCode: any; }):boolean
@@ -42,11 +46,22 @@ export class CheckinComponent implements OnInit {
       return;  
     }  
     this.isValidFormSubmitted = true;  
-    this.familyService.updateFamily(this.user.mobileNumber);
+    this.familyService.updateFamily(this.user.mobileNumber).then(response => {
+      this.family = this.familyService.getFamily();
+      if(this.family.name == "") {
+        this.router.navigate(['new-registration'])
+      } else {
+        var today = new Date();
+        console.log(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
+        this.family.checkedIn.push(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
+        //console.log("Updated family: " + this.family.checkedIn);
+        this.familyService.postFamily(this.family);
+        this.router.navigate(['/review']);
+      }
+    });
     
     form.resetForm(); 
-
-    this.router.navigate(['/review']);
+    
  }
    
 }

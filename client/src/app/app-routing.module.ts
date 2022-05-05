@@ -15,11 +15,11 @@ import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/remo
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path:'checkin', component:CheckinComponent},
-  {path: 'change', component: ReviewChangesComponent},
+  {path:'review', component: ReviewChangesComponent},
   {path:'appointment', component:AppointmentComponent},
   {path:'familyormember', component:FamilyOrMemberComponent},
   {path:'appointment2', component:Appointment2Component},
-  {path:'changingfamilyinfo', component:NewRegistrationComponent},
+  {path:'new-registration', component:NewRegistrationComponent},
   {path:'newfamilymember', component:NewFamilyMemberComponent},
   {path:'removefamilymember', component:RemoveFamilyMemberComponent},
   {path:'changememberinfo1', component:ChangeMemberInfo1Component},
