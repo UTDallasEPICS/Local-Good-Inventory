@@ -24,7 +24,7 @@ const routes: Routes = [
   {path:'removefamilymember', component:RemoveFamilyMemberComponent},
   {path:'changememberinfo1', component:ChangeMemberInfo1Component},
   {path:'changememberinfo2', component:ChangeMemberInfo2Component},
-  
+  {path:'new-registration', component:NewRegistrationComponent} 
 ];
 
 @NgModule({
