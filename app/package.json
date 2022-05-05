@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/UTDallasEPICS/Local-Good-Inventory#readme",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.17.3",
     "mongodb": "^4.4.1"
   }
