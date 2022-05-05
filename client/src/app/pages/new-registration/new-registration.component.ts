@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Family } from 'src/app/models/family.model';
+import { Member } from 'src/app/models/member.model';
 
 @Component({
   selector: 'app-new-registration',
@@ -8,7 +9,13 @@ import { Family } from 'src/app/models/family.model';
 })
 export class NewRegistrationComponent implements OnInit {
 
-  private family: Family = {phoneNumber: "", name: "", members: [], checkedIn: [], nextAppointment: ""};
+  family: Family = {phoneNumber: "", name: "", members: [], checkedIn: [], nextAppointment: ""};
+
+
+  members: Member[] = [
+    { name: "", age: "", allergies: []}
+  ];
+  numMembers = 2;
 
   constructor() { }
 

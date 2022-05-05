@@ -21,6 +21,7 @@ import { AppointmentComponent } from './pages/Appointment/appointment.component'
 import { Appointment2Component } from './pages/Appointment2/appointment2.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
+import { NewRegistrationComponent } from './pages/new-registration/new-registration.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/remo
     ChangeMemberInfo1Component,
     ChangeMemberInfo2Component,
     FamilyOrMemberComponent,
-    RemoveFamilyMemberComponent
+    RemoveFamilyMemberComponent,
+    NewRegistrationComponent
   ],
   imports: [
     BrowserModule,

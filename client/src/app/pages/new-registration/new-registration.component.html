@@ -11,17 +11,25 @@
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
-                <input class = "input" type="text" placeholder="Last Name">
+                <input class = "input" type="text" [(ngModel)]="family.name" placeholder="Last Name">
                 </div>
             </div>
             
             <div class="field">
                 <label class="label">Phone Number</label>
                 <div class="control has-icons-left">
-                <input class="input" type="tel" placeholder="(XXX) XXX-XXXX" mask="(000) 000-0000">
+                <input class="input" type="tel" [(ngModel)]="family.phoneNumber" placeholder="(XXX) XXX-XXXX" mask="(000) 000-0000">
                 <span class="icon is-small is-left">
                     <i class="fa-solid fa-phone"></i>
                 </span>
+                </div>
+            </div>
+
+            
+            <div class="field">
+                <label class="label">Family Members</label>
+                <div *ngFor="let member of members; let i = index">
+                    <input class="input" type="text" [(ngModel)]="members[i].name" placeholder="First Name">
                 </div>
             </div>
             
@@ -41,11 +49,6 @@
                 <label class="checkbox">
                     <input type="checkbox">
                     Vegan
-                </label>
-                <br>
-                <label class="checkbox">
-                    <input type="checkbox">
-                    None
                 </label>
                 <br>
                 <label class="checkbox">
