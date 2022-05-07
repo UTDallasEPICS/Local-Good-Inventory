@@ -10,6 +10,7 @@ export class FamilyService {
             name: "", 
             phoneNumber: "", 
             members: [], 
+            allergies: [],
             checkedIn: [], 
             nextAppointment: ""
         };

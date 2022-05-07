@@ -17,3 +17,7 @@ input[type='checkbox']:checked {
 .field {
     margin: 2rem;
 }
+
+.field > * {
+    margin: 1rem;
+}

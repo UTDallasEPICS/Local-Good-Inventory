@@ -11,7 +11,7 @@ import { FamilyService } from 'src/app/services/family.service';
 })
 export class ReviewChangesComponent implements OnInit {
 
-  family: Family = {name: "", phoneNumber: "", members: [], checkedIn: [], nextAppointment: "" };
+  family: Family = {name: "", phoneNumber: "", members: [], allergies: [], checkedIn: [], nextAppointment: "" };
   private familySubscription: Subscription = new Subscription;
 
   constructor(public familyService: FamilyService) { }

@@ -46,8 +46,8 @@ app.get('/family', (req, res) => {
 app.post('/family', (req, res) => {
   if(req.query.phoneNumber) {
     const query = { phoneNumber: req.query.phoneNumber };
-    const newValue = { $set: { checkedIn: req.body.checkedIn, nextAppointment: req.body.nextAppointment } };
-    familiesCollection.updateOne(query, newValue);
+    const newValue = { $set: req.body };
+    familiesCollection.updateOne(query, newValue, {upsert: true});
     res.status(201);
   } else {
     res.status(404);

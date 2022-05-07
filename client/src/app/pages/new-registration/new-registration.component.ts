@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Family } from 'src/app/models/family.model';
 import { Member } from 'src/app/models/member.model';
+import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
   selector: 'app-new-registration',
@@ -9,17 +11,25 @@ import { Member } from 'src/app/models/member.model';
 })
 export class NewRegistrationComponent implements OnInit {
 
-  family: Family = {phoneNumber: "", name: "", members: [], checkedIn: [], nextAppointment: ""};
+  family: Family = {phoneNumber: "", name: "", members: [{name: "", age: ""}], allergies: [], checkedIn: [], nextAppointment: ""};
 
-
-  members: Member[] = [
-    { name: "", age: "", allergies: []}
-  ];
-  numMembers = 2;
-
-  constructor() { }
+  constructor(private familyService: FamilyService, private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.family);
+  }
+
+  onClick(){
+    this.familyService.postFamily(this.family);
+    this.router.navigate(['/']);
+  }
+
+  addMember() {
+    this.family.members.push({name: "", age: ""})
+  }
+
+  removeMember(index: number) {
+    this.family.members.splice(index,1);
   }
 
 }

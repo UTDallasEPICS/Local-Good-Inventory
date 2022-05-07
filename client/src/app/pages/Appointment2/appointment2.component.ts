@@ -13,7 +13,7 @@ import { Family } from 'src/app/models/family.model';
 
 export class Appointment2Component implements OnInit {
 
-  family: Family = {name: "", phoneNumber: "", members: [], checkedIn: [], nextAppointment: ""};
+  family: Family = {name: "", phoneNumber: "", members: [], allergies: [], checkedIn: [], nextAppointment: ""};
 
   datePicked: Date = new Date();
   pipe = new DatePipe('en-US');
