@@ -7,9 +7,12 @@ div {
     padding: 10px;
 }
 button {
-    display: inline;
-    margin: auto;
+    width: 6rem;
 }
 #changes {
     text-align: center;
+}
+
+.info {
+    font-size: 1.8rem;
 }

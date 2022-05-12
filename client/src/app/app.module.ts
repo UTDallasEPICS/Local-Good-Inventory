@@ -22,6 +22,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 import { NewRegistrationComponent } from './pages/new-registration/new-registration.component';
 import { CommonModule } from '@angular/common';
+import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CommonModule } from '@angular/common';
     ChangeMemberInfo2Component,
     FamilyOrMemberComponent,
     RemoveFamilyMemberComponent,
-    NewRegistrationComponent
+    NewRegistrationComponent,
+    CheckinCompleteComponent
   ],
   imports: [
     BrowserModule,

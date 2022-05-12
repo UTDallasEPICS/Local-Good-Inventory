@@ -11,7 +11,7 @@
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
-                <input class = "input" type="text" name="lname" [(ngModel)]="family.name" placeholder="Last Name">
+                <input class = "input ml-5" type="text" name="lname" [(ngModel)]="family.name" placeholder="Last Name">
                 </div>
             </div>
             
@@ -180,16 +180,20 @@
             <div class="field">
                 <label class="label">How did you hear about The Local Good Market?</label>
                 <div class="control">
-                <textarea class="textarea" placeholder="Textarea"></textarea>
+                <textarea class="textarea"></textarea>
                 </div>
             </div>
 
             <div class="field is-grouped">
                 <div class="control">
+                    <a routerLink="/appointment">
                 <button class="button is-link" (click)="onClick()">Submit</button>
+            </a>
                 </div>
                 <div class="control">
-                <button class="button is-link is-light">Cancel</button>
+                     <a routerLink="/">
+                        <button class="button is-link is-light">Cancel</button>
+                     </a>
                 </div>
             </div>
         </form>

@@ -1,18 +1,27 @@
-<div>
-    Hello {{family.name}} Family!
+<div class="container has-text-centered has-text-weight-bold my-6">
+    <h1 class="welcome is-size-1">Hello {{family.name}} Family! </h1>
 </div>
-<div class="box">
-    <p>Name: {{family.name}} Family</p>
-    <p>Phone Number: 
+<div class="box my-6">
+    <p class="info">Name: {{family.name}} Family</p>
+    <p class="info">Phone Number: 
         ({{family.phoneNumber.substring(0,3)}})-{{family.phoneNumber.substring(3,6)}}-{{family.phoneNumber.substring(6,10)}}</p>
-    <p>People:</p>
-    <p *ngFor="let member of family.members">&nbsp;&nbsp;&nbsp;&nbsp;{{member.name}} age {{member.age}}</p>
+    <p class="info">People:</p>
+    <p class="info" *ngFor="let member of family.members">&nbsp;&nbsp;&nbsp;&nbsp;{{member.name}} age {{member.age}}</p>
 </div>
 
-<div class="box" id="changes">
-    <h1>Have there been any changes in family members since your last visit?</h1>
-    <button class="button">Yes</button>
-    <button class="button" routerLink='/appointment'>No</button>
-
+<div class="container" id="changes">
+    <h1 class="text is-size-3">Have there been any changes in family members since your last visit?</h1>
+    <div class="field is-grouped">
+        <div class="control">
+            <a routerLink="/changememberinfo1">
+                 <button class="button is-link is-large">Yes</button>
+            </a>
+        </div>
+        <div class="control">
+             <a routerLink="/appointment">
+                <button class="button is-link is-light is-large">No</button>
+             </a>
+        </div>
+    </div>
 </div>
 

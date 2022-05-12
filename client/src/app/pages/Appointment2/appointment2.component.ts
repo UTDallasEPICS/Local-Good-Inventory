@@ -5,7 +5,7 @@ import { Family } from 'src/app/models/family.model';
 
 
 @Component({
-  selector: 'appointment2',
+  selector: 'app-appointment2',
   templateUrl: './appointment2.component.html',
   styleUrls: ['./appointment2.component.css'],
 })
@@ -19,12 +19,16 @@ export class Appointment2Component implements OnInit {
   pipe = new DatePipe('en-US');
   nextAppointment: string = "";
 
+  appointmentconfirm = false;
+
   constructor(public familyService: FamilyService) { }
 
   ngOnInit(): void {
   }
 
+
   updateAppointment() {
+    this.appointmentconfirm = true;
     var nextAppointment = this.pipe.transform(this.datePicked, 'dd-MM-YYYY');
     this.family = this.familyService.getFamily();
     this.family.nextAppointment = nextAppointment? nextAppointment: "";

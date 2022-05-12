@@ -11,6 +11,7 @@ import { AppointmentComponent } from './pages/Appointment/appointment.component'
 import { Appointment2Component } from './pages/Appointment2/appointment2.component'; 
 import { ReviewChangesComponent } from './pages/review-changes/change.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
+import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -18,13 +19,13 @@ const routes: Routes = [
   {path:'review', component: ReviewChangesComponent},
   {path:'appointment', component:AppointmentComponent},
   {path:'familyormember', component:FamilyOrMemberComponent},
-  {path:'appointment2', component:Appointment2Component},
   {path:'new-registration', component:NewRegistrationComponent},
   {path:'newfamilymember', component:NewFamilyMemberComponent},
   {path:'removefamilymember', component:RemoveFamilyMemberComponent},
   {path:'changememberinfo1', component:ChangeMemberInfo1Component},
   {path:'changememberinfo2', component:ChangeMemberInfo2Component},
-  {path:'new-registration', component:NewRegistrationComponent} 
+  {path:'new-registration', component:NewRegistrationComponent},
+  {path:'checkin-complete', component:CheckinCompleteComponent}
 ];
 
 @NgModule({
