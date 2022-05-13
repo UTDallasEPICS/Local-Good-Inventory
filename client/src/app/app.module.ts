@@ -21,6 +21,8 @@ import { Appointment2Component } from './pages/Appointment2/appointment2.compone
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 import { NewRegistrationComponent } from './pages/new-registration/new-registration.component';
+import { CommonModule } from '@angular/common';
+import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
 
 @NgModule({
   declarations: [
@@ -38,10 +40,12 @@ import { NewRegistrationComponent } from './pages/new-registration/new-registrat
     ChangeMemberInfo2Component,
     FamilyOrMemberComponent,
     RemoveFamilyMemberComponent,
-    NewRegistrationComponent
+    NewRegistrationComponent,
+    CheckinCompleteComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

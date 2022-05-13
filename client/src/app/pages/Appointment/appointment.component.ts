@@ -9,6 +9,15 @@ export class AppointmentComponent implements OnInit {
 
   constructor() { }
 
+  isDisplay = false;
+  clicked = false;
+
+  toggle()
+  {
+    this.isDisplay = true;
+    this.clicked = true;
+  }
+
   ngOnInit(): void {
   }
 
