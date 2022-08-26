@@ -28,7 +28,7 @@ The project should now be ready for use.
 
 ### Front End
 
-To see the front end, from the `Local-Good-Center` directory,
+To see the front end, from the `Local-Good-Inventory` directory,
 ```
 cd client
 ng serve
