@@ -8,11 +8,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 3000;
 
-const mongoClient = new MongoClient("mongodb+srv://user1:UTDallas1@cluster0.yjnoy.mongodb.net/")
+//const mongoClient = new MongoClient("mongodb+srv://user1:UTDallas1@cluster0.yjnoy.mongodb.net/")
 
-mongoClient.connect();
+//mongoClient.connect();
 
-const familiesCollection = mongoClient.db('TestDatabase').collection('CollectionOne');
+//const familiesCollection = mongoClient.db('TestDatabase').collection('CollectionOne');
 
 app.use(bodyParser.json());
 
@@ -31,12 +31,12 @@ app.get('/family', (req, res) => {
   
   if(req.query.phoneNumber) {
     const query = { phoneNumber: req.query.phoneNumber };
-    familiesCollection.findOne(query).then((family) => {
+    /*familiesCollection.findOne(query).then((family) => {
       this.family = family;
       res.status(200).json({
         family
       });
-    });
+    });*/
   } else {
     res.status(404);
   }
@@ -53,7 +53,7 @@ app.post('/family', (req, res) => {
       phoneNumber: req.body.phoneNumber,
       checkedIn: req.body.checkedIn,
       nextAppointment: req.body.nextAppointment } };
-    familiesCollection.updateOne(query, newValue, {upsert: true});
+    //familiesCollection.updateOne(query, newValue, {upsert: true});
     res.status(201);
   } else {
     res.status(404);
