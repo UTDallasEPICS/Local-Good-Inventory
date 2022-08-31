@@ -49,11 +49,11 @@ node index.js
 
 ---
 ## Fall '22 Team
-Michael Ross\
-Gabe Gorham-Puente\
-Isabelle Villegas\
-Aarian Tasnim\
-Kian Hakim
+Michael Ross - Project Leader\
+Gabe Puente - Financial Officer\
+Isabelle Villegas - Project Partner Liaison\
+Aarian Ahsan - Document Manager\
+Kian Hakim - Project Webmaster
 
 ## Spring '22 Team
 
