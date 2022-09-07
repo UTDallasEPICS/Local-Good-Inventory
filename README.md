@@ -1,6 +1,6 @@
 # Local-Good-Inventory
 
-The Local Good Center is a non-profit organization dedicated to serving the community through their
+ Local Good Center is a non-profit organization dedicated to serving the community through their
 various programs for education, wellness, job readiness etc. The goal of the project is to develop a web-based self check-in
 for the community members coming to the food pantry of Local Good Center. The team is divided into two subteams, each dedicated
 to working on the front-end and back-end side of the website. The Spring 2022 team will focus on documenting all the requirements
