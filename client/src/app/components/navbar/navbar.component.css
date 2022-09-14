@@ -5,7 +5,12 @@
 }
 
 .navbar-item img {
-    max-height: 3.5rem;
+    max-height: 4.5rem;
+}
+
+.navbar-item {
+  color: white;
+  font-weight: bold;
 }
 
 .logo {
