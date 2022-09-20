@@ -8,7 +8,7 @@ for the project through discussing with the Local Good Center representative and
 create a basic UI/UX design of the website for the front end, and a database design for the backend. The team will finally implements
 aspects of the design to construct a basic prototype of the website by the end of the semester.
 
-[Screenshots](screenshots.md#Screenshots)
+[Screenshots](SCREENSHOTS.md#Screenshots)
 
 # Instructions
 
