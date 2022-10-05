@@ -4,14 +4,72 @@
       <p class="subtitle has-text-centered is-size-3">
         <strong>Choose the date for your next appointment  </strong>
       </p>
+
+  <!--
       <p class="subtitle has-text-centered">
-        <input class="aptDate my-5" type="date" [(ngModel)]="datePicked">
-      </p> 
+        <input class="aptDate my-5" type= "date" [(ngModel)]= "datePicked">
+      </p>
+
+      <div class="datepicker-subheader">
+        {{ customMessage }} {{ selectedDay }} {{ monthNames[localdate.getMonth()] }} {{ localdate.getDate() }}, {{ localdate.getFullYear() }}</div>
+
+      -->
+  <!---->
+
+    <!-- <button (click)="isDisabled = !isDisabled"> {{isDisabled ? 'Edit' : 'Save' }} </button> -->
+
+      <div class="month">
+        <ul>
+          <li class="prev">&#10094;</li>
+          <li (click)="isDisabled = !isDisabled" class="next">&#10095;</li>
+          <li>{{isDisabled ? 'October' : 'November' }}<br><span style="font-size:18px">2022</span></li>
+        </ul>
+      </div>
+
+      <ul class="weekdays">
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+        <li>Su</li>
+      </ul>
+
+      <ul class="days">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li><span class="active">10</span></li>
+        <li>11</li>
+      </ul>
+
+      <br>
+
+      <div class="time buttons has-addons is-centered">
+        <button class="button">am</button>
+        <button class="button">pm</button>
+      </div>
+
+  <!-- <div class="app-container" ng-app="dateTimeApp" ng-controller="dateTimeCtrl as ctrl" ng-cloak> -->
+      <div class="buttons is-centered">
+        <div class="button is-medium is-outlined">Cancel</div>
+        <div class="button is-medium is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Save</div>
+      </div>
+
+  <!--
 
      <div class="buttons is-centered">
-      <button class="button is-large button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
-
+      <button class="button is-large is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
       </div>
-    </div>
-  
+
+  -->
+</div>
+
 </section>

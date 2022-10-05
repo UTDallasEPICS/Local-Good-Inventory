@@ -10,7 +10,6 @@ import { Family } from 'src/app/models/family.model';
   styleUrls: ['./appointment2.component.css'],
 })
 
-
 export class Appointment2Component implements OnInit {
 
   family: Family = {name: "", phoneNumber: "", members: [], allergies: [], checkedIn: [], nextAppointment: ""};
@@ -21,10 +20,12 @@ export class Appointment2Component implements OnInit {
 
   appointmentconfirm = false;
 
+  isDisabled: boolean = false;
+
   constructor(public familyService: FamilyService) { }
 
   ngOnInit(): void {
-  }
+}
 
 
   updateAppointment() {
@@ -35,5 +36,5 @@ export class Appointment2Component implements OnInit {
     this.familyService.postFamily(this.family);
     console.log();
   }
-  
+
 }
