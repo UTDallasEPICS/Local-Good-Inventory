@@ -6,9 +6,21 @@
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
 
+.container {
+  padding: 20px;
+  border: 3px solid rgb(132, 218, 252);
+}
+
+.calendar {
+  width: 50%;
+  float: left;
+  padding: 20px;
+  border: 2px solid rgb(255, 117, 117);
+}
+
 /* Month header */
 .month {
-  padding: 70px 25px;
+  padding: 50px 25px;
   width: 100%;
   background: #1abc9c;
   text-align: center;
@@ -30,7 +42,6 @@ body {font-family: Verdana, sans-serif;}
 /* Previous button inside month header */
 .month .prev {
   float: left;
-  padding-top: 10px;
 }
 
 /* Next button */
@@ -41,14 +52,19 @@ body {font-family: Verdana, sans-serif;}
 
 /* Weekdays (Mon-Sun) */
 .weekdays {
+  width: 100%;
   margin: 0;
   padding: 10px 0;
   background-color:#ddd;
 }
 
+.paam{
+  margin-right: 10px;
+}
+
 .weekdays li {
   display: inline-block;
-  width: 13.6%;
+  width: 14.25%;
   color: #666;
   text-align: center;
 }
@@ -58,12 +74,13 @@ body {font-family: Verdana, sans-serif;}
   padding: 10px 0;
   background: #eee;
   margin: 0;
+  width: 100%;
 }
 
 .days li {
   list-style-type: none;
   display: inline-block;
-  width: 13.6%;
+  width: 14.25%;
   text-align: center;
   margin-bottom: 5px;
   font-size:12px;
