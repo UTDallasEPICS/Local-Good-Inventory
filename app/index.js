@@ -86,20 +86,23 @@ app.post('/appointment', (req, res) => {
 });
 
 app.post('/settings', (req, res) => {
-  if(req.query) {
+  console.log("Settings Posted");
+  //console.log(req);
+  //if(req.query) {
     const newValue = { $set: {
       date: req.body.date,
       startTime: req.body.startTime,
       endTime: req.body.endTime,
       interval: req.body.interval,
       quantity: req.body.quantity } };
+    const query = {};
     settingsCollection.updateOne(query, newValue, {upsert: true});
     res.status(201);
     console.log("Post Settings Successful");
-  } else {
-    console.log("Post Settings Unsuccessful");
-    res.status(404);
-  }
+  //} else {
+    //console.log("Post Settings Unsuccessful");
+    //res.status(404);
+  //}
 });
 
 app.listen(port, () => {

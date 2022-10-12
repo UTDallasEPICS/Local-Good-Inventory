@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Appointment } from 'src/app/models/appointment.model';
 
 @Component({
@@ -18,6 +18,8 @@ export class AdminComponent implements OnInit {
     timeslots: []
   }
 
+  public pages: string[] = ["Stats", "Settings"];
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -27,5 +29,11 @@ export class AdminComponent implements OnInit {
     window.alert("Hey");
     this.http.post(`http://localhost:3000/appointment?date=${this.appointment.date}`, this.appointment)
       .subscribe();
+  }
+
+  setActive(id: string) {
+    for(var i = 0; i < this.pages.length; i++) {
+
     }
+  }
 }

@@ -1,2 +1,9 @@
-<p>admin works!</p>
-<button (click)="addAppointment()">test!</button>
+<button class="button" (click)="addAppointment()">test!</button>
+
+<div class="tabs is-large is-toggle">
+    <ul>
+        <li *ngFor="let page of pages; let i = index" id="page{{i}}"><a>{{page}}</a></li>
+    </ul>
+</div>
+
+<app-settings></app-settings>

@@ -1,0 +1,9 @@
+<form>
+    <!--Dates: <input type="text" name="dates" [(ngModel)]="settings.dates">-->
+    Start Time: <input type="time" name="startTime" [(ngModel)]="settings.startTime">
+    End Time: <input type="time" name="endTime" [(ngModel)]="settings.endTime">
+    Interval: <input type="number" name="interval" [(ngModel)]="settings.interval">
+    Quantity: <input type="number" name="quantity" [(ngModel)]="settings.quantity">
+</form>
+
+<a class="button is-medium is-success" (click)="updateSettings()">Submit</a>
