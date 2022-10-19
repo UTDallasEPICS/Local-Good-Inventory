@@ -9,7 +9,7 @@ import { Injectable } from "@angular/core";
 export class SettingsService {
     private settings: Settings = 
         {
-            dates: ['F','S'],
+            dates: ['Fri','Sat'],
             startTime: "09:30",
             endTime: "11:30",
             interval: 15,
@@ -36,13 +36,14 @@ export class SettingsService {
                     resolve(settings);
             });    
         });
-
+        console.log("Updated settings");
+        //console.log(this.settings);
         return promiseToken;
         
     }
 
     postSettings(settings: Settings) {
-        this.http.post(`http://localhost:3000/settings`, this.settings)
+        this.http.post(`http://localhost:3000/settings`, settings)
             .subscribe();
     }
 }

@@ -18,7 +18,8 @@ export class AdminComponent implements OnInit {
     timeslots: []
   }
 
-  public pages: string[] = ["Stats", "Settings"];
+  public pages = [{page: "Stats", active: true}, 
+                  {page: "Settings", active: false}];
 
   constructor(private http: HttpClient) { }
 
@@ -26,14 +27,16 @@ export class AdminComponent implements OnInit {
   }
 
   addAppointment() {
-    window.alert("Hey");
     this.http.post(`http://localhost:3000/appointment?date=${this.appointment.date}`, this.appointment)
       .subscribe();
   }
 
-  setActive(id: string) {
+  setActive(id: number) {
     for(var i = 0; i < this.pages.length; i++) {
-
+      this.pages[i].active = false;
+      if(id == i) {
+        this.pages[i].active = true;
+      }
     }
   }
 }

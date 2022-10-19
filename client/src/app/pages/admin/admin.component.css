@@ -1,4 +1,7 @@
 .tabs {
-    width: 80%;
     margin: auto;
+}
+
+.card {
+    padding: 20px;
 }

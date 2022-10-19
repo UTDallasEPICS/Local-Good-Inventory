@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/family', (req, res) => {
-  console.log("Get request");
+  console.log("Get family request");
   family = {phoneNumber: "", name: "", members: [] }
   
   if(req.query.phoneNumber) {
@@ -85,24 +85,29 @@ app.post('/appointment', (req, res) => {
   }
 });
 
+app.get('/settings', (req, res) => {
+  console.log("Get settings request")
+  settingsCollection.findOne().then((settings) => {
+    res.status(200).json({
+      settings
+    });
+    console.log("returned: ");
+    console.log(settings);
+  });
+});
+
 app.post('/settings', (req, res) => {
   console.log("Settings Posted");
-  //console.log(req);
-  //if(req.query) {
-    const newValue = { $set: {
-      date: req.body.date,
-      startTime: req.body.startTime,
-      endTime: req.body.endTime,
-      interval: req.body.interval,
-      quantity: req.body.quantity } };
-    const query = {};
-    settingsCollection.updateOne(query, newValue, {upsert: true});
-    res.status(201);
-    console.log("Post Settings Successful");
-  //} else {
-    //console.log("Post Settings Unsuccessful");
-    //res.status(404);
-  //}
+  const newValue = { $set: {
+    dates: req.body.dates,
+    startTime: req.body.startTime,
+    endTime: req.body.endTime,
+    interval: req.body.interval,
+    quantity: req.body.quantity } };
+  const query = {};
+  settingsCollection.updateOne(query, newValue, {upsert: true});
+  res.status(201);
+  console.log("Post Settings Successful");
 });
 
 app.listen(port, () => {

@@ -8,14 +8,12 @@ body {font-family: Verdana, sans-serif;}
 
 .container {
   padding: 20px;
-  border: 3px solid rgb(132, 218, 252);
 }
 
 .calendar {
   width: 50%;
   float: left;
   padding: 20px;
-  border: 2px solid rgb(255, 117, 117);
 }
 
 /* Month header */
