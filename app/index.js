@@ -66,6 +66,22 @@ app.post('/family', (req, res) => {
 
 });
 
+app.get('/appointment', (req, res) => {
+  console.log("Get appointment request");
+  // family = {phoneNumber: "", name: "", members: [] }
+  
+  if(req.query.date) {
+    const query = { date: req.query.date };
+    appointmentsCollection.findOne(query).then((appointment) => {
+      res.status(200).json({
+        appointment
+      });
+    });
+  } else {
+    res.status(404);
+  }
+});
+
 app.post('/appointment', (req, res) => {
   if(req.query.date) {
     const query = {date: req.query.date};
