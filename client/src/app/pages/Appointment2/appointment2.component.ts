@@ -30,6 +30,14 @@ export class Appointment2Component implements OnInit {
   pipe = new DatePipe('en-US');
   nextAppointment: string = "";
 
+  dates = Array(31).fill(0).map((x,i)=>i+1);
+  startTime = 9.5;
+  EndTime = 11.5;
+  interval = .25;
+
+  totalTime = (this.EndTime - this.startTime) / this.interval;
+  times = Array(this.totalTime);
+
   appointmentconfirm = false;
 
   isDisabled: boolean = true;
@@ -37,7 +45,9 @@ export class Appointment2Component implements OnInit {
   constructor(public familyService: FamilyService) { }
 
   ngOnInit(): void {
-
+    for(let x = 0; x < this.totalTime; x++){
+      this.times[x] = this.startTime + (x * this.interval);
+    }
 }
 
   updateAppointment() {

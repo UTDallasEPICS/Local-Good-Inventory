@@ -3,8 +3,11 @@
 } */
 
 
-ul {list-style-type: none;}
+.button {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
+p{
+  font-family: Verdana, sans-serif;
+}
 
 .container {
   padding: 20px;
@@ -58,15 +61,6 @@ body {font-family: Verdana, sans-serif;}
   background-color:#ddd;
 }
 
-.box{
-  width: 100%;
-  height: 365px;
-  }
-
-.paam{
-  object-position: right bottom;
-}
-
 .weekdays li {
   display: inline-block;
   width: 14.25%;
@@ -98,3 +92,33 @@ body {font-family: Verdana, sans-serif;}
   background: #1abc9c;
   color: white !important
 }
+
+.buttons{
+  width: 9.10%;
+  display: inline-block;
+  margin: 1% 2.55%;
+  display: inline-block;
+  transition-duration: 0.2s;
+  border-style: solid;
+  border-color: #eee;
+}
+
+.buttons:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.box{
+  background-color: #eee;
+}
+
+.button{
+  padding:12px;
+  margin:5px;
+}
+
+.confirm{
+  text-align: right;
+}
+
+
