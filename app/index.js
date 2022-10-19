@@ -14,6 +14,10 @@ mongoClient.connect();
 
 const familiesCollection = mongoClient.db('LocalGoodCenter').collection('Families');
 
+const appointmentsCollection = mongoClient.db('LocalGoodCenter').collection('Appointments');
+
+const settingsCollection = mongoClient.db('LocalGoodCenter').collection('Settings');
+
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -26,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/family', (req, res) => {
-  console.log("Get request");
+  console.log("Get family request");
   family = {phoneNumber: "", name: "", members: [] }
   
   if(req.query.phoneNumber) {
@@ -55,11 +59,55 @@ app.post('/family', (req, res) => {
       nextAppointment: req.body.nextAppointment } };
     familiesCollection.updateOne(query, newValue, {upsert: true});
     res.status(201);
-    console.log("Post Successful");
+    console.log("Post Family Successful");
   } else {
     res.status(404);
   }
 
+});
+
+app.post('/appointment', (req, res) => {
+  if(req.query.date) {
+    const query = {date: req.query.date};
+    const newValue = { $set: {
+      date: req.body.date,
+      startTime: req.body.startTime,
+      endTime: req.body.endTime,
+      interval: req.body.interval,
+      quantity: req.body.quantity,
+      timeslots: req.body.timeslots } };
+    appointmentsCollection.updateOne(query, newValue, {upsert: true});
+    res.status(201);
+    console.log("Post Appointment Successful");
+  } else {
+    console.log("Post Appointment Unsuccessful");
+    res.status(404);
+  }
+});
+
+app.get('/settings', (req, res) => {
+  console.log("Get settings request")
+  settingsCollection.findOne().then((settings) => {
+    res.status(200).json({
+      settings
+    });
+    console.log("returned: ");
+    console.log(settings);
+  });
+});
+
+app.post('/settings', (req, res) => {
+  console.log("Settings Posted");
+  const newValue = { $set: {
+    dates: req.body.dates,
+    startTime: req.body.startTime,
+    endTime: req.body.endTime,
+    interval: req.body.interval,
+    quantity: req.body.quantity } };
+  const query = {};
+  settingsCollection.updateOne(query, newValue, {upsert: true});
+  res.status(201);
+  console.log("Post Settings Successful");
 });
 
 app.listen(port, () => {

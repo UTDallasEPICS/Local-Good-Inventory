@@ -12,9 +12,10 @@ import { Appointment2Component } from './pages/Appointment2/appointment2.compone
 import { ReviewChangesComponent } from './pages/review-changes/change.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
+  {path:'', component: CheckinComponent},
   {path:'checkin', component:CheckinComponent},
   {path:'review', component: ReviewChangesComponent},
   {path:'appointment', component:AppointmentComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path:'changememberinfo1', component:ChangeMemberInfo1Component},
   {path:'changememberinfo2', component:ChangeMemberInfo2Component},
   {path:'new-registration', component:NewRegistrationComponent},
-  {path:'checkin-complete', component:CheckinCompleteComponent}
+  {path:'checkin-complete', component:CheckinCompleteComponent},
+  {path:'admin', component:AdminComponent}
 ];
 
 @NgModule({

@@ -23,6 +23,8 @@ import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/remo
 import { NewRegistrationComponent } from './pages/new-registration/new-registration.component';
 import { CommonModule } from '@angular/common';
 import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { SettingsComponent } from './pages/admin/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-compl
     FamilyOrMemberComponent,
     RemoveFamilyMemberComponent,
     NewRegistrationComponent,
-    CheckinCompleteComponent
+    CheckinCompleteComponent,
+    AdminComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

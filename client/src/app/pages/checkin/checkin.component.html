@@ -1,51 +1,46 @@
 
 <section class="section has-text-centered">
-    <span class="icon is-large  mt-6"> 
-      <i class="fa-solid fa-hand-holding-hand fa-10x fa-bounce" style="color: #1c7ed6;"></i>
-    </span>
-  </section>
-  <section class="section">
-    <form accept-charset="utf-8" enctype="multipart/form-data" #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
-      <div class="field">
-          <label class="label is-large" for="number">Phone Number</label>
-          <div class="control has-icons-right has-icons-left" style="width: 40%;">
-              <input class="input is-large"
-              [(ngModel)]="user.mobileNumber"
-              [pattern]="mobNumberPattern"
-              #mobNumber="ngModel" 
-               type="text"
-               name="mobileNumber"
-               placeholder="(XXX) XXX-XXXX" 
-               mask="(000) 000-0000" 
-               value=""
-               (keypress) = "OnlyNumbersAllowed($event)"
-               #pNumberInput = "ngModel"
-               >
-              <span class="icon is-small is-left">
-                  <i class="fa-solid fa-phone"></i>
-              </span>
-              <!--
-              <span class="icon is-small is-right" >
-                  <i class="fas fa-exclamation-triangle"></i>
-              </span>
-              -->
+  <div class="content">
+    <h1>Welcome to Local Good Center!</h1>
+  </div>
+</section>
+<section class="section">
+  <form accept-charset="utf-8" enctype="multipart/form-data" #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+    <div class="field">
+        <label class="label is-large" for="number">Phone Number</label>
+        <div class="control has-icons-right has-icons-left" style="width: 40%;">
+            <input class="input is-large"
+            [(ngModel)]="user.mobileNumber"
+            [pattern]="mobNumberPattern"
+            #mobNumber="ngModel" 
+              type="text"
+              name="mobileNumber"
+              placeholder="(XXX) XXX-XXXX" 
+              mask="(000) 000-0000" 
+              value=""
+              (keypress) = "OnlyNumbersAllowed($event)"
+              #pNumberInput = "ngModel"
+              >
+            <span class="icon is-small is-left">
+                <i class="fa-solid fa-phone"></i>
+            </span>
+        </div>
+    </div>
+      
+      <div class="field is-grouped mt-6">
+          <div class="control">
+              <button class="button is-link is-medium" type="submit" [disabled]="userForm.invalid">Submit</button>
+          </div>
+          <div class="control">
+              <a routerLink = "/">
+                  <button class="button is-link is-medium is-light ml-6">Cancel</button>
+              </a>
           </div>
       </div>
-        
-        <div class="field is-grouped mt-6">
-            <div class="control">
-                <button class="button is-link is-medium" type="submit" [disabled]="userForm.invalid">Submit</button>
-            </div>
-            <div class="control">
-                <a routerLink = "/">
-                    <button class="button is-link is-medium is-light ml-6">Cancel</button>
-                </a>
-            </div>
-        </div>
-    </form>
-  </section>
-  <section class="section">
-    <a routerLink = "/new-registration">
-      <span class="tag is-warning is-rounded is-large">New Registration</span>
-    </a>
-  </section>
+  </form>
+</section>
+<section class="section">
+  <a routerLink = "/new-registration">
+    <span class="tag is-warning is-rounded is-large">New Registration</span>
+  </a>
+</section>
