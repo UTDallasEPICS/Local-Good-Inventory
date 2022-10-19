@@ -1,0 +1,24 @@
+<form>
+    <!--Dates: <input type="text" name="dates" [(ngModel)]="settings.dates">-->
+    <div class="field is-horizontal">
+        <div class="field">
+            <label class="label">Start Time</label><input class="input" type="time" name="startTime" [(ngModel)]="settings.startTime">
+        </div>
+        <div class="field">
+            <label class="label">End Time</label><input class="input" type="time" name="endTime" [(ngModel)]="settings.endTime">
+        </div>
+        <div class="field">
+            <label class="label">Interval (mins)</label><input class="input" type="number" name="interval" [(ngModel)]="settings.interval" min="10" max="60">
+        </div>
+        <div class="field">
+            <label class="label">Quantity (people/timeslot)</label><input class="input" type="number" name="quantity" [(ngModel)]="settings.quantity" min="1">
+        </div>
+    </div>
+    <label class="label">Days</label>
+    <div class="field is-grouped">
+        <p class="control" *ngFor="let day of days; let i = index;">
+            <button [ngClass]="this.settings.dates.includes(day.day) ? 'has-background-link has-text-white':''" class="button {{day}}Button" (click)="updateDays(day.day)">{{day.day}}</button>
+        </p>
+    </div>
+    <a class="button is-medium is-success" (click)="updateSettings()">Submit</a>
+</form>

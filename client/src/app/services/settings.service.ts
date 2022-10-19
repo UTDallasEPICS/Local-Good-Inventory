@@ -3,13 +3,15 @@ import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 
+
+
 @Injectable({providedIn: 'root'})
-export class FamilyService {
+export class SettingsService {
     private settings: Settings = 
         {
-            dates: ['F','S'],
-            startTime: "9:30am",
-            endTime: "11:30am",
+            dates: ['Fri','Sat'],
+            startTime: "09:30",
+            endTime: "11:30",
             interval: 15,
             quantity: 4
         };
@@ -17,15 +19,15 @@ export class FamilyService {
 
     constructor(private http: HttpClient) { }
 
-    getFamily() {
+    getSettings() {
         return {...this.settings};
     }
 
-    getFamilyUpdateListener() {
+    getSettingsUpdateListener() {
         return this.settingsUpdated.asObservable();
     }
 
-    updateFamily() {
+    updateSettings() {
         const promiseToken = new Promise((resolve, reject) => {
             this.http.get<{settings: Settings}>(`http://localhost:3000/settings`)
             .subscribe((settings) => {
@@ -34,13 +36,14 @@ export class FamilyService {
                     resolve(settings);
             });    
         });
-
+        console.log("Updated settings");
+        //console.log(this.settings);
         return promiseToken;
         
     }
 
-    postFamily(settings: Settings) {
-        this.http.post(`http://localhost:3000/settings`, this.settings)
+    postSettings(settings: Settings) {
+        this.http.post(`http://localhost:3000/settings`, settings)
             .subscribe();
     }
 }
