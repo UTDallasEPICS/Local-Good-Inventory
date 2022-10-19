@@ -40,7 +40,6 @@ export class Appointment2Component implements OnInit {
 
 }
 
-
   updateAppointment() {
     this.appointmentconfirm = true;
     var nextAppointment = this.pipe.transform(this.datePicked, 'dd-MM-YYYY');

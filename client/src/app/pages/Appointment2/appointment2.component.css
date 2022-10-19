@@ -8,14 +8,14 @@ body {font-family: Verdana, sans-serif;}
 
 .container {
   padding: 20px;
-  border: 3px solid rgb(132, 218, 252);
+  /* border: 3px solid rgb(132, 218, 252); */
 }
 
 .calendar {
   width: 50%;
   float: left;
   padding: 20px;
-  border: 2px solid rgb(255, 117, 117);
+  /* border: 2px solid rgb(255, 117, 117); */
 }
 
 /* Month header */
@@ -58,8 +58,13 @@ body {font-family: Verdana, sans-serif;}
   background-color:#ddd;
 }
 
+.box{
+  width: 100%;
+  height: 365px;
+  }
+
 .paam{
-  margin-right: 10px;
+  object-position: right bottom;
 }
 
 .weekdays li {
