@@ -3,7 +3,7 @@
         <h1 class="title"><strong><u>Local Good Market Application</u></strong></h1>
     </div>
     <div class="container">
-        <form accept-charset="utf-8" action="sendmail.php" method="post" enctype="multipart/form-data">
+        <form accept-charset="utf-8" action="sendmail.php" method="post" enctype="multipart/form-data" #f="ngForm">
             <div class="field">
                 <label class="label">Name</label>
                 <div class="control has-icons-left">
@@ -99,6 +99,11 @@
                 <br>
                 <label class="checkbox">
                     <input type="checkbox">
+                    Halal(حلال)
+                </label>
+                <br>
+                <label class="checkbox">
+                    <input type="checkbox">
                     Other
                 </label>
                 </div>
@@ -164,30 +169,17 @@
                 </div>
             </div>
             
-            <div class="field">
-                <div class="control">
-                <label class="radio">
-                    <input type="radio" name="question">
-                    Yes
-                </label>
-                <label class="radio">
-                    <input type="radio" name="question">
-                    No
-                </label>
-                </div>
-            </div>
-            
+          
             <div class="field">
                 <label class="label">How did you hear about The Local Good Market?</label>
                 <div class="control">
-                <textarea class="textarea"></textarea>
+                <textarea class="textarea" name = "required" ngModel minlength = "25" required placeholder = "Please fill out this form!"></textarea>
                 </div>
             </div>
-
             <div class="field is-grouped">
                 <div class="control">
                     <a routerLink="/appointment">
-                <button class="button is-link" (click)="onClick()">Submit</button>
+                <button class="button is-link" (click)="onClick()" [disabled] = "f.invalid">Submit</button>
             </a>
                 </div>
                 <div class="control">

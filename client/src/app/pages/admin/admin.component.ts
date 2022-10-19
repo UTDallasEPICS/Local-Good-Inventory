@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  public pages = [{page: "Stats", active: true}, 
+                  {page: "Settings", active: false}];
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
+  setActive(id: number) {
+    for(var i = 0; i < this.pages.length; i++) {
+      this.pages[i].active = false;
+      if(id == i) {
+        this.pages[i].active = true;
+      }
+    }
+  }
 }

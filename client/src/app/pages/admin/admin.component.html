@@ -1,1 +1,14 @@
-<p>admin works!</p>
+<div class="section">
+    <div class="tabs is-large is-toggle">
+        <ul>
+            <li [ngClass]="page.active?'is-active':'has-background-white'" *ngFor="let page of pages; let i = index" id="page{{i}}"><a (click)="setActive(i)">{{page.page}}</a></li>
+        </ul>
+    </div>
+
+    <div *ngIf="pages[1].active" class="card">
+        <app-settings></app-settings>
+    </div>
+    <div *ngIf="pages[0].active" class="card">
+        <p>Stats Page</p>
+    </div>
+</div>

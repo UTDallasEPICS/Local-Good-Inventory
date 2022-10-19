@@ -24,6 +24,7 @@ import { NewRegistrationComponent } from './pages/new-registration/new-registrat
 import { CommonModule } from '@angular/common';
 import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { SettingsComponent } from './pages/admin/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     RemoveFamilyMemberComponent,
     NewRegistrationComponent,
     CheckinCompleteComponent,
-    AdminComponent
+    AdminComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
