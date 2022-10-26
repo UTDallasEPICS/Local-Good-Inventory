@@ -24,10 +24,12 @@ export class SettingsService {
     return this.settingsUpdated.asObservable();
   }
 
-  updateSettings() {
+  updateSettings(date: string) {
     const promiseToken = new Promise((resolve, reject) => {
       this.http
-        .get<{ settings: Settings }>(`http://localhost:3000/appointment`)
+        .get<{ settings: Settings }>(
+          `http://localhost:3000/appointment?date=${date}`
+        )
         .subscribe((settings) => {
           this.settings = settings.settings;
           this.settingsUpdated.next({ ...this.settings });
