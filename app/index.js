@@ -31,19 +31,21 @@ app.use((req, res, next) => {
 
 app.get('/family', (req, res) => {
   console.log("Get family request");
-  family = {phoneNumber: "", name: "", members: [] }
   
   if(req.query.phoneNumber) {
     const query = { phoneNumber: req.query.phoneNumber };
     familiesCollection.findOne(query).then((family) => {
-      this.family = family;
-      res.status(200).json({
-        family
-      });
+      res.status(200).json({family});
     });
   } else {
-    res.status(404);
+    // familiesCollection.find({}).then((families) => {
+    //   res.status(200).json({families});
+    // });
+    familiesCollection.find({}).toArray().then((families) => {
+      res.status(200).json({families});
+    })
   }
+  res.status(404);
   
 });
 
@@ -67,9 +69,7 @@ app.post('/family', (req, res) => {
 });
 
 app.get('/appointment', (req, res) => {
-  console.log("Get appointment request");
-  // family = {phoneNumber: "", name: "", members: [] }
-  
+  console.log("Get appointment request");  
   if(req.query.date) {
     const query = { date: req.query.date };
     appointmentsCollection.findOne(query).then((appointment) => {

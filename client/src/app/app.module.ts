@@ -25,6 +25,8 @@ import { CommonModule } from '@angular/common';
 import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { SettingsComponent } from './pages/admin/settings/settings.component';
+import { FamiliesComponent } from './pages/admin/families/families.component';
+import { StatsComponent } from './pages/admin/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { SettingsComponent } from './pages/admin/settings/settings.component';
     NewRegistrationComponent,
     CheckinCompleteComponent,
     AdminComponent,
-    SettingsComponent
+    SettingsComponent,
+    FamiliesComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

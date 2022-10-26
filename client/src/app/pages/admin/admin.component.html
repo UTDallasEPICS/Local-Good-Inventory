@@ -5,10 +5,13 @@
         </ul>
     </div>
 
+    <div *ngIf="pages[0].active" class="card">
+        <app-stats></app-stats>
+    </div>
     <div *ngIf="pages[1].active" class="card">
         <app-settings></app-settings>
     </div>
-    <div *ngIf="pages[0].active" class="card">
-        <p>Stats Page</p>
+    <div *ngIf="pages[2].active" class="card">
+        <app-families></app-families>
     </div>
 </div>

@@ -1,0 +1,17 @@
+<div *ngFor="let family of families; let i = index">
+    <a (click)="showModal(family.phoneNumber)">{{family.name}} Family</a>
+</div>
+
+<div class="modal" [class.is-active]="modalVisible">
+    <div class="modal-background" (click)="hideModal()"></div>
+    <div class="modal-content">
+        <div class="box">
+            <h1>{{selectedFamily.name}} Family: {{selectedFamily.members.length}} Members</h1>
+            <div *ngFor="let member of selectedFamily.members; let i = index;">
+                <p>{{member.name}}: {{member.age}}</p>
+            </div>
+            <p>{{selectedFamily.phoneNumber}}</p>
+            <p>{{selectedFamily.nextAppointment}}</p>
+        </div>
+    </div>
+</div>
