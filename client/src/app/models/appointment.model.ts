@@ -1,10 +1,10 @@
-import { Family } from "./family.model";
+import { Family } from './family.model';
 
 export interface Appointment {
-    date: string;
-    startTime: string;
-    endTime: string;
-    interval: number;
+  date: string;
+  timeslots: {
+    time: string;
     quantity: number;
-    timeslots: {time: string, family: Family}[];
+    phoneNumber: string[];
+  };
 }

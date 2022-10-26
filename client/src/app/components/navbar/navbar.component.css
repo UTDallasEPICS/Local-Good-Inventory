@@ -9,7 +9,7 @@
 }
 
 .navbar-item {
-  color: white;
+  color: #f7ae04;
   font-weight: bold;
 }
 
@@ -17,6 +17,7 @@
   height: 180px;
   width: 140px;
 }
+
 .dropdown-item {
   color: black;
   display: block;
@@ -24,4 +25,8 @@
   line-height: 1.5;
   padding: 0.375rem 1rem;
   position: relative;
+}
+
+.navbar-item:active {
+  color: #28487b;
 }
