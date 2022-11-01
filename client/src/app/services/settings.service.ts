@@ -9,9 +9,13 @@ import { Injectable } from "@angular/core";
 export class SettingsService {
     private settings: Settings = 
         {
-            dates: ['Fri','Sat'],
-            startTime: "09:30",
-            endTime: "11:30",
+            dates: [{day: 'Sun', startTime:"09:30", endTime:"11:30", active:false},
+                    {day: 'Mon', startTime:"09:30", endTime:"11:30", active:false},
+                    {day: 'Tue', startTime:"09:30", endTime:"11:30", active:false},
+                    {day: 'Wed', startTime:"09:30", endTime:"11:30", active:false},
+                    {day: 'Thu', startTime:"09:30", endTime:"11:30", active:false},
+                    {day: 'Fri', startTime:"09:30", endTime:"11:30", active:true},
+                    {day: 'Sat', startTime:"09:30", endTime:"11:30", active:true}],
             interval: 15,
             quantity: 4
         };

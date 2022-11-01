@@ -1,4 +1,4 @@
-<div *ngFor="let family of families; let i = index">
+<div *ngFor="let family of filteredFamilies; let i = index">
     <a (click)="showModal(family.phoneNumber)">{{family.name}} Family</a>
 </div>
 
@@ -12,6 +12,9 @@
             </div>
             <p>{{selectedFamily.phoneNumber}}</p>
             <p>{{selectedFamily.nextAppointment}}</p>
+
+            <button class="button" (click)="updateFamily()">Save</button>
+            <button class="button" (click)="hideModal()">Close</button>
         </div>
     </div>
 </div>
