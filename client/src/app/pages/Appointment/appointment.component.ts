@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Family } from 'src/app/models/family.model';
 import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { FamilyService } from 'src/app/services/family.service';
 })
 export class AppointmentComponent implements OnInit {
 
-  constructor(public famiyService: FamilyService) { }
+  family: Family = {} as Family;
+  nextAppointment: string = "";
+
+  constructor(public familyService: FamilyService) { }
 
   isDisplay = false;
   clicked = false;
@@ -20,6 +24,13 @@ export class AppointmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  updateAppointment() {
+    this.family = this.familyService.getFamily();
+    this.family.nextAppointment = this.nextAppointment;
+    this.familyService.postFamily(this.family);
+    console.log();
   }
 
   

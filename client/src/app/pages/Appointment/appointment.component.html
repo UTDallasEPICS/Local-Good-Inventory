@@ -16,7 +16,13 @@
     </div>
 
     <div *ngIf = "isDisplay">
-      <datepicker></datepicker>
+      <datepicker [(selectedDate)]="this.nextAppointment"></datepicker>
+      
+      <div class="confirm is-centered">
+        <button class="button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
+      </div>
+      
+    
     </div>
   </div>
 
