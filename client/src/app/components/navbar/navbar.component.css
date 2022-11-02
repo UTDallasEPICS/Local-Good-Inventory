@@ -1,14 +1,32 @@
 .navbar {
-    background-color: #28487B;
-    height: 6rem;
-    padding: 0 0 0 0;
+  background-color: #28487b;
+  height: 6rem;
+  padding: 0 0 0 0;
 }
 
 .navbar-item img {
-    max-height: 3.5rem;
+  max-height: 4.5rem;
+}
+
+.navbar-item {
+  color: #f7ae04;
+  font-weight: bold;
 }
 
 .logo {
   height: 180px;
   width: 140px;
+}
+
+.dropdown-item {
+  color: black;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  padding: 0.375rem 1rem;
+  position: relative;
+}
+
+.navbar-item:active {
+  color: #28487b;
 }

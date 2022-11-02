@@ -4,14 +4,69 @@
       <p class="subtitle has-text-centered is-size-3">
         <strong>Choose the date for your next appointment  </strong>
       </p>
+
+  <!--
       <p class="subtitle has-text-centered">
-        <input class="aptDate my-5" type="date" [(ngModel)]="datePicked">
-      </p> 
+        <input class="aptDate my-5" type= "date" [(ngModel)]= "datePicked">
+      </p>
 
-     <div class="buttons is-centered">
-      <button class="button is-large button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
+      <div class="datepicker-subheader">
+        {{ customMessage }} {{ selectedDay }} {{ monthNames[localdate.getMonth()] }} {{ localdate.getDate() }}, {{ localdate.getFullYear() }}</div>
 
+      -->
+  <!---->
+
+    <!-- <button (click)="isDisabled = !isDisabled"> {{isDisabled ? 'Edit' : 'Save' }} </button> -->
+
+    <div class = "container">
+
+      <div class = "calendar">
+        <div class="month">
+          <ul>
+            <li class="prev">&#10094;</li>
+            <li (click)="isDisabled = !isDisabled" class="next">&#10095;</li>
+            <li>{{isDisabled ? 'October' : 'November' }}<br><span style="font-size:18px">2022</span></li>
+          </ul>
+        </div>
+
+        <ul class="weekdays">
+          <li>Mo</li>
+          <li>Tu</li>
+          <li>We</li>
+          <li>Th</li>
+          <li>Fr</li>
+          <li>Sa</li>
+          <li>Su</li>
+        </ul>
+
+        <!-- Adds buttons for each day in the month -->
+        <div class = "box">
+           <button class = "buttons days" *ngFor = "let date of dates">{{date}}</button>
+        </div>
+          </div>
+          <div class = "calendar">
+              <p>Choose a time:</p>
+              <br>
+              <div class = has-addons>
+                <!-- <button class  = "button is-primary is-rounded" *ngFor = "let time of times">{{time}}</button> -->
+                <button class="button is-primary is-rounded">9:00 AM</button>
+                <button class="button is-primary is-rounded">10:00 AM</button>
+                <button class="button is-primary is-rounded">11:00 AM</button>
+                <button class="button is-primary is-rounded">12:00 PM</button>
+                <button class="button is-primary is-rounded">1:00 PM</button>
+                <button class="button is-primary is-rounded">2:00 PM</button>
+                <button class="button is-primary is-rounded">3:00 PM</button>
+                <button class="button is-primary is-rounded">4:00 PM</button>
+            </div>
       </div>
-    </div>
-  
-</section>
+</div>
+<br>
+
+<div class="confirm is-centered">
+  <button class="button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
+</div>
+
+
+
+
+<!-- </section> -->

@@ -23,3 +23,7 @@ describe('Appointment2Component', () => {
     expect(component).toBeTruthy();
   });
 });
+
+// export class AppComponent {
+//   isDisabled: boolean = false;
+// }

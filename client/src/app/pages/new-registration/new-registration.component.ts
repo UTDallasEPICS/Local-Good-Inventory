@@ -11,7 +11,7 @@ import { FamilyService } from 'src/app/services/family.service';
 })
 export class NewRegistrationComponent implements OnInit {
 
-  family: Family = {phoneNumber: "", name: "", members: [{name: "", age: ""}], allergies: [], checkedIn: [], nextAppointment: ""};
+  family: Family = {phoneNumber: "", name: "", members: [{name: "", age: "", lastName: ""}], allergies: [], checkedIn: [], nextAppointment: ""};
 
   constructor(private familyService: FamilyService, private router: Router) { }
 
@@ -21,11 +21,11 @@ export class NewRegistrationComponent implements OnInit {
 
   onClick(){
     this.familyService.postFamily(this.family);
-    this.router.navigate(['/']);
+    this.router.navigate(['/appointment']);
   }
 
   addMember() {
-    this.family.members.push({name: "", age: ""})
+    this.family.members.push({name: "", age: "", lastName: ""})
   }
 
   removeMember(index: number) {

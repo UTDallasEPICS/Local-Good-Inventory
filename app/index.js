@@ -8,11 +8,15 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 3000;
 
-//const mongoClient = new MongoClient("mongodb+srv://user1:UTDallas1@cluster0.yjnoy.mongodb.net/")
+const mongoClient = new MongoClient("mongodb+srv://UTDallas:utdallas1@cluster0.76dcy.mongodb.net/?retryWrites=true&w=majority")
 
-//mongoClient.connect();
+mongoClient.connect();
 
-//const familiesCollection = mongoClient.db('TestDatabase').collection('CollectionOne');
+const familiesCollection = mongoClient.db('LocalGoodCenter').collection('Families');
+
+const appointmentsCollection = mongoClient.db('LocalGoodCenter').collection('Appointments');
+
+const settingsCollection = mongoClient.db('LocalGoodCenter').collection('Settings');
 
 app.use(bodyParser.json());
 
@@ -26,20 +30,22 @@ app.use((req, res, next) => {
 });
 
 app.get('/family', (req, res) => {
-  console.log("Get request");
-  family = {phoneNumber: "", name: "", members: [] }
+  console.log("Get family request");
   
   if(req.query.phoneNumber) {
     const query = { phoneNumber: req.query.phoneNumber };
-    /*familiesCollection.findOne(query).then((family) => {
-      this.family = family;
-      res.status(200).json({
-        family
-      });
-    });*/
+    familiesCollection.findOne(query).then((family) => {
+      res.status(200).json({family});
+    });
   } else {
-    res.status(404);
+    // familiesCollection.find({}).then((families) => {
+    //   res.status(200).json({families});
+    // });
+    familiesCollection.find({}).toArray().then((families) => {
+      res.status(200).json({families});
+    })
   }
+  res.status(404);
   
 });
 
@@ -53,12 +59,70 @@ app.post('/family', (req, res) => {
       phoneNumber: req.body.phoneNumber,
       checkedIn: req.body.checkedIn,
       nextAppointment: req.body.nextAppointment } };
-    //familiesCollection.updateOne(query, newValue, {upsert: true});
+    familiesCollection.updateOne(query, newValue, {upsert: true});
     res.status(201);
+    console.log("Post Family Successful");
   } else {
     res.status(404);
   }
 
+});
+
+app.get('/appointment', (req, res) => {
+  console.log("Get appointment request");  
+  if(req.query.date) {
+    const query = { date: req.query.date };
+    appointmentsCollection.findOne(query).then((appointment) => {
+      res.status(200).json({
+        appointment
+      });
+    });
+  } else {
+    res.status(404);
+  }
+});
+
+app.post('/appointment', (req, res) => {
+  if(req.query.date) {
+    const query = {date: req.query.date};
+    const newValue = { $set: {
+      date: req.body.date,
+      startTime: req.body.startTime,
+      endTime: req.body.endTime,
+      interval: req.body.interval,
+      quantity: req.body.quantity,
+      timeslots: req.body.timeslots } };
+    appointmentsCollection.updateOne(query, newValue, {upsert: true});
+    res.status(201);
+    console.log("Post Appointment Successful");
+  } else {
+    console.log("Post Appointment Unsuccessful");
+    res.status(404);
+  }
+});
+
+app.get('/settings', (req, res) => {
+  console.log("Get settings request")
+  settingsCollection.findOne().then((settings) => {
+    res.status(200).json({
+      settings
+    });
+    console.log("returned: ");
+    console.log(settings);
+  });
+});
+
+app.post('/settings', (req, res) => {
+  console.log("Settings Posted");
+  const newValue = { $set: {
+    dates: req.body.dates,
+    interval: req.body.interval,
+    quantity: req.body.quantity,
+    blockOuts: req.body.blockOuts } };
+  const query = {};
+  settingsCollection.updateOne(query, newValue, {upsert: true});
+  res.status(201);
+  console.log("Post Settings Successful");
 });
 
 app.listen(port, () => {

@@ -13,9 +13,10 @@ import { ReviewChangesComponent } from './pages/review-changes/change.component'
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
 import { DietaryPageComponent } from './pages/dietary-page/dietary-page.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
+  {path:'', component: CheckinComponent},
   {path:'checkin', component:CheckinComponent},
   {path:'review', component: ReviewChangesComponent},
   {path:'appointment', component:AppointmentComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'new-registration', component:NewRegistrationComponent},
   {path:'checkin-complete', component:CheckinCompleteComponent},
   {path: 'dietary-page', component:DietaryPageComponent},
+  {path:'admin', component:AdminComponent}
 ];
 
 @NgModule({
