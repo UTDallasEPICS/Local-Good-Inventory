@@ -10,7 +10,7 @@ import { FamilyService } from 'src/app/services/family.service';
 })
 export class DietaryPageComponent implements OnInit {
 
-    family: Family = {name: "", phoneNumber: "", members: [], allergies: ['kosher','gluten','vegetarian', 'vegan','diabetes'], checkedIn: [], nextAppointment: "" };
+    family: Family = {name: "", phoneNumber: "", members: [], allergies: [], checkedIn: [], nextAppointment: "" };
     private familySubscription: Subscription = new Subscription;
   
     constructor(public familyService: FamilyService) { }
