@@ -21,7 +21,7 @@ export class NewRegistrationComponent implements OnInit {
 
   onClick(){
     this.familyService.postFamily(this.family);
-    this.router.navigate(['/']);
+    this.router.navigate(['/appointment']);
   }
 
   addMember() {
