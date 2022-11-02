@@ -1,0 +1,25 @@
+
+<div class = "calendar">
+    <div class="month">
+        <ul>
+            <li class="prev" (click)="changeMonth(selectedMonth-1)">&#10094;</li>
+            <li class="next" (click)="changeMonth(selectedMonth+1)">&#10095;</li>
+            <li>{{monthNames[selectedMonth - 1]}}<br><span style="font-size:18px">{{this.selectedYear}}</span></li>
+        </ul>
+    </div>
+
+    <ul class="weekdays">
+        <li>Sun</li>
+        <li>Mon</li>
+        <li>Tue</li>
+        <li>Wed</li>
+        <li>Thu</li>
+        <li>Fri</li>
+        <li>Sat</li>
+    </ul>
+
+    <!-- Adds buttons for each day in the month -->
+    <div class = "box">
+        <button class = "buttons days" [ngClass]="[date == 0 ? 'disabled': '', dateSelected(date) ? 'selected':'']" *ngFor = "let date of dates" [disabled]="date == 0" (click)="selectDate(date)">{{date == 0 ? "" : date}}</button>
+    </div>
+</div>
