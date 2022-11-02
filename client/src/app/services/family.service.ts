@@ -5,13 +5,13 @@ import { Injectable } from "@angular/core";
 
 @Injectable({providedIn: 'root'})
 export class FamilyService {
-    private family: Family = 
+    private family: Family =
         {
-            name: "", 
-            phoneNumber: "", 
-            members: [], 
+            name: "",
+            phoneNumber: "",
+            members: [],
             allergies: [],
-            checkedIn: [], 
+            checkedIn: [],
             nextAppointment: ""
         };
     private familyUpdated = new Subject<Family>();
@@ -20,6 +20,13 @@ export class FamilyService {
 
     getFamily() {
         return {...this.family};
+    }
+
+    getFamilies() {
+      this.http.get<{families: Family[]}>(`http://localhost:3000/family`)
+        .subscribe((families) => {
+          return families;
+        });
     }
 
     getFamilyUpdateListener() {
@@ -37,11 +44,11 @@ export class FamilyService {
                 });
             } else {
                 reject("Not a valid phone number");
-            }        
+            }
         });
 
         return promiseToken;
-        
+
     }
 
     postFamily(family: Family) {
