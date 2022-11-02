@@ -39,72 +39,34 @@
           <li>Su</li>
         </ul>
 
-        <ul class="days">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li><span class ="active">5</span></li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
-          <li>9</li>
-          <li>10</li>
-          <li>11</li>
-          <li>12</li>
-          <li>13</li>
-          <li>14</li>
-          <li>15</li>
-          <li>16</li>
-          <li>17</li>
-          <li>18</li>
-          <li>19</li>
-          <li>20</li>
-          <li>21</li>
-          <li>22</li>
-          <li>23</li>
-          <li>24</li>
-          <li>25</li>
-          <li>26</li>
-          <li>27</li>
-          <li>28</li>
-          <li>29</li>
-          <li>30</li>
-          <li>31</li>
-
-          </ul>
-
-
+        <!-- Adds buttons for each day in the month -->
+        <div class = "box">
+           <button class = "buttons days" *ngFor = "let date of dates">{{date}}</button>
+        </div>
           </div>
           <div class = "calendar">
-
-            <div class = "paam" class="time buttons has-addons">
-              <button class="button">am</button>
-              <button class="button">pm</button>
+              <p>Choose a time:</p>
+              <br>
+              <div class = has-addons>
+                <!-- <button class  = "button is-primary is-rounded" *ngFor = "let time of times">{{time}}</button> -->
+                <button class="button is-primary is-rounded">9:00 AM</button>
+                <button class="button is-primary is-rounded">10:00 AM</button>
+                <button class="button is-primary is-rounded">11:00 AM</button>
+                <button class="button is-primary is-rounded">12:00 PM</button>
+                <button class="button is-primary is-rounded">1:00 PM</button>
+                <button class="button is-primary is-rounded">2:00 PM</button>
+                <button class="button is-primary is-rounded">3:00 PM</button>
+                <button class="button is-primary is-rounded">4:00 PM</button>
             </div>
-
-          </div>
-
       </div>
+</div>
+<br>
 
-
-      <!-- <div class = "submit"> -->
-
-        <!-- <div class="app-container" ng-app="dateTimeApp" ng-controller="dateTimeCtrl as ctrl" ng-cloak> -->
-            <!-- <div class="buttons is-centered">
-              <div class="button is-medium is-outlined">Cancel</div>
-              <div class="button is-medium is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Save</div>
-            </div>
-
-      </div> -->
-
-  <!--
-
-     <div class="buttons is-centered">
-      <button class="button is-large is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
-      </div>
-
-  -->
+<div class="confirm is-centered">
+  <button class="button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
 </div>
 
-</section>
+
+
+
+<!-- </section> -->
