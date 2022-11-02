@@ -12,6 +12,8 @@ export class FamiliesComponent implements OnInit {
 
   families: Family[] = []
 
+  filteredFamilies: Family[] = [];
+
   selectedFamily: Family = {
     name: "", 
     phoneNumber: "", 
@@ -30,7 +32,12 @@ export class FamiliesComponent implements OnInit {
     this.http.get<{families: Family[]}>(`http://localhost:3000/family`)
       .subscribe((families) => {
           this.families = families.families;
+          this.filteredFamilies = families.families.filter(t=>t);
       });
+  }
+
+  updateFilter(): void {
+
   }
 
   showModal(number: string): void {
@@ -44,6 +51,21 @@ export class FamiliesComponent implements OnInit {
 
   hideModal(): void {
     this.modalVisible = false;
+    this.selectedFamily = {
+      name: "", 
+      phoneNumber: "", 
+      members: [], 
+      allergies: [],
+      checkedIn: [], 
+      nextAppointment: ""
+    };
+  }
+
+  updateFamily(): void {
+    if(this.selectedFamily.phoneNumber.length == 10) {
+      this.http.post(`http://localhost:3000/family?phoneNumber=${this.selectedFamily.phoneNumber}`, this.selectedFamily)
+        .subscribe();
+    }
   }
 
 }

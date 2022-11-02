@@ -2,7 +2,7 @@
 <section class="section">
   <div class="card-image has-text-centered my-6">
     <span class="icon is-large  mt-6">
-      <i class="fa-solid fa-solid fa-calendar-days fa-10x fa-flip" style="color: #025ba9;"></i>
+      <i class="fa-solid fa-solid fa-calendar-days fa-10x" style="color: #025ba9;"></i>
     </span>
   </div>
   <div class='card-content my-3'>
@@ -16,7 +16,13 @@
     </div>
 
     <div *ngIf = "isDisplay">
-      <app-appointment2></app-appointment2>
+      <datepicker [(selectedDate)]="this.nextAppointment"></datepicker>
+      
+      <div class="confirm is-centered">
+        <button class="button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
+      </div>
+      
+    
     </div>
   </div>
 
