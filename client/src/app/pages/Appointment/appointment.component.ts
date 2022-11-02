@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
   selector: 'appointment',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppointmentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public famiyService: FamilyService) { }
 
   isDisplay = false;
   clicked = false;

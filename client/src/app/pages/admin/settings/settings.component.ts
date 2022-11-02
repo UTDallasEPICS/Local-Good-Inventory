@@ -12,11 +12,7 @@ export class SettingsComponent implements OnInit {
 
   private settingsSubscription: Subscription = new Subscription;
 
-  settings: Settings = {
-    dates: [],
-    interval: 0,
-    quantity: 0
-  };
+  settings: Settings = {} as Settings;
 
   days = [
     {day: 'Sun', active: false},
@@ -36,8 +32,6 @@ export class SettingsComponent implements OnInit {
     this.settingsSubscription = this.settingsService.getSettingsUpdateListener()
       .subscribe((settings: Settings) => {
         this.settings = settings;
-        console.log("Retrieved settings");
-        console.log(settings);
       });
     this.days.forEach(day => {
       if(this.settings.dates.find(date => date.day == day.day))
@@ -59,8 +53,6 @@ export class SettingsComponent implements OnInit {
   }
 
   updateSettings() {
-    console.log("Updating settings");
-    console.log(this.settings);
     this.settingsService.postSettings(this.settings);
     //window.alert(this.settings.startTime);
     //console.log(this.settings.startTime);

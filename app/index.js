@@ -116,10 +116,9 @@ app.post('/settings', (req, res) => {
   console.log("Settings Posted");
   const newValue = { $set: {
     dates: req.body.dates,
-    startTime: req.body.startTime,
-    endTime: req.body.endTime,
     interval: req.body.interval,
-    quantity: req.body.quantity } };
+    quantity: req.body.quantity,
+    blockOuts: req.body.blockOuts } };
   const query = {};
   settingsCollection.updateOne(query, newValue, {upsert: true});
   res.status(201);

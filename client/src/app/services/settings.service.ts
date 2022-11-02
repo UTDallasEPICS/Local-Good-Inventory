@@ -17,7 +17,8 @@ export class SettingsService {
                     {day: 'Fri', startTime:"09:30", endTime:"11:30", active:true},
                     {day: 'Sat', startTime:"09:30", endTime:"11:30", active:true}],
             interval: 15,
-            quantity: 4
+            quantity: 4,
+            blockOuts: []
         };
     private settingsUpdated = new Subject<Settings>();
 
@@ -47,6 +48,8 @@ export class SettingsService {
     }
 
     postSettings(settings: Settings) {
+        console.log("Posted settings");
+        console.log(settings);
         this.http.post(`http://localhost:3000/settings`, settings)
             .subscribe();
     }

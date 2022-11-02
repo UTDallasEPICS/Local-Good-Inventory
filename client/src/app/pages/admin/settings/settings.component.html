@@ -1,27 +1,36 @@
-<form>
-    <!--Dates: <input type="text" name="dates" [(ngModel)]="settings.dates">-->
-    <div class="field is-horizontal">
-        <div class="field">
-            <label class="label">Interval (mins)</label><input class="input" type="number" name="interval" [(ngModel)]="settings.interval" min="10" max="60">
+<div style="display: flex;">
+
+
+    <form>
+        <!--Dates: <input type="text" name="dates" [(ngModel)]="settings.dates">-->
+        <div class="field is-horizontal">
+            <div class="field">
+                <label class="label">Interval (mins)</label><input class="input" type="number" name="interval" [(ngModel)]="settings.interval" min="10" max="60">
+            </div>
+            <div class="field">
+                <label class="label">Quantity (people/timeslot)</label><input class="input" type="number" name="quantity" [(ngModel)]="settings.quantity" min="1">
+            </div>
         </div>
-        <div class="field">
-            <label class="label">Quantity (people/timeslot)</label><input class="input" type="number" name="quantity" [(ngModel)]="settings.quantity" min="1">
-        </div>
-    </div>
-    <label class="label">Days</label>
-    <div class="field is-grouped">
-        <div class="control" *ngFor="let day of settings.dates; let i = index;">
-            <button style="padding-right: 77px;" [ngClass]="day.active ? 'has-background-link has-text-white':''" class="button" (click)="day.active = !day.active">{{day.day}}</button>
-            <div *ngIf="day.active">
-                <br>
-                <div class="field">
-                    <label class="label">Start Time</label><input class="input" type="time" name="startTime{{i}}" [(ngModel)]="day.startTime">
-                </div>
-                <div class="field">
-                    <label class="label">End Time</label><input class="input" type="time" name="endTime{{i}}" [(ngModel)]="day.endTime">
+        <label class="label">Days</label>
+        <div class="field is-grouped">
+            <div class="control" *ngFor="let day of settings.dates; let i = index;">
+                <button style="padding-right: 77px;" [ngClass]="day.active ? 'has-background-link has-text-white':''" class="button" (click)="day.active = !day.active">{{day.day}}</button>
+                <div *ngIf="day.active">
+                    <br>
+                    <div class="field">
+                        <label class="label">Start Time</label><input class="input" type="time" name="startTime{{i}}" [(ngModel)]="day.startTime">
+                    </div>
+                    <div class="field">
+                        <label class="label">End Time</label><input class="input" type="time" name="endTime{{i}}" [(ngModel)]="day.endTime">
+                    </div>
                 </div>
             </div>
         </div>
+    </form>
+    <datepicker [(selectedDates)]="this.settings.blockOuts" [multiSelect]="true"></datepicker>
+    <div style="display:block;">
+        <h1>Blocked Out Dates</h1>
+        <p *ngFor="let date of settings.blockOuts">{{date}}</p>
     </div>
-    <a class="button is-medium is-success" (click)="updateSettings()">Submit</a>
-</form>
+</div>
+<a class="button is-medium is-success" (click)="updateSettings()">Submit</a>
