@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Family } from 'src/app/models/family.model';
+import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
   selector: 'app-dietary-page',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DietaryPageComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+    family: Family = {name: "", phoneNumber: "", members: [], allergies: ['kosher','gluten','vegetarian', 'vegan','diabetes'], checkedIn: [], nextAppointment: "" };
+    private familySubscription: Subscription = new Subscription;
+  
+    constructor(public familyService: FamilyService) { }
+  
+    ngOnInit() {
+      //this.family = this.familyService.getFamily();
+      this.familySubscription = this.familyService.getFamilyUpdateListener()
+        .subscribe((family: Family) => {
+          //this.family = family;
+        });
+    }
+    ngOnDestroy() {
+      this.familySubscription.unsubscribe();
+    }
+  
   }
-
-}
