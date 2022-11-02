@@ -12,6 +12,7 @@ import { Appointment2Component } from './pages/Appointment2/appointment2.compone
 import { ReviewChangesComponent } from './pages/review-changes/change.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
+import { DietaryPageComponent } from './pages/dietary-page/dietary-page.component';
 import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path:'changememberinfo2', component:ChangeMemberInfo2Component},
   {path:'new-registration', component:NewRegistrationComponent},
   {path:'checkin-complete', component:CheckinCompleteComponent},
+  {path: 'dietary-page', component:DietaryPageComponent},
   {path:'admin', component:AdminComponent}
 ];
 

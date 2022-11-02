@@ -31,7 +31,8 @@
                 <div *ngFor="let member of family.members; let i = index">
                     <div class="field">
                         <input class="input" type="text" name="{{'fname' + i}}" [(ngModel)]="member.name" placeholder="First Name">
-
+                        <input class="input" type="text" name="{{'Lname' + i}}" [(ngModel)]="member.lastName" placeholder="Last Name">
+                        <br>
                         <label><strong>Age:</strong></label>
 
                         <label class ="radio" for="{{'0-17' + i}}">
@@ -173,7 +174,7 @@
             <div class="field">
                 <label class="label">How did you hear about The Local Good Market?</label>
                 <div class="control">
-                <textarea class="textarea" name = "required" ngModel minlength = "25" required placeholder = "Please fill out this form!"></textarea>
+                <textarea class="textarea" name = "required" ngModel minlength = "10" required placeholder = "Please fill out this form!"></textarea>
                 </div>
             </div>
             <div class="field is-grouped">
