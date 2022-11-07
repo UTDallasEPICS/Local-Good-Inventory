@@ -14,16 +14,27 @@
       <button class="button is-large" (click)="toggle()" [disabled] = "clicked">Yes</button>
       <a class="button is-large button is-danger mx-4" routerLink = "/checkin-complete">No</a>
     </div>
+      <div *ngIf = "isDisplay">
+        <div>
+        <datepicker [(selectedDate)]="this.nextAppointment"></datepicker>
 
-    <div *ngIf = "isDisplay">
-      <datepicker [(selectedDate)]="this.nextAppointment"></datepicker>
-      
-      <div class="confirm is-centered">
-        <button class="button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
+        <div class="confirm is-centered">
+          <button class="button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
+        </div>
+
       </div>
-      
-    
+      <div>
+        <button class="button is-primary is-rounded">9:00 AM</button>
+                <button class="button is-primary is-rounded">10:00 AM</button>
+                <button class="button is-primary is-rounded">11:00 AM</button>
+                <button class="button is-primary is-rounded">12:00 PM</button>
+                <button class="button is-primary is-rounded">1:00 PM</button>
+                <button class="button is-primary is-rounded">2:00 PM</button>
+                <button class="button is-primary is-rounded">3:00 PM</button>
+                <button class="button is-primary is-rounded">4:00 PM</button>
+      </div>
     </div>
+
   </div>
 
 </section>
