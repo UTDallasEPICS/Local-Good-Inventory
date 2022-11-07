@@ -3,17 +3,17 @@
 } */
 
 
-ul {list-style-type: none;}
+.button {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
-
-.container {
-  padding: 20px;
+p{
+  font-family: Verdana, sans-serif;
 }
 
 .calendar {
   width: 50%;
   float: left;
   padding: 20px;
+  /* border: 2px solid rgb(255, 117, 117); */
 }
 
 /* Month header */
@@ -56,10 +56,6 @@ body {font-family: Verdana, sans-serif;}
   background-color:#ddd;
 }
 
-.paam{
-  margin-right: 10px;
-}
-
 .weekdays li {
   display: inline-block;
   width: 14.25%;
@@ -91,3 +87,38 @@ body {font-family: Verdana, sans-serif;}
   background: #1abc9c;
   color: white !important
 }
+
+.buttons{
+  width: 9.10%;
+  display: inline-block;
+  margin: 1% 2.55%;
+  display: inline-block;
+  transition-duration: 0.2s;
+  border-style: solid;
+  border-color: #eee;
+}
+
+.buttons:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.container {
+  padding: 20px;
+  /* border: 3px solid rgb(132, 218, 252); */
+}
+
+.box{
+  background-color: #eee;
+}
+
+.button{
+  padding:12px;
+  margin:5px;
+}
+
+.confirm{
+  text-align: right;
+}
+
+

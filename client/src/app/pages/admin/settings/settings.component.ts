@@ -12,13 +12,7 @@ export class SettingsComponent implements OnInit {
 
   private settingsSubscription: Subscription = new Subscription;
 
-  settings: Settings = {
-    dates: [],
-    startTime: '',
-    endTime: '',
-    interval: 0,
-    quantity: 0
-  };
+  settings: Settings = {} as Settings;
 
   days = [
     {day: 'Sun', active: false},
@@ -38,24 +32,27 @@ export class SettingsComponent implements OnInit {
     this.settingsSubscription = this.settingsService.getSettingsUpdateListener()
       .subscribe((settings: Settings) => {
         this.settings = settings;
-        console.log(settings);
       });
     this.days.forEach(day => {
-      if(this.settings.dates.includes(day.day))
+      if(this.settings.dates.find(date => date.day == day.day))
         day.active = true;
     });
   }
 
   updateDays(day: string) {
-    if(!this.settings.dates.includes(day))
-      this.settings.dates.push(day);
-    else
-      this.settings.dates.splice(this.settings.dates.indexOf(day), 1);
+    let date = this.settings.dates.find(date => date.day == day);
+    if(date)
+      date.active = !date?.active;
+  }
+
+  dateSelected(day: string): boolean {
+    let date = this.settings.dates.find(date => date.day == day);
+    if(date)
+      return date.active
+    return false;
   }
 
   updateSettings() {
-    console.log("Updating settings");
-    console.log(this.settings);
     this.settingsService.postSettings(this.settings);
     //window.alert(this.settings.startTime);
     //console.log(this.settings.startTime);

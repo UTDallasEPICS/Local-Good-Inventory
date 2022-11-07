@@ -1,0 +1,33 @@
+.title{
+  font-size: medium;
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  /* border: 3px solid rgb(132, 218, 252); */
+}
+
+.table{
+  /* background-color: #eee; */
+  box-shadow: none;
+  width: 90%;
+}
+
+.box{
+  /* background-color: #eee; */
+  box-shadow: none;
+  width: 110%;
+}
+
+select{
+  width: 20%;
+  height: 2.5%;
+  margin-right: 5%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: none;
+  background-color: #eee;
+  border-radius: 4px;
+}
