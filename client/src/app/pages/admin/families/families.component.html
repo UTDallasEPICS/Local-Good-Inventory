@@ -6,15 +6,40 @@
     <div class="modal-background" (click)="hideModal()"></div>
     <div class="modal-content">
         <div class="box">
-            <h1>{{selectedFamily.name}} Family: {{selectedFamily.members.length}} Members</h1>
-            <div *ngFor="let member of selectedFamily.members; let i = index;">
-                <p>{{member.name}}: {{member.age}}</p>
-            </div>
-            <p>{{selectedFamily.phoneNumber}}</p>
-            <p>{{selectedFamily.allergies}}</p>
-            <p>{{selectedFamily.nextAppointment}}</p>
-            <button class="button" (click)="updateFamily()">Save</button>
+            <form #f="ngForm">
+                <h1 class="title">{{selectedFamily.name}} Family: {{selectedFamily.members.length}} Members</h1>
+                <fieldset [disabled]="!editMode">
+                    <div style="display: flex;" *ngFor="let member of selectedFamily.members; let i = index;">
+                        <input class="input" type="text" name="firstName{{i}}" [(ngModel)]="member.name">
+                        <div class="radio">
+                            <label style="padding-right: 10px;">Age</label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age" value="0-17" [(ngModel)]="member.age"> 0-17 </label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age" value="18-59" [(ngModel)]="member.age"> 18-59</label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age" value="60+" [(ngModel)]="member.age"> 60+</label>
+                        </div>
+                        <button *ngIf="i > 0" class="button fa-x"></button>
+                    </div>
+                    <label>
+                        Number
+                        <input class="input" type="text" name="number" [(ngModel)]="selectedFamily.phoneNumber">
+                    </label>
+                    <label>
+                        Allergies
+                        <input class="input" type="text" name="allergies" [(ngModel)]="selectedFamily.allergies">
+                    </label>
+                    <label>
+                        Next Appointment
+                        <input class="input" type="text" name="nextAppointment" [(ngModel)]="selectedFamily.nextAppointment">
+                    </label>
+                    <div style="display: inline-flex;">
+                        <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'colorSelected' : ''" (click)="updateColor('blue')">Blue</button>
+                        <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'colorSelected' : ''" (click)="updateColor('pink')" >Pink</button>
+                    </div>
+                </fieldset>
+            </form>
+            <button class="button" (click)="updateFamily()">{{editMode ? "Save" : "Edit"}}</button>
             <button class="button" (click)="hideModal()">Close</button>
+            <button class="button is-danger" (click)="deleteFamily()">Delete</button>
         </div>
     </div>
 </div>

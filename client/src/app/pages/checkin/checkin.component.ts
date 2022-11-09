@@ -19,7 +19,7 @@ export class CheckinComponent implements OnInit {
   mobNumberPattern = "^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$";  
   isValidFormSubmitted = false;  
   user = new User();
-  family: Family = {name: "", phoneNumber: "", members: [], allergies: [], checkedIn: [], nextAppointment: ""};
+  family: Family = {} as Family;
 
   constructor(public familyService: FamilyService, private router: Router) { }
 

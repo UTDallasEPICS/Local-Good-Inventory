@@ -11,7 +11,7 @@ import { FamilyService } from 'src/app/services/family.service';
 })
 export class NewRegistrationComponent implements OnInit {
 
-  family: Family = {phoneNumber: "", name: "", members: [{name: "", age: "", lastName: ""}], allergies: [], checkedIn: [], nextAppointment: ""};
+  family: Family = {} as Family;
 
   constructor(private familyService: FamilyService, private router: Router) { }
 

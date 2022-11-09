@@ -20,10 +20,12 @@ export class FamiliesComponent implements OnInit {
     members: [], 
     allergies: [],
     checkedIn: [], 
-    nextAppointment: ""
+    nextAppointment: "",
+    color: ""
   };
 
   modalVisible = false;
+  editMode = false;
 
   constructor(private http: HttpClient) { }
 
@@ -57,15 +59,35 @@ export class FamiliesComponent implements OnInit {
       members: [], 
       allergies: [],
       checkedIn: [], 
-      nextAppointment: ""
+      nextAppointment: "",
+      color: ""
     };
+    this.editMode = false;
   }
 
   updateFamily(): void {
+    if(this.editMode) {
+      if(this.selectedFamily.phoneNumber.length == 10) {
+        this.http.post(`http://localhost:3000/family?phoneNumber=${this.selectedFamily.phoneNumber}`, this.selectedFamily)
+        .subscribe();
+        console.log(this.selectedFamily);
+      }
+      this.editMode = false;
+    } else {
+      this.editMode = true;
+    }
+  }
+
+  updateColor(color: string) {
+    this.selectedFamily.color = color;
+  }
+
+  deleteFamily() {
     if(this.selectedFamily.phoneNumber.length == 10) {
-      this.http.post(`http://localhost:3000/family?phoneNumber=${this.selectedFamily.phoneNumber}`, this.selectedFamily)
+      this.http.delete(`http://localhost:3000/family?phoneNumber=${this.selectedFamily.phoneNumber}`)
         .subscribe();
     }
+    this.modalVisible = false;
   }
 
 }

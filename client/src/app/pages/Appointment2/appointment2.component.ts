@@ -24,7 +24,7 @@ import { Family } from 'src/app/models/family.model';
 
 export class Appointment2Component implements OnInit {
 
-  family: Family = {name: "", phoneNumber: "", members: [], allergies: [], checkedIn: [], nextAppointment: ""};
+  family: Family = {} as Family;
 
   datePicked: Date = new Date();
   pipe = new DatePipe('en-US');
