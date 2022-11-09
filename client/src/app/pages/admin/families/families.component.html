@@ -13,19 +13,21 @@
                         <input class="input" type="text" name="firstName{{i}}" [(ngModel)]="member.name">
                         <div class="radio">
                             <label style="padding-right: 10px;">Age</label>
-                            <label style="padding-top: 5px;"><input type="radio" name="age" value="0-17" [(ngModel)]="member.age"> 0-17 </label>
-                            <label style="padding-top: 5px;"><input type="radio" name="age" value="18-59" [(ngModel)]="member.age"> 18-59</label>
-                            <label style="padding-top: 5px;"><input type="radio" name="age" value="60+" [(ngModel)]="member.age"> 60+</label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="0-17" [(ngModel)]="member.age"> 0-17 </label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="18-59" [(ngModel)]="member.age"> 18-59</label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="60+" [(ngModel)]="member.age"> 60+</label>
                         </div>
-                        <button *ngIf="i > 0" class="button fa-x"></button>
+                        <button *ngIf="i > 0" class="button fa-x" (click)="selectedFamily.members.splice(i, 1)" ></button>
                     </div>
+                    <button class="button fa-plus" (click)="selectedFamily.members.push({name: '', age: '', lastName: ''})"></button>
+                    <br>
                     <label>
                         Number
                         <input class="input" type="text" name="number" [(ngModel)]="selectedFamily.phoneNumber">
                     </label>
                     <label>
                         Allergies
-                        <input class="input" type="text" name="allergies" [(ngModel)]="selectedFamily.allergies">
+                        <input class="input" type="text" name="allergies" [disabled]="true" [(ngModel)]="selectedFamily.allergies" style="cursor: pointer;">
                     </label>
                     <label>
                         Next Appointment
