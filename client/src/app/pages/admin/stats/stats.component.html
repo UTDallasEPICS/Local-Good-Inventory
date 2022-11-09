@@ -1,38 +1,88 @@
-<p class = "title">Number of Total Breakfast Meals</p>
-<p>{{breakfastCount}}</p>
-<br>
-<p class = "title">Number of Lunch Meals</p>
-<p>{{lunchCount}}</p>
-<br>
-<p class = "title">Number of Dinner Meals</p>
-<p>{{dinnerCount}}</p>
-<br>
-<p class = "title">Number of Supplemental Snacks</p>
-<p>{{supplementalSnackCount}}</p>
-<br>
+<div class="container">
+  <div class ="table">
+    <tr>
+      <td class = "title">Number of Total Breakfast Meals</td>
+      <td>{{breakfastCount}}</td>
+    </tr>
 
-<p class = "title">Total Days Distributed this Month</p>
-<p>{{totalDaysDistributed}}</p>
-<br>
-<p class = "title">Total Number of Individual Households Served this Month</p>
-<p>{{totalHouseholdsServed}}</p>
-<br>
-<p class = "title">Total Number of Households Served this Month</p>
-<p>{{totalIndividualsServed}}</p>
-<br>
-<p class = "title">Total Number of New Households Served this Month</p>
-<p>{{totalNewHouseholdsServed}}</p>
-<br>
-<p class = "title">Number of Clients 17 and Under</p>
-<p>{{totalClientsUnder17}}</p>
-<br>
+    <tr>
+      <td class = "title">Number of Lunch Meals</td>
+      <td>{{lunchCount}}</td>
+    </tr>
 
-<p class = "title">Number of Clients 18 to 59</p>
-<p>{{totalClients18to59}}</p>
-<br>
-<p class = "title">Number of Clients 60 and Over</p>
-<p>{{totalClients60andOver}}</p>
-<br>
-<p class = "title">Percent of Food Used From NFTB</p>
-<p>{{percentFoodUsedFromNFTB}}</p>
-<br>
+    <tr>
+      <td class = "title">Number of Dinner Meals</td>
+      <td>{{dinnerCount}}</td>
+    </tr>
+
+    <tr>
+      <td class = "title">Number of Supplemental Snacks</td>
+      <td>{{supplementalSnackCount}}</td>
+    </tr>
+
+
+    <tr>
+      <td class = "title">Total Days Distributed this Month</td>
+      <td>{{totalDaysDistributed}}</td>
+    </tr>
+
+    <tr>
+      <td class = "title">Total Number of Individual Households Served this Month</td>
+      <td>{{totalHouseholdsServed}}</td>
+    </tr>
+
+    <tr>
+      <td class = "title">Total Number of Households Served this Month</td>
+      <td>{{totalIndividualsServed}}</td>
+    </tr>
+
+    <tr>
+      <td class = "title">Total Number of New Households Served this Month</td>
+      <td>{{totalNewHouseholdsServed}}</td>
+    </tr>
+
+    <tr>
+      <td class = "title">Number of Clients 17 and Under</td>
+      <td>{{totalClientsUnder17}}</td>
+    </tr>
+
+
+    <tr>
+      <td class = "title">Number of Clients 18 to 59</td>
+      <td>{{totalClients18to59}}</td>
+    </tr>
+
+    <tr>
+      <td class = "title">Number of Clients 60 and Over</td>
+      <td>{{totalClients60andOver}}</td>
+    </tr>
+
+    <tr>
+      <td class = "title">Percent of Food Used From NFTB</td>
+      <td>{{percentFoodUsedFromNFTB}}</td>
+    </tr>
+  </div>
+  <div class="box">
+    <select id="month" name="month">
+      <option value="SelectMonth">Select Month</option>
+      <option value="01">January</option>
+      <option value="02">February</option>
+      <option value="03">March</option>
+      <option value="04">April</option>
+      <option value="05">May</option>
+      <option value="06">June</option>
+      <option value="07">July</option>
+      <option value="08">August</option>
+      <option value="09">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+    <br>
+    <select id="day" name="day">
+      <option value="Select Year">Select Year</option>
+      <option value="2023">2023</option>
+      <option value="2022">2022</option>
+    </select>
+  </div>
+</div>
