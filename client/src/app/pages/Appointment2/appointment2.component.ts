@@ -10,30 +10,29 @@ import { Family } from 'src/app/models/family.model';
   styleUrls: ['./appointment2.component.css'],
 })
 
-// export const HEROES: Hero[] = [
-//   { id: 12, name: 'Dr. Nice' },
-//   { id: 13, name: 'Bombasto' },
-//   { id: 14, name: 'Celeritas' },
-//   { id: 15, name: 'Magneta' },
-//   { id: 16, name: 'RubberMan' },
-//   { id: 17, name: 'Dynama' },
-//   { id: 18, name: 'Dr. IQ' },
-//   { id: 19, name: 'Magma' },
-//   { id: 20, name: 'Tornado' }
-// ];
-
 export class Appointment2Component implements OnInit {
 
   family: Family = {} as Family;
 
-  datePicked: Date = new Date();
+  datePicked: Date = new Date(Date.now());
+  appointmentTime: string = "";
   pipe = new DatePipe('en-US');
   nextAppointment: string = "";
+  isActive: number = this.datePicked.getDate();
+  isTimeActive: string = "";
 
   dates = Array(31).fill(0).map((x,i)=>i+1);
   startTime = 9.5;
   EndTime = 11.5;
   interval = .25;
+
+  months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  n = new Date();
+  day = this.n.getDay();
+  month = this.n.getMonth();
+  year = this.n.getFullYear();
+
 
   totalTime = (this.EndTime - this.startTime) / this.interval;
   times = Array(this.totalTime);
@@ -48,15 +47,15 @@ export class Appointment2Component implements OnInit {
     for(let x = 0; x < this.totalTime; x++){
       this.times[x] = this.startTime + (x * this.interval);
     }
-}
+  }
 
   updateAppointment() {
     this.appointmentconfirm = true;
-    var nextAppointment = this.pipe.transform(this.datePicked, 'dd-MM-YYYY');
+    var nextAppointment = this.pipe.transform(this.datePicked, 'dd-MM-YYYY')+ " at " + this.appointmentTime;
     this.family = this.familyService.getFamily();
     this.family.nextAppointment = nextAppointment? nextAppointment: "";
     this.familyService.postFamily(this.family);
-    console.log();
+    console.log(nextAppointment);
   }
 
 }

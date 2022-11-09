@@ -23,9 +23,10 @@
       <div class = "calendar">
         <div class="month">
           <ul>
-            <li class="prev">&#10094;</li>
-            <li (click)="isDisabled = !isDisabled" class="next">&#10095;</li>
-            <li>{{isDisabled ? 'October' : 'November' }}<br><span style="font-size:18px">2022</span></li>
+            <li (click)="month = month - 1" class="prev">&#10094;</li>
+            <li (click)="month = month+1" class="next">&#10095;</li>
+            <li>{{months[month]}}</li>
+            <li>{{year}}</li>
           </ul>
         </div>
 
@@ -41,22 +42,31 @@
 
         <!-- Adds buttons for each day in the month -->
         <div class = "box">
-           <button class = "buttons days" *ngFor = "let date of dates">{{date}}</button>
+           <button class = "buttons days" [ngStyle]="{ 'background-color' : isActive == date? '#f7ae04': '#eee' }" (click)="isActive = date" *ngFor = "let date of dates; let i = index">{{date}}</button>
         </div>
+
           </div>
+
           <div class = "calendar">
               <p>Choose a time:</p>
               <br>
               <div class = has-addons>
-                <!-- <button class  = "button is-primary is-rounded" *ngFor = "let time of times">{{time}}</button> -->
-                <button class="button is-primary is-rounded">9:00 AM</button>
-                <button class="button is-primary is-rounded">10:00 AM</button>
-                <button class="button is-primary is-rounded">11:00 AM</button>
-                <button class="button is-primary is-rounded">12:00 PM</button>
-                <button class="button is-primary is-rounded">1:00 PM</button>
-                <button class="button is-primary is-rounded">2:00 PM</button>
-                <button class="button is-primary is-rounded">3:00 PM</button>
-                <button class="button is-primary is-rounded">4:00 PM</button>
+                <!-- <button [(ngModel)]= "appointmentTime" class="button is-rounded">9:00 AM</button>
+                <button [(ngModel)]= "appointmentTime" class="button is-rounded">10:00 AM</button>
+                <button [(ngModel)]= "appointmentTime" class="button is-rounded">11:00 AM</button>
+                <button [(ngModel)]= "appointmentTime" class="button is-rounded">12:00 PM</button>
+                <button [(ngModel)]= "appointmentTime" class="button is-rounded">1:00 PM</button>
+                <button [(ngModel)]= "appointmentTime" class="button is-rounded">2:00 PM</button>
+                <button [(ngModel)]= "appointmentTime" class="button is-rounded">3:00 PM</button>
+                <button [(ngModel)]= "appointmentTime" class="button is-rounded">4:00 PM</button> -->
+                <button [ngStyle]="{ 'background-color' : isTimeActive == '9:00 AM'? '#28487b': '#eee',  'color' : isTimeActive == '9:00 AM'? 'white': '#28487b'}" (click)="isTimeActive = '9:00 AM' " class="button is-rounded">9:00 AM</button>
+                <button [ngStyle]="{ 'background-color' : isTimeActive == '10:00 AM'? '#28487b': '#eee',  'color' : isTimeActive == '10:00 AM'? 'white': '#28487b'}" (click)="isTimeActive = '10:00 AM' " class="button is-rounded">10:00 AM</button>
+                <button [ngStyle]="{ 'background-color' : isTimeActive == '11:00 AM'? '#28487b': '#eee',  'color' : isTimeActive == '11:00 AM'? 'white': '#28487b'}" (click)="isTimeActive = '11:00 AM' " class="button is-rounded">11:00 AM</button>
+                <button [ngStyle]="{ 'background-color' : isTimeActive == '12:00 PM'? '#28487b': '#eee',  'color' : isTimeActive == '12:00 PM'? 'white': '#28487b'}" (click)="isTimeActive = '12:00 PM' " class="button is-rounded">12:00 PM</button>
+                <button [ngStyle]="{ 'background-color' : isTimeActive == '1:00 PM'? '#28487b': '#eee',  'color' : isTimeActive == '1:00 PM'? 'white': '#28487b'}" (click)="isTimeActive = '1:00 PM' " class="button is-rounded">1:00 PM</button>
+                <button [ngStyle]="{ 'background-color' : isTimeActive == '2:00 PM'? '#28487b': '#eee',  'color' : isTimeActive == '2:00 PM'? 'white': '#28487b'}" (click)="isTimeActive = '2:00 PM' " class="button is-rounded">2:00 PM</button>
+                <button [ngStyle]="{ 'background-color' : isTimeActive == '3:00 PM'? '#28487b': '#eee',  'color' : isTimeActive == '3:00 PM'? 'white': '#28487b'}" (click)="isTimeActive = '3:00 PM' " class="button is-rounded">3:00 PM</button>
+                <button [ngStyle]="{ 'background-color' : isTimeActive == '4:00 PM'? '#28487b': '#eee',  'color' : isTimeActive == '4:00 PM'? 'white': '#28487b'}" (click)="isTimeActive = '4:00 PM' " class="button is-rounded">4:00 PM</button>
             </div>
       </div>
 </div>
@@ -66,7 +76,7 @@
   <button class="button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
 </div>
 
-
+<br>
 
 
 <!-- </section> -->
