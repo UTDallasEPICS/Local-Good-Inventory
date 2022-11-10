@@ -14,6 +14,7 @@ import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/remo
 import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
 import { DietaryPageComponent } from './pages/dietary-page/dietary-page.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
 
 const routes: Routes = [
   {path:'', component: CheckinComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:'new-registration', component:NewRegistrationComponent},
   {path:'checkin-complete', component:CheckinCompleteComponent},
   {path: 'dietary-page', component:DietaryPageComponent},
-  {path:'admin', component:AdminComponent}
+  {path:'admin', component:AdminComponent},
+  {path:'family-edit', component:FamilyEditComponent}
 ];
 
 @NgModule({
