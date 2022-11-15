@@ -4,7 +4,7 @@
 
 <div class="modal" [class.is-active]="modalVisible">
     <div class="modal-background" (click)="hideModal()"></div>
-    <div class="modal-content">
+    <div class="modal-content" style="overflow:visible !important;">
         <div class="box">
             <form #f="ngForm">
                 <h1 class="title">{{selectedFamily.name}} Family: {{selectedFamily.members.length}} Members</h1>
@@ -27,12 +27,35 @@
                     </label>
                     <label>
                         Allergies
-                        <input class="input" type="text" name="allergies" [disabled]="true" [(ngModel)]="selectedFamily.allergies" style="cursor: pointer;">
                     </label>
+                    <br>
+                    <div class="dropdown" [ngClass]="this.restrictionsVisble? 'is-active' : ''" style="z-index: 10;">
+                        <div class="dropdown-trigger">
+                          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2" (click)="this.restrictionsVisble = !this.restrictionsVisble">
+                            <span>{{this.selectedFamily.allergies.length == 0 ? "No Dietary Restrictions" : this.selectedFamily.allergies.toString()}}</span>
+                            <span class="icon is-small">
+                              <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                            <div class="dropdown-content">
+                                <div *ngFor="let restriction of dietaryRestrictions; let i = index;">
+                                    <div class="dropdown-item">
+                                        <input type="checkbox" name="allergy{{i}}" (change)="updateRestriction(restriction)" [checked]="this.selectedFamily.allergies.includes(restriction)">
+                                        {{restriction}}
+                                    </div>
+                                    <!-- <hr class="dropdown-divider"> -->
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <br>
                     <label>
                         Next Appointment
-                        <input class="input" type="text" name="nextAppointment" [(ngModel)]="selectedFamily.nextAppointment">
+                        <input class="input" type="datetime-local" name="nextAppointment" [(ngModel)]="selectedFamily.nextAppointment">
                     </label>
+                    <br>
                     <div style="display: inline-flex;">
                         <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'colorSelected' : ''" (click)="updateColor('blue')">Blue</button>
                         <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'colorSelected' : ''" (click)="updateColor('pink')" >Pink</button>
