@@ -11,6 +11,7 @@ export class AppointmentComponent implements OnInit {
 
   family: Family = {} as Family;
   nextAppointment: string = "";
+  nextAppointmentTime: string = "T10:00";
 
   constructor(public familyService: FamilyService) { }
 
@@ -28,9 +29,9 @@ export class AppointmentComponent implements OnInit {
 
   updateAppointment() {
     this.family = this.familyService.getFamily();
-    this.family.nextAppointment = this.nextAppointment;
+    this.family.nextAppointment = this.nextAppointment + this.nextAppointmentTime;
     this.familyService.postFamily(this.family);
-    console.log();
+    console.log("Next appointment: " + this.family.nextAppointment);
   }
 
   
