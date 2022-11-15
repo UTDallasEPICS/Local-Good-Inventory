@@ -33,6 +33,16 @@
       <a class="navbar-item" routerLink="/admin">
         ADMIN
       </a>
+
+      <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+        <a class="navbar-item" (click)="auth.logout({ returnTo: document.location.origin })">
+          LOG OUT
+        </a>
+      </ng-container>
+  
+      <ng-template #loggedOut>
+        <a class="navbar-item" (click)="auth.loginWithRedirect()">LOG IN</a>
+      </ng-template>
     </div>
   </div>
 </nav>

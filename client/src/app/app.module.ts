@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from '@auth0/auth0-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,6 +62,10 @@ import { StatsComponent } from './pages/admin/stats/stats.component';
     FormsModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
+    AuthModule.forRoot({
+      domain: 'dev-w3oomddkry5f25to.us.auth0.com',
+      clientId: 'ZrBK4FhRIvzp6c8CFgIKn3aHNFs8f4Zt'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
