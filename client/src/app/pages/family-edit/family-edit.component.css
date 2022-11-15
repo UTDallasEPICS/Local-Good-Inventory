@@ -1,12 +1,32 @@
-.dietary {
-    color: #28487B;
-    font-size: 2rem;
-    text-align: left;
-    font-family: sans-serif;
+.radio {
+    display: flex;
+    white-space: nowrap;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
 }
-.name1 {
-    color: #28487B;
-    font-size: 1.2rem;
-    text-align: left;
-    font-family: sans-serif;
+
+.radio > label {
+    padding-right: 5px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+input:disabled {
+    background-color: white;
+    color: black;
+    border-color: #dbdbdb;
+}
+
+.box {
+    width: 80%;
+    margin: auto;
 }
