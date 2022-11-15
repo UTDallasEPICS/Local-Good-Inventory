@@ -29,6 +29,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { SettingsComponent } from './pages/admin/settings/settings.component';
 import { FamiliesComponent } from './pages/admin/families/families.component';
 import { StatsComponent } from './pages/admin/stats/stats.component';
+import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { StatsComponent } from './pages/admin/stats/stats.component';
     AdminComponent,
     SettingsComponent,
     FamiliesComponent,
-    StatsComponent
+    StatsComponent,
+    FamilyEditComponent
   ],
   imports: [
     BrowserModule,

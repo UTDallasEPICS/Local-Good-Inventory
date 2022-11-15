@@ -107,7 +107,7 @@ button, .prev, .next{
 }
 
 .buttons:hover:not(.disabled) {
-  background-color: #f7ae04; /* Green */
+  background-color: #f7ae04;
   color: white;
 }
 
