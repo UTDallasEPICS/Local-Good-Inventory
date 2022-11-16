@@ -12,8 +12,13 @@ import { Subscription } from 'rxjs';
 })
 export class AppointmentComponent implements OnInit {
   family: Family = {} as Family;
+<<<<<<< HEAD
   settings: Settings = {} as Settings;
   private settingsSubscription: Subscription = new Subscription();
+=======
+  nextAppointment: string = "";
+  nextAppointmentTime: string = "T10:00";
+>>>>>>> f4d3c48c2a8899acc4f2bd1442f0f585a38de58f
 
   nextAppointment: string = '';
 
@@ -49,8 +54,8 @@ export class AppointmentComponent implements OnInit {
   }
   updateAppointment() {
     this.family = this.familyService.getFamily();
-    this.family.nextAppointment = this.nextAppointment;
+    this.family.nextAppointment = this.nextAppointment + this.nextAppointmentTime;
     this.familyService.postFamily(this.family);
-    console.log();
+    console.log("Next appointment: " + this.family.nextAppointment);
   }
 }

@@ -1,5 +1,6 @@
-import { Component, ɵflushModuleScopingQueueAsMuchAsPossible } from '@angular/core';
+import { Component, Inject, ɵflushModuleScopingQueueAsMuchAsPossible } from '@angular/core';
 import { Family } from './models/family.model';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,5 @@ import { Family } from './models/family.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  constructor(public auth: AuthService) {}
 }

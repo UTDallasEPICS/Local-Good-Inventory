@@ -5,15 +5,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable({providedIn: 'root'})
 export class FamilyService {
-    private family: Family =
-        {
-            name: "",
-            phoneNumber: "",
-            members: [],
-            allergies: [],
-            checkedIn: [],
-            nextAppointment: ""
-        };
+    private family: Family = {} as Family;
     private familyUpdated = new Subject<Family>();
 
     constructor(private http: HttpClient) { }

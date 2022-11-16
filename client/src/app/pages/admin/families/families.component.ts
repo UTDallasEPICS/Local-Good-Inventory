@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Family } from 'src/app/models/family.model';
+import * as Constants from 'src/app/models/constants.model';
 
 @Component({
   selector: 'app-families',
@@ -9,6 +10,8 @@ import { Family } from 'src/app/models/family.model';
   styleUrls: ['./families.component.css']
 })
 export class FamiliesComponent implements OnInit {
+
+  dietaryRestrictions = Constants.dietaryRestrictions;
 
   families: Family[] = []
 
@@ -20,10 +23,15 @@ export class FamiliesComponent implements OnInit {
     members: [], 
     allergies: [],
     checkedIn: [], 
-    nextAppointment: ""
+    nextAppointment: "",
+    color: ""
   };
 
+  nextAppointmentFormatted: Date = new Date();
+
   modalVisible = false;
+  editMode = false;
+  restrictionsVisble = false;
 
   constructor(private http: HttpClient) { }
 
@@ -42,8 +50,12 @@ export class FamiliesComponent implements OnInit {
 
   showModal(number: string): void {
     this.families.forEach((family) => {
-      if(family.phoneNumber == number)
+      if(family.phoneNumber == number) {
         this.selectedFamily = family;
+        this.nextAppointmentFormatted = new Date(this.selectedFamily.nextAppointment);
+        
+        console.log(this.nextAppointmentFormatted);
+      }
     })
 
     this.modalVisible = true;
@@ -57,15 +69,42 @@ export class FamiliesComponent implements OnInit {
       members: [], 
       allergies: [],
       checkedIn: [], 
-      nextAppointment: ""
+      nextAppointment: "",
+      color: ""
     };
+    this.editMode = false;
   }
 
   updateFamily(): void {
+    if(this.editMode) {
+      if(this.selectedFamily.phoneNumber.length == 10) {
+        this.http.post(`http://localhost:3000/family?phoneNumber=${this.selectedFamily.phoneNumber}`, this.selectedFamily)
+        .subscribe();
+        console.log(this.selectedFamily);
+      }
+      this.editMode = false;
+    } else {
+      this.editMode = true;
+    }
+  }
+
+  updateColor(color: string) {
+    this.selectedFamily.color = color;
+  }
+
+  updateRestriction(restriction: string) {
+    if(!this.selectedFamily.allergies.includes(restriction))
+      this.selectedFamily.allergies.push(restriction);
+    else
+      this.selectedFamily.allergies.splice(this.selectedFamily.allergies.indexOf(restriction), 1);
+  }
+
+  deleteFamily() {
     if(this.selectedFamily.phoneNumber.length == 10) {
-      this.http.post(`http://localhost:3000/family?phoneNumber=${this.selectedFamily.phoneNumber}`, this.selectedFamily)
+      this.http.delete(`http://localhost:3000/family?phoneNumber=${this.selectedFamily.phoneNumber}`)
         .subscribe();
     }
+    this.modalVisible = false;
   }
 
 }

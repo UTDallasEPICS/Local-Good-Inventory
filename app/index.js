@@ -58,7 +58,8 @@ app.post('/family', (req, res) => {
       allergies: req.body.allergies,
       phoneNumber: req.body.phoneNumber,
       checkedIn: req.body.checkedIn,
-      nextAppointment: req.body.nextAppointment } };
+      nextAppointment: req.body.nextAppointment,
+      color: req.body.color } };
     familiesCollection.updateOne(query, newValue, {upsert: true});
     res.status(201);
     console.log("Post Family Successful");
@@ -67,6 +68,16 @@ app.post('/family', (req, res) => {
   }
 
 });
+
+app.delete('/family', (req, res) => {
+  if(req.query.phoneNumber) {
+    const query = { phoneNumber: req.query.phoneNumber };
+    familiesCollection.deleteOne(query);
+    res.status(201);
+  } else {
+    res.status(404);
+  }
+})
 
 app.get('/appointment', (req, res) => {
   console.log("Get appointment request");  
