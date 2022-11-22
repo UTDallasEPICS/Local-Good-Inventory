@@ -19,7 +19,7 @@ export class DatepickerComponent implements OnInit {
   today: Date = new Date();
   pipe = new DatePipe('en-US');
   
-  selectedMonth = this.today.getMonth();
+  selectedMonth = this.today.getMonth() + 1;
   selectedYear = this.today.getFullYear();
   
   dates = Array(this.daysInMonth(this.selectedMonth, this.today.getFullYear())).fill(0).map((x,i)=>i+1);

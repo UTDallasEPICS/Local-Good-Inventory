@@ -18,6 +18,8 @@ const appointmentsCollection = mongoClient.db('LocalGoodCenter').collection('App
 
 const settingsCollection = mongoClient.db('LocalGoodCenter').collection('Settings');
 
+const reportsCollection = mongoClient.db('LocalGoodCenter').collection('Reports');
+
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -60,6 +62,59 @@ app.post('/family', (req, res) => {
       checkedIn: req.body.checkedIn,
       nextAppointment: req.body.nextAppointment,
       color: req.body.color } };
+    if(req.query.date) {
+      console.log(`DEBUG: Date requested: ${req.query.date}`);
+      const date = new Date();
+      const reportsQuery = {month: date.getMonth() + 1, year: date.getFullYear()};
+      reportsCollection.updateOne(reportsQuery, {$set: {}}, {upsert: true});
+      console.log("DEBUG: Updated reports collection");
+      familiesCollection.findOne(query).then((family) => {
+        var numberOfClients = 0, numberOfYouth = 0, numberOfSeniors = 0;
+        family.members.forEach(member => { //Get how many family members in each age group 
+          switch(member.age) {
+            case '0-17': numberOfYouth++;
+              break;
+            case '18-59': numberOfClients++;
+              break;
+            case '60+': numberOfSeniors++;
+              break;
+          }
+        });
+        console.log(`DEBUG: family.checkedIn.size == ${family.checkedIn.length}`);
+        console.log(`DEBUG: Previous checkin: ${family.checkedIn[family.checkedIn.length - 1]}`);
+        if(family.checkedIn.length == 0) { //Case: Family has never checked in before
+          reportsCollection.findOneAndUpdate(reportsQuery, 
+            {$inc: {
+              households: 1,
+              individualHouseholds: 1,
+              newHouseholds: 1,
+              numberOfClients: numberOfClients,
+              numberOfYouth: numberOfYouth,
+              numberOfSeniors: numberOfSeniors
+            }}
+          );
+        } else if (
+          //If they've already checked in this month
+          family.checkedIn[family.checkedIn.length - 1].split('-')[1] == date.getMonth() + 1 &&
+          family.checkedIn[family.checkedIn.length - 1].split('-')[2] == date.getFullYear()) {
+            // console.log(`DEBUG: Last date: ${family.checkedIn[family.checkedIn.length - 1]}`);
+            reportsCollection.findOneAndUpdate(reportsQuery, 
+              {$inc: {
+                households: 1 // Just increase the total number of households served
+              }});
+        } else { //They haven't checked in this month
+          reportsCollection.findOneAndUpdate(reportsQuery, 
+            {$inc: {
+              households: 1,
+              individualHouseholds: 1,
+              numberOfClients: numberOfClients,
+              numberOfYouth: numberOfYouth,
+              numberOfSeniors: numberOfSeniors
+            }}
+          );
+        }
+      });
+    }
     familiesCollection.updateOne(query, newValue, {upsert: true});
     res.status(201);
     console.log("Post Family Successful");
@@ -86,6 +141,13 @@ app.get('/appointment', (req, res) => {
     appointmentsCollection.findOne(query).then((appointment) => {
       res.status(200).json({
         appointment
+      });
+    });
+  } else if (req.query.month && req.query.year) {
+    const query = { month: req.query.month, year: req.query.year };
+    appointmentsCollection.find(query).then((appointments) => {
+      res.status(200).json({
+        appointments
       });
     });
   } else {
@@ -118,8 +180,6 @@ app.get('/settings', (req, res) => {
     res.status(200).json({
       settings
     });
-    console.log("returned: ");
-    console.log(settings);
   });
 });
 
@@ -134,6 +194,22 @@ app.post('/settings', (req, res) => {
   settingsCollection.updateOne(query, newValue, {upsert: true});
   res.status(201);
   console.log("Post Settings Successful");
+});
+
+app.get('/report', (req, res) => {
+  if(req.query.month && req.query.year) {
+    const query = { month: parseInt(req.query.month), year: parseInt(req.query.year)};
+    reportsCollection.findOne(query).then((report, err) => {
+      if(err) {
+        console.log(`ERROR: ${err}`);
+      }
+      res.status(200).json({
+        report
+      });
+    });
+  } else {
+    res.status(404);
+  }
 });
 
 app.listen(port, () => {

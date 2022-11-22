@@ -1,4 +1,4 @@
-import { Family } from "../models/family.model"
+import { Family } from "../models/family.model";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
@@ -43,9 +43,16 @@ export class FamilyService {
 
     }
 
-    postFamily(family: Family) {
+    postFamily(family: Family): void {
         if(family.phoneNumber.length == 10) {
         this.http.post(`http://localhost:3000/family?phoneNumber=${family.phoneNumber}`, family)
+            .subscribe();
+        }
+    }
+
+    postFamilyDate(family: Family, date: string): void {
+        if(family.phoneNumber.length == 10) {
+        this.http.post(`http://localhost:3000/family?phoneNumber=${family.phoneNumber}&date=${date}`, family)
             .subscribe();
         }
     }

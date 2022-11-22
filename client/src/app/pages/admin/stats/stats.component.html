@@ -1,6 +1,6 @@
 <div class="container">
   <div class ="table">
-    <tr>
+    <!-- <tr>
       <td class = "title">Number of Total Breakfast Meals</td>
       <td>{{breakfastCount}}</td>
     </tr>
@@ -18,7 +18,7 @@
     <tr>
       <td class = "title">Number of Supplemental Snacks</td>
       <td>{{supplementalSnackCount}}</td>
-    </tr>
+    </tr> -->
 
 
     <tr>
@@ -28,33 +28,33 @@
 
     <tr>
       <td class = "title">Total Number of Individual Households Served this Month</td>
-      <td>{{totalHouseholdsServed}}</td>
+      <td>{{report.individualHouseholds}}</td>
     </tr>
 
     <tr>
       <td class = "title">Total Number of Households Served this Month</td>
-      <td>{{totalIndividualsServed}}</td>
+      <td>{{report.households}}</td>
     </tr>
 
     <tr>
       <td class = "title">Total Number of New Households Served this Month</td>
-      <td>{{totalNewHouseholdsServed}}</td>
+      <td>{{report.newHouseholds ?? 0}}</td>
     </tr>
 
     <tr>
       <td class = "title">Number of Clients 17 and Under</td>
-      <td>{{totalClientsUnder17}}</td>
+      <td>{{report.numberOfYouth}}</td>
     </tr>
 
 
     <tr>
       <td class = "title">Number of Clients 18 to 59</td>
-      <td>{{totalClients18to59}}</td>
+      <td>{{report.numberOfClients}}</td>
     </tr>
 
     <tr>
       <td class = "title">Number of Clients 60 and Over</td>
-      <td>{{totalClients60andOver}}</td>
+      <td>{{report.numberOfSeniors}}</td>
     </tr>
 
     <tr>
@@ -63,7 +63,7 @@
     </tr>
   </div>
   <div class="box">
-    <select id="month" name="month">
+    <select id="month" name="month" [(ngModel)] = "this.selectedMonth" (change)="updateReport(this.selectedMonth, this.selectedYear)">
       <option value="SelectMonth">Select Month</option>
       <option value="01">January</option>
       <option value="02">February</option>
@@ -79,7 +79,7 @@
       <option value="12">December</option>
     </select>
     <br>
-    <select id="day" name="day">
+    <select id="year" name="year" [(ngModel)]="this.selectedYear" (change)="updateReport(this.selectedMonth, this.selectedYear)">
       <option value="Select Year">Select Year</option>
       <option value="2023">2023</option>
       <option value="2022">2022</option>
