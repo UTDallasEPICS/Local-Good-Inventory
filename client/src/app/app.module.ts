@@ -66,8 +66,8 @@ import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     AuthModule.forRoot({
-      domain: 'dev-w3oomddkry5f25to.us.auth0.com',
-      clientId: 'ZrBK4FhRIvzp6c8CFgIKn3aHNFs8f4Zt'
+      domain: process.env.DOMAIN,
+      clientId: process.env.CLIENTID
     })
   ],
   providers: [],
