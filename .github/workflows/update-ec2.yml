@@ -1,19 +1,22 @@
-server {
-        listen 80;
-        server_name example.com;
-        return 301 https://$server_name$request_uri;
-}
-server {
-        listen 443;
-        server_name example.com;
-        ssl on;
-        gzip on;
-        location / {
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_pass http://127.0.0.1:3000;
-        }
-
-        ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-}
+name: Update our EC2 instance
+on:
+  push:
+    branches:
+      - master
+jobs:
+  update:
+    name: Prod - SSH Login, Pull, Reload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          script: |
+            cd api
+            git checkout master
+            npm install
+            ./prisma-generate
+            pm2 reload all
+          host: http://ec2-34-203-72-107.compute-1.amazonaws.com
+          username: ec2-user
+          key: ${{ secrets.API_PRIVATE_KEY }}
