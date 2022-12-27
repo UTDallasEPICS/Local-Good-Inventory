@@ -2,15 +2,15 @@ import { Settings } from '../models/settings.model';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
   private settings: Settings = {
-    dates: ['Fri', 'Sat'],
-    startTime: '09:30',
-    endTime: '11:30',
+    dates: [{day: 'Fri', startTime: '09:30', endTime: '11:30', active: true}],
     interval: 15,
     quantity: 4,
+    blockOuts: []
   };
   private settingsUpdated = new Subject<Settings>();
 
@@ -28,7 +28,7 @@ export class SettingsService {
     const promiseToken = new Promise((resolve, reject) => {
       this.http
         .get<{ settings: Settings }>(
-          `http://localhost:3000/appointment?date=${date}`
+          `http://${environment.API_URL}/appointment?date=${date}`
         )
         .subscribe((settings) => {
           this.settings = settings.settings;
@@ -42,6 +42,6 @@ export class SettingsService {
   }
 
   postSettings(settings: Settings) {
-    this.http.post(`http://localhost:3000/appointment`, settings).subscribe();
+    this.http.post(`http://${environment.API_URL}/appointment`, settings).subscribe();
   }
 }

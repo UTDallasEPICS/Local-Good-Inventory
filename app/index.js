@@ -6,9 +6,9 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const app = express();
 const bodyParser = require('body-parser');
-const port = process.env.DB_PORT;
+const port = 3000;
 
-const mongoClient = new MongoClient(process.env.DB_URL)
+const mongoClient = new MongoClient("mongodb+srv://UTDallas:utdallas1@cluster0.76dcy.mongodb.net/?retryWrites=true&w=majority")
 
 mongoClient.connect();
 

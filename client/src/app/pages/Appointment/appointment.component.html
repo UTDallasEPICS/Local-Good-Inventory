@@ -12,27 +12,20 @@
 
     <div class="buttons is-centered">
       <button class="button is-large" (click)="toggle()" [disabled] = "clicked">Yes</button>
-      <a class="button is-large button is-danger mx-4" routerLink = "/checkin-complete">No</a>
+      <a class="button is-large button is-danger mx-4" routerLink = "/dietary-page">No</a>
     </div>
-      <div *ngIf = "isDisplay">
-        <div>
+      <div *ngIf = "isDisplay" style="width: 70%; margin: auto;">
+        <div style="display: inline-flex;">
         <datepicker [(selectedDate)]="this.nextAppointment" (click) = "buttonDisplay()"></datepicker>
+        <div style="padding: 10px; max-width: 50%;">
+          <button class="button is-primary is-rounded" [ngClass]="selectedTime == time ? 'active' : ''" *ngFor="let time of availableTimes; let i = index" style="margin: 10px;" (click) = "selectTime(time)">{{time}}</button>
+        </div>
+      </div>
 
         <div class="confirm is-centered">
-          <button class="button is-success" routerLink = "/checkin-complete" (click) = "updateAppointment()">Confirm</button>
+          <button class="button is-success" routerLink = "/dietary-page" (click) = "updateAppointment()">Confirm</button>
         </div>
 
-      </div>
-      <div>
-        <button class="button is-primary is-rounded">9:00 AM</button>
-                <button class="button is-primary is-rounded">10:00 AM</button>
-                <button class="button is-primary is-rounded">11:00 AM</button>
-                <button class="button is-primary is-rounded">12:00 PM</button>
-                <button class="button is-primary is-rounded">1:00 PM</button>
-                <button class="button is-primary is-rounded">2:00 PM</button>
-                <button class="button is-primary is-rounded">3:00 PM</button>
-                <button class="button is-primary is-rounded">4:00 PM</button>
-      </div>
     </div>
 
   </div>

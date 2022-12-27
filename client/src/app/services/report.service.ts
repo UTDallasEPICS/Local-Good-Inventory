@@ -2,6 +2,7 @@ import { Report } from '../models/report.model';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ReportService {
@@ -24,7 +25,7 @@ export class ReportService {
     const promiseToken = new Promise((resolve, reject) => {
       this.http
         .get<{ report: Report }>(
-          `http://localhost:3000/report?month=${month}&year=${year}`
+          `http://${environment.API_URL}/report?month=${month}&year=${year}`
         )
         .subscribe((report) => {
           this.report = report.report;
@@ -38,6 +39,6 @@ export class ReportService {
   }
 
   postReport(report: Report) {
-    this.http.post(`http://localhost:3000/report`, report).subscribe();
+    this.http.post(`http://${environment.API_URL}/report`, report).subscribe();
   }
 }

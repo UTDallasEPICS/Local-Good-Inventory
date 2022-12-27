@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '@auth0/auth0-angular';
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -66,8 +67,8 @@ import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     AuthModule.forRoot({
-      domain: process.env.DOMAIN,
-      clientId: process.env.CLIENTID
+      domain: environment.AUTH_0_DOMAIN,
+      clientId: environment.AUTH_0_CLIENT_ID
     })
   ],
   providers: [],

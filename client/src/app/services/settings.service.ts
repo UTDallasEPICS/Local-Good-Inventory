@@ -2,6 +2,7 @@ import { Settings } from "../models/settings.model"
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 
 
@@ -34,7 +35,7 @@ export class SettingsService {
 
     updateSettings() {
         const promiseToken = new Promise((resolve, reject) => {
-            this.http.get<{settings: Settings}>(`http://localhost:3000/settings`)
+            this.http.get<{settings: Settings}>(`http://${environment.API_URL}/settings`)
             .subscribe((settings) => {
                     this.settings = settings.settings;
                     this.settingsUpdated.next({...this.settings});
@@ -50,7 +51,7 @@ export class SettingsService {
     postSettings(settings: Settings) {
         console.log("Posted settings");
         console.log(settings);
-        this.http.post(`http://localhost:3000/settings`, settings)
+        this.http.post(`http://${environment.API_URL}/settings`, settings)
             .subscribe();
     }
 }

@@ -16,6 +16,9 @@ export class AppointmentComponent implements OnInit {
   private settingsSubscription: Subscription = new Subscription();
   nextAppointment: string = '';
   nextAppointmentTime: string = 'T10:00';
+  selectedTime: string = '';
+
+  availableTimes: string[] = [];
 
   constructor(
     public familyService: FamilyService,
@@ -45,8 +48,34 @@ export class AppointmentComponent implements OnInit {
   //day of week from day obj
   //output start and end time for that specific date && week of the settings obj
   buttonDisplay() {
-    window.alert(this.settings);
+    this.selectedTime = '';
+    var dateSelected = new Date(this.nextAppointment);
+    this.availableTimes = [];
+    var dateNumSelected = dateSelected.getDay() + 1;
+    console.log(`Datenumselected: ${dateNumSelected}`)
+    if(dateNumSelected > 6) dateNumSelected = 0;
+    var settingsDate = this.settings.dates[dateNumSelected];
+    if(settingsDate.active && !this.settings.blockOuts.includes(this.nextAppointment)) {
+      var startTime = parseInt(settingsDate.startTime.split(':')[0]) * 60 + 
+                      parseInt(settingsDate.startTime.split(':')[1]);
+      var endTime = parseInt(settingsDate.endTime.split(':')[0]) * 60 + 
+                    parseInt(settingsDate.endTime.split(':')[1]);
+      console.log(`Start time: ${startTime} End time: ${settingsDate.endTime}`)
+      for(var i = startTime; i <= endTime; i+= this.settings.interval) {
+        this.availableTimes.push(`${Math.floor(i / 60)}:${(i % 60) == 0 ? "00" : i % 60}`);
+      }
+    }
+
+    console.log(this.availableTimes);
+    
   }
+
+  selectTime(time: string) {
+    this.selectedTime = time;
+    this.nextAppointmentTime = `T${time}`;
+  }
+
+
   updateAppointment() {
     this.family = this.familyService.getFamily();
     this.family.nextAppointment =

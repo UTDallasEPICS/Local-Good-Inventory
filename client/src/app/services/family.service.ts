@@ -2,6 +2,8 @@ import { Family } from "../models/family.model";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
+
 
 @Injectable({providedIn: 'root'})
 export class FamilyService {
@@ -15,7 +17,7 @@ export class FamilyService {
     }
 
     getFamilies() {
-      this.http.get<{families: Family[]}>(`http://localhost:3000/family`)
+      this.http.get<{families: Family[]}>(`http://${environment.API_URL}/family`)
         .subscribe((families) => {
           return families;
         });
@@ -28,7 +30,7 @@ export class FamilyService {
     updateFamily(phoneNumber: string) {
         const promiseToken = new Promise((resolve, reject) => {
             if(phoneNumber.length == 10) {
-                this.http.get<{family: Family}>(`http://localhost:3000/family?phoneNumber=${phoneNumber}`)
+                this.http.get<{family: Family}>(`http://${environment.API_URL}/family?phoneNumber=${phoneNumber}`)
                 .subscribe((family) => {
                     this.family = family.family;
                     this.familyUpdated.next({...this.family});
@@ -45,14 +47,14 @@ export class FamilyService {
 
     postFamily(family: Family): void {
         if(family.phoneNumber.length == 10) {
-        this.http.post(`http://localhost:3000/family?phoneNumber=${family.phoneNumber}`, family)
+        this.http.post(`http://${environment.API_URL}/family?phoneNumber=${family.phoneNumber}`, family)
             .subscribe();
         }
     }
 
     postFamilyDate(family: Family, date: string): void {
         if(family.phoneNumber.length == 10) {
-        this.http.post(`http://localhost:3000/family?phoneNumber=${family.phoneNumber}&date=${date}`, family)
+        this.http.post(`http://${environment.API_URL}/family?phoneNumber=${family.phoneNumber}&date=${date}`, family)
             .subscribe();
         }
     }
