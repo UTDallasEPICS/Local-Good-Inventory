@@ -3,20 +3,28 @@ on:
   push:
     branches:
       - master
+      - dev
 jobs:
   update:
     name: Prod - SSH Login, Pull, Reload
     runs-on: ubuntu-latest
     steps:
-      - name: Execute
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          script: |
-            cd api
-            git checkout master
-            npm install
-            ./prisma-generate
-            pm2 reload all
-          host: http://ec2-34-203-72-107.compute-1.amazonaws.com
-          username: ubuntu
-          key: ${{ secrets.API_PRIVATE_KEY }}
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '12.x'
+        cache: 'npm'
+    - run: cd client
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: cd ../app
+    - run: npm ci
+    - name: Execute
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        script: |
+          touch iwashere.txt
+        host: http://ec2-34-203-72-107.compute-1.amazonaws.com
+        username: ubuntu
+        key: ${{ secrets.API_PRIVATE_KEY }}
