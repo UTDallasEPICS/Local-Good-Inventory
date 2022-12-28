@@ -44,4 +44,4 @@ jobs:
           mv tmp/dist/client tmp/client
           rm -rf tmp/dist
           mv tmp dist
-          ./reload_server.sh
+          pm2 reload all
