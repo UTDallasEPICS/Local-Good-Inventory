@@ -21,11 +21,10 @@ jobs:
         npm run build --if-present
         cd ../app
         npm ci
-    - name: Execute
-      uses: appleboy/ssh-action@v0.1.4
+    - name: SSH
+      uses: appleboy/ssh-action@v0.1.6
       with:
-        script: |
-          touch iwashere.txt
-        host: http://ec2-34-203-72-107.compute-1.amazonaws.com
+        script: touch iwashere.txt
+        host: "http://ec2-34-203-72-107.compute-1.amazonaws.com"
         username: ubuntu
         key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
