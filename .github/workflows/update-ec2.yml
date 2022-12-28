@@ -29,5 +29,5 @@ jobs:
         username: ${{ secrets.SSH_DEPLOYMENT_USER }}
         key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
         port: 22
-        source: "client/dist/,app/"
-        target: /home/ubuntu/test2
+        source: "client/dist/client/,app/"
+        target: /home/ubuntu/dist
