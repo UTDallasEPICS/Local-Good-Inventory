@@ -28,4 +28,4 @@ jobs:
           touch iwashere.txt
         host: http://ec2-34-203-72-107.compute-1.amazonaws.com
         username: ubuntu
-        key: ${{ secrets.API_PRIVATE_KEY }}
+        key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
