@@ -25,7 +25,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.6
       with:
         script: touch iwashere.txt
-        host: "http://ec2-34-203-72-107.compute-1.amazonaws.com"
+        host: ec2-34-203-72-107.compute-1.amazonaws.com
         username: ubuntu
         key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
         port: 22
