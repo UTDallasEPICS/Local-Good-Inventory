@@ -30,7 +30,7 @@ jobs:
         key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
         port: 22
         source: "client/dist/client, ./app"
-        target: /home/ubuntu/dist
+        target: /home/ubuntu/tmp
         strip_components: 1
     - name: Reload processes
       uses: appleboy/ssh-action@master
@@ -40,6 +40,8 @@ jobs:
         key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
         port: 22
         script: |
-          mv dist/dist/client dist/client
-          rm -rf dist/dist
-          /home/ubuntu/.nvm/versions/node/v19.2.0/bin/pm2 reload all
+          rm -rf dist
+          mv tmp/dist/client tmp/client
+          rm -rf tmp/dist
+          mv tmp dist
+          ./reload_server.sh
