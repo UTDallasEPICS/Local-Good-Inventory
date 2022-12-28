@@ -22,7 +22,7 @@ jobs:
         cd ../app
         npm ci
         cd ..
-    - name: SCP
+    - name: Transfer build files
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.SSH_DEPLOYMENT_HOST }}
@@ -32,6 +32,7 @@ jobs:
         source: "client/dist/client, ./app"
         target: /home/ubuntu/dist
         strip_components: 1
+    - name: Reload processes
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_DEPLOYMENT_HOST }}
