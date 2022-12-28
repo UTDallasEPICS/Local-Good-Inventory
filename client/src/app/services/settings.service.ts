@@ -35,7 +35,7 @@ export class SettingsService {
 
     updateSettings() {
         const promiseToken = new Promise((resolve, reject) => {
-            this.http.get<{settings: Settings}>(`http://${environment.API_URL}/settings`)
+            this.http.get<{settings: Settings}>(`${environment.API_URL}/settings`)
             .subscribe((settings) => {
                     this.settings = settings.settings;
                     this.settingsUpdated.next({...this.settings});
@@ -51,7 +51,7 @@ export class SettingsService {
     postSettings(settings: Settings) {
         console.log("Posted settings");
         console.log(settings);
-        this.http.post(`http://${environment.API_URL}/settings`, settings)
+        this.http.post(`${environment.API_URL}/settings`, settings)
             .subscribe();
     }
 }

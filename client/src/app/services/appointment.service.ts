@@ -28,7 +28,7 @@ export class SettingsService {
     const promiseToken = new Promise((resolve, reject) => {
       this.http
         .get<{ settings: Settings }>(
-          `http://${environment.API_URL}/appointment?date=${date}`
+          `${environment.API_URL}/appointment?date=${date}`
         )
         .subscribe((settings) => {
           this.settings = settings.settings;
@@ -42,6 +42,6 @@ export class SettingsService {
   }
 
   postSettings(settings: Settings) {
-    this.http.post(`http://${environment.API_URL}/appointment`, settings).subscribe();
+    this.http.post(`${environment.API_URL}/appointment`, settings).subscribe();
   }
 }

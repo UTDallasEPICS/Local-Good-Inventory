@@ -38,7 +38,7 @@ export class FamiliesComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("OnInit");
-    this.http.get<{families: Family[]}>(`http://${environment.API_URL}/family`)
+    this.http.get<{families: Family[]}>(`${environment.API_URL}/family`)
       .subscribe((families) => {
           this.families = families.families;
           this.filteredFamilies = families.families.filter(t=>t);
@@ -79,7 +79,7 @@ export class FamiliesComponent implements OnInit {
   updateFamily(): void {
     if(this.editMode) {
       if(this.selectedFamily.phoneNumber.length == 10) {
-        this.http.post(`http://${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`, this.selectedFamily)
+        this.http.post(`${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`, this.selectedFamily)
         .subscribe();
         console.log(this.selectedFamily);
       }
@@ -102,7 +102,7 @@ export class FamiliesComponent implements OnInit {
 
   deleteFamily() {
     if(this.selectedFamily.phoneNumber.length == 10) {
-      this.http.delete(`http://${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`)
+      this.http.delete(`${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`)
         .subscribe();
     }
     this.modalVisible = false;

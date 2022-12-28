@@ -17,7 +17,7 @@ export class FamilyService {
     }
 
     getFamilies() {
-      this.http.get<{families: Family[]}>(`http://${environment.API_URL}/family`)
+      this.http.get<{families: Family[]}>(`${environment.API_URL}/family`)
         .subscribe((families) => {
           return families;
         });
@@ -30,7 +30,7 @@ export class FamilyService {
     updateFamily(phoneNumber: string) {
         const promiseToken = new Promise((resolve, reject) => {
             if(phoneNumber.length == 10) {
-                this.http.get<{family: Family}>(`http://${environment.API_URL}/family?phoneNumber=${phoneNumber}`)
+                this.http.get<{family: Family}>(`${environment.API_URL}/family?phoneNumber=${phoneNumber}`)
                 .subscribe((family) => {
                     this.family = family.family;
                     this.familyUpdated.next({...this.family});
@@ -47,14 +47,14 @@ export class FamilyService {
 
     postFamily(family: Family): void {
         if(family.phoneNumber.length == 10) {
-        this.http.post(`http://${environment.API_URL}/family?phoneNumber=${family.phoneNumber}`, family)
+        this.http.post(`${environment.API_URL}/family?phoneNumber=${family.phoneNumber}`, family)
             .subscribe();
         }
     }
 
     postFamilyDate(family: Family, date: string): void {
         if(family.phoneNumber.length == 10) {
-        this.http.post(`http://${environment.API_URL}/family?phoneNumber=${family.phoneNumber}&date=${date}`, family)
+        this.http.post(`${environment.API_URL}/family?phoneNumber=${family.phoneNumber}&date=${date}`, family)
             .subscribe();
         }
     }

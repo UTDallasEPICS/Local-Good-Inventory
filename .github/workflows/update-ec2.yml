@@ -18,5 +18,5 @@ jobs:
             ./prisma-generate
             pm2 reload all
           host: http://ec2-34-203-72-107.compute-1.amazonaws.com
-          username: ec2-user
+          username: ubuntu
           key: ${{ secrets.API_PRIVATE_KEY }}

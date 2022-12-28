@@ -68,7 +68,9 @@ import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
     NgxMaskModule.forRoot(),
     AuthModule.forRoot({
       domain: environment.AUTH_0_DOMAIN,
-      clientId: environment.AUTH_0_CLIENT_ID
+      clientId: environment.AUTH_0_CLIENT_ID,
+      useRefreshTokens: true,
+      cacheLocation: "localstorage"
     })
   ],
   providers: [],

@@ -25,7 +25,7 @@ export class ReportService {
     const promiseToken = new Promise((resolve, reject) => {
       this.http
         .get<{ report: Report }>(
-          `http://${environment.API_URL}/report?month=${month}&year=${year}`
+          `${environment.API_URL}/report?month=${month}&year=${year}`
         )
         .subscribe((report) => {
           this.report = report.report;
@@ -39,6 +39,6 @@ export class ReportService {
   }
 
   postReport(report: Report) {
-    this.http.post(`http://${environment.API_URL}/report`, report).subscribe();
+    this.http.post(`${environment.API_URL}/report`, report).subscribe();
   }
 }
