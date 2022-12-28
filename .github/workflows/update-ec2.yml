@@ -42,4 +42,4 @@ jobs:
         script: |
           mv dist/dist/client dist/client
           rm -rf dist/dist
-          pm2 reload all
+          /home/ubuntu/.nvm/versions/node/v19.2.0/bin/pm2 reload all
