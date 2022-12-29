@@ -70,7 +70,8 @@ import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
       domain: environment.AUTH_0_DOMAIN,
       clientId: environment.AUTH_0_CLIENT_ID,
       useRefreshTokens: true,
-      cacheLocation: "localstorage"
+      cacheLocation: "localstorage",
+      audience: environment.API_URL
     })
   ],
   providers: [],

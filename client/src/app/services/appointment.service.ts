@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Auth0Client } from '@auth0/auth0-spa-js';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
@@ -14,7 +16,15 @@ export class SettingsService {
   };
   private settingsUpdated = new Subject<Settings>();
 
-  constructor(private http: HttpClient) {}
+  private accessToken: string = "";
+
+  constructor(private http: HttpClient, private auth: AuthService) {
+    auth.getAccessTokenSilently().subscribe(token => {
+      this.accessToken = token;
+      console.log('Bearer ' + token);
+    })
+    console.log('Bearer ' + this.accessToken);
+  }
 
   getSettings() {
     return { ...this.settings };
@@ -28,7 +38,10 @@ export class SettingsService {
     const promiseToken = new Promise((resolve, reject) => {
       this.http
         .get<{ settings: Settings }>(
-          `${environment.API_URL}/appointment?date=${date}`
+          `${environment.API_URL}/appointment?date=${date}`,
+          {
+            headers: {Authorization: 'Bearer ' + this.accessToken}
+          }
         )
         .subscribe((settings) => {
           this.settings = settings.settings;
@@ -42,6 +55,11 @@ export class SettingsService {
   }
 
   postSettings(settings: Settings) {
-    this.http.post(`${environment.API_URL}/appointment`, settings).subscribe();
+    this.http.post(
+      `${environment.API_URL}/appointment`, 
+      settings,
+      {
+        headers: { Authorization: 'Bearer ' + this.accessToken }
+      }).subscribe();
   }
 }

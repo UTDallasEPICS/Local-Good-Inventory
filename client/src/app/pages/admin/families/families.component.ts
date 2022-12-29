@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Family } from 'src/app/models/family.model';
 import * as Constants from 'src/app/models/constants.model';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-families',
@@ -34,15 +35,28 @@ export class FamiliesComponent implements OnInit {
   editMode = false;
   restrictionsVisble = false;
 
-  constructor(private http: HttpClient) { }
+  private accessToken: string = "";
+
+  constructor(private http: HttpClient, private auth: AuthService) { 
+    auth.getAccessTokenSilently().subscribe(token => {
+      this.accessToken = token;
+      console.log('Bearer ' + token);
+    })
+  }
 
   ngOnInit(): void {
     console.log("OnInit");
-    this.http.get<{families: Family[]}>(`${environment.API_URL}/family`)
-      .subscribe((families) => {
-          this.families = families.families;
-          this.filteredFamilies = families.families.filter(t=>t);
-      });
+    this.auth.getAccessTokenSilently().subscribe(token => {
+      this.http.get<{families: Family[]}>(
+        `${environment.API_URL}/family`,
+        {
+          headers: { Authorization: 'Bearer ' + token }
+        })
+        .subscribe((families) => {
+            this.families = families.families;
+            this.filteredFamilies = families.families.filter(t=>t);
+        });
+    })
   }
 
   updateFilter(): void {
@@ -79,7 +93,12 @@ export class FamiliesComponent implements OnInit {
   updateFamily(): void {
     if(this.editMode) {
       if(this.selectedFamily.phoneNumber.length == 10) {
-        this.http.post(`${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`, this.selectedFamily)
+        this.http.post(
+          `${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`, 
+          this.selectedFamily,
+          {
+            headers: { Authorization: 'Bearer ' + this.accessToken }
+          })
         .subscribe();
         console.log(this.selectedFamily);
       }
@@ -102,7 +121,11 @@ export class FamiliesComponent implements OnInit {
 
   deleteFamily() {
     if(this.selectedFamily.phoneNumber.length == 10) {
-      this.http.delete(`${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`)
+      this.http.delete(
+        `${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`,
+        {
+          headers: { Authorization: 'Bearer ' + this.accessToken }
+        })
         .subscribe();
     }
     this.modalVisible = false;

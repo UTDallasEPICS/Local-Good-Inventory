@@ -3,8 +3,11 @@
  */
 
 const express = require('express');
-const { MongoClient } = require('mongodb');
 const app = express();
+const { expressjwt: jwt } = require('express-jwt');
+var jwks = require('jwks-rsa');
+const cors = require('cors')
+const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
 const port = 3000;
 
@@ -20,15 +23,47 @@ const settingsCollection = mongoClient.db('LocalGoodCenter').collection('Setting
 
 const reportsCollection = mongoClient.db('LocalGoodCenter').collection('Reports');
 
+
+const jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: 'https://dev-nae568sko2nuectb.us.auth0.com/.well-known/jwks.json'
+    //jwksUri: 'https://dev-w3oomddkry5f25to.us.auth0.com/.well-known/jwks.json'
+  }),
+  audience: 'https://api.localgoodcenter.org',
+  //audience: 'http://localhost:3000',
+  issuer: 'https://dev-nae568sko2nuectb.us.auth0.com/',
+  //issuer: 'https://dev-w3oomddkry5f25to.us.auth0.com/',
+  algorithms: ['RS256']
+});
+
+
+app.use(cors({
+  origin: '*',
+  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  methods: 'GET, POST, PATCH, DELETE, OPTIONS'
+}))
+
+app.use(jwtCheck);
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-  //res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers', 
-    'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
-  next();
+app.use((err, req, res, next) => {
+  if(err) {
+    if(err.name === "UnauthorizedError") {
+      res.status(401).send(err.inner);
+      console.log(err);
+    } else {
+      next(err);
+    }
+  } else {
+    //res.setHeader(
+    //  'Access-Control-Allow-Headers', 
+    //  );
+    //  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+      next();
+  }
 });
 
 app.get('/family', (req, res) => {
@@ -213,5 +248,5 @@ app.get('/report', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Listening at https://localhost:${port}`)
+    console.log(`Listening at http://localhost:${port}`)
 })
