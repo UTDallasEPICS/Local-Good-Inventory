@@ -16,9 +16,7 @@ export class FamilyService {
     constructor(private http: HttpClient, private auth: AuthService) { 
         auth.getAccessTokenSilently().subscribe(token => {
             this.accessToken = token;
-            console.log('Bearer ' + token);
         })
-        console.log('Bearer ' + this.accessToken);
     }
 
     getFamily() {

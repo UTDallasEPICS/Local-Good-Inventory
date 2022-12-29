@@ -15,9 +15,7 @@ export class ReportService {
   constructor(private http: HttpClient, private auth: AuthService) {
     auth.getAccessTokenSilently().subscribe(token => {
       this.accessToken = token;
-      console.log('Bearer ' + token);
     });
-    console.log('Bearer ' + this.accessToken);
   }
 
   getReport() {
