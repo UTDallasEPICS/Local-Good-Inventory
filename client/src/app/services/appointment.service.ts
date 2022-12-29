@@ -7,7 +7,7 @@ import { Auth0Client } from '@auth0/auth0-spa-js';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({ providedIn: 'root' })
-export class SettingsService {
+export class AppointmentService {
   private settings: Settings = {
     dates: [{day: 'Fri', startTime: '09:30', endTime: '11:30', active: true}],
     interval: 15,
