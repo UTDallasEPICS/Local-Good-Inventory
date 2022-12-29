@@ -53,15 +53,12 @@ export class SettingsService {
                     resolve(settings);
             });    
         });
-        console.log("Updated settings");
         //console.log(this.settings);
         return promiseToken;
         
     }
 
     postSettings(settings: Settings) {
-        console.log("Posted settings");
-        console.log(settings);
         this.http.post(
             `${environment.API_URL}/settings`, 
             settings,

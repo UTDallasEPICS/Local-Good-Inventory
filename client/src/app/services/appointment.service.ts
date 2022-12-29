@@ -47,7 +47,6 @@ export class SettingsService {
           resolve(settings);
         });
     });
-    console.log('Updated appointments');
     //console.log(this.settings);
     return promiseToken;
   }

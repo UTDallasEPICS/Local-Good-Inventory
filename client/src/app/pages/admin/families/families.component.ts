@@ -44,7 +44,6 @@ export class FamiliesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("OnInit");
     this.auth.getAccessTokenSilently().subscribe(token => {
       this.http.get<{families: Family[]}>(
         `${environment.API_URL}/family`,
@@ -67,8 +66,6 @@ export class FamiliesComponent implements OnInit {
       if(family.phoneNumber == number) {
         this.selectedFamily = family;
         this.nextAppointmentFormatted = new Date(this.selectedFamily.nextAppointment);
-        
-        console.log(this.nextAppointmentFormatted);
       }
     })
 
@@ -99,7 +96,6 @@ export class FamiliesComponent implements OnInit {
             headers: { Authorization: 'Bearer ' + this.accessToken }
           })
         .subscribe();
-        console.log(this.selectedFamily);
       }
       this.editMode = false;
     } else {

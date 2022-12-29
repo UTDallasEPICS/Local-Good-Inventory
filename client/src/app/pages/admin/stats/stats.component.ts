@@ -42,13 +42,11 @@ export class StatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.reportsService.updateReport(this.selectedMonth, this.selectedYear).then((report) => {
-      console.log(report);
       this.report = report as Report;
     });
   }
 
   updateReport(month: number, year: number) {
-    console.log(`Month: ${month}, year: ${year}`);
     this.reportsService.updateReport(this.selectedMonth, this.selectedYear).then((report) => {
       if(report == null) {
         report = {

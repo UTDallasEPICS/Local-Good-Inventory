@@ -27,7 +27,6 @@ export class NewRegistrationComponent implements OnInit {
   constructor(private familyService: FamilyService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.family);
   }
 
   onClick(){

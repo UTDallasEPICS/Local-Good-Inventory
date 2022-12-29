@@ -41,7 +41,6 @@ export class ReportService {
           resolve(report.report);
         });
     });
-    console.log('Updated appointments');
     //console.log(this.settings);
     return promiseToken;
   }

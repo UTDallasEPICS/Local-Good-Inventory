@@ -41,7 +41,7 @@ const jwtCheck = jwt({
 
 
 app.use(cors({
-  origin: '*',
+  origin: 'https://checkin.localgoodcenter.org',
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   methods: 'GET, POST, PATCH, DELETE, OPTIONS'
 }))

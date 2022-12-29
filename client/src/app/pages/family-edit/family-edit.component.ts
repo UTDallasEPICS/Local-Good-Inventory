@@ -42,7 +42,6 @@ export class FamilyEditComponent implements OnInit {
         if(this.family.phoneNumber.length == 10) {
           this.http.post(`http://localhost:3000/family?phoneNumber=${this.family.phoneNumber}`, this.family)
           .subscribe();
-          console.log(this.family);
         }
         this.editMode = false;
         this.router.navigate(['/appointment']);
