@@ -2,6 +2,7 @@
  *  as well as connecting to the database.
  */
 
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const { expressjwt: jwt } = require('express-jwt');
@@ -9,18 +10,15 @@ var jwks = require('jwks-rsa');
 const cors = require('cors')
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
-const port = 3000;
 
-const mongoClient = new MongoClient("mongodb+srv://UTDallas:utdallas1@cluster0.76dcy.mongodb.net/?retryWrites=true&w=majority")
+const port = process.env.PORT;
 
+const mongoClient = new MongoClient(process.env.DB_URL)
 mongoClient.connect();
 
 const familiesCollection = mongoClient.db('LocalGoodCenter').collection('Families');
-
 const appointmentsCollection = mongoClient.db('LocalGoodCenter').collection('Appointments');
-
 const settingsCollection = mongoClient.db('LocalGoodCenter').collection('Settings');
-
 const reportsCollection = mongoClient.db('LocalGoodCenter').collection('Reports');
 
 
@@ -29,19 +27,16 @@ const jwtCheck = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: 'https://dev-nae568sko2nuectb.us.auth0.com/.well-known/jwks.json'
-    //jwksUri: 'https://dev-w3oomddkry5f25to.us.auth0.com/.well-known/jwks.json'
+    jwksUri: process.env.JWT_URI
   }),
-  audience: 'https://api.localgoodcenter.org',
-  //audience: 'http://localhost:3000',
-  issuer: 'https://dev-nae568sko2nuectb.us.auth0.com/',
-  //issuer: 'https://dev-w3oomddkry5f25to.us.auth0.com/',
+  audience: process.env.JWT_AUDIENCE,
+  issuer: process.env.JWT_ISSUER,
   algorithms: ['RS256']
 });
 
 
 app.use(cors({
-  origin: 'https://checkin.localgoodcenter.org',
+  origin: process.env.CORS_ORIGIN,
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   methods: 'GET, POST, PATCH, DELETE, OPTIONS'
 }))
@@ -58,11 +53,7 @@ app.use((err, req, res, next) => {
       next(err);
     }
   } else {
-    //res.setHeader(
-    //  'Access-Control-Allow-Headers', 
-    //  );
-    //  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
-      next();
+    next();
   }
 });
 
@@ -75,9 +66,6 @@ app.get('/family', (req, res) => {
       res.status(200).json({family});
     });
   } else {
-    // familiesCollection.find({}).then((families) => {
-    //   res.status(200).json({families});
-    // });
     familiesCollection.find({}).toArray().then((families) => {
       res.status(200).json({families});
     })

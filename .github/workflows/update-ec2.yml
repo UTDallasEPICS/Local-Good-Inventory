@@ -4,9 +4,14 @@ on:
     branches:
       - master
       - dev
+  pull-request:
+    types:
+      - closed
+    branches: 
+      - master
 jobs:
   update:
-    name: Prod - SSH Login, Pull, Reload
+    name: Prod - Build, Push, SSH Login, Reload
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -44,4 +49,5 @@ jobs:
           mv tmp/dist/client tmp/client
           rm -rf tmp/dist
           mv tmp dist
+          cp ~/.env/.env ~/dist/app/.env
           pm2 reload all
