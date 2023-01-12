@@ -1,9 +1,9 @@
 
 <section class="section has-text-weight-bold">
-        <h5 class="title is-3">Allergies: </h5>
+        <h5 class="title is-3">Dietary Restrictions: </h5>
 
             <!-- <div *ngFor="let allergy of family.allergies"> -->
-              <span *ngIf="family.allergies.includes('gluten')" class="icon-text">
+              <span *ngIf="family.allergies.includes('Gluten')" class="icon-text">
                 <span class = "is-size-4">
                 <i class="fa-solid fa-wheat-awn-circle-exclamation"></i>
                 </span>
@@ -30,15 +30,27 @@
                 <i *ngIf="family.allergies.includes('Kosher')" class="fa-solid fa-hotdog"></i>
               </span>
               <br>
-              <span class = "is-size-4">Kosher allergy</span>
+              <span class = "is-size-4">Kosher</span>
               </span>
               <br>
-                <span *ngIf="family.allergies.includes('diabetes')" class="icon-text">
+                <span *ngIf="family.allergies.includes('Diabetes')" class="icon-text">
                   <span class = "is-size-4">
                 <i *ngIf="family.allergies.includes('diabetes')" class="fa-solid fa-cubes-stacked"></i>
               </span>
+              <br>
               <span class = "is-size-4">Diabetes</span>
               </span>
               <br>
+              <span *ngIf="family.allergies.length == 0" class="icon-text">
+                <span class = "is-size-4">
+            </span>
+            <br>
+            <span class = "is-size-4">No Dietary Restrictions</span>
+            </span>
+            <br>
+
+              
             <!-- </div> -->
+            <button class="button is-primary" routerLink="/">Continue</button>
+
   </section>

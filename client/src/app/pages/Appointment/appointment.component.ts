@@ -81,6 +81,6 @@ export class AppointmentComponent implements OnInit {
     this.family.nextAppointment =
       this.nextAppointment + this.nextAppointmentTime;
     this.familyService.postFamily(this.family);
-    console.log('Next appointment: ' + this.family.nextAppointment);
+    window.alert('Appointment successfully booked for ' + this.family.nextAppointment);
   }
 }
