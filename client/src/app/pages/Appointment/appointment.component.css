@@ -7,3 +7,7 @@
 .button:hover{
 background-color: #f7ae04
 }
+
+.active {
+    background-color: #f7ae04;
+}

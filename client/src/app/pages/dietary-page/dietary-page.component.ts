@@ -10,16 +10,16 @@ import { FamilyService } from 'src/app/services/family.service';
 })
 export class DietaryPageComponent implements OnInit {
 
-    family: Family = {name: "", phoneNumber: "", members: [], allergies: [], checkedIn: [], nextAppointment: "" };
+    family: Family = {} as Family;
     private familySubscription: Subscription = new Subscription;
   
     constructor(public familyService: FamilyService) { }
   
     ngOnInit() {
-      //this.family = this.familyService.getFamily();
+      this.family = this.familyService.getFamily();
       this.familySubscription = this.familyService.getFamilyUpdateListener()
         .subscribe((family: Family) => {
-          //this.family = family;
+          this.family = family;
         });
     }
     ngOnDestroy() {

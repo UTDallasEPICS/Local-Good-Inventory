@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +30,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { SettingsComponent } from './pages/admin/settings/settings.component';
 import { FamiliesComponent } from './pages/admin/families/families.component';
 import { StatsComponent } from './pages/admin/stats/stats.component';
+import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +55,8 @@ import { StatsComponent } from './pages/admin/stats/stats.component';
     AdminComponent,
     SettingsComponent,
     FamiliesComponent,
-    StatsComponent
+    StatsComponent,
+    FamilyEditComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,13 @@ import { StatsComponent } from './pages/admin/stats/stats.component';
     FormsModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
+    AuthModule.forRoot({
+      domain: environment.AUTH_0_DOMAIN,
+      clientId: environment.AUTH_0_CLIENT_ID,
+      useRefreshTokens: true,
+      cacheLocation: "localstorage",
+      audience: environment.API_URL
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

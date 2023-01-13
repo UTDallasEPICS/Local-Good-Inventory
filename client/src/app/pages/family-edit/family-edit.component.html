@@ -1,0 +1,51 @@
+<div class="box">
+  <form #form="ngForm">
+    <h1 class="title">{{family.name}} Family: {{family.members.length}} Members</h1>
+    <fieldset [disabled]="!editMode">
+      <div style="display: flex;" *ngFor="let member of family.members; let i = index;">
+          <input class="input" type="text" name="firstName{{i}}" [(ngModel)]="member.name">
+          <div class="radio">
+            <label style="padding-right: 10px;">Age</label>
+            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="0-17" [(ngModel)]="member.age"> 0-17 </label>
+            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="18-59" [(ngModel)]="member.age"> 18-59</label>
+            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="60+" [(ngModel)]="member.age"> 60+</label>
+          </div>
+          <button *ngIf="i > 0" class="button fa-x" (click)="family.members.splice(i, 1)" ></button>
+      </div>
+      <button class="button fa-plus" (click)="family.members.push({name: '', age: '', lastName: ''})"></button>
+      <br>
+      <label>
+          Number
+          <input class="input" type="text" name="number" [(ngModel)]="family.phoneNumber">
+      </label>
+      <label>
+          Allergies
+      </label>
+      <br>
+      <div class="dropdown" [ngClass]="this.restrictionsVisble? 'is-active' : ''" style="z-index: 10;">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2" (click)="this.restrictionsVisble = !this.restrictionsVisble">
+            <span>{{this.family.allergies.length == 0 ? "No Dietary Restrictions" : this.family.allergies.toString()}}</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+            <div class="dropdown-content">
+                <div *ngFor="let restriction of dietaryRestrictions; let i = index;">
+                    <div class="dropdown-item">
+                        <input type="checkbox" name="allergy{{i}}" (change)="updateRestriction(restriction)" [checked]="this.family.allergies.includes(restriction)">
+                        {{restriction}}
+                    </div>
+                    <!-- <hr class="dropdown-divider"> -->
+                </div>
+            </div>
+        </div>
+      </div>
+      <br>
+    </fieldset>
+  </form>
+  <button class="button" (click)="updateFamily()">{{editMode ? "Save" : "Edit"}}</button>
+  <button class="button is-warning" routerLink="/appointment">Cancel</button>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Report } from 'src/app/models/report.model';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-stats',
@@ -20,9 +22,47 @@ export class StatsComponent implements OnInit {
   totalClients60andOver = 25;
   percentFoodUsedFromNFTB = 90;
 
-  constructor() { }
+  report: Report = {
+    month: 0,
+    year: 0,
+    daysDistributed: 0,
+    households: 0,
+    individualHouseholds: 0,
+    newHouseholds: 0,
+    numberOfClients: 0,
+    numberOfYouth: 0,
+    numberOfSeniors: 0
+}
+
+  today: Date = new Date();
+  selectedMonth = this.today.getMonth() + 1;
+  selectedYear = this.today.getFullYear();
+
+  constructor(private reportsService: ReportService) { }
 
   ngOnInit(): void {
+    this.reportsService.updateReport(this.selectedMonth, this.selectedYear).then((report) => {
+      this.report = report as Report;
+    });
+  }
+
+  updateReport(month: number, year: number) {
+    this.reportsService.updateReport(this.selectedMonth, this.selectedYear).then((report) => {
+      if(report == null) {
+        report = {
+          month: 0,
+          year: 0,
+          daysDistributed: 0,
+          households: 0,
+          individualHouseholds: 0,
+          newHouseholds: 0,
+          numberOfClients: 0,
+          numberOfYouth: 0,
+          numberOfSeniors: 0
+        }
+      }
+      this.report = report as Report;
+    });
   }
 
 }

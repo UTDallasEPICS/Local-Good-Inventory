@@ -1,0 +1,53 @@
+name: Update our EC2 instance
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - closed
+    branches: 
+      - master
+jobs:
+  update:
+    name: Prod - Build, Push, SSH Login, Reload
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '12.x'
+        cache: 'npm'
+    - run: | 
+        cd client
+        npm ci
+        npm run build --if-present
+        cd ../app
+        npm ci
+        cd ..
+    - name: Transfer build files
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_DEPLOYMENT_HOST }}
+        username: ${{ secrets.SSH_DEPLOYMENT_USER }}
+        key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
+        port: 22
+        source: "client/dist/client, ./app"
+        target: /home/ubuntu/tmp
+        strip_components: 1
+    - name: Reload processes
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_DEPLOYMENT_HOST }}
+        username: ${{ secrets.SSH_DEPLOYMENT_USER }}
+        key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
+        port: 22
+        script: |
+          rm -rf dist
+          mv tmp/dist/client tmp/client
+          rm -rf tmp/dist
+          mv tmp dist
+          cp ~/.env/.env ~/dist/app/.env
+          pm2 reload all
+          cp -r ~/db ~/.db.bak

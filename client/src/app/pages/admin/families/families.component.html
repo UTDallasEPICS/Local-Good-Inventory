@@ -4,17 +4,67 @@
 
 <div class="modal" [class.is-active]="modalVisible">
     <div class="modal-background" (click)="hideModal()"></div>
-    <div class="modal-content">
+    <div class="modal-content" style="overflow:visible !important;">
         <div class="box">
-            <h1>{{selectedFamily.name}} Family: {{selectedFamily.members.length}} Members</h1>
-            <div *ngFor="let member of selectedFamily.members; let i = index;">
-                <p>{{member.name}}: {{member.age}}</p>
-            </div>
-            <p>{{selectedFamily.phoneNumber}}</p>
-            <p>{{selectedFamily.allergies}}</p>
-            <p>{{selectedFamily.nextAppointment}}</p>
-            <button class="button" (click)="updateFamily()">Save</button>
+            <form #f="ngForm">
+                <h1 class="title">{{selectedFamily.name}} Family: {{selectedFamily.members.length}} Members</h1>
+                <fieldset [disabled]="!editMode">
+                    <div style="display: flex;" *ngFor="let member of selectedFamily.members; let i = index;">
+                        <input class="input" type="text" name="firstName{{i}}" [(ngModel)]="member.name">
+                        <div class="radio">
+                            <label style="padding-right: 10px;">Age</label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="0-17" [(ngModel)]="member.age"> 0-17 </label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="18-59" [(ngModel)]="member.age"> 18-59</label>
+                            <label style="padding-top: 5px;"><input type="radio" name="age{{i}}" value="60+" [(ngModel)]="member.age"> 60+</label>
+                        </div>
+                        <button *ngIf="i > 0" class="button fa-x" (click)="selectedFamily.members.splice(i, 1)" ></button>
+                    </div>
+                    <button class="button fa-plus" (click)="selectedFamily.members.push({name: '', age: '', lastName: ''})"></button>
+                    <br>
+                    <label>
+                        Number
+                        <input class="input" type="text" name="number" [(ngModel)]="selectedFamily.phoneNumber">
+                    </label>
+                    <label>
+                        Allergies
+                    </label>
+                    <br>
+                    <div class="dropdown" [ngClass]="this.restrictionsVisble? 'is-active' : ''" style="z-index: 10;">
+                        <div class="dropdown-trigger">
+                          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2" (click)="this.restrictionsVisble = !this.restrictionsVisble">
+                            <span>{{this.selectedFamily.allergies.length == 0 ? "No Dietary Restrictions" : this.selectedFamily.allergies.toString()}}</span>
+                            <span class="icon is-small">
+                              <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                            <div class="dropdown-content">
+                                <div *ngFor="let restriction of dietaryRestrictions; let i = index;">
+                                    <div class="dropdown-item">
+                                        <input type="checkbox" name="allergy{{i}}" (change)="updateRestriction(restriction)" [checked]="this.selectedFamily.allergies.includes(restriction)">
+                                        {{restriction}}
+                                    </div>
+                                    <!-- <hr class="dropdown-divider"> -->
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <br>
+                    <label>
+                        Next Appointment
+                        <input class="input" type="datetime-local" name="nextAppointment" [(ngModel)]="selectedFamily.nextAppointment">
+                    </label>
+                    <br>
+                    <div style="display: inline-flex;">
+                        <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'colorSelected' : ''" (click)="updateColor('blue')">Blue</button>
+                        <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'colorSelected' : ''" (click)="updateColor('pink')" >Pink</button>
+                    </div>
+                </fieldset>
+            </form>
+            <button class="button" (click)="updateFamily()">{{editMode ? "Save" : "Edit"}}</button>
             <button class="button" (click)="hideModal()">Close</button>
+            <button class="button is-danger" (click)="deleteFamily()">Delete</button>
         </div>
     </div>
 </div>

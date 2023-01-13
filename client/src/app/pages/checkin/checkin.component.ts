@@ -19,7 +19,7 @@ export class CheckinComponent implements OnInit {
   mobNumberPattern = "^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$";  
   isValidFormSubmitted = false;  
   user = new User();
-  family: Family = {name: "", phoneNumber: "", members: [], allergies: [], checkedIn: [], nextAppointment: ""};
+  family: Family = {} as Family;
 
   constructor(public familyService: FamilyService, private router: Router) { }
 
@@ -54,8 +54,7 @@ export class CheckinComponent implements OnInit {
         var today = new Date();
         console.log(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
         this.family.checkedIn.push(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
-        //console.log("Updated family: " + this.family.checkedIn);
-        this.familyService.postFamily(this.family);
+        this.familyService.postFamilyDate(this.family, this.family.checkedIn[this.family.checkedIn.length - 1]);
         this.router.navigate(['/review']);
       }
     });

@@ -7,4 +7,6 @@ export interface Appointment {
     quantity: number;
     phoneNumber: string[];
   };
+  month: number;
+  year: number;
 }

@@ -1,7 +1,7 @@
-<div style="display: flex;">
+<div>
 
 
-    <form>
+    <form styly="display: flex;">
         <!--Dates: <input type="text" name="dates" [(ngModel)]="settings.dates">-->
         <div class="field is-horizontal">
             <div class="field">
@@ -27,10 +27,13 @@
             </div>
         </div>
     </form>
-    <datepicker [(selectedDates)]="this.settings.blockOuts" [multiSelect]="true"></datepicker>
-    <div style="display:block;">
-        <h1>Blocked Out Dates</h1>
-        <p *ngFor="let date of settings.blockOuts">{{date}}</p>
+    <div style="display: flex;">
+
+        <datepicker [(selectedDates)]="this.settings.blockOuts" [multiSelect]="true"></datepicker>
+        <div style="display:block;">
+            <h1>Blocked Out Dates</h1>
+            <p *ngFor="let date of settings.blockOuts">{{date}}</p>
+        </div>
     </div>
 </div>
 <a class="button is-medium is-success" (click)="updateSettings()">Submit</a>

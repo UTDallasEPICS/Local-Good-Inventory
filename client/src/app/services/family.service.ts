@@ -1,31 +1,37 @@
-import { Family } from "../models/family.model"
+import { Family } from "../models/family.model";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
+import { AuthService } from "@auth0/auth0-angular";
+
 
 @Injectable({providedIn: 'root'})
 export class FamilyService {
-    private family: Family =
-        {
-            name: "",
-            phoneNumber: "",
-            members: [],
-            allergies: [],
-            checkedIn: [],
-            nextAppointment: ""
-        };
+    private family: Family = {} as Family;
     private familyUpdated = new Subject<Family>();
 
-    constructor(private http: HttpClient) { }
+    private accessToken: string = "";
+
+    constructor(private http: HttpClient, private auth: AuthService) { 
+        auth.getAccessTokenSilently().subscribe(token => {
+            this.accessToken = token;
+        })
+    }
 
     getFamily() {
         return {...this.family};
     }
 
-    getFamilies() {
-      this.http.get<{families: Family[]}>(`http://localhost:3000/family`)
+    async getFamilies() {
+        this.http.get<{families: Family[]}>(
+            `${environment.API_URL}/family`,
+            {
+                headers: { Authorization: 'Bearer ' + this.accessToken }
+            }
+        )
         .subscribe((families) => {
-          return families;
+            return families;
         });
     }
 
@@ -36,7 +42,12 @@ export class FamilyService {
     updateFamily(phoneNumber: string) {
         const promiseToken = new Promise((resolve, reject) => {
             if(phoneNumber.length == 10) {
-                this.http.get<{family: Family}>(`http://localhost:3000/family?phoneNumber=${phoneNumber}`)
+                this.http.get<{family: Family}>(
+                    `${environment.API_URL}/family?phoneNumber=${phoneNumber}`,
+                    {
+                        headers: { Authorization: 'Bearer ' + this.accessToken }
+                    }
+                )
                 .subscribe((family) => {
                     this.family = family.family;
                     this.familyUpdated.next({...this.family});
@@ -51,10 +62,27 @@ export class FamilyService {
 
     }
 
-    postFamily(family: Family) {
+    async postFamily(family: Family): Promise<void> {
         if(family.phoneNumber.length == 10) {
-        this.http.post(`http://localhost:3000/family?phoneNumber=${family.phoneNumber}`, family)
+            this.http.post(
+                `${environment.API_URL}/family?phoneNumber=${family.phoneNumber}`, 
+                family,
+                {
+                    headers: { Authorization: 'Bearer ' + this.accessToken}
+                })
             .subscribe();
+        }
+    }
+
+    postFamilyDate(family: Family, date: string): void {
+        if(family.phoneNumber.length == 10) {
+            this.http.post(
+                `${environment.API_URL}/family?phoneNumber=${family.phoneNumber}&date=${date}`, 
+                family,
+                {
+                    headers: {Authorization: 'Bearer ' + this.accessToken }
+                })
+                .subscribe();
         }
     }
 }

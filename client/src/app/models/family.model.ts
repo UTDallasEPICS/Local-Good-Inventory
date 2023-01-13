@@ -7,4 +7,5 @@ export interface Family {
     allergies: string[];
     checkedIn: string[];
     nextAppointment: string;
+    color: string;
 }

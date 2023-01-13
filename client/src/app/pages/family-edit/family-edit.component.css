@@ -20,24 +20,13 @@ input {
     margin-bottom: 10px;
 }
 
-.blue.colorSelected {
-    background-color: lightskyblue;
-}
-
-.pink.colorSelected {
-    background-color: hotpink;
-}
-
 input:disabled {
     background-color: white;
     color: black;
     border-color: #dbdbdb;
 }
 
-.blue.colorSelected:disabled {
-    background-color: lightskyblue;
-}
-
-.pink.colorSelected:disabled {
-    background-color: hotpink;
+.box {
+    width: 80%;
+    margin: auto;
 }

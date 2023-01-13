@@ -19,7 +19,7 @@ export class DatepickerComponent implements OnInit {
   today: Date = new Date();
   pipe = new DatePipe('en-US');
   
-  selectedMonth = this.today.getMonth();
+  selectedMonth = this.today.getMonth() + 1;
   selectedYear = this.today.getFullYear();
   
   dates = Array(this.daysInMonth(this.selectedMonth, this.today.getFullYear())).fill(0).map((x,i)=>i+1);
@@ -57,7 +57,7 @@ export class DatepickerComponent implements OnInit {
   }
 
   dateSelected(date: number) {
-    let dateString = this.pipe.transform(new Date(this.selectedYear, this.selectedMonth - 1, date).toDateString(), 'MM-dd-YYYY');
+    let dateString = this.pipe.transform(new Date(this.selectedYear, this.selectedMonth - 1, date).toDateString(), 'YYYY-MM-dd');
     if(dateString) {
       if(this.multiSelect)
         return this.selectedDates.includes(dateString);
@@ -67,7 +67,7 @@ export class DatepickerComponent implements OnInit {
   }
 
   selectDate(date: number) {
-    let dateString = this.pipe.transform(new Date(this.selectedYear, this.selectedMonth - 1, date).toDateString(), 'MM-dd-YYYY');
+    let dateString = this.pipe.transform(new Date(this.selectedYear, this.selectedMonth - 1, date).toDateString(), 'YYYY-MM-dd');
     if(dateString != null) {
       if(this.multiSelect) {
         if(this.dateSelected(date)) {

@@ -2,6 +2,8 @@ import { Settings } from "../models/settings.model"
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
+import { AuthService } from "@auth0/auth0-angular";
 
 
 
@@ -22,7 +24,13 @@ export class SettingsService {
         };
     private settingsUpdated = new Subject<Settings>();
 
-    constructor(private http: HttpClient) { }
+    private accessToken: string = "";
+
+    constructor(private http: HttpClient, private auth: AuthService) { 
+        auth.getAccessTokenSilently().subscribe(token => {
+            this.accessToken = token;
+        })
+    }
 
     getSettings() {
         return {...this.settings};
@@ -34,23 +42,29 @@ export class SettingsService {
 
     updateSettings() {
         const promiseToken = new Promise((resolve, reject) => {
-            this.http.get<{settings: Settings}>(`http://localhost:3000/settings`)
+            this.http.get<{settings: Settings}>(
+                `${environment.API_URL}/settings`,
+                {
+                    headers: { Authorization: 'Bearer ' + this.accessToken }
+                })
             .subscribe((settings) => {
                     this.settings = settings.settings;
                     this.settingsUpdated.next({...this.settings});
                     resolve(settings);
             });    
         });
-        console.log("Updated settings");
         //console.log(this.settings);
         return promiseToken;
         
     }
 
     postSettings(settings: Settings) {
-        console.log("Posted settings");
-        console.log(settings);
-        this.http.post(`http://localhost:3000/settings`, settings)
+        this.http.post(
+            `${environment.API_URL}/settings`, 
+            settings,
+            {
+                headers: { Authorization: 'Bearer ' + this.accessToken }
+            })
             .subscribe();
     }
 }
