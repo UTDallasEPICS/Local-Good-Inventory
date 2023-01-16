@@ -46,4 +46,3 @@ jobs:
           mv tmp dist
           cp ~/.env/.env ~/dist/app/.env
           pm2 reload all
-          cp -r ~/db ~/.db.bak
