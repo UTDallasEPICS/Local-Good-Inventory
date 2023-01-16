@@ -2,12 +2,7 @@ name: Update our EC2 instance
 on:
   push:
     branches:
-      - master
-  pull_request:
-    types:
-      - closed
-    branches: 
-      - master
+      - main
 jobs:
   update:
     name: Prod - Build, Push, SSH Login, Reload
