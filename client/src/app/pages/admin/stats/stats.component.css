@@ -21,10 +21,6 @@
 }
 
 select{
-  width: 20%;
-  height: 2.5%;
-  margin-right: 5%;
-  padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: none;
