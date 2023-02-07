@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { AuthService } from "@auth0/auth0-angular";
+import { lastValueFrom } from "rxjs";
 
 
 @Injectable({providedIn: 'root'})
@@ -21,6 +22,22 @@ export class FamilyService {
 
     getFamily() {
         return {...this.family};
+    }
+
+    async pullFamily(phoneNumber: string) {
+        const promiseToken = new Promise<Family>((resolve, reject) => {
+            this.http.get<{family: Family}>(
+                `${environment.API_URL}/family?phoneNumber=${phoneNumber}`,
+                {
+                    headers: { Authorization: 'Bearer ' + this.accessToken }
+                }
+            )
+            .subscribe((family) => {
+                resolve(family.family);
+            });
+        });
+
+        return promiseToken;
     }
 
     async getFamilies() {

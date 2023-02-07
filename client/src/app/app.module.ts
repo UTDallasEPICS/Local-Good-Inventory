@@ -29,6 +29,7 @@ import { SettingsComponent } from './pages/admin/settings/settings.component';
 import { FamiliesComponent } from './pages/admin/families/families.component';
 import { StatsComponent } from './pages/admin/stats/stats.component';
 import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
+import { AppointmentsComponent } from './pages/admin/appointments/appointments.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
     SettingsComponent,
     FamiliesComponent,
     StatsComponent,
-    FamilyEditComponent
+    FamilyEditComponent,
+    AppointmentsComponent
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ export class AppointmentComponent implements OnInit {
   settings: Settings = {} as Settings;
   appointment: Appointment = {} as Appointment;
   private settingsSubscription: Subscription = new Subscription();
+  familySubscription: Subscription = new Subscription();
   nextAppointment: string = '';
   nextAppointmentTime: string = 'T10:00';
   selectedTime: string = '';
@@ -44,6 +45,13 @@ export class AppointmentComponent implements OnInit {
       .getSettingsUpdateListener()
       .subscribe((settings: Settings) => {
         this.settings = settings;
+      });
+
+    this.family = this.familyService.getFamily();
+    this.familySubscription = this.familyService
+      .getFamilyUpdateListener()
+      .subscribe((family: Family) => {
+        this.family = family;
       });
   }
   //make appointment time show up on front end
