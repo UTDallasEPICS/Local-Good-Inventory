@@ -4,6 +4,8 @@ import { FamilyService } from 'src/app/services/family.service';
 import { Settings } from 'src/app/models/settings.model';
 import { SettingsService } from 'src/app/services/settings.service';
 import { Subscription } from 'rxjs';
+import { AppointmentService } from 'src/app/services/appointment.service';
+import { Appointment } from 'src/app/models/appointment.model';
 
 @Component({
   selector: 'appointment',
@@ -13,7 +15,9 @@ import { Subscription } from 'rxjs';
 export class AppointmentComponent implements OnInit {
   family: Family = {} as Family;
   settings: Settings = {} as Settings;
+  appointment: Appointment = {} as Appointment;
   private settingsSubscription: Subscription = new Subscription();
+  familySubscription: Subscription = new Subscription();
   nextAppointment: string = '';
   nextAppointmentTime: string = 'T10:00';
   selectedTime: string = '';
@@ -22,7 +26,8 @@ export class AppointmentComponent implements OnInit {
 
   constructor(
     public familyService: FamilyService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private appointmentService: AppointmentService
   ) {}
 
   isDisplay = false;
@@ -40,6 +45,13 @@ export class AppointmentComponent implements OnInit {
       .getSettingsUpdateListener()
       .subscribe((settings: Settings) => {
         this.settings = settings;
+      });
+
+    this.family = this.familyService.getFamily();
+    this.familySubscription = this.familyService
+      .getFamilyUpdateListener()
+      .subscribe((family: Family) => {
+        this.family = family;
       });
   }
   //make appointment time show up on front end
@@ -61,9 +73,24 @@ export class AppointmentComponent implements OnInit {
       var endTime = parseInt(settingsDate.endTime.split(':')[0]) * 60 + 
                     parseInt(settingsDate.endTime.split(':')[1]);
       console.log(`Start time: ${startTime} End time: ${settingsDate.endTime}`)
-      for(var i = startTime; i <= endTime; i+= this.settings.interval) {
-        this.availableTimes.push(`${Math.floor(i / 60)}:${(i % 60) == 0 ? "00" : i % 60}`);
-      }
+      console.log("Appointment Object: ")
+      this.appointmentService.updateAppointment(this.nextAppointment).then((res) => {
+        this.appointment = res
+        console.log(this.appointment);
+        
+        var full;
+        for(var i = startTime; i <= endTime; i+= this.settings.interval) {
+          full = false;
+          this.appointment.timeslots.forEach(slot => { // Check if the timeslot that's being pushed has met maximum capacity
+            if(slot.time == `${Math.floor(i / 60)}:${(i % 60) == 0 ? "00" : i % 60}` && slot.quantity >= this.settings.quantity)
+            full = true;
+          });
+
+          if(!full)
+            this.availableTimes.push(`${Math.floor(i / 60)}:${(i % 60) == 0 ? "00" : i % 60}`);
+        }
+      });
+      
     }
 
     console.log(this.availableTimes);
@@ -73,6 +100,31 @@ export class AppointmentComponent implements OnInit {
   selectTime(time: string) {
     this.selectedTime = time;
     this.nextAppointmentTime = `T${time}`;
+
+    var slotExists = false;
+    console.log("APPOINTMENT OBJECT ON TIME SELECTION");
+    console.log(this.appointment.timeslots);
+    console.log(this.appointment.timeslots.length);
+    this.appointment.timeslots.forEach(slot => {
+      console.log(`SLOT TIME: ${slot.time}`);
+      if(slot.time == time) {
+        console.log("FOUND A MATCH");
+        slot.quantity++;
+        slot.phoneNumber.push(this.family.phoneNumber);
+        slotExists = true;
+      }
+    });
+
+    if(!slotExists) {
+      this.appointment.timeslots.push({
+        time: time,
+        quantity: 1,
+        phoneNumber: [this.family.phoneNumber]
+      })
+    }
+
+    console.log(`TIME SELECTED OBJECT: ${slotExists}\nTime: ${time}\nPhone Number ${this.family.phoneNumber}`);
+    console.log(this.appointment);
   }
 
 
@@ -81,6 +133,7 @@ export class AppointmentComponent implements OnInit {
     this.family.nextAppointment =
       this.nextAppointment + this.nextAppointmentTime;
     this.familyService.postFamily(this.family);
+    this.appointmentService.postAppointment(this.appointment);
     window.alert('Appointment successfully booked for ' + this.family.nextAppointment);
   }
 }

@@ -16,10 +16,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { NewFamilyMemberComponent } from './pages/New-Family-Member/newfamilymember.component';
 import { ChangeMemberInfo1Component } from './pages/Change-Member-Info1/changememberinfo1.component';
-import { ChangeMemberInfo2Component } from './pages/Change-Member-Info2/changememberinfo2.component';
 import { FamilyOrMemberComponent } from './pages/Family-or-Member/family-or-member.component'; 
 import { AppointmentComponent } from './pages/Appointment/appointment.component';
-import { Appointment2Component } from './pages/Appointment2/appointment2.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 import { NewRegistrationComponent } from './pages/new-registration/new-registration.component';
@@ -31,6 +29,7 @@ import { SettingsComponent } from './pages/admin/settings/settings.component';
 import { FamiliesComponent } from './pages/admin/families/families.component';
 import { StatsComponent } from './pages/admin/stats/stats.component';
 import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
+import { AppointmentsComponent } from './pages/admin/appointments/appointments.component';
 
 
 @NgModule({
@@ -42,11 +41,9 @@ import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
     HomeComponent,
     CheckinComponent,
     AppointmentComponent,
-    Appointment2Component,
     DatepickerComponent,
     NewFamilyMemberComponent,
     ChangeMemberInfo1Component,
-    ChangeMemberInfo2Component,
     FamilyOrMemberComponent,
     RemoveFamilyMemberComponent,
     NewRegistrationComponent,
@@ -56,7 +53,8 @@ import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
     SettingsComponent,
     FamiliesComponent,
     StatsComponent,
-    FamilyEditComponent
+    FamilyEditComponent,
+    AppointmentsComponent
   ],
   imports: [
     BrowserModule,

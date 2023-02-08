@@ -10,7 +10,8 @@ export class AdminComponent implements OnInit {
 
   public pages = [{page: "Stats", active: true}, 
                   {page: "Settings", active: false},
-                  {page: "Families", active: false}];
+                  {page: "Families", active: false},
+                  {page: "Appointments", active: false}];
 
   constructor(private http: HttpClient) { }
 

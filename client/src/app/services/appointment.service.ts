@@ -5,16 +5,12 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Auth0Client } from '@auth0/auth0-spa-js';
 import { AuthService } from '@auth0/auth0-angular';
+import { Appointment } from '../models/appointment.model';
 
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
-  private settings: Settings = {
-    dates: [{day: 'Fri', startTime: '09:30', endTime: '11:30', active: true}],
-    interval: 15,
-    quantity: 4,
-    blockOuts: []
-  };
-  private settingsUpdated = new Subject<Settings>();
+  private appointment: Appointment = {} as Appointment;
+  private appointmentUpdated = new Subject<Appointment>();
 
   private accessToken: string = "";
 
@@ -24,37 +20,50 @@ export class AppointmentService {
     })
   }
 
-  getSettings() {
-    return { ...this.settings };
+  getAppointment() {
+    return { ...this.appointment };
   }
 
-  getSettingsUpdateListener() {
-    return this.settingsUpdated.asObservable();
+  getAppointmentUpdateListener() {
+    return this.appointmentUpdated.asObservable();
   }
 
-  updateSettings(date: string) {
-    const promiseToken = new Promise((resolve, reject) => {
+  updateAppointment(date: string) {
+    const promiseToken = new Promise<Appointment>((resolve, reject) => {
       this.http
-        .get<{ settings: Settings }>(
+        .get<{ appointment: Appointment }>(
           `${environment.API_URL}/appointment?date=${date}`,
           {
             headers: {Authorization: 'Bearer ' + this.accessToken}
           }
         )
-        .subscribe((settings) => {
-          this.settings = settings.settings;
-          this.settingsUpdated.next({ ...this.settings });
-          resolve(settings);
+        .subscribe((res) => {
+          this.appointment = res.appointment;
+          console.log("APPOINTMENT API CALL: ");
+          console.log(res.appointment);
+          if(!res.appointment) {
+            this.appointment = {
+              date: +date.split('-')[2],
+              month: +date.split('-')[1],
+              year: +date.split('-')[0],
+              timeslots: []
+            }
+          }
+          console.log("Object Returned from Function: ")
+          console.log(this.appointment);
+          this.appointmentUpdated.next({ ...this.appointment });
+          resolve(this.appointment);
         });
     });
-    //console.log(this.settings);
     return promiseToken;
   }
 
-  postSettings(settings: Settings) {
+  postAppointment(appointment: Appointment) {
+    console.log("NEW APPOINTMENT API OBJECT");
+    console.log(appointment);
     this.http.post(
       `${environment.API_URL}/appointment`, 
-      settings,
+      appointment,
       {
         headers: { Authorization: 'Bearer ' + this.accessToken }
       }).subscribe();

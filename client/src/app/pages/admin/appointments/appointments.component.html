@@ -1,0 +1,14 @@
+<div style="display: inline-flex; width: 100%">
+    <datepicker [(selectedDate)]="appointmentString" (click)="getAppointments()"></datepicker>
+
+    <div style="width: 100%; display: flex;">
+        <div *ngIf="loading" class="lds-dual-ring"></div>
+    
+        <table *ngIf="!loading">
+            <tr *ngFor="let time of times; let i = index;">
+                <td>{{time}}</td>
+                <td *ngFor="let family of families.get(time)">{{family.name}}<br/>{{family.phoneNumber}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
