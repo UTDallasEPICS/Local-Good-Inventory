@@ -30,6 +30,7 @@ import { FamiliesComponent } from './pages/admin/families/families.component';
 import { StatsComponent } from './pages/admin/stats/stats.component';
 import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
 import { AppointmentsComponent } from './pages/admin/appointments/appointments.component';
+import { ExportComponent } from './pages/admin/export/export.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { AppointmentsComponent } from './pages/admin/appointments/appointments.c
     FamiliesComponent,
     StatsComponent,
     FamilyEditComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    ExportComponent
   ],
   imports: [
     BrowserModule,
