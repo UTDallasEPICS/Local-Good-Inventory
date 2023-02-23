@@ -16,7 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { NewFamilyMemberComponent } from './pages/New-Family-Member/newfamilymember.component';
 import { ChangeMemberInfo1Component } from './pages/Change-Member-Info1/changememberinfo1.component';
-import { FamilyOrMemberComponent } from './pages/Family-or-Member/family-or-member.component'; 
+import { FamilyOrMemberComponent } from './pages/Family-or-Member/family-or-member.component';
 import { AppointmentComponent } from './pages/Appointment/appointment.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
@@ -31,6 +31,7 @@ import { StatsComponent } from './pages/admin/stats/stats.component';
 import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
 import { AppointmentsComponent } from './pages/admin/appointments/appointments.component';
 import { ExportComponent } from './pages/admin/export/export.component';
+import { EventsComponent } from './pages/admin/events/events.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ExportComponent } from './pages/admin/export/export.component';
     StatsComponent,
     FamilyEditComponent,
     AppointmentsComponent,
-    ExportComponent
+    ExportComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

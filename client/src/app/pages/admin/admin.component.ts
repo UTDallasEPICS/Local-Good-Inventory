@@ -12,7 +12,8 @@ export class AdminComponent implements OnInit {
                   {page: "Settings", active: false},
                   {page: "Families", active: false},
                   {page: "Appointments", active: false},
-                  {page: "Import", active: false}];
+                  {page: "Import", active: false},
+                  {page: "Events", active: false}];
 
   constructor(private http: HttpClient) { }
 
