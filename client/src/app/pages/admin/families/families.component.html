@@ -1,5 +1,29 @@
-<div *ngFor="let family of filteredFamilies; let i = index">
-    <a (click)="showModal(family.phoneNumber)">{{family.lastName}} Family</a>
+<table class="table is-hoverable is-fullwidth is-striped is-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Color</th>
+            <th>Next Appointment</th>
+            <th># Minors</th>
+            <th># Adults</th>
+            <th># Seniors</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let family of filteredFamilies; let i = index" (click)="showModal(family.phoneNumber)">
+            <td>{{family.firstName}} {{family.lastName}}</td>
+            <td>{{family.phoneNumber}}</td>
+            <td>{{family.color}}</td>
+            <td>{{family.nextAppointment}}</td>
+            <td>{{family.minors}}</td>
+            <td>{{family.adults}}</td>
+            <td>{{family.seniors}}</td>
+        </tr>
+    </tbody>
+</table>
+<div >
+
 </div>
 
 <div class="modal" [class.is-active]="modalVisible">
