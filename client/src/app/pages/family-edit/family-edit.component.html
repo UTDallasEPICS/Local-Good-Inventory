@@ -1,6 +1,6 @@
 <div class="box">
   <form #form="ngForm">
-    <h1 class="title">{{family.lastName}} Family: {{family.members.length}} Members</h1>
+    <h1 class="title">{{family.lastName}} Family</h1>
     <fieldset [disabled]="!editMode">
       <label>
         Number of Members:
@@ -8,15 +8,15 @@
       <div class="columns">
           <div class="column">
               <label>0-17</label>
-              <input class="input" type="number" name="numMinors">
+              <input class="input" type="number" name="numMinors" [(ngModel)]="family.minors">
           </div>
           <div class="column">
               <label>18-59</label>
-              <input class="input" type="number" name="numAdults">
+              <input class="input" type="number" name="numAdults" [(ngModel)]="family.adults">
           </div>
           <div class="column">
               <label>60+</label>
-              <input class="input" type="number" name="numSeniors">
+              <input class="input" type="number" name="numSeniors" [(ngModel)]="family.seniors">
           </div>
       </div>
       <label>

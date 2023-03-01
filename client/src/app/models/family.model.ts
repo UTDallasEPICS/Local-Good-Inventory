@@ -4,7 +4,6 @@ export interface Family {
     phoneNumber: string;
     firstName: string;
     lastName: string;
-    members: Member[];
     minors: number;
     adults: number;
     seniors: number;

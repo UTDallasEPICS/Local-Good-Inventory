@@ -18,7 +18,6 @@ export class NewRegistrationComponent implements OnInit {
     firstName: "", 
     lastName: "",
     phoneNumber: "", 
-    members: [], 
     allergies: [],
     checkedIn: [], 
     nextAppointment: "",
@@ -39,11 +38,11 @@ export class NewRegistrationComponent implements OnInit {
   }
 
   addMember() {
-    this.family.members.push({name: "", age: "", lastName: ""})
+    //this.family.members.push({name: "", age: "", lastName: ""})
   }
 
   removeMember(index: number) {
-    this.family.members.splice(index,1);
+    //this.family.members.splice(index,1);
   }
 
   updateRestriction(restriction: string) {

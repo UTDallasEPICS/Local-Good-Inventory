@@ -6,9 +6,9 @@
     <p class="info">Phone Number: 
         ({{family.phoneNumber.substring(0,3)}})-{{family.phoneNumber.substring(3,6)}}-{{family.phoneNumber.substring(6,10)}}</p>
     <p class="info">People:</p>
-    <p class="info">&nbsp;&nbsp;&nbsp;&nbsp;Ages 0-17:</p>
-    <p class="info">&nbsp;&nbsp;&nbsp;&nbsp;Ages 18-59:</p>
-    <p class="info">&nbsp;&nbsp;&nbsp;&nbsp;Ages 60+:</p>
+    <p class="info">&nbsp;&nbsp;&nbsp;&nbsp;Ages 0-17: {{family.minors}}</p>
+    <p class="info">&nbsp;&nbsp;&nbsp;&nbsp;Ages 18-59: {{family.adults}}</p>
+    <p class="info">&nbsp;&nbsp;&nbsp;&nbsp;Ages 60+: {{family.seniors}}</p>
 </div>
 
 <div class="container" id="changes">
