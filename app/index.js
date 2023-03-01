@@ -41,6 +41,7 @@ app.use(cors({
   methods: 'GET, POST, PATCH, DELETE, OPTIONS'
 }))
 
+
 app.use(jwtCheck);
 app.use(bodyParser.json());
 
@@ -234,5 +235,5 @@ app.get('/report', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}`)
+    console.log(`Listening at http://localhost:${port}`)  
 })

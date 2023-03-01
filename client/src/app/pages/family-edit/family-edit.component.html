@@ -1,6 +1,6 @@
 <div class="box">
   <form #form="ngForm">
-    <h1 class="title">{{family.name}} Family: {{family.members.length}} Members</h1>
+    <h1 class="title">{{family.lastName}} Family: {{family.members.length}} Members</h1>
     <fieldset [disabled]="!editMode">
       <div style="display: flex;" *ngFor="let member of family.members; let i = index;">
           <input class="input" type="text" name="firstName{{i}}" [(ngModel)]="member.name">

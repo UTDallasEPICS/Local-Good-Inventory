@@ -15,13 +15,17 @@ export class NewRegistrationComponent implements OnInit {
   dietaryRestrictions = Constants.dietaryRestrictions;
 
   family: Family = {
-    name: "", 
+    firstName: "", 
+    lastName: "",
     phoneNumber: "", 
-    members: [{name: "", age: "", lastName: ""}], 
+    members: [], 
     allergies: [],
     checkedIn: [], 
     nextAppointment: "",
-    color: ""
+    color: "",
+    minors: 0,
+    adults: 0,
+    seniors: 0
   };
 
   constructor(private familyService: FamilyService, private router: Router) { }

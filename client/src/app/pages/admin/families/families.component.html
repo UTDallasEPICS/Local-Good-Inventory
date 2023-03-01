@@ -1,5 +1,5 @@
 <div *ngFor="let family of filteredFamilies; let i = index">
-    <a (click)="showModal(family.phoneNumber)">{{family.name}} Family</a>
+    <a (click)="showModal(family.phoneNumber)">{{family.lastName}} Family</a>
 </div>
 
 <div class="modal" [class.is-active]="modalVisible">
@@ -7,7 +7,7 @@
     <div class="modal-content" style="overflow:visible !important;">
         <div class="box">
             <form #f="ngForm">
-                <h1 class="title">{{selectedFamily.name}} Family: {{selectedFamily.members.length}} Members</h1>
+                <h1 class="title">{{selectedFamily.lastName}} Family: {{selectedFamily.members.length}} Members</h1>
                 <fieldset [disabled]="!editMode">
                     <div style="display: flex;" *ngFor="let member of selectedFamily.members; let i = index;">
                         <input class="input" type="text" name="firstName{{i}}" [(ngModel)]="member.name">
