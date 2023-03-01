@@ -43,9 +43,26 @@ export class AppointmentsComponent implements OnInit {
       }
       this.families.set(slot.time, familyArray);
     }
-    this.times.sort();
+    this.times.sort(this.sortTimes);
     this.ref.markForCheck();
+    console.log(this.times);
     this.loading = false;
+  }
+
+  sortTimes(a: string, b: string) {
+    var hourA = parseInt(a.split(':')[0]);
+    var hourB = parseInt(b.split(':')[0]);
+
+    var minuteA = parseInt(a.split(':')[1]);
+    var minuteB = parseInt(b.split(':')[1]);
+
+    if(hourA == hourB) {
+      if(minuteA == minuteB) {
+        return 0;
+      }
+      return minuteA < minuteB ? -1 : 1;
+    }
+    return hourA < hourB ? -1 : 1;
   }
 
 }
