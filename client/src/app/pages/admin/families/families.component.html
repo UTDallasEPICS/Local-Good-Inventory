@@ -10,6 +10,17 @@
                 <h1 class="title">{{selectedFamily.lastName}} Family</h1>
                 <fieldset [disabled]="!editMode">
                     <label>
+                        Name
+                    </label>
+                    <div class="columns">
+                        <div class="column">
+                            <input class="input" type="text" name="firstName" placeholder="First Name" [(ngModel)]="selectedFamily.firstName">
+                        </div>
+                        <div class="column">
+                            <input class="input" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="selectedFamily.lastName">
+                        </div>
+                    </div>
+                    <label>
                         Number of Members:
                     </label>
                     <div class="columns">
@@ -28,8 +39,8 @@
                     </div>
                     <label>
                         Number
-                        <input class="input" type="text" name="number" [(ngModel)]="selectedFamily.phoneNumber">
                     </label>
+                    <input class="input" type="text" name="number" [(ngModel)]="selectedFamily.phoneNumber">
                     <label>
                         Allergies
                     </label>
