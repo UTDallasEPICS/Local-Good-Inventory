@@ -8,7 +8,7 @@ export interface Family {
     adults: number;
     seniors: number;
     allergies: string[];
-    checkedIn: string[];
+    checkedIn: {id: string[], date: string};
     nextAppointment: string;
     color: string;
 }
