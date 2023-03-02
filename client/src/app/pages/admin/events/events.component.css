@@ -1,0 +1,28 @@
+#event-container{
+  background-color: white;
+  display: flex;
+}
+
+img{
+  height: 90%;
+  width: 90%;
+  border-radius: 5%;
+}
+
+.left-div{
+  width: 25%;
+  /* background-color: #ffffff; */
+  float: left;
+}
+
+.right-div{
+  width: 75%;
+  float: right;
+  /* background-color: #ffffff; */
+}
+
+h2{
+  font-size: x-large;
+}
+
+
