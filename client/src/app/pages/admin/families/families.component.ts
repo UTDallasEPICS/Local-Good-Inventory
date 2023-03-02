@@ -20,13 +20,16 @@ export class FamiliesComponent implements OnInit {
   filteredFamilies: Family[] = [];
 
   selectedFamily: Family = {
-    name: "", 
+    firstName: "", 
+    lastName: "",
     phoneNumber: "", 
-    members: [], 
     allergies: [],
     checkedIn: [], 
     nextAppointment: "",
-    color: ""
+    color: "",
+    minors: 0,
+    adults: 0,
+    seniors: 0
   };
 
   nextAppointmentFormatted: Date = new Date();
@@ -75,13 +78,16 @@ export class FamiliesComponent implements OnInit {
   hideModal(): void {
     this.modalVisible = false;
     this.selectedFamily = {
-      name: "", 
+      firstName: "", 
+      lastName: "",
       phoneNumber: "", 
-      members: [], 
       allergies: [],
       checkedIn: [], 
       nextAppointment: "",
-      color: ""
+      color: "",
+      minors: 0,
+      adults: 0,
+      seniors: 0
     };
     this.editMode = false;
   }

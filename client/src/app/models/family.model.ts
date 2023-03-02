@@ -2,8 +2,11 @@ import { Member } from "./member.model";
 
 export interface Family {
     phoneNumber: string;
-    name: string;
-    members: Member[];
+    firstName: string;
+    lastName: string;
+    minors: number;
+    adults: number;
+    seniors: number;
     allergies: string[];
     checkedIn: string[];
     nextAppointment: string;

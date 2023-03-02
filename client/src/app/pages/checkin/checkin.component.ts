@@ -48,7 +48,7 @@ export class CheckinComponent implements OnInit {
     this.isValidFormSubmitted = true;  
     this.familyService.updateFamily(this.user.mobileNumber).then(response => {
       this.family = this.familyService.getFamily();
-      if(this.family.name == "") {
+      if(this.family.lastName == "") {
         this.router.navigate(['new-registration'])
       } else {
         var today = new Date();

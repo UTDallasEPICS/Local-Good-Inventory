@@ -54,6 +54,7 @@ export class SettingsComponent implements OnInit {
 
   updateSettings() {
     this.settingsService.postSettings(this.settings);
+    console.log("Changes Saved");
     //window.alert(this.settings.startTime);
     //console.log(this.settings.startTime);
   }

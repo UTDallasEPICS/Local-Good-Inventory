@@ -1,5 +1,5 @@
 <div class="section">
-    <div class="tabs is-large is-toggle">
+    <div class="tabs is-medium is-boxed">
         <ul>
             <li [ngClass]="page.active?'is-active':'has-background-white'" *ngFor="let page of pages; let i = index" id="page{{i}}"><a (click)="setActive(i)">{{page.page}}</a></li>
         </ul>
@@ -17,4 +17,10 @@
     <div *ngIf="pages[3].active" class="card">
         <app-appointments></app-appointments>
     </div>
+    <div *ngIf="pages[4].active" class="card">
+      <app-export></app-export>
+    </div>
+    <div *ngIf="pages[5].active" class="card">
+      <app-events></app-events>
+  </div>
 </div>

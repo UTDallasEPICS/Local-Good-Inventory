@@ -41,6 +41,7 @@ app.use(cors({
   methods: 'GET, POST, PATCH, DELETE, OPTIONS'
 }))
 
+
 app.use(jwtCheck);
 app.use(bodyParser.json());
 
@@ -78,8 +79,11 @@ app.post('/family', (req, res) => {
   if(req.query.phoneNumber) {
     const query = { phoneNumber: req.query.phoneNumber };
     const newValue = { $set: { 
-      name: req.body.name,
-      members: req.body.members,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      minors: req.body.minors,
+      adults: req.body.adults,
+      seniors: req.body.seniors,
       allergies: req.body.allergies,
       phoneNumber: req.body.phoneNumber,
       checkedIn: req.body.checkedIn,
@@ -92,17 +96,6 @@ app.post('/family', (req, res) => {
       reportsCollection.updateOne(reportsQuery, {$set: {}}, {upsert: true});
       console.log("DEBUG: Updated reports collection");
       familiesCollection.findOne(query).then((family) => {
-        var numberOfClients = 0, numberOfYouth = 0, numberOfSeniors = 0;
-        family.members.forEach(member => { //Get how many family members in each age group 
-          switch(member.age) {
-            case '0-17': numberOfYouth++;
-              break;
-            case '18-59': numberOfClients++;
-              break;
-            case '60+': numberOfSeniors++;
-              break;
-          }
-        });
         console.log(`DEBUG: family.checkedIn.size == ${family.checkedIn.length}`);
         console.log(`DEBUG: Previous checkin: ${family.checkedIn[family.checkedIn.length - 1]}`);
         if(family.checkedIn.length == 0) { //Case: Family has never checked in before
@@ -111,9 +104,9 @@ app.post('/family', (req, res) => {
               households: 1,
               individualHouseholds: 1,
               newHouseholds: 1,
-              numberOfClients: numberOfClients,
-              numberOfYouth: numberOfYouth,
-              numberOfSeniors: numberOfSeniors
+              numberOfClients: req.body.adults,
+              numberOfYouth: req.body.minors,
+              numberOfSeniors: req.body.seniors
             }}
           );
         } else if (
@@ -130,9 +123,9 @@ app.post('/family', (req, res) => {
             {$inc: {
               households: 1,
               individualHouseholds: 1,
-              numberOfClients: numberOfClients,
-              numberOfYouth: numberOfYouth,
-              numberOfSeniors: numberOfSeniors
+              numberOfClients: req.body.adults,
+              numberOfYouth: req.body.minors,
+              numberOfSeniors: req.body.seniors
             }}
           );
         }
@@ -234,5 +227,5 @@ app.get('/report', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}`)
+    console.log(`Listening at http://localhost:${port}`)  
 })
