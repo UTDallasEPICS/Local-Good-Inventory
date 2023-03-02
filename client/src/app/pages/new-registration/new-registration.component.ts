@@ -15,13 +15,16 @@ export class NewRegistrationComponent implements OnInit {
   dietaryRestrictions = Constants.dietaryRestrictions;
 
   family: Family = {
-    name: "", 
+    firstName: "", 
+    lastName: "",
     phoneNumber: "", 
-    members: [{name: "", age: "", lastName: ""}], 
     allergies: [],
     checkedIn: [], 
     nextAppointment: "",
-    color: ""
+    color: "",
+    minors: 0,
+    adults: 0,
+    seniors: 0
   };
 
   constructor(private familyService: FamilyService, private router: Router) { }
@@ -35,11 +38,11 @@ export class NewRegistrationComponent implements OnInit {
   }
 
   addMember() {
-    this.family.members.push({name: "", age: "", lastName: ""})
+    //this.family.members.push({name: "", age: "", lastName: ""})
   }
 
   removeMember(index: number) {
-    this.family.members.splice(index,1);
+    //this.family.members.splice(index,1);
   }
 
   updateRestriction(restriction: string) {

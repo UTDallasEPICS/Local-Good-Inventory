@@ -12,6 +12,10 @@
     padding-right: 5px;
 }
 
+tbody:hover {
+    cursor: pointer;
+}
+
 form {
     margin-bottom: 20px;
 }
