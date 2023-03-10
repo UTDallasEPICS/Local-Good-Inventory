@@ -3,7 +3,6 @@ import { Appointment } from 'src/app/models/appointment.model';
 import { Family } from 'src/app/models/family.model';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { FamilyService } from 'src/app/services/family.service';
-import { FamilyOrMemberComponent } from '../../Family-or-Member/family-or-member.component';
 
 @Component({
   selector: 'app-appointments',

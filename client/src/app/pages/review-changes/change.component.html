@@ -15,15 +15,17 @@
     <h1 class="text is-size-3">Have there been any changes in family members since your last visit?</h1>
     <div class="field is-grouped">
         <div class="control">
-            <a routerLink="/family-edit">
-                 <button class="button is-link is-large">Yes</button>
+            <a>
+                 <button class="button is-link is-large" (click)="showModal()">Yes</button>
             </a>
         </div>
         <div class="control">
-             <a routerLink="/appointment">
-                <button class="button is-link is-light is-large">No</button>
+             <a>
+                <button class="button is-link is-light is-large" (click)="navigate()">No</button>
              </a>
         </div>
     </div>
 </div>
+
+<app-family-info [(modalVisible)]="modalVisible" [callback]="navigate"></app-family-info>
 
