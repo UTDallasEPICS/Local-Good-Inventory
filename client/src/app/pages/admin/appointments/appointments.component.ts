@@ -37,8 +37,10 @@ export class AppointmentsComponent implements OnInit {
       this.times.push(slot.time);
       var familyArray: Family[] = []
       for await(var phoneNumber of slot.phoneNumber) {
-        var family = await this.familyService.pullFamily(phoneNumber);
-        familyArray.push(family);
+        if(phoneNumber != null) {
+          var family = await this.familyService.pullFamily(phoneNumber);
+          familyArray.push(family);
+        }
       }
       this.families.set(slot.time, familyArray);
     }
