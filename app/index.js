@@ -20,6 +20,7 @@ const familiesCollection = mongoClient.db('LocalGoodCenter').collection('Familie
 const appointmentsCollection = mongoClient.db('LocalGoodCenter').collection('Appointments');
 const settingsCollection = mongoClient.db('LocalGoodCenter').collection('Settings');
 const reportsCollection = mongoClient.db('LocalGoodCenter').collection('Reports');
+const eventsCollection = mongoClient.db('LocalGoodCenter').collection('Events');
 
 
 const jwtCheck = jwt({
@@ -220,6 +221,22 @@ app.get('/report', (req, res) => {
       res.status(200).json({
         report
       });
+    });
+  } else {
+    res.status(404);
+  }
+});
+
+app.get('/event', (req, res) => {
+  if(req.query.id) {
+    const query = { _id: req.query.id }
+    eventsCollection.findOne(query).then((res, err) => {
+      if(err) {
+        console.log(`ERROR: ${err}`)
+        res.status(400);
+      } else {
+        res.status(200).json({res});
+      }
     });
   } else {
     res.status(404);
