@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class FamilyEditComponent implements OnInit {
 
-    family: Family = {firstName: "", lastName: "", phoneNumber: "", allergies: [], checkedIn: [], nextAppointment: "", color:"", minors: 0, adults: 0, seniors: 0};
+    family: Family = {firstName: "", lastName: "", phoneNumber: "", allergies: [], checkedIn: [], nextAppointment: [], color:"", minors: 0, adults: 0, seniors: 0};
     private familySubscription: Subscription = new Subscription;
 
     public restrictionsVisble = false;
