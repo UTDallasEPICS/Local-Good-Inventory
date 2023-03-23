@@ -123,6 +123,8 @@ export class AppointmentComponent implements OnInit {
       })
     }
 
+
+    this.appointment.event_id="640a50682157dc05a74ea096"; //update event_id
     console.log(`TIME SELECTED OBJECT: ${slotExists}\nTime: ${time}\nPhone Number ${this.family.phoneNumber}`);
     console.log(this.appointment);
   }
@@ -130,8 +132,7 @@ export class AppointmentComponent implements OnInit {
 
   updateAppointment() {
     this.family = this.familyService.getFamily();
-    this.family.nextAppointment =
-      this.nextAppointment + this.nextAppointmentTime;
+    this.family.nextAppointment.push({id: "640a50682157dc05a74ea096" , date: this.nextAppointment + this.nextAppointmentTime});//update event__id
     this.familyService.postFamily(this.family);
     this.appointmentService.postAppointment(this.appointment);
     window.alert('Appointment successfully booked for ' + this.family.nextAppointment);
