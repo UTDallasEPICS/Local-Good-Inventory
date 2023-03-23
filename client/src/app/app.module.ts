@@ -22,7 +22,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 import { NewRegistrationComponent } from './pages/new-registration/new-registration.component';
 import { CommonModule } from '@angular/common';
-import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
+import { CheckinCompleteComponent } from './pages/events-check-in/checkin-complete.component';
 import { DietaryPageComponent } from './pages/dietary-page/dietary-page.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { SettingsComponent } from './pages/admin/settings/settings.component';

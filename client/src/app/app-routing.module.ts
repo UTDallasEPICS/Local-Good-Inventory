@@ -9,7 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AppointmentComponent } from './pages/Appointment/appointment.component'; 
 import { ReviewChangesComponent } from './pages/review-changes/change.component';
 import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
-import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
+import { CheckinCompleteComponent } from './pages/events-check-in/checkin-complete.component';
 import { DietaryPageComponent } from './pages/dietary-page/dietary-page.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
@@ -25,7 +25,7 @@ const routes: Routes = [
   {path:'removefamilymember', component:RemoveFamilyMemberComponent},
   {path:'changememberinfo1', component:ChangeMemberInfo1Component},
   {path:'new-registration', component:NewRegistrationComponent},
-  {path:'checkin-complete', component:CheckinCompleteComponent},
+  {path:'events-check-in', component:CheckinCompleteComponent},
   {path: 'dietary-page', component:DietaryPageComponent},
   {path:'admin', component:AdminComponent},
   {path:'family-edit', component:FamilyEditComponent}
