@@ -46,7 +46,8 @@ export class AppointmentService {
               date: +date.split('-')[2],
               month: +date.split('-')[1],
               year: +date.split('-')[0],
-              timeslots: []
+              timeslots: [],
+              event_id: ""
             }
           }
           console.log("Object Returned from Function: ")

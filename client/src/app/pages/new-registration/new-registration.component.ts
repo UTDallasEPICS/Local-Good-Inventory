@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Family } from 'src/app/models/family.model';
-import { Member } from 'src/app/models/member.model';
+//import { Member } from 'src/app/models/member.model';
 import { FamilyService } from 'src/app/services/family.service';
 import * as Constants from 'src/app/models/constants.model';
 
@@ -20,7 +20,7 @@ export class NewRegistrationComponent implements OnInit {
     phoneNumber: "", 
     allergies: [],
     checkedIn: [], 
-    nextAppointment: "",
+    nextAppointment: [],
     color: "",
     minors: 0,
     adults: 0,

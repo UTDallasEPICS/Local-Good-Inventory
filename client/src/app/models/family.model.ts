@@ -1,4 +1,4 @@
-import { Member } from "./member.model";
+//import { Member } from "./member.model";
 
 export interface Family {
     phoneNumber: string;
@@ -8,7 +8,8 @@ export interface Family {
     adults: number;
     seniors: number;
     allergies: string[];
-    checkedIn: string[];
-    nextAppointment: string;
+    checkedIn: {id: string, date: string}[];
+    nextAppointment: {id: string, date: string}[];
     color: string;
+    //events: string[];
 }

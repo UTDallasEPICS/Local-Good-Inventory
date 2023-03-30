@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { Family } from 'src/app/models/family.model';
 import { FamilyService } from 'src/app/services/family.service';
@@ -11,10 +12,12 @@ import { FamilyService } from 'src/app/services/family.service';
 })
 export class ReviewChangesComponent implements OnInit {
 
+  modalVisible: boolean = false;
+
   family: Family = {} as Family;
   private familySubscription: Subscription = new Subscription;
 
-  constructor(public familyService: FamilyService) { }
+  constructor(public familyService: FamilyService, private router: Router) { }
 
   ngOnInit() {
     this.family = this.familyService.getFamily();
@@ -26,6 +29,14 @@ export class ReviewChangesComponent implements OnInit {
 
   ngOnDestroy() {
     this.familySubscription.unsubscribe();
+  }
+
+  showModal() {
+    this.modalVisible = true;
+  }
+
+  navigate() {
+    this.router.navigate(['/appointment'])
   }
 
 }

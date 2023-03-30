@@ -14,24 +14,20 @@ import { CheckinComponent } from './pages/checkin/checkin.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { NewFamilyMemberComponent } from './pages/New-Family-Member/newfamilymember.component';
-import { ChangeMemberInfo1Component } from './pages/Change-Member-Info1/changememberinfo1.component';
-import { FamilyOrMemberComponent } from './pages/Family-or-Member/family-or-member.component';
-import { AppointmentComponent } from './pages/Appointment/appointment.component';
+import { AppointmentComponent } from './pages/appointment/appointment.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
-import { RemoveFamilyMemberComponent } from './pages/Removing-Family-Member/removefamilymember.component';
 import { NewRegistrationComponent } from './pages/new-registration/new-registration.component';
 import { CommonModule } from '@angular/common';
-import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-complete.component';
+import { CheckinCompleteComponent } from './pages/events-check-in/checkin-complete.component';
 import { DietaryPageComponent } from './pages/dietary-page/dietary-page.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { SettingsComponent } from './pages/admin/settings/settings.component';
 import { FamiliesComponent } from './pages/admin/families/families.component';
 import { StatsComponent } from './pages/admin/stats/stats.component';
-import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
 import { AppointmentsComponent } from './pages/admin/appointments/appointments.component';
 import { ExportComponent } from './pages/admin/export/export.component';
 import { EventsComponent } from './pages/admin/events/events.component';
+import { FamilyInfoComponent } from './components/family-info/family-info.component';
 
 
 @NgModule({
@@ -44,10 +40,6 @@ import { EventsComponent } from './pages/admin/events/events.component';
     CheckinComponent,
     AppointmentComponent,
     DatepickerComponent,
-    NewFamilyMemberComponent,
-    ChangeMemberInfo1Component,
-    FamilyOrMemberComponent,
-    RemoveFamilyMemberComponent,
     NewRegistrationComponent,
     CheckinCompleteComponent,
     DietaryPageComponent,
@@ -55,10 +47,10 @@ import { EventsComponent } from './pages/admin/events/events.component';
     SettingsComponent,
     FamiliesComponent,
     StatsComponent,
-    FamilyEditComponent,
     AppointmentsComponent,
     ExportComponent,
-    EventsComponent
+    EventsComponent,
+    FamilyInfoComponent
   ],
   imports: [
     BrowserModule,

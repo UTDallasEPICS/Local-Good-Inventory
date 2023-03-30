@@ -3,7 +3,6 @@ import { Appointment } from 'src/app/models/appointment.model';
 import { Family } from 'src/app/models/family.model';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { FamilyService } from 'src/app/services/family.service';
-import { FamilyOrMemberComponent } from '../../Family-or-Member/family-or-member.component';
 
 @Component({
   selector: 'app-appointments',
@@ -38,8 +37,10 @@ export class AppointmentsComponent implements OnInit {
       this.times.push(slot.time);
       var familyArray: Family[] = []
       for await(var phoneNumber of slot.phoneNumber) {
-        var family = await this.familyService.pullFamily(phoneNumber);
-        familyArray.push(family);
+        if(phoneNumber != null) {
+          var family = await this.familyService.pullFamily(phoneNumber);
+          familyArray.push(family);
+        }
       }
       this.families.set(slot.time, familyArray);
     }
