@@ -3,5 +3,6 @@ export interface Event {
   eventName: string,
   time: string,
   info: string,
-  dates: string[]
+  dates: string[],
+  display: boolean
 }

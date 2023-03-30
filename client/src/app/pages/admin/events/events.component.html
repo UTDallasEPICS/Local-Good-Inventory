@@ -1,11 +1,11 @@
 <div id="event-container">
   <div class = "left-div">
     <!-- Event Image -->
-    <img src = "https://images.squarespace-cdn.com/content/v1/605de134d463f363dd19bd79/1675294553912-NK277AIQWG55L64M8TTR/Screenshot+2023-02-01+at+17.35.17.png?format=1000w"
+    <img id = "event-image" src = "https://images.squarespace-cdn.com/content/v1/605de134d463f363dd19bd79/1675294553912-NK277AIQWG55L64M8TTR/Screenshot+2023-02-01+at+17.35.17.png?format=1000w"
     alt = "CookingClass">
     <br>
     <!-- Button to change Image that is shown-->
-    <input type="file" id="image-input" onchange="updateImage()">
+    <input type="file" id="image-input" onclick="updateImage()">
   </div>
 
   <div class = "right-div" contenteditable="false">
@@ -28,6 +28,9 @@
     <p>
       Week 4: February 28
     </p>
+
+    <button class="button is-rounded"  (click)="toggleButton()">Display</button>
+
   </div>
 
 </div>
