@@ -238,11 +238,21 @@ app.get('/event', (req, res) => {
         res.status(200).json({res});
       }
     });
+  } else if(req.query.date) {
+    const query = { dates: {$gt: date} }
+    eventsCollection.find(query).then((res, err) => {
+      if(err) {
+        console.log(`ERROR: ${err}`);
+        res.status(400);
+      } else {
+        res.status(200).json({res});
+      }
+    });
   } else {
     res.status(404);
   }
 });
 
-app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}`)  
+app.listen(port, async () => {
+    console.log(`Listening at http://localhost:${port}`) 
 })

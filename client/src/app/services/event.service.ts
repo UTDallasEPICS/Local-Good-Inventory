@@ -45,6 +45,23 @@ export class EventService {
     return promiseToken;
   }
 
+  getFutureEvents() {
+    const promiseToken = new Promise((resolve, reject) => {
+      this.http
+        .get<{ events: Event[] }>(
+          `${environment.API_URL}/event?date=${new Date()}`,
+          {
+            headers: { Authorization: 'Bearer ' + this.accessToken }
+          }
+        )
+        .subscribe((res) => {
+          resolve(res.events);
+        });
+    });
+    //console.log(this.settings);
+    return promiseToken;
+  } 
+
   postReport(event: Event) {
     this.http.post(
       `${environment.API_URL}/event`, 
