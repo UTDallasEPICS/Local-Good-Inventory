@@ -9,6 +9,7 @@ const { expressjwt: jwt } = require('express-jwt');
 var jwks = require('jwks-rsa');
 const cors = require('cors')
 const { MongoClient } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 const bodyParser = require('body-parser');
 
 const port = process.env.PORT;
@@ -229,23 +230,25 @@ app.get('/report', (req, res) => {
 
 app.get('/event', (req, res) => {
   if(req.query.id) {
-    const query = { _id: req.query.id }
-    eventsCollection.findOne(query).then((res, err) => {
+    const query = { _id: ObjectId(req.query.id) }
+    eventsCollection.findOne(query).then((event, err) => {
       if(err) {
         console.log(`ERROR: ${err}`)
         res.status(400);
       } else {
-        res.status(200).json({res});
+        res.status(200).json({event});
+        console.log(event);
       }
     });
   } else if(req.query.date) {
     const query = { dates: {$gt: date} }
-    eventsCollection.find(query).then((res, err) => {
+    eventsCollection.find(query).then((event, err) => {
       if(err) {
         console.log(`ERROR: ${err}`);
         res.status(400);
       } else {
-        res.status(200).json({res});
+        res.status(200).json({event});
+        console.log(event);
       }
     });
   } else {
