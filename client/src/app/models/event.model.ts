@@ -5,4 +5,7 @@ export interface Event {
   info: string;
   dates: string[];
   id: string;
+  display: boolean;
+  reservationRequired: boolean;
+  formURL: string;
 }

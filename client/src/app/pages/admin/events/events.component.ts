@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { Event } from 'src/app/models/event.model';
+=======
+import { EventService } from 'src/app/services/event.service';
+>>>>>>> dev
 
 @Component({
   selector: 'app-events',
@@ -8,9 +12,13 @@ import { Event } from 'src/app/models/event.model';
 })
 export class EventsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
+  }
+
+  getEvent(id: string) {
+    this.eventService.retrieveEvent(id);
   }
 
   updateImage(){
