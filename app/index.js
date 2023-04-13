@@ -1,5 +1,6 @@
 /*  This folder/file is for the server. The server handles hosting the website
  *  as well as connecting to the database.
+how to scrape data from a website using JS
  */
 
 require('dotenv').config();

@@ -23,6 +23,10 @@
     "express": "^4.17.3",
     "express-jwt": "^8.2.1",
     "jwks-rsa": "^3.0.0",
-    "mongodb": "^4.4.1"
+    "mongodb": "^4.4.1",
+    "selenium-webdriver": "^4.8.1"
+  },
+  "devDependencies": {
+    "chromedriver": "^110.0.0"
   }
 }
