@@ -7,7 +7,7 @@
         <table *ngIf="!loading">
             <tr *ngFor="let time of times; let i = index;">
                 <td>{{time}}</td>
-                <td *ngFor="let family of families.get(time)">{{family.name}}<br/>{{family.phoneNumber}}</td>
+                <td *ngFor="let family of families.get(time)">{{family.lastName}}<br/>{{family.phoneNumber}}</td>
             </tr>
         </table>
     </div>

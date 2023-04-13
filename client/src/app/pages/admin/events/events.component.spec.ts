@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RemoveFamilyMemberComponent } from './removefamilymember.component';
+import { EventsComponent } from './events.component';
 
-describe('Appointment2Component', () => {
-  let component: RemoveFamilyMemberComponent;
-  let fixture: ComponentFixture<RemoveFamilyMemberComponent>;
+describe('EventsComponent', () => {
+  let component: EventsComponent;
+  let fixture: ComponentFixture<EventsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RemoveFamilyMemberComponent ]
+      declarations: [ EventsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RemoveFamilyMemberComponent);
+    fixture = TestBed.createComponent(EventsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

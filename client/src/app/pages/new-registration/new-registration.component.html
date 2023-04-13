@@ -7,11 +7,11 @@
             <div class="field">
                 <label class="label">Name</label>
                 <div class="control has-icons-left">
-                <input class="input" type="text" name="hname" [(ngModel)]="family.members[0].name" placeholder="First Name">
+                <input class="input" type="text" name="hname" [(ngModel)]="family.firstName" placeholder="First Name">
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
-                <input class = "input ml-5" type="text" name="lname" [(ngModel)]="family.name" placeholder="Last Name">
+                <input class = "input ml-5" type="text" name="lname" [(ngModel)]="family.lastName" placeholder="Last Name">
                 </div>
             </div>
             
@@ -28,31 +28,21 @@
             
             <div class="field">
                 <label class="label">Family Members</label>
-                <div *ngFor="let member of family.members; let i = index">
-                    <div class="field">
-                        <input class="input" type="text" name="{{'fname' + i}}" [(ngModel)]="member.name" placeholder="First Name">
-                        <input class="input" type="text" name="{{'Lname' + i}}" [(ngModel)]="member.lastName" placeholder="Last Name">
-                        <br>
-                        <label><strong>Age:</strong></label>
-
-                        <label class ="radio" for="{{'0-17' + i}}">
-                            <input id="{{'0-17' + i}}" type="radio" value="0-17" name="{{'age' + i}}" required [(ngModel)]="member.age">
-                            0-17
-                        </label>
-                        <label class ="radio" for="{{'18-59' + i}}">
-                            <input id="{{'18-59' + i}}" type="radio" value="18-59" name="{{'age' + i}}" required [(ngModel)]="member.age">
-                            18-59
-                        </label>
-                        <label class ="radio" for="{{'60+' + i}}">
-                            <input id="{{'60+' + i}}" type="radio" value="60+" name="{{'age' + i}}" required [(ngModel)]="member.age">
-                            60+
-                        </label>
-
-                        <button *ngIf="i != 0" class="button" (click)="removeMember(i)">-</button>
-
+                <div class="columns">
+                    <div class="column">
+                        <label class="label">Age 0-17</label>
+                        <input class="input" type="number" name="numMinors" [(ngModel)]="family.minors">
+                    </div>
+                    <div class="column">
+                        <label class="label">Age 18-59</label>
+                        <input class="input" type="number" name="numAdults" [(ngModel)]="family.adults">
+                    </div>
+                    <div class="column">
+                        <label class="label">Age 60+</label>
+                        <input class="input" type="number" name="numSeniors" [(ngModel)]="family.seniors">
                     </div>
                 </div>
-                <button class="button" (click)="addMember()">+</button>
+                
             </div>
             
             <div class="field">

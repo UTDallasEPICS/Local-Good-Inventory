@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FamilyOrMemberComponent } from './family-or-member.component';
+import { ExportComponent } from './export.component';
 
-describe('FamilyOrMemberComponent', () => {
-  let component: FamilyOrMemberComponent;
-  let fixture: ComponentFixture<FamilyOrMemberComponent>;
+describe('ExportComponent', () => {
+  let component: ExportComponent;
+  let fixture: ComponentFixture<ExportComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FamilyOrMemberComponent ]
+      declarations: [ ExportComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FamilyOrMemberComponent);
+    fixture = TestBed.createComponent(ExportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

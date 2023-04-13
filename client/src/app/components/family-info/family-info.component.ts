@@ -1,17 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Family } from 'src/app/models/family.model';
 import * as Constants from 'src/app/models/constants.model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '@auth0/auth0-angular';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Component({
-  selector: 'app-families',
-  templateUrl: './families.component.html',
-  styleUrls: ['./families.component.css']
+  selector: 'app-family-info',
+  templateUrl: './family-info.component.html',
+  styleUrls: ['./family-info.component.css']
 })
-export class FamiliesComponent implements OnInit {
+export class FamilyInfoComponent implements OnInit {
+
+  @Input() modalVisible: boolean = false;
+  @Output() modalVisibleChange = new EventEmitter();
+
+  @Input() isAdmin: boolean = false;
+
+  @Input() callback: (() => void) | undefined;
 
   dietaryRestrictions = Constants.dietaryRestrictions;
 
@@ -34,62 +42,18 @@ export class FamiliesComponent implements OnInit {
 
   nextAppointmentFormatted: Date = new Date();
 
-  modalVisible = false;
   editMode = false;
   restrictionsVisble = false;
 
   private accessToken: string = "";
-
-  constructor(private http: HttpClient, private auth: AuthService) { 
+  
+  constructor(private http: HttpClient, private auth: AuthService, private router: Router) { 
     auth.getAccessTokenSilently().subscribe(token => {
       this.accessToken = token;
     })
   }
 
   ngOnInit(): void {
-    this.auth.getAccessTokenSilently().subscribe(token => {
-      this.http.get<{families: Family[]}>(
-        `${environment.API_URL}/family`,
-        {
-          headers: { Authorization: 'Bearer ' + token }
-        })
-        .subscribe((families) => {
-            this.families = families.families;
-            this.filteredFamilies = families.families.filter(t=>t);
-        });
-    })
-  }
-
-  updateFilter(): void {
-
-  }
-
-  showModal(number: string): void {
-    this.families.forEach((family) => {
-      if(family.phoneNumber == number) {
-        this.selectedFamily = family;
-        this.nextAppointmentFormatted = new Date(this.selectedFamily.nextAppointment[0].date);
-      }
-    })
-
-    this.modalVisible = true;
-  }
-
-  hideModal(): void {
-    this.modalVisible = false;
-    this.selectedFamily = {
-      firstName: "", 
-      lastName: "",
-      phoneNumber: "", 
-      allergies: [],
-      checkedIn: [], 
-      nextAppointment: [],
-      color: "",
-      minors: 0,
-      adults: 0,
-      seniors: 0
-    };
-    this.editMode = false;
   }
 
   updateFamily(): void {
@@ -129,7 +93,39 @@ export class FamiliesComponent implements OnInit {
         })
         .subscribe();
     }
+  }
+
+  showModal(number: string): void {
+    this.families.forEach((family) => {
+      if(family.phoneNumber == number) {
+        this.selectedFamily = family;
+        this.nextAppointmentFormatted = new Date(this.selectedFamily.nextAppointment[-1].date);
+      }
+    })
+
+    this.modalVisible = true;
+    this.modalVisibleChange.emit(this.modalVisible);
+  }
+
+  hideModal(): void {
     this.modalVisible = false;
+    this.selectedFamily = {
+      firstName: "", 
+      lastName: "",
+      phoneNumber: "", 
+      allergies: [],
+      checkedIn: [], 
+      nextAppointment: [],
+      color: "",
+      minors: 0,
+      adults: 0,
+      seniors: 0
+    };
+    this.editMode = false;
+    this.modalVisibleChange.emit(this.modalVisible);
+    if(this.callback != undefined) {
+      this.callback();
+    }
   }
 
 }

@@ -48,14 +48,14 @@ export class CheckinComponent implements OnInit {
     this.isValidFormSubmitted = true;  
     this.familyService.updateFamily(this.user.mobileNumber).then(response => {
       this.family = this.familyService.getFamily();
-      if(this.family.name == "") {
+      if(this.family.lastName == "") {
         this.router.navigate(['new-registration'])
       } else {
         var today = new Date();
         console.log(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
-        this.family.checkedIn.push(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
-        this.familyService.postFamilyDate(this.family, this.family.checkedIn[this.family.checkedIn.length - 1]);
-        this.router.navigate(['/review']);
+        this.family.checkedIn.push({id: "640a50682157dc05a74ea096", date: formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST')});
+        this.familyService.postFamilyDate(this.family, this.family.checkedIn[this.family.checkedIn.length - 1].date);
+        this.router.navigate(['/events-check-in']);
       }
     });
     

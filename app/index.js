@@ -10,6 +10,7 @@ const { expressjwt: jwt } = require('express-jwt');
 var jwks = require('jwks-rsa');
 const cors = require('cors')
 const { MongoClient } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 const bodyParser = require('body-parser');
 
 const port = process.env.PORT;
@@ -21,6 +22,7 @@ const familiesCollection = mongoClient.db('LocalGoodCenter').collection('Familie
 const appointmentsCollection = mongoClient.db('LocalGoodCenter').collection('Appointments');
 const settingsCollection = mongoClient.db('LocalGoodCenter').collection('Settings');
 const reportsCollection = mongoClient.db('LocalGoodCenter').collection('Reports');
+const eventsCollection = mongoClient.db('LocalGoodCenter').collection('Events');
 
 
 const jwtCheck = jwt({
@@ -41,6 +43,7 @@ app.use(cors({
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   methods: 'GET, POST, PATCH, DELETE, OPTIONS'
 }))
+
 
 app.use(jwtCheck);
 app.use(bodyParser.json());
@@ -79,8 +82,11 @@ app.post('/family', (req, res) => {
   if(req.query.phoneNumber) {
     const query = { phoneNumber: req.query.phoneNumber };
     const newValue = { $set: { 
-      name: req.body.name,
-      members: req.body.members,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      minors: req.body.minors,
+      adults: req.body.adults,
+      seniors: req.body.seniors,
       allergies: req.body.allergies,
       phoneNumber: req.body.phoneNumber,
       checkedIn: req.body.checkedIn,
@@ -93,17 +99,6 @@ app.post('/family', (req, res) => {
       reportsCollection.updateOne(reportsQuery, {$set: {}}, {upsert: true});
       console.log("DEBUG: Updated reports collection");
       familiesCollection.findOne(query).then((family) => {
-        var numberOfClients = 0, numberOfYouth = 0, numberOfSeniors = 0;
-        family.members.forEach(member => { //Get how many family members in each age group 
-          switch(member.age) {
-            case '0-17': numberOfYouth++;
-              break;
-            case '18-59': numberOfClients++;
-              break;
-            case '60+': numberOfSeniors++;
-              break;
-          }
-        });
         console.log(`DEBUG: family.checkedIn.size == ${family.checkedIn.length}`);
         console.log(`DEBUG: Previous checkin: ${family.checkedIn[family.checkedIn.length - 1]}`);
         if(family.checkedIn.length == 0) { //Case: Family has never checked in before
@@ -112,9 +107,9 @@ app.post('/family', (req, res) => {
               households: 1,
               individualHouseholds: 1,
               newHouseholds: 1,
-              numberOfClients: numberOfClients,
-              numberOfYouth: numberOfYouth,
-              numberOfSeniors: numberOfSeniors
+              numberOfClients: req.body.adults,
+              numberOfYouth: req.body.minors,
+              numberOfSeniors: req.body.seniors
             }}
           );
         } else if (
@@ -131,9 +126,9 @@ app.post('/family', (req, res) => {
             {$inc: {
               households: 1,
               individualHouseholds: 1,
-              numberOfClients: numberOfClients,
-              numberOfYouth: numberOfYouth,
-              numberOfSeniors: numberOfSeniors
+              numberOfClients: req.body.adults,
+              numberOfYouth: req.body.minors,
+              numberOfSeniors: req.body.seniors
             }}
           );
         }
@@ -234,6 +229,52 @@ app.get('/report', (req, res) => {
   }
 });
 
-app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}`)
+app.post('/event', (req, res) => {
+  console.log("Event Posted");
+  const newValue = { $set: {
+    imageURL: req.body.imageURL,
+    eventName: req.body.eventName,
+    time: req.body.time,
+    info: req.body.info,
+    dates: req.body.dates,
+    display: req.body.display,
+    reservationRequired: req.body.reservationRequired,
+    formURL: req.body.formURL
+  } };
+  const query = {};
+  settingsCollection.updateOne(query, newValue, {upsert: true});
+  res.status(201);
+  console.log("Post Event Successful");
+});
+
+app.get('/event', (req, res) => {
+  if(req.query.id) {
+    const query = { _id: ObjectId(req.query.id) }
+    eventsCollection.findOne(query).then((event, err) => {
+      if(err) {
+        console.log(`ERROR: ${err}`)
+        res.status(400);
+      } else {
+        res.status(200).json({event});
+        console.log(event);
+      }
+    });
+  } else if(req.query.date) {
+    const query = { dates: {$gt: req.query.date} }
+    eventsCollection.find(query).toArray().then((events, err) => {
+      if(err) {
+        console.log(`ERROR: ${err}`);
+        res.status(400);
+      } else {
+        res.status(200).json({events});
+        console.log(events);
+      }
+    });
+  } else {
+    res.status(404);
+  }
+});
+
+app.listen(port, async () => {
+    console.log(`Listening at http://localhost:${port}`) 
 })

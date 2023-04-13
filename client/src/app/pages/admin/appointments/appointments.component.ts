@@ -3,7 +3,6 @@ import { Appointment } from 'src/app/models/appointment.model';
 import { Family } from 'src/app/models/family.model';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { FamilyService } from 'src/app/services/family.service';
-import { FamilyOrMemberComponent } from '../../Family-or-Member/family-or-member.component';
 
 @Component({
   selector: 'app-appointments',
@@ -38,14 +37,33 @@ export class AppointmentsComponent implements OnInit {
       this.times.push(slot.time);
       var familyArray: Family[] = []
       for await(var phoneNumber of slot.phoneNumber) {
-        var family = await this.familyService.pullFamily(phoneNumber);
-        familyArray.push(family);
+        if(phoneNumber != null) {
+          var family = await this.familyService.pullFamily(phoneNumber);
+          familyArray.push(family);
+        }
       }
       this.families.set(slot.time, familyArray);
     }
-    this.times.sort();
+    this.times.sort(this.sortTimes);
     this.ref.markForCheck();
+    console.log(this.times);
     this.loading = false;
+  }
+
+  sortTimes(a: string, b: string) {
+    var hourA = parseInt(a.split(':')[0]);
+    var hourB = parseInt(b.split(':')[0]);
+
+    var minuteA = parseInt(a.split(':')[1]);
+    var minuteB = parseInt(b.split(':')[1]);
+
+    if(hourA == hourB) {
+      if(minuteA == minuteB) {
+        return 0;
+      }
+      return minuteA < minuteB ? -1 : 1;
+    }
+    return hourA < hourB ? -1 : 1;
   }
 
 }

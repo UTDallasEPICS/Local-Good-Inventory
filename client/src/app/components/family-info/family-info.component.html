@@ -1,0 +1,83 @@
+<div class="modal" [class.is-active]="modalVisible">
+    <div class="modal-background" (click)="hideModal()"></div>
+    <div class="modal-content" style="overflow:visible !important;">
+        <div class="box">
+            <form #f="ngForm">
+                <h1 class="title">{{selectedFamily.lastName}} Family</h1>
+                <fieldset [disabled]="!editMode">
+                    <label>
+                        Name
+                    </label>
+                    <div class="columns">
+                        <div class="column">
+                            <input class="input" type="text" name="firstName" placeholder="First Name" [(ngModel)]="selectedFamily.firstName">
+                        </div>
+                        <div class="column">
+                            <input class="input" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="selectedFamily.lastName">
+                        </div>
+                    </div>
+                    <label>
+                        Number of Members:
+                    </label>
+                    <div class="columns">
+                        <div class="column">
+                            <label>0-17</label>
+                            <input class="input" type="number" name="numMinors" [(ngModel)]="selectedFamily.minors">
+                        </div>
+                        <div class="column">
+                            <label>18-59</label>
+                            <input class="input" type="number" name="numAdults" [(ngModel)]="selectedFamily.adults">
+                        </div>
+                        <div class="column">
+                            <label>60+</label>
+                            <input class="input" type="number" name="numSeniors" [(ngModel)]="selectedFamily.seniors">
+                        </div>
+                    </div>
+                    <label>
+                        Phone Number
+                    </label>
+                    <input class="input" type="text" name="number" [(ngModel)]="selectedFamily.phoneNumber">
+                    <label>
+                        Allergies
+                    </label>
+                    <br>
+                    <div class="dropdown" [ngClass]="this.restrictionsVisble? 'is-active' : ''" style="z-index: 10;">
+                        <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2" (click)="this.restrictionsVisble = !this.restrictionsVisble">
+                            <span>{{this.selectedFamily.allergies.length == 0 ? "No Dietary Restrictions" : this.selectedFamily.allergies.toString()}}</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                            <div class="dropdown-content">
+                                <div *ngFor="let restriction of dietaryRestrictions; let i = index;">
+                                    <div class="dropdown-item">
+                                        <input type="checkbox" name="allergy{{i}}" (change)="updateRestriction(restriction)" [checked]="this.selectedFamily.allergies.includes(restriction)">
+                                        {{restriction}}
+                                    </div>
+                                    <!-- <hr class="dropdown-divider"> -->
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <br>
+                    <label *ngIf="isAdmin">
+                        Next Appointment
+                        <input class="input" type="datetime-local" name="nextAppointment" [(ngModel)]="selectedFamily.nextAppointment">
+                    </label>
+                    <br>
+                    <div style="display: inline-flex;" *ngIf="isAdmin">
+                        <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'colorSelected' : ''" (click)="updateColor('blue')">Blue</button>
+                        <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'colorSelected' : ''" (click)="updateColor('pink')" >Pink</button>
+                    </div>
+                </fieldset>
+            </form>
+            <br>
+            <button class="button" (click)="updateFamily()">{{editMode ? "Save" : "Edit"}}</button>
+            <button class="button" (click)="hideModal()">Close</button>
+            <button class="button is-danger" (click)="deleteFamily()" *ngIf="isAdmin">Delete</button>
+        </div>
+    </div>
+</div>
