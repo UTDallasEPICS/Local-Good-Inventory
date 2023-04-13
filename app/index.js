@@ -228,6 +228,24 @@ app.get('/report', (req, res) => {
   }
 });
 
+app.post('/event', (req, res) => {
+  console.log("Event Posted");
+  const newValue = { $set: {
+    imageURL: req.body.imageURL,
+    eventName: req.body.eventName,
+    time: req.body.time,
+    info: req.body.info,
+    dates: req.body.dates,
+    display: req.body.display,
+    reservationRequired: req.body.reservationRequired,
+    formURL: req.body.formURL
+  } };
+  const query = {};
+  settingsCollection.updateOne(query, newValue, {upsert: true});
+  res.status(201);
+  console.log("Post Event Successful");
+});
+
 app.get('/event', (req, res) => {
   if(req.query.id) {
     const query = { _id: ObjectId(req.query.id) }
@@ -241,14 +259,14 @@ app.get('/event', (req, res) => {
       }
     });
   } else if(req.query.date) {
-    const query = { dates: {$gt: date} }
-    eventsCollection.find(query).then((event, err) => {
+    const query = { dates: {$gt: req.query.date} }
+    eventsCollection.find(query).toArray().then((events, err) => {
       if(err) {
         console.log(`ERROR: ${err}`);
         res.status(400);
       } else {
-        res.status(200).json({event});
-        console.log(event);
+        res.status(200).json({events});
+        console.log(events);
       }
     });
   } else {

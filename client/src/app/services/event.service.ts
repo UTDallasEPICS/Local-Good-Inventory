@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '@auth0/auth0-angular';
+import { Event } from '../models/event.model';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
@@ -27,7 +28,7 @@ export class EventService {
   }
 
   retrieveEvent(id: string) {
-    const promiseToken = new Promise((resolve, reject) => {
+    const promiseToken = new Promise<Event>((resolve, reject) => {
       this.http
         .get<{ event: Event }>(
           `${environment.API_URL}/event?id=${id}`,
@@ -46,10 +47,10 @@ export class EventService {
   }
 
   getFutureEvents() {
-    const promiseToken = new Promise((resolve, reject) => {
+    const promiseToken = new Promise<Event[]>((resolve, reject) => {
       this.http
         .get<{ events: Event[] }>(
-          `${environment.API_URL}/event?date=${new Date()}`,
+          `${environment.API_URL}/event?date=${new Date().toISOString()}`,
           {
             headers: { Authorization: 'Bearer ' + this.accessToken }
           }

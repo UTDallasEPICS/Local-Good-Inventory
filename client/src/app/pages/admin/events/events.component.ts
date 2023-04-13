@@ -13,8 +13,9 @@ export class EventsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getEvent(id: string) {
-    this.eventService.retrieveEvent(id);
+  async getEvent(id: string) {
+    console.log(await this.eventService.retrieveEvent(id));
+    console.log(await this.eventService.getFutureEvents());
   }
 
   updateImage(){
