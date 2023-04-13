@@ -99,7 +99,7 @@ app.post('/family', (req, res) => {
       console.log("DEBUG: Updated reports collection");
       familiesCollection.findOne(query).then((family) => {
         console.log(`DEBUG: family.checkedIn.size == ${family.checkedIn.length}`);
-        console.log(`DEBUG: Previous checkin: ${family.checkedIn[family.checkedIn.length - 1]}`);
+        console.log(`DEBUG: Previous checkin: ${family.checkedIn[family.checkedIn.length - 1].date}`);
         if(family.checkedIn.length == 0) { //Case: Family has never checked in before
           reportsCollection.findOneAndUpdate(reportsQuery, 
             {$inc: {
@@ -113,8 +113,8 @@ app.post('/family', (req, res) => {
           );
         } else if (
           //If they've already checked in this month
-          family.checkedIn[family.checkedIn.length - 1].split('-')[1] == date.getMonth() + 1 &&
-          family.checkedIn[family.checkedIn.length - 1].split('-')[2] == date.getFullYear()) {
+          family.checkedIn[family.checkedIn.length - 1].date.split('-')[1] == date.getMonth() + 1 &&
+          family.checkedIn[family.checkedIn.length - 1].date.split('-')[2] == date.getFullYear()) {
             // console.log(`DEBUG: Last date: ${family.checkedIn[family.checkedIn.length - 1]}`);
             reportsCollection.findOneAndUpdate(reportsQuery, 
               {$inc: {

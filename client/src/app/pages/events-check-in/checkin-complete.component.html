@@ -1,6 +1,55 @@
-<section>
-<div>
-<b>Which events are you checking into?</b>
-
-</div>
-</section>
+<head>
+    <meta charset="UTF-8">
+    <title>Check-In Page</title>
+    <style>
+      /* CSS to style the page layout */
+      body {
+        margin: 0.5;
+        padding: 0.5;
+        font-family: italic, sans-serif;
+      }
+      .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        background-color: #28487b;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #f7ae04;
+      }
+      .image-with-text {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        color: #28487b;
+      }
+      .image-with-text img {
+        width: 200px;
+        height: 200px;
+        margin-right: 20px;
+      }
+      .image-with-text p {
+        font-size: 18px;
+        color: #28487b;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>What are you checking into?</h1>
+    </div>
+    <div class="content">
+      <div class="image-with-text">
+        <img src="https://gff.com/wp-content/uploads/2022/01/IMG_3830-scaled.jpg" alt="Market Image">
+        <a routerLink="/review">Local Good Market</a>
+      </div>
+      <div class="image-with-text">
+        <img src="https://images.squarespace-cdn.com/content/v1/605de134d463f363dd19bd79/1679931352660-Z18105QWDGT1I6L6LJ9R/Screenshot+2023-03-27+at+10.34.59.png?format=750w" alt="Events Image">
+        <p>Local Good Events</p>
+      </div>
+    </div>
+  </body>
