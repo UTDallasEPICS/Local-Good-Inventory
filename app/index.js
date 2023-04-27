@@ -242,7 +242,7 @@ app.post('/event', (req, res) => {
     formURL: req.body.formURL
   } };
   const query = {};
-  settingsCollection.updateOne(query, newValue, {upsert: true});
+  eventsCollection.updateOne(query, newValue, {upsert: true});
   res.status(201);
   console.log("Post Event Successful");
 });

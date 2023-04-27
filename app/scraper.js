@@ -5,6 +5,25 @@ const chromedriver = require('chromedriver');
 const options = new chrome.Options();
 options.addArguments('--headless');
 
+// --------------------------------------------
+require('dotenv').config();
+const express = require('express');
+const app = express();
+const { expressjwt: jwt } = require('express-jwt');
+var jwks = require('jwks-rsa');
+const cors = require('cors')
+const { MongoClient } = require('mongodb');
+const bodyParser = require('body-parser');
+
+const port = process.env.PORT;
+
+const mongoClient = new MongoClient(process.env.DB_URL)
+mongoClient.connect();
+
+const eventsCollection = mongoClient.db('LocalGoodCenter').collection('Events');
+
+// ---------------------------------------------\\
+
 (async function() {
   try {
 
@@ -19,7 +38,7 @@ options.addArguments('--headless');
 
     console.log(await driver.getTitle());
 
-    var titleElements = await driver.findElements(By.className('eventlist-title-link')); // SEMI-WORKS
+    var titleElements = await driver.findElements(By.className('eventlist-title-link')); // WORKS
     var imageElements = await driver.findElements(By.className('eventlist-thumbnail')); // WORKS
     var eventInfoElements = await driver.findElements(By.className('sqs-block html-block sqs-block-html')); // WORKS
     var timeElements = await driver.findElements(By.className('eventlist-meta-item')); //WORKS
@@ -48,7 +67,7 @@ options.addArguments('--headless');
       console.log("Title Elements: " + title);
       //await driver.sleep(20000);
     }
-  
+
     // Image for (KEEP)
     for (let element of imageElements) {
       const src = await element.getAttribute('data-src');
@@ -56,6 +75,21 @@ options.addArguments('--headless');
     }
 
     driver.quit();
+
+    for (var i = 0; i < titleElements.length; i++) {
+    const newValue = {
+      imageURL: imageElements[i],
+      eventName: titleElements[i],
+      time: "",
+      info: eventInfoElements[i],
+      dates: "",
+      display: "",
+      reservationRequired: false,
+      formURL: ""
+    };
+    const query = {};
+    eventsCollection.insertOne(newValue);
+  }
   
   } finally {
    // await driver.quit();
