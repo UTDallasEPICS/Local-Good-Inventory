@@ -52,7 +52,7 @@ export class CheckinComponent implements OnInit {
         this.router.navigate(['new-registration'])
       } else {
         var today = new Date();
-        console.log(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
+        //console.log(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
         this.family.checkedIn.push({id: "640a50682157dc05a74ea096", date: formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST')});
         this.familyService.postFamilyDate(this.family, this.family.checkedIn[this.family.checkedIn.length - 1].date);
         this.router.navigate(['/events-check-in']);
