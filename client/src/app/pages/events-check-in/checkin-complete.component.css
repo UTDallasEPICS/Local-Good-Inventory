@@ -5,10 +5,10 @@
 }
 
 div{
-text-align: center;    
+text-align: center;
 }
 b {
-    
+
     color: #f7ae04;
     margin-top: 15rem;
     font-size: 1.5rem;
@@ -19,4 +19,40 @@ b {
 .container {
     margin-top: 8rem;
     margin-bottom: 10rem;
+}
+
+body {
+    margin: 0.5;
+    padding: 0.5;
+    font-family: italic, sans-serif;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: #28487b;
+}
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #f7ae04;
+}
+.image-with-text {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #28487b;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.image-with-text img {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+}
+.image-with-text p {
+    font-size: 18px;
+    color: #28487b;
+    margin: 0;
 }

@@ -6,6 +6,7 @@ import { SettingsService } from 'src/app/services/settings.service';
 import { Subscription } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { Appointment } from 'src/app/models/appointment.model';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'appointment',
@@ -27,7 +28,8 @@ export class AppointmentComponent implements OnInit {
   constructor(
     public familyService: FamilyService,
     private settingsService: SettingsService,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private eventService: EventService
   ) {}
 
   isDisplay = false;
@@ -124,7 +126,7 @@ export class AppointmentComponent implements OnInit {
     }
 
 
-    this.appointment.event_id="640a50682157dc05a74ea096"; //update event_id
+    this.appointment.event_id=this.eventService.getEvent().id; //update event_id
     console.log(`TIME SELECTED OBJECT: ${slotExists}\nTime: ${time}\nPhone Number ${this.family.phoneNumber}`);
     console.log(this.appointment);
   }
@@ -132,7 +134,7 @@ export class AppointmentComponent implements OnInit {
 
   updateAppointment() {
     this.family = this.familyService.getFamily();
-    this.family.nextAppointment.push({id: "640a50682157dc05a74ea096" , date: this.nextAppointment + this.nextAppointmentTime});//update event__id
+    this.family.nextAppointment.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime});//update event__id
     this.familyService.postFamily(this.family);
     this.appointmentService.postAppointment(this.appointment);
     window.alert('Appointment successfully booked for ' + this.family.nextAppointment);

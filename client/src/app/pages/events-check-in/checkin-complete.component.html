@@ -1,6 +1,17 @@
-<section>
-<div>
-<b>Which events are you checking into?</b>
-
+<div class="header">
+  <h1>What are you checking into?</h1>
 </div>
-</section>
+<div class="tile is-ancestor">
+  <div class="content">
+    <div *ngFor="let appointment of this.family.nextAppointment" class="image-with-text">
+      <img src="{{this.events.get(appointment.id)?.imageURL}}">
+      <div style="display: block">
+        <p>{{this.events.get(appointment.id)?.eventName}}</p>
+        <br>
+        <p>Appointment Time: {{appointment.date.replace('T', ' ')}}</p>
+        <br>
+        <a class="button" routerLink="/review">Check In</a>
+      </div>
+    </div>
+  </div>
+</div>
