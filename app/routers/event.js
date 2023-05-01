@@ -49,7 +49,16 @@ event.get('/', (req, res) => {
       }
     });
   } else {
-    res.status(404);
+    const query = {}
+    eventsCollection.find(query).toArray().then((events, err) => {
+      if(err) {
+        console.log(`ERROR: ${err}`);
+        res.status(400);
+      } else {
+        res.status(200).json({events});
+        console.log(events);
+      }
+    });
   }
 });
 
