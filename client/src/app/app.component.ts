@@ -5,6 +5,7 @@ import { ReportService } from './services/report.service';
 import { FamilyService } from './services/family.service';
 import { SettingsService } from './services/settings.service';
 import { AppointmentService } from './services/appointment.service';
+import { EventService } from './services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,10 @@ import { AppointmentService } from './services/appointment.service';
 })
 export class AppComponent {
   constructor(
-    public auth: AuthService, 
-    private reportService: ReportService, 
+    public auth: AuthService,
+    private reportService: ReportService,
     private familyService: FamilyService,
     private settingsService: SettingsService,
-    private appointmentService: AppointmentService) {}
+    private appointmentService: AppointmentService,
+    private eventsService: EventService) {}
 }

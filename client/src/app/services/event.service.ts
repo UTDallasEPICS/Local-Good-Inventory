@@ -27,45 +27,45 @@ export class EventService {
     return this.eventUpdated.asObservable();
   }
 
-  retrieveEvent(id: string) {
+  async retrieveEvent(id: string) {
     const promiseToken = new Promise<Event>((resolve, reject) => {
-      this.http
-        .get<{ event: Event }>(
-          `${environment.API_URL}/event?id=${id}`,
-          {
-            headers: { Authorization: 'Bearer ' + this.accessToken }
-          }
-        )
-        .subscribe((res) => {
-          this.event = res.event;
-          this.eventUpdated.next({ ...this.event });
-          resolve(res.event);
-        });
+    this.http
+      .get<{ event: Event }>(
+        `${environment.API_URL}/event?id=${id}`,
+        {
+          headers: { Authorization: 'Bearer ' + this.accessToken }
+        }
+      )
+      .subscribe((res) => {
+        this.event = res.event;
+        this.eventUpdated.next({ ...this.event });
+        resolve(res.event);
+      });
     });
-    //console.log(this.settings);
+
     return promiseToken;
   }
 
-  getFutureEvents() {
+  async getFutureEvents() {
     const promiseToken = new Promise<Event[]>((resolve, reject) => {
-      this.http
-        .get<{ events: Event[] }>(
-          `${environment.API_URL}/event?date=${new Date().toISOString()}`,
-          {
-            headers: { Authorization: 'Bearer ' + this.accessToken }
-          }
-        )
-        .subscribe((res) => {
-          resolve(res.events);
-        });
+    this.http
+      .get<{ events: Event[] }>(
+        `${environment.API_URL}/event?date=${new Date().toISOString()}`,
+        {
+          headers: { Authorization: 'Bearer ' + this.accessToken }
+        }
+      )
+      .subscribe((res) => {
+        resolve(res.events);
+      });
     });
-    //console.log(this.settings);
+
     return promiseToken;
-  } 
+  }
 
   postReport(event: Event) {
     this.http.post(
-      `${environment.API_URL}/event`, 
+      `${environment.API_URL}/event`,
       event,
       {
         headers: { Authorization: 'Bearer ' + this.accessToken }
