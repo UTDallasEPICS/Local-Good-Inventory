@@ -1,7 +1,7 @@
-<div id="event-container">
+<div id="event-container" *ngFor="let event of this.events">
   <div class = "left-div">
     <!-- Event Image -->
-    <img id = "event-image" src = "https://images.squarespace-cdn.com/content/v1/605de134d463f363dd19bd79/1675294553912-NK277AIQWG55L64M8TTR/Screenshot+2023-02-01+at+17.35.17.png?format=1000w"
+    <img id = "event-image" src = {{event.imageURL}}
     alt = "CookingClass">
     <br>
     <!-- Button to change Image that is shown-->
@@ -11,28 +11,22 @@
   <div class = "right-div" contenteditable="false">
     <span class="edit-icon" onclick="toggleEdit()">✏️</span>
     <h2>
-      Cooking Class
+      {{event.eventName}}
     </h2>
     <p>
-      11:15 AM and 12:15 PM
+      {{event.time}}
     </p>
     <p>
-      Join us in the Local Good Kitchen this January to learn new cooking skills and recipes with North Texas Food Bank.
-      We will have lots of fun and prizes.
-      This class is free and family-friendly, so children are welcome to attend with their parents.
-      You can come to one class or attend all four in this series.
+      {{event.info}}
     </p>
     <p>
-      Week 3: February 21
-    </p>
-    <p>
-      Week 4: February 28
+      {{event.dates}}
     </p>
 
     <button class="button is-rounded"  (click)="toggleButton()">Display</button>
 
   </div>
 
-  <button (click)="getEvent('640a50682157dc05a74ea096')"> Test </button>
+  <!-- <button (click)="getEvent('640a50682157dc05a74ea096')"> Test </button> -->
 
 </div>

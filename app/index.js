@@ -241,14 +241,15 @@ app.get('/event', (req, res) => {
       }
     });
   } else if(req.query.date) {
-    const query = { dates: {$gt: date} }
-    eventsCollection.find(query).then((event, err) => {
+    const query = { dates: {$gt: req.query.date} }
+    console.log(query);
+    eventsCollection.find(query).toArray((err, events) => {
       if(err) {
         console.log(`ERROR: ${err}`);
         res.status(400);
       } else {
-        res.status(200).json({event});
-        console.log(event);
+        res.status(200).json({events});
+        console.log(events);
       }
     });
   } else {

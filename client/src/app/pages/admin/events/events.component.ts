@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { Event } from 'src/app/models/event.model';
-=======
 import { EventService } from 'src/app/services/event.service';
->>>>>>> dev
 
 @Component({
   selector: 'app-events',
@@ -12,9 +9,21 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class EventsComponent implements OnInit {
 
-  constructor(private eventService: EventService) { }
+  events: Event[] = [];
+
+  constructor(private eventService: EventService) {
+   }
+
+
+  async loadEvents() {
+    console.log("Loading events");
+    this.events = await this.eventService.getFutureEvents();
+    console.log(this.events);
+  }
 
   ngOnInit(): void {
+    console.log("Events page initialized");
+    this.loadEvents();
   }
 
   getEvent(id: string) {
