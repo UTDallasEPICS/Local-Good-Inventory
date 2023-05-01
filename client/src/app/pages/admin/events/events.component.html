@@ -1,3 +1,7 @@
+<div class="content">
+  <button class="button is-success" (click)="scrapeEvents()">Get New Events</button>
+</div>
+
 <div id="event-container" *ngFor="let event of this.events">
   <div class = "left-div">
     <!-- Event Image -->
@@ -5,7 +9,7 @@
     alt = "CookingClass">
     <br>
     <!-- Button to change Image that is shown-->
-    <input type="file" id="image-input" onclick="updateImage()">
+    <!-- <input type="file" id="image-input" onclick="updateImage()"> -->
   </div>
 
   <div class = "right-div" contenteditable="false">
@@ -23,10 +27,46 @@
       {{event.dates}}
     </p>
 
-    <button class="button is-rounded"  (click)="toggleButton()">Display</button>
+    <!-- <button class="button is-rounded"  (click)="toggleButton()">Display</button> -->
 
   </div>
 
   <!-- <button (click)="getEvent('640a50682157dc05a74ea096')"> Test </button> -->
 
+</div>
+
+<div class="modal" [class.is-active]="modalVisible">
+  <div class="modal-background" (click)="this.modalVisible = false"></div>
+  <div class="modal-content" style="">
+    <div id="event-container" *ngFor="let event of this.scrapedEvents">
+      <div class = "left-div">
+        <!-- Event Image -->
+        <img id = "event-image" src = {{event.imageURL}}
+        alt = "CookingClass">
+        <br>
+        <!-- Button to change Image that is shown-->
+      </div>
+    
+      <div class = "right-div">
+        <h2>
+          {{event.eventName}}
+        </h2>
+        <p>
+          {{event.time}}
+        </p>
+        <p>
+          {{event.info}}
+        </p>
+        <p>
+          {{event.dates}}
+        </p>
+    
+        <button class="button is-success" (click)="saveEvent(event)">Save</button>
+      </div>
+    
+      <!-- <button (click)="getEvent('640a50682157dc05a74ea096')"> Test </button> -->
+    
+    </div>
+    <button class="button is-danger" (click)="this.modalVisible = false">Close</button>
+  </div>
 </div>

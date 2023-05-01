@@ -63,7 +63,41 @@ export class EventService {
     return promiseToken;
   }
 
-  postReport(event: Event) {
+  async getAllEvents() {
+    const promiseToken = new Promise<Event[]>((resolve, reject) => {
+      this.http
+        .get<{ events: Event[] }>(
+          `${environment.API_URL}/event`,
+          {
+            headers: { Authorization: 'Bearer ' + this.accessToken }
+          }
+        )
+        .subscribe((res) => {
+          resolve(res.events);
+        });
+      });
+  
+      return promiseToken;
+  }
+
+  async scrapeEvents() {
+    const promiseToken = new Promise<Event[]>((resolve, reject) => {
+      this.http
+        .get<{ events: Event[] }>(
+          `${environment.API_URL}/event/scrape`,
+          {
+            headers: { Authorization: 'Bearer ' + this.accessToken }
+          }
+        )
+        .subscribe((res) => {
+          resolve(res.events);
+        });
+      });
+  
+      return promiseToken;
+  }
+
+  postEvent(event: Event) {
     this.http.post(
       `${environment.API_URL}/event`,
       event,

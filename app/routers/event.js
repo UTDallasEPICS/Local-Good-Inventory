@@ -8,7 +8,7 @@ const {scrape} = require("../scraper.js");
 
 event.post('/', (req, res) => {
   console.log("Event Posted");
-  const newValue = { $set: {
+  const newValue = {
     imageURL: req.body.imageURL,
     eventName: req.body.eventName,
     time: req.body.time,
@@ -17,9 +17,8 @@ event.post('/', (req, res) => {
     display: req.body.display,
     reservationRequired: req.body.reservationRequired,
     formURL: req.body.formURL
-  } };
-  const query = {};
-  settingsCollection.updateOne(query, newValue, {upsert: true});
+  };
+  eventsCollection.insertOne(newValue);
   res.status(201);
   console.log("Post Event Successful");
 });

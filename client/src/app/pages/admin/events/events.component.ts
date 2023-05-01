@@ -10,6 +10,8 @@ import { EventService } from 'src/app/services/event.service';
 export class EventsComponent implements OnInit {
 
   events: Event[] = [];
+  scrapedEvents: Event[] = [];
+  modalVisible: boolean = false;
 
   constructor(private eventService: EventService) {
    }
@@ -17,7 +19,7 @@ export class EventsComponent implements OnInit {
 
   async loadEvents() {
     console.log("Loading events");
-    this.events = await this.eventService.getFutureEvents();
+    this.events = await this.eventService.getAllEvents();
     console.log(this.events);
   }
 
@@ -29,6 +31,15 @@ export class EventsComponent implements OnInit {
   async getEvent(id: string) {
     console.log(await this.eventService.retrieveEvent(id));
     console.log(await this.eventService.getFutureEvents());
+  }
+
+  async scrapeEvents(){
+    this.scrapedEvents = await this.eventService.scrapeEvents();
+    this.modalVisible = true;
+  }
+
+  saveEvent(event: Event) {
+    this.eventService.postEvent(event);
   }
 
   updateImage(){
