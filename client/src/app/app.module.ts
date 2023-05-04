@@ -28,6 +28,7 @@ import { AppointmentsComponent } from './pages/admin/appointments/appointments.c
 import { ExportComponent } from './pages/admin/export/export.component';
 import { EventsComponent } from './pages/admin/events/events.component';
 import { FamilyInfoComponent } from './components/family-info/family-info.component';
+import { PopupComponent } from './pages/popup/popup.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { FamilyInfoComponent } from './components/family-info/family-info.compon
     AppointmentsComponent,
     ExportComponent,
     EventsComponent,
-    FamilyInfoComponent
+    FamilyInfoComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { ReviewChangesComponent } from './pages/review-changes/change.component'
 import { CheckinCompleteComponent } from './pages/events-check-in/checkin-complete.component';
 import { DietaryPageComponent } from './pages/dietary-page/dietary-page.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { PopupComponent } from './pages/popup/popup.component';
 
 const routes: Routes = [
   {path:'', component: CheckinComponent},
@@ -18,7 +19,9 @@ const routes: Routes = [
   {path:'new-registration', component:NewRegistrationComponent},
   {path:'events-check-in', component:CheckinCompleteComponent},
   {path: 'dietary-page', component:DietaryPageComponent},
-  {path:'admin', component:AdminComponent}
+  {path:'admin', component:AdminComponent},
+  {path:'popup', component:PopupComponent}//,
+  //{path:'family-edit', component:FamilyEditComponent}
 ];
 
 @NgModule({

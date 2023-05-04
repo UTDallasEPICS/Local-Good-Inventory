@@ -14,6 +14,8 @@ import { EventService } from 'src/app/services/event.service';
   styleUrls: ['./appointment.component.css'],
 })
 export class AppointmentComponent implements OnInit {
+  popup = document.getElementById("popup");
+
   family: Family = {} as Family;
   settings: Settings = {} as Settings;
   appointment: Appointment = {} as Appointment;
@@ -41,6 +43,8 @@ export class AppointmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.popup = document.getElementById("popup");
+    
     this.settings = this.settingsService.getSettings();
     this.settingsService.updateSettings();
     this.settingsSubscription = this.settingsService
@@ -146,4 +150,21 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.postAppointment(this.appointment);
     window.alert('Appointment successfully booked for ' + this.family.nextAppointment[this.family.nextAppointment.length-1].date.replace('T', " at "));
   }
+
+  openPopup(){
+    // this.popup!.classList.add("open-popup");
+    document.getElementById("popup")?.classList.toggle("open-popup");
+    // document.body.style.height = '100%';
+// document.body.style.width = '100%';
+// document.documentElement.style.height = '100%';
+// document.documentElement.style.width = '100%';
+    // document.getElementById("popup")?.classList.toggle("open-background");
+    // document.getElementById("popup")?.classList.toggle("active");
+  }
+
+  // closePopup(){
+  //     this.popup!.classList.remove("open-popup");
+  // }
+
 }
+

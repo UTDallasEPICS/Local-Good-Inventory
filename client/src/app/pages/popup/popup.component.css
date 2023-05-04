@@ -1,0 +1,193 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Poppins',sans-serif; */
+}
+
+.popup{
+   outline-width: 600px;
+   outline-color: rgba(0, 0, 0, 0.7);
+   outline-style: solid;
+}
+/* new code to use for container */
+ .section {
+    /* background-color: transparent;   */
+    position: fixed;
+    top: 0px;
+    /* right: 0px; */
+    /* bottom: 0px; */
+    left: 0px;
+    width: 100vw;
+    height: 100vh; 
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    /* z-index:1000; */
+    visibility: hidden;
+    /* display:none; */
+}
+
+/* .container{
+    width: 100%;
+    height: 100%; */
+    /* background-color: transparent;  */
+    /* background-color: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.event1{
+    width: 100%;
+    height: 30vh;
+    background-color: white;
+    padding: 10px;
+    border: 5px solid #1f2f46;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event2{
+    width: 100%;
+    height: 30vh;
+    background-color: white;
+    padding: 10px;
+    border: 5px solid #1f2f46;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event3{
+    width: 100%;
+    height: 30vh;
+    background-color: white;
+    padding: 10px;
+    border: 5px solid #1f2f46;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .btn{
+    padding: 10px 60px;
+    background: #28487b;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    color: #f7ae04;
+    font-size: 22px;
+    font-weight: 500;
+    border-radius: 30px;
+} */
+
+/* .popup
+{ */
+   /* width: 50%;
+   height: 90vh; */
+   /* width: 100%;
+   height: 90vh;
+   background: #e6e9ed;
+   color: #1f2f46;
+   font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+   border-radius: 6px;
+   position: absolute;
+   top: 0;
+   left: 50%;
+   transform: translate(-50%,-50%) scale(0.1); 
+   text-align: center;
+   padding: 0 30px 30px;
+   visibility: hidden;
+   transition: transform 0.4s, top 0.4s;
+   overflow: hidden;
+   overflow-y: scroll;
+} */
+.popup
+{
+   width: 600px;
+   height: 500px;
+   background: white;
+   color: #1f2f46;
+   font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+   border: 5px solid #1f2f46;
+   border-radius: 6px;
+   position: absolute;
+   margin-top: 300px;
+   margin-left: 75px;
+   margin-right: 100px;
+   /* margin-left: auto;
+   margin-right: auto; */
+   top: 50%;
+   left: 50%;
+   z-index: 9999;
+   transform: translate(-50%,-50%) scale(0.1); 
+   text-align: center;
+   padding: 0 30px 30px;
+   visibility: hidden;
+   transition: transform 0.4s, top 0.4s;
+   overflow: hidden;
+   overflow-y: scroll;
+}
+
+/* .section.active .section{
+    display: block;
+}
+
+.section.active .popup {
+    transition: transform 0.4s, top 0.4s;
+    transform: translate(-50%,-50%) scale(1); 
+} */
+
+.open-popup{
+    visibility: visible;
+    /* display: flex; */
+    /* display: flex; */
+    /* display: absolute; */
+    top: 50%;
+    transform: translate(-50%,-50%) scale(1);
+
+}
+
+.open-background{
+    visibility: visible;
+}
+
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
+.popup .close{
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    /* background: #222; */
+    color:5px #222;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    /* border-radius: 50%; */
+}
+.popup button{
+    width: 100%;
+    /* margin-top: 50px; */
+    margin-top: 10px;
+    padding: 10px 0;
+    background: #1f2f46;
+    color: white;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+}

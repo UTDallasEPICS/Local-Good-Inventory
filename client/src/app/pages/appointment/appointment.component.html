@@ -11,7 +11,13 @@
 
     <div class="buttons is-centered">
       <button class="button is-large" (click)="toggle()" [disabled] = "clicked">Yes</button>
-      <a class="button is-large button is-danger mx-4" routerLink = "/dietary-page">No</a>
+      <a class="button is-large button is-danger mx-4" (click) = "openPopup()" routerLink = "/dietary-page">No</a>
+      <!-- <button class="button is-large" (click)="toggle()" [disabled] = "clicked">Yes</button>
+      <a class="button is-large button is-danger mx-4" routerLink = "/dietary-page">No</a> -->
+      <!-- <a class="button is-large button is-danger mx-4" routerLink = "/popup">No</a>  -->
+      <!-- <a href = "popup.component.html">
+        <button>Nono</button>
+      </a>  -->
     </div>
       <div *ngIf = "isDisplay" style="width: 70%; margin: auto;">
         <div style="display: inline-flex;">
@@ -22,7 +28,7 @@
       </div>
 
         <div class="confirm is-centered">
-          <button class="button is-success" routerLink = "/dietary-page" (click) = "updateAppointment()">Confirm</button>
+        <button class="button is-success" routerLink = "/dietary-page" (click) = "updateAppointment() " (click) = "openPopup()">Confirm</button> 
         </div>
 
     </div>
