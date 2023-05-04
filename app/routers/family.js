@@ -25,6 +25,12 @@ family.get('/', (req, res) => {
 family.post('/', (req, res) => {
     if(req.query.phoneNumber) {
       const query = { phoneNumber: req.query.phoneNumber };
+      if(req.body.minors == null)
+        req.body.minors = 0;
+      if(req.body.adults == null)
+        req.body.adults = 0;
+      if(req.body.seniors == null)
+        req.body.seniors = 0;    
       const newValue = { $set: { 
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -36,6 +42,7 @@ family.post('/', (req, res) => {
         checkedIn: req.body.checkedIn,
         nextAppointment: req.body.nextAppointment,
         color: req.body.color } };
+
       if(req.query.date) {
         console.log(`DEBUG: Date requested: ${req.query.date}`);
         const date = new Date();
@@ -51,9 +58,9 @@ family.post('/', (req, res) => {
                 households: 1,
                 individualHouseholds: 1,
                 newHouseholds: 1,
-                numberOfClients: req.body.adults,
-                numberOfYouth: req.body.minors,
-                numberOfSeniors: req.body.seniors
+                numberOfClients: family.adults,
+                numberOfYouth: family.minors,
+                numberOfSeniors: family.seniors
               }}
             );
           } else if (
@@ -70,9 +77,9 @@ family.post('/', (req, res) => {
               {$inc: {
                 households: 1,
                 individualHouseholds: 1,
-                numberOfClients: req.body.adults,
-                numberOfYouth: req.body.minors,
-                numberOfSeniors: req.body.seniors
+                numberOfClients: family.adults,
+                numberOfYouth: family.minors,
+                numberOfSeniors: family.seniors
               }}
             );
           }

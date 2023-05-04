@@ -66,7 +66,7 @@ export class AppointmentComponent implements OnInit {
     var dateSelected = new Date(this.nextAppointment);
     this.availableTimes = [];
     var dateNumSelected = dateSelected.getDay() + 1;
-    console.log(`Datenumselected: ${dateNumSelected}`)
+    //console.log(`Datenumselected: ${dateNumSelected}`)
     if(dateNumSelected > 6) dateNumSelected = 0;
     var settingsDate = this.settings.dates[dateNumSelected];
     if(settingsDate.active && !this.settings.blockOuts.includes(this.nextAppointment)) {
@@ -74,11 +74,11 @@ export class AppointmentComponent implements OnInit {
                       parseInt(settingsDate.startTime.split(':')[1]);
       var endTime = parseInt(settingsDate.endTime.split(':')[0]) * 60 + 
                     parseInt(settingsDate.endTime.split(':')[1]);
-      console.log(`Start time: ${startTime} End time: ${settingsDate.endTime}`)
-      console.log("Appointment Object: ")
+      //console.log(`Start time: ${startTime} End time: ${settingsDate.endTime}`)
+      //console.log("Appointment Object: ")
       this.appointmentService.updateAppointment(this.nextAppointment).then((res) => {
         this.appointment = res
-        console.log(this.appointment);
+        //console.log(this.appointment);
         
         var full;
         for(var i = startTime; i <= endTime; i+= this.settings.interval) {
@@ -95,7 +95,7 @@ export class AppointmentComponent implements OnInit {
       
     }
 
-    console.log(this.availableTimes);
+    //console.log(this.availableTimes);
     
   }
 
@@ -104,11 +104,11 @@ export class AppointmentComponent implements OnInit {
     this.nextAppointmentTime = `T${time}`;
 
     var slotExists = false;
-    console.log("APPOINTMENT OBJECT ON TIME SELECTION");
-    console.log(this.appointment.timeslots);
-    console.log(this.appointment.timeslots.length);
+    //console.log("APPOINTMENT OBJECT ON TIME SELECTION");
+    //console.log(this.appointment.timeslots);
+    //console.log(this.appointment.timeslots.length);
     this.appointment.timeslots.forEach(slot => {
-      console.log(`SLOT TIME: ${slot.time}`);
+      //console.log(`SLOT TIME: ${slot.time}`);
       if(slot.time == time) {
         console.log("FOUND A MATCH");
         slot.quantity++;
@@ -127,16 +127,23 @@ export class AppointmentComponent implements OnInit {
 
 
     this.appointment.event_id=this.eventService.getEvent().id; //update event_id
-    console.log(`TIME SELECTED OBJECT: ${slotExists}\nTime: ${time}\nPhone Number ${this.family.phoneNumber}`);
-    console.log(this.appointment);
+    if(this.appointment.event_id == null)
+      this.appointment.event_id = "000000000000000000000000";
+    //console.log(`TIME SELECTED OBJECT: ${slotExists}\nTime: ${time}\nPhone Number ${this.family.phoneNumber}`);
+    //console.log(this.appointment);
   }
 
 
   updateAppointment() {
     this.family = this.familyService.getFamily();
-    this.family.nextAppointment.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime});//update event__id
+    if(Array.isArray(this.family.nextAppointment)) {
+      this.family.nextAppointment.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime});
+    } else {
+      this.family.nextAppointment = [{id: "000000000000000000000000", date: this.family.nextAppointment}];
+      this.family.nextAppointment.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime});
+    }
     this.familyService.postFamily(this.family);
     this.appointmentService.postAppointment(this.appointment);
-    window.alert('Appointment successfully booked for ' + this.family.nextAppointment);
+    window.alert('Appointment successfully booked for ' + this.family.nextAppointment[this.family.nextAppointment.length-1].date.replace('T', " at "));
   }
 }

@@ -1,5 +1,3 @@
-import { Family } from './family.model';
-
 export interface Appointment {
   date: number;
   timeslots: {

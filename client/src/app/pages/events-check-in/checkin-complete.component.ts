@@ -5,6 +5,8 @@ import { Family } from 'src/app/models/family.model';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { EventService } from 'src/app/services/event.service';
 import { FamilyService } from 'src/app/services/family.service';
+import { formatDate } from '@angular/common';
+
 
 @Component({
   selector: 'app-checkin-complete',
@@ -25,13 +27,24 @@ export class CheckinCompleteComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.family = this.familyService.getFamily();
-    console.log(this.family.nextAppointment);
 
     for(var appointment of this.family.nextAppointment) {
+      if(appointment.id == null) 
+        appointment.id = "000000000000000000000000";
       this.events.set(appointment.id, await this.eventService.retrieveEvent(appointment.id));
     }
+  }
 
-    console.log(this.events);
+  checkIn(eventId: string) {
+    var dateString: string = "";
+    for (const appointment of this.family.nextAppointment) {
+      if (appointment.id == eventId) {
+        dateString = appointment.date;
+      }
+    }
+    this.family.checkedIn.push({id: eventId, date: formatDate(dateString, 'dd-MM-yyyy', 'en-US', 'CST')});
+    this.familyService.postFamilyDate(this.family, this.family.checkedIn[this.family.checkedIn.length - 1].date);
+    this.eventService.loadEvent(eventId);
   }
 
 }

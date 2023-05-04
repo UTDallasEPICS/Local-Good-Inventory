@@ -32,8 +32,9 @@ event.get('/', (req, res) => {
         console.log(`ERROR: ${err}`)
         res.status(400);
       } else {
+        event.id = event._id;
         res.status(200).json({event});
-        console.log(event);
+        //console.log(event);
       }
     });
   } else if(req.query.date) {
@@ -44,7 +45,7 @@ event.get('/', (req, res) => {
         res.status(400);
       } else {
         res.status(200).json({events});
-        console.log(events);
+        //console.log(events);
       }
     });
   } else {
@@ -55,7 +56,7 @@ event.get('/', (req, res) => {
         res.status(400);
       } else {
         res.status(200).json({events});
-        console.log(events);
+        //console.log(events);
       }
     });
   }

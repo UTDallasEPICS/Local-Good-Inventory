@@ -1,5 +1,3 @@
-//import { Member } from "./member.model";
-
 export interface Family {
     phoneNumber: string;
     firstName: string;
@@ -11,5 +9,4 @@ export interface Family {
     checkedIn: {id: string, date: string}[];
     nextAppointment: {id: string, date: string}[];
     color: string;
-    //events: string[];
 }

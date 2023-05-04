@@ -15,7 +15,7 @@ appointment.get('/', (req, res) => {
       const query = { date: day, month: month, year: year };
       appointmentsCollection.findOne(query).then((appointment) => {
         //console.log(`${query}`);
-        console.log(query);
+        //console.log(query);
         res.status(200).json({
           appointment
         });

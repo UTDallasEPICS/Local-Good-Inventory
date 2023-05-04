@@ -39,8 +39,8 @@ export class AppointmentService {
         )
         .subscribe((res) => {
           this.appointment = res.appointment;
-          console.log("APPOINTMENT API CALL: ");
-          console.log(res.appointment);
+          //console.log("APPOINTMENT API CALL: ");
+          //console.log(res.appointment);
           if(!res.appointment) {
             this.appointment = {
               date: +date.split('-')[2],
@@ -50,8 +50,8 @@ export class AppointmentService {
               event_id: ""
             }
           }
-          console.log("Object Returned from Function: ")
-          console.log(this.appointment);
+          //console.log("Object Returned from Function: ")
+          //console.log(this.appointment);
           this.appointmentUpdated.next({ ...this.appointment });
           resolve(this.appointment);
         });
@@ -60,8 +60,8 @@ export class AppointmentService {
   }
 
   postAppointment(appointment: Appointment) {
-    console.log("NEW APPOINTMENT API OBJECT");
-    console.log(appointment);
+    //console.log("NEW APPOINTMENT API OBJECT");
+    //console.log(appointment);
     this.http.post(
       `${environment.API_URL}/appointment`, 
       appointment,

@@ -27,8 +27,7 @@ export class EventService {
     return this.eventUpdated.asObservable();
   }
 
-  async retrieveEvent(id: string) {
-    const promiseToken = new Promise<Event>((resolve, reject) => {
+  loadEvent(id: string) {
     this.http
       .get<{ event: Event }>(
         `${environment.API_URL}/event?id=${id}`,
@@ -39,6 +38,19 @@ export class EventService {
       .subscribe((res) => {
         this.event = res.event;
         this.eventUpdated.next({ ...this.event });
+      });
+  }
+
+  async retrieveEvent(id: string) {
+    const promiseToken = new Promise<Event>((resolve, reject) => {
+    this.http
+      .get<{ event: Event }>(
+        `${environment.API_URL}/event?id=${id}`,
+        {
+          headers: { Authorization: 'Bearer ' + this.accessToken }
+        }
+      )
+      .subscribe((res) => {
         resolve(res.event);
       });
     });

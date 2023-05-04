@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FamilyService } from 'src/app/services/family.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { formatDate } from '@angular/common';
 import { Family } from 'src/app/models/family.model';
 
 
@@ -51,10 +50,6 @@ export class CheckinComponent implements OnInit {
       if(this.family.lastName == "") {
         this.router.navigate(['new-registration'])
       } else {
-        var today = new Date();
-        //console.log(formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST'));
-        this.family.checkedIn.push({id: "640a50682157dc05a74ea096", date: formatDate(today, 'dd-MM-yyyy', 'en-US', 'CST')});
-        this.familyService.postFamilyDate(this.family, this.family.checkedIn[this.family.checkedIn.length - 1].date);
         this.router.navigate(['/events-check-in']);
       }
     });
