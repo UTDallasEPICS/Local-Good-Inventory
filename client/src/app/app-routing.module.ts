@@ -13,6 +13,7 @@ import { CheckinCompleteComponent } from './pages/checkin-complete/checkin-compl
 import { DietaryPageComponent } from './pages/dietary-page/dietary-page.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import {FamilyEditComponent } from './pages/family-edit/family-edit.component';
+import { PopupComponent } from './pages/popup/popup.component';
 
 const routes: Routes = [
   {path:'', component: CheckinComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'checkin-complete', component:CheckinCompleteComponent},
   {path: 'dietary-page', component:DietaryPageComponent},
   {path:'admin', component:AdminComponent},
+  {path:'popup', component:PopupComponent},
   {path:'family-edit', component:FamilyEditComponent}
 ];
 
