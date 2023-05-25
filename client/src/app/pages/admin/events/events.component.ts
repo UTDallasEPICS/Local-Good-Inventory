@@ -40,6 +40,7 @@ export class EventsComponent implements OnInit {
 
   saveEvent(event: Event) {
     this.eventService.postEvent(event);
+    window.alert("Event successfully saved");
   }
 
   updateImage(){

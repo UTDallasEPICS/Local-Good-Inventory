@@ -1,23 +1,13 @@
 <div class = "section">
-<!-- <head>
-    <meta name="viewport" content ="eidth-device-width, initial-scale=1.0">
-    <title>Events</title>
-    <link rel="stylesheet" href="popup.component.css">
-</head>
-<body> -->
     <div class = "container">
         <!-- <button type="check-in" class = 'btn' (click)="openPopup()">check in</button> -->
         <div class = "popup" id="popup">
             <div class = "close" (click)="closePopup()">&times;</div>
             <h2>Would you like to join any upcoming events?</h2>
-            <div class = "event1">
-                <p>Event 1</p>
-            </div>
-            <div class = "event2">
-                <p>Event 2</p>
-            </div>
-            <div class = "event3">
-                <p>Event 3</p>
+            <div class = "event1" *ngFor="let event of this.events" style="display: block">
+                <p>{{event.eventName}}</p>
+                <br>
+                <a *ngIf="event.formURL.length > 5" href="{{event.formURL}}" class="button is-primary" target="_blank">Register</a>
             </div>
             <button type ="button1" (click)="closePopup()">No thanks</button>
             <a href = "https://www.localgoodcenter.org/events" target="_blank">
@@ -25,28 +15,5 @@
             </a>
         </div>
     </div>
-    <!-- <script>
-        let popup = document.getElementById("popup");
 
-        function openPopup(){
-            popup.classList.add("open-popup");
-        }
-
-        function closePopup(){
-            popup.classList.remove("open-popup");
-        }
-        
-        const exitPopUP = document.getElementById("popup");
-        document.addEventListener("mouseout", exitPage);
-
-        function exitPage(event)
-        {
-            if (event.clientY < 50)
-            {
-                popup.classList.add("open-popup");
-            }
-        }
-    </script> -->
-
-<!-- </body> -->
 </div>
