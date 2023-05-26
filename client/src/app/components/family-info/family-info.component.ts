@@ -6,6 +6,8 @@ import { AuthService } from '@auth0/auth0-angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FamilyService } from 'src/app/services/family.service';
+import { Event } from 'src/app/models/event.model';
+import { EventService } from 'src/app/services/event.service';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class FamilyInfoComponent implements OnInit {
   @Input() set family(value: string) {
     this.familyService.pullFamily(value).then(res => {
       this.selectedFamily = res;
+      this.sortAppointments();
       window.alert("function ran: " + value);
     });
   }
@@ -48,6 +51,8 @@ export class FamilyInfoComponent implements OnInit {
     seniors: 0
   };
 
+  eventData = new Map<string, Event>();
+
   nextAppointmentFormatted: Date = new Date();
 
   futureAppointments: {id: string, date: string, checkedIn: boolean}[] = [];
@@ -58,7 +63,10 @@ export class FamilyInfoComponent implements OnInit {
 
   private accessToken: string = "";
   
-  constructor(private http: HttpClient, private auth: AuthService, private router: Router, private familyService: FamilyService) { 
+  constructor(private http: HttpClient, 
+              private auth: AuthService,  
+              private familyService: FamilyService,
+              private eventService: EventService) { 
     auth.getAccessTokenSilently().subscribe(token => {
       this.accessToken = token;
     })
@@ -103,6 +111,29 @@ export class FamilyInfoComponent implements OnInit {
           headers: { Authorization: 'Bearer ' + this.accessToken }
         })
         .subscribe();
+    }
+  }
+
+  deleteAppointment(i: number) {
+    //todo: remove index i from this.futureAppointments
+    //api call to server
+  }
+
+  async sortAppointments() {
+    this.futureAppointments = [];
+    this.pastAppointments = [];
+    this.eventData.clear();
+    var today = new Date().valueOf();
+    for(var appointment of this.selectedFamily.appointments) {
+      var appointmentDate = new Date(Date.parse(appointment.date)).valueOf();
+      if(today > appointmentDate) {
+        this.pastAppointments.push(appointment);
+      } else {
+        this.futureAppointments.push(appointment);
+      }
+      if(!this.eventData.has(appointment.id)) {
+        this.eventData.set(appointment.id, await this.eventService.retrieveEvent(appointment.id))
+      }
     }
   }
 

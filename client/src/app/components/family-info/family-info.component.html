@@ -74,14 +74,47 @@
                     <br>
                     <label *ngIf="isAdmin">
                         Upcoming Appointments
+                        <table class="table is-hoverable is-fullwidth is-striped is-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Time</th>
+                                    <th></th>
+                                </tr>
+                            </thead>    
+                            <tbody>
+                                <tr *ngFor="let appointment of this.futureAppointments; let i = index;">
+                                    <td>{{this.eventData.get(appointment.id)?.eventName}}</td>
+                                    <td>{{appointment.date}}</td>
+                                    <td>
+                                        <button class="button is-danger" (click)="deleteAppointment(i);">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <input class="input" type="datetime-local" name="nextAppointment" [(ngModel)]="selectedFamily.appointments[selectedFamily.appointments.length - 1]">
-                        <button class="button is-danger">Delete</button>
                         <br>
-                        <button class="button is-link">Add</button>
+                        <button class="button is-link">Add Appointment</button>
                     </label>
                     <br>
                     <label>
                         Previous Appointments
+                        <table class="table is-hoverable is-fullwidth is-striped is-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Time</th>
+                                    <th>Checked In</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let appointment of this.pastAppointments">
+                                    <td>{{this.eventData.get(appointment.id)?.eventName}}</td>
+                                    <td>{{appointment.date}}</td>
+                                    <td>{{appointment.checkedIn ? "Yes" : "No"}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </label>
                 </fieldset>
             </form>
