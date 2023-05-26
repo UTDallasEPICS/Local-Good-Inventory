@@ -3,7 +3,7 @@
 </div>
 <div class="tile is-ancestor">
   <div class="content">
-    <div *ngFor="let appointment of this.family.nextAppointment" class="image-with-text">
+    <div *ngFor="let appointment of this.filteredAppointments" class="image-with-text">
       <img src="{{this.events.get(appointment.id)?.imageURL}}">
       <div style="display: block">
         <p>{{this.events.get(appointment.id)?.eventName}}</p>

@@ -17,6 +17,7 @@ export class CheckinCompleteComponent implements OnInit {
 
   family: Family = {} as Family;
   events = new Map<string, Event>();
+  filteredAppointments: {id: string, date: string}[] = [];
 
   private userEvents: Event[] = [];
   private userAppointments: Appointment[] = [];
@@ -28,11 +29,24 @@ export class CheckinCompleteComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.family = this.familyService.getFamily();
 
+    var today = new Date();
+
     for(var appointment of this.family.nextAppointment) {
-      if(appointment.id == null) 
-        appointment.id = "000000000000000000000000";
-      this.events.set(appointment.id, await this.eventService.retrieveEvent(appointment.id));
+      var curr = appointment;
+      var appointmentDate = new Date(Date.parse(curr.date));
+      console.log("Appointment Date: ", appointmentDate.toLocaleString());
+      console.log("Hour Deficit: " + (today.valueOf() - appointmentDate.valueOf()) / 36e5);
+      if((today.valueOf() - appointmentDate.valueOf())/36e5 < 48) {
+        if(curr.id == null) {
+          curr.id = "000000000000000000000000";
+          console.log("null appointment found");
+        }
+        this.filteredAppointments.push(curr);
+        this.events.set(curr.id, await this.eventService.retrieveEvent(curr.id));
+      }
     }
+    console.log(this.family.nextAppointment);
+
   }
 
   checkIn(eventId: string) {
