@@ -40,6 +40,7 @@ export class EventsComponent implements OnInit {
 
   saveEvent(event: Event) {
     this.eventService.postEvent(event);
+    this.events.push(event);
     window.alert("Event successfully saved");
   }
 
