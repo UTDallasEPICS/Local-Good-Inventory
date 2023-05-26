@@ -1,19 +1,19 @@
-<div class = "section">
-    <div class = "container">
-        <!-- <button type="check-in" class = 'btn' (click)="openPopup()">check in</button> -->
-        <div class = "popup" id="popup">
-            <div class = "close" (click)="closePopup()">&times;</div>
-            <h2>Would you like to join any upcoming events?</h2>
-            <div class = "event1" *ngFor="let event of this.events" style="display: block">
-                <p>{{event.eventName}}</p>
+<div class="modal">
+    <div class="modal-background" (click)="closePopup()"></div>
+    <div class="modal-card">
+        <div class="modal-card-head">Interested in any of our other events?</div>
+        <div class="modal-card-body">
+            <div *ngFor="let event of this.events">
+                <h1>{{event.eventName}}</h1>
+                <br>
+                <p>{{event.info}}</p>
                 <br>
                 <a *ngIf="event.formURL.length > 5" href="{{event.formURL}}" class="button is-primary" target="_blank">Register</a>
             </div>
-            <button type ="button1" (click)="closePopup()">No thanks</button>
-            <a href = "https://www.localgoodcenter.org/events" target="_blank">
-                <button type =" link-to-events">More Events</button> 
-            </a>
+        </div>
+        <div class="modal-card-foot">
+            <button class="button is-danger" (click)="closePopup()">No Thanks</button>
+            <a class="button is-link" href="https://www.localgoodcenter.org/events" target="_blank">More Events</a>
         </div>
     </div>
-
 </div>
