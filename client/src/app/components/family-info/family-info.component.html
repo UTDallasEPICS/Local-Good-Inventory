@@ -63,17 +63,26 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
-                        <br>
-                    <label *ngIf="isAdmin">
-                        Next Appointment
-                        <input class="input" type="datetime-local" name="nextAppointment" [(ngModel)]="selectedFamily.nextAppointment">
-                    </label>
+                    </div>
+                    <br>
+                    <label>Color</label>
                     <br>
                     <div style="display: inline-flex;" *ngIf="isAdmin">
                         <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'colorSelected' : ''" (click)="updateColor('blue')">Blue</button>
                         <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'colorSelected' : ''" (click)="updateColor('pink')" >Pink</button>
                     </div>
+                    <br>
+                    <label *ngIf="isAdmin">
+                        Upcoming Appointments
+                        <input class="input" type="datetime-local" name="nextAppointment" [(ngModel)]="selectedFamily.nextAppointment[selectedFamily.nextAppointment.length - 1]">
+                        <button class="button is-danger">Delete</button>
+                        <br>
+                        <button class="button is-link">Add</button>
+                    </label>
+                    <br>
+                    <label>
+                        Previous Appointments
+                    </label>
                 </fieldset>
             </form>
         </div>

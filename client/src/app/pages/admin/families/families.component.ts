@@ -19,18 +19,7 @@ export class FamiliesComponent implements OnInit {
 
   filteredFamilies: Family[] = [];
 
-  selectedFamily: Family = {
-    firstName: "", 
-    lastName: "",
-    phoneNumber: "", 
-    allergies: [],
-    checkedIn: [], 
-    nextAppointment: [],
-    color: "",
-    minors: 0,
-    adults: 0,
-    seniors: 0
-  };
+  selectedFamily: string = "";
 
   nextAppointmentFormatted: Date = new Date();
 
@@ -65,71 +54,13 @@ export class FamiliesComponent implements OnInit {
   }
 
   showModal(number: string): void {
-    this.families.forEach((family) => {
-      if(family.phoneNumber == number) {
-        this.selectedFamily = family;
-        this.nextAppointmentFormatted = new Date(this.selectedFamily.nextAppointment[0].date);
-      }
-    })
-
+    this.selectedFamily = number;
     this.modalVisible = true;
   }
 
   hideModal(): void {
     this.modalVisible = false;
-    this.selectedFamily = {
-      firstName: "", 
-      lastName: "",
-      phoneNumber: "", 
-      allergies: [],
-      checkedIn: [], 
-      nextAppointment: [],
-      color: "",
-      minors: 0,
-      adults: 0,
-      seniors: 0
-    };
-    this.editMode = false;
-  }
-
-  updateFamily(): void {
-    if(this.editMode) {
-      if(this.selectedFamily.phoneNumber.length == 10) {
-        this.http.post(
-          `${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`, 
-          this.selectedFamily,
-          {
-            headers: { Authorization: 'Bearer ' + this.accessToken }
-          })
-        .subscribe();
-      }
-      this.editMode = false;
-    } else {
-      this.editMode = true;
-    }
-  }
-
-  updateColor(color: string) {
-    this.selectedFamily.color = color;
-  }
-
-  updateRestriction(restriction: string) {
-    if(!this.selectedFamily.allergies.includes(restriction))
-      this.selectedFamily.allergies.push(restriction);
-    else
-      this.selectedFamily.allergies.splice(this.selectedFamily.allergies.indexOf(restriction), 1);
-  }
-
-  deleteFamily() {
-    if(this.selectedFamily.phoneNumber.length == 10) {
-      this.http.delete(
-        `${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`,
-        {
-          headers: { Authorization: 'Bearer ' + this.accessToken }
-        })
-        .subscribe();
-    }
-    this.modalVisible = false;
+    this.selectedFamily = "";
   }
 
 }

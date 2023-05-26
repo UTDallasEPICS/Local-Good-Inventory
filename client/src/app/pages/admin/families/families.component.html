@@ -13,9 +13,9 @@
     <tbody>
         <tr *ngFor="let family of filteredFamilies; let i = index" (click)="showModal(family.phoneNumber)">
             <td>{{family.firstName}} {{family.lastName}}</td>
-            <td>{{family.phoneNumber}}</td>
+            <td>({{family.phoneNumber.slice(0,3)}}) {{family.phoneNumber.slice(3,6)}}-{{family.phoneNumber.slice(6,10)}}</td>
             <td>{{family.color}}</td>
-            <td>{{family.nextAppointment}}</td>
+            <td>{{family.nextAppointment.length > 0 ? family.nextAppointment[family.nextAppointment.length - 1].date : ""}}</td>
             <td>{{family.minors}}</td>
             <td>{{family.adults}}</td>
             <td>{{family.seniors}}</td>
@@ -23,4 +23,4 @@
     </tbody>
 </table>
 
-<app-family-info [(modalVisible)]="modalVisible" [isAdmin]="true"></app-family-info>
+<app-family-info [(modalVisible)]="modalVisible" [isAdmin]="true" [family]="this.selectedFamily" [callback]="this.hideModal"></app-family-info>

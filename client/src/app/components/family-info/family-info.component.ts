@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from '@auth0/auth0-angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FamilyService } from 'src/app/services/family.service';
 
 
 @Component({
@@ -20,6 +21,13 @@ export class FamilyInfoComponent implements OnInit {
   @Input() isAdmin: boolean = false;
 
   @Input() callback: (() => void) | undefined;
+
+  @Input() set family(value: string) {
+    this.familyService.pullFamily(value).then(res => {
+      this.selectedFamily = res;
+      window.alert("function ran: " + value);
+    });
+  }
 
   dietaryRestrictions = Constants.dietaryRestrictions;
 
@@ -42,12 +50,15 @@ export class FamilyInfoComponent implements OnInit {
 
   nextAppointmentFormatted: Date = new Date();
 
+  futureAppointments: {id: string, date: string, checkedIn: boolean}[] = [];
+  pastAppointments: {id: string, date: string, checkedIn: boolean}[] = [];
+
   editMode = false;
   restrictionsVisble = false;
 
   private accessToken: string = "";
   
-  constructor(private http: HttpClient, private auth: AuthService, private router: Router) { 
+  constructor(private http: HttpClient, private auth: AuthService, private router: Router, private familyService: FamilyService) { 
     auth.getAccessTokenSilently().subscribe(token => {
       this.accessToken = token;
     })
