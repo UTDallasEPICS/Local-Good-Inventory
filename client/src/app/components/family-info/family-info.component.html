@@ -74,7 +74,7 @@
                     <br>
                     <label *ngIf="isAdmin">
                         Upcoming Appointments
-                        <input class="input" type="datetime-local" name="nextAppointment" [(ngModel)]="selectedFamily.nextAppointment[selectedFamily.nextAppointment.length - 1]">
+                        <input class="input" type="datetime-local" name="nextAppointment" [(ngModel)]="selectedFamily.appointments[selectedFamily.appointments.length - 1]">
                         <button class="button is-danger">Delete</button>
                         <br>
                         <button class="button is-link">Add</button>

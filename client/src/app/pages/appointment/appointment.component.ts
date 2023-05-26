@@ -140,15 +140,15 @@ export class AppointmentComponent implements OnInit {
 
   updateAppointment() {
     this.family = this.familyService.getFamily();
-    if(Array.isArray(this.family.nextAppointment)) {
-      this.family.nextAppointment.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime});
+    if(Array.isArray(this.family.appointments)) {
+      this.family.appointments.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime, checkedIn: false});
     } else {
-      this.family.nextAppointment = [{id: "000000000000000000000000", date: this.family.nextAppointment}];
-      this.family.nextAppointment.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime});
+      this.family.appointments = [{id: "000000000000000000000000", date: this.family.appointments, checkedIn: false}];
+      this.family.appointments.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime, checkedIn: false});
     }
     this.familyService.postFamily(this.family);
     this.appointmentService.postAppointment(this.appointment);
-    window.alert('Appointment successfully booked for ' + this.family.nextAppointment[this.family.nextAppointment.length-1].date.replace('T', " at "));
+    window.alert('Appointment successfully booked for ' + this.family.appointments[this.family.appointments.length-1].date.replace('T', " at "));
   }
 
   openPopup(){

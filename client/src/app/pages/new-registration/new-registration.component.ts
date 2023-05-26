@@ -20,7 +20,7 @@ export class NewRegistrationComponent implements OnInit {
     phoneNumber: "", 
     allergies: [],
     checkedIn: [], 
-    nextAppointment: [],
+    appointments: [],
     color: "",
     minors: 0,
     adults: 0,

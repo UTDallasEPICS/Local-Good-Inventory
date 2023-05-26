@@ -17,7 +17,7 @@ export class CheckinCompleteComponent implements OnInit {
 
   family: Family = {} as Family;
   events = new Map<string, Event>();
-  filteredAppointments: {id: string, date: string}[] = [];
+  filteredAppointments: {id: string, date: string, checkedIn: boolean}[] = [];
 
   private userEvents: Event[] = [];
   private userAppointments: Appointment[] = [];
@@ -31,12 +31,10 @@ export class CheckinCompleteComponent implements OnInit {
 
     var today = new Date();
 
-    for(var appointment of this.family.nextAppointment) {
+    for(var appointment of this.family.appointments) {
       var curr = appointment;
       var appointmentDate = new Date(Date.parse(curr.date));
-      console.log("Appointment Date: ", appointmentDate.toLocaleString());
-      console.log("Hour Deficit: " + (today.valueOf() - appointmentDate.valueOf()) / 36e5);
-      if((today.valueOf() - appointmentDate.valueOf())/36e5 < 48) {
+      if(!curr.checkedIn && (today.valueOf() - appointmentDate.valueOf())/36e5 < 48) {
         if(curr.id == null) {
           curr.id = "000000000000000000000000";
           console.log("null appointment found");
@@ -45,13 +43,13 @@ export class CheckinCompleteComponent implements OnInit {
         this.events.set(curr.id, await this.eventService.retrieveEvent(curr.id));
       }
     }
-    console.log(this.family.nextAppointment);
+    console.log(this.family.appointments);
 
   }
 
   checkIn(eventId: string) {
     var dateString: string = "";
-    for (const appointment of this.family.nextAppointment) {
+    for (const appointment of this.family.appointments) {
       if (appointment.id == eventId) {
         dateString = appointment.date;
       }

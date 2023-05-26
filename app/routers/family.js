@@ -40,7 +40,7 @@ family.post('/', (req, res) => {
         allergies: req.body.allergies,
         phoneNumber: req.body.phoneNumber,
         checkedIn: req.body.checkedIn,
-        nextAppointment: req.body.nextAppointment,
+        appointments: req.body.appointments,
         color: req.body.color } };
 
       if(req.query.date) {

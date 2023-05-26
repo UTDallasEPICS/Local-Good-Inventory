@@ -41,7 +41,7 @@ export class FamilyInfoComponent implements OnInit {
     phoneNumber: "", 
     allergies: [],
     checkedIn: [], 
-    nextAppointment: [],
+    appointments: [],
     color: "",
     minors: 0,
     adults: 0,
@@ -110,7 +110,7 @@ export class FamilyInfoComponent implements OnInit {
     this.families.forEach((family) => {
       if(family.phoneNumber == number) {
         this.selectedFamily = family;
-        this.nextAppointmentFormatted = new Date(this.selectedFamily.nextAppointment[-1].date);
+        this.nextAppointmentFormatted = new Date(this.selectedFamily.appointments[-1].date);
       }
     })
 
@@ -126,7 +126,7 @@ export class FamilyInfoComponent implements OnInit {
       phoneNumber: "", 
       allergies: [],
       checkedIn: [], 
-      nextAppointment: [],
+      appointments: [],
       color: "",
       minors: 0,
       adults: 0,
