@@ -10,14 +10,16 @@ aspects of the design to construct a basic prototype of the website by the end o
 
 [Screenshots](SCREENSHOTS.md#Screenshots)
 
-# Instructions
+## Instructions
 
-#### Prerequesites
+### Prerequesites
+
 - Node.js installed. The link can be found [here.](https://nodejs.org/en/download/)  
 
-#### Building
-Download the repository either from the website or with `
-git clone https://github.com/UTDallasEPICS/Local-Good-Inventory.git` and then navigate into the project directory with `cd Local-Good-Inventory`
+### Building
+
+Download the repository either from the website or with 
+`git clone https://github.com/UTDallasEPICS/Local-Good-Inventory.git` and then navigate into the project directory with `cd Local-Good-Inventory`
 
 Next we need to install the node packages for the front end. Navigate into the *app* directory with `cd app` and install the necessary packages by running `npm install`.
 
@@ -31,6 +33,7 @@ The project should now be ready for use.
 ### Front End
 
 To see the front end, from the `Local-Good-Inventory` directory,
+
 ```
 cd client
 ng serve
@@ -43,14 +46,27 @@ Then navigate to [http://localhost:4200](http://localhost:4200), and you should 
 ### Back End
 
 To run the back-end of this app, which just connects to the database and displays no website or graphical interface, in your terminal from the `Local-Good-Inventory` directory, you want to
+
 ```
 cd app
 node index.js 
 ```
 
-
 ---
+
+## Spring '23 Team 
+
+Isabelle Villegas - Project Leader\
+Michael Ross - Project Partner Liason\
+Kian Hakim - Project Partner Liason\
+Emily Zhu - Project Webmaster\
+Hamzah - Project Webmaster\
+Jay Gadhia - \
+Ruben - \
+Rami Smadi -
+
 ## Fall '22 Team
+
 Michael Ross - Project Leader\
 Gabe Puente - Financial Officer\
 Isabelle Villegas - Project Partner Liaison\
@@ -66,7 +82,7 @@ Adwaith Moothezhath - Project Leader\
 Michael Ross - Project Webmaster\
 Al Wasee Mahmood - Document Manager
 
-### Software Tools Used
+## Software Tools Used
 
 Figma\
 MongoDB\
