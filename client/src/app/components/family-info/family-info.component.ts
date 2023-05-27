@@ -28,7 +28,7 @@ export class FamilyInfoComponent implements OnInit {
     this.familyService.pullFamily(value).then(res => {
       this.selectedFamily = res;
       this.sortAppointments();
-      window.alert("function ran: " + value);
+      //window.alert("function ran: " + value);
     });
   }
 
@@ -126,11 +126,13 @@ export class FamilyInfoComponent implements OnInit {
     var today = new Date().valueOf();
     for(var appointment of this.selectedFamily.appointments) {
       var appointmentDate = new Date(Date.parse(appointment.date)).valueOf();
-      if(today > appointmentDate) {
+      if(today > appointmentDate || appointment.checkedIn) {
         this.pastAppointments.push(appointment);
       } else {
         this.futureAppointments.push(appointment);
       }
+      if(appointment.id == null || appointment.id == "")
+        appointment.id = "000000000000000000000000";
       if(!this.eventData.has(appointment.id)) {
         this.eventData.set(appointment.id, await this.eventService.retrieveEvent(appointment.id))
       }
