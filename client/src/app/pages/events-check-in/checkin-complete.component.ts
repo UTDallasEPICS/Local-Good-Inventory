@@ -47,15 +47,15 @@ export class CheckinCompleteComponent implements OnInit {
 
   }
 
-  checkIn(eventId: string) {
+  checkIn(eventId: string, date: string) {
     var dateString: string = "";
     for (const appointment of this.family.appointments) {
-      if (appointment.id == eventId) {
-        dateString = appointment.date;
+      if (appointment.id == eventId && appointment.date == date) {
+        appointment.checkedIn = true;
       }
     }
-    this.family.checkedIn.push({id: eventId, date: formatDate(dateString, 'dd-MM-yyyy', 'en-US', 'CST')});
-    this.familyService.postFamilyDate(this.family, this.family.checkedIn[this.family.checkedIn.length - 1].date);
+    //this.family.checkedIn.push({id: eventId, date: formatDate(dateString, 'dd-MM-yyyy', 'en-US', 'CST')});
+    this.familyService.postFamilyDate(this.family, date);
     this.eventService.loadEvent(eventId);
   }
 

@@ -10,7 +10,7 @@
         <br>
         <p>Appointment Time: {{appointment.date.replace('T', ' ')}}</p>
         <br>
-        <a class="button" routerLink="/review" (click)="checkIn(appointment.id)">Check In</a>
+        <a class="button" routerLink="/review" (click)="checkIn(appointment.id, appointment.date)">Check In</a>
       </div>
     </div>
   </div>

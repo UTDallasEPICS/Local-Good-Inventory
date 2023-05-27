@@ -39,7 +39,7 @@ family.post('/', (req, res) => {
         seniors: req.body.seniors,
         allergies: req.body.allergies,
         phoneNumber: req.body.phoneNumber,
-        checkedIn: req.body.checkedIn,
+        //checkedIn: req.body.checkedIn,
         appointments: req.body.appointments,
         color: req.body.color } };
 
@@ -50,9 +50,20 @@ family.post('/', (req, res) => {
         reportsCollection.updateOne(reportsQuery, {$set: {}}, {upsert: true});
         console.log("DEBUG: Updated reports collection");
         familiesCollection.findOne(query).then((family) => {
-          console.log(`DEBUG: family.checkedIn.size == ${family.checkedIn.length}`);
-          console.log(`DEBUG: Previous checkin: ${family.checkedIn[family.checkedIn.length - 1].date}`);
-          if(family.checkedIn.length == 0) { //Case: Family has never checked in before
+          var previouslyCheckedIn = false;
+          var checkedInThisMonth = false;
+          for(var appointment of family.appointments) {
+            if(appointment.checkedIn) {
+              previouslyCheckedIn = true;
+              appointmentMonth = new Date(Date.parse(appointment.date)).getMonth();
+              if(appointmentMonth == date.getMonth()) {
+                checkedInThisMonth = true;
+              }
+            }
+          }
+          //console.log(`DEBUG: family.checkedIn.size == ${family.checkedIn.length}`);
+          //console.log(`DEBUG: Previous checkin: ${family.checkedIn[family.checkedIn.length - 1].date}`);
+          if(!previouslyCheckedIn) { //Case: Family has never checked in before
             reportsCollection.findOneAndUpdate(reportsQuery, 
               {$inc: {
                 households: 1,
@@ -63,11 +74,7 @@ family.post('/', (req, res) => {
                 numberOfSeniors: family.seniors
               }}
             );
-          } else if (
-            //If they've already checked in this month
-            family.checkedIn[family.checkedIn.length - 1].date.split('-')[1] == date.getMonth() + 1 &&
-            family.checkedIn[family.checkedIn.length - 1].date.split('-')[2] == date.getFullYear()) {
-              // console.log(`DEBUG: Last date: ${family.checkedIn[family.checkedIn.length - 1]}`);
+          } else if (checkedInThisMonth) {
               reportsCollection.findOneAndUpdate(reportsQuery, 
                 {$inc: {
                   households: 1 // Just increase the total number of households served
