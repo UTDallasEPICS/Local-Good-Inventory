@@ -7,6 +7,9 @@ const reportsCollection = mongoClient.db('LocalGoodCenter').collection('Reports'
 
 family.get('/', (req, res) => {
     console.log("Get family request");
+
+    familiesCollection.updateMany( {}, { $rename: { "nextAppointment": "appointments" } } )
+
     
     if(req.query.phoneNumber) {
       const query = { phoneNumber: req.query.phoneNumber };
