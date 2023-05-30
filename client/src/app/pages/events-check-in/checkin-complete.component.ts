@@ -61,4 +61,8 @@ export class CheckinCompleteComponent implements OnInit {
     this.eventService.loadEvent(eventId);
   }
 
+  getReadableDate(date: string) {
+    return new Date(Date.parse(date)).toLocaleString();
+  }
+
 }

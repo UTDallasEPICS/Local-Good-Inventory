@@ -118,6 +118,8 @@ export class FamilyInfoComponent implements OnInit {
     //todo: remove index i from this.futureAppointments
     //api call to server
     this.familyService.deleteAppointment(this.selectedFamily.phoneNumber, this.futureAppointments[i].id, this.futureAppointments[i].date);
+    this.futureAppointments.splice(i, 1);
+    //window.alert("Appointment Successfully Deleted");
   }
 
   async sortAppointments() {

@@ -8,7 +8,7 @@
       <div style="display: block">
         <p>{{this.events.get(appointment.id)?.eventName}}</p>
         <br>
-        <p>Appointment Time: {{appointment.date.replace('T', ' ')}}</p>
+        <p>Appointment Time: {{this.getReadableDate(appointment.date)}}</p>
         <br>
         <a class="button" routerLink="/review" (click)="checkIn(appointment.id, appointment.date)">Check In</a>
       </div>
