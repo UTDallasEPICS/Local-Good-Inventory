@@ -104,9 +104,9 @@ export class AppointmentComponent implements OnInit {
   }
 
   selectTime(time: string) {
+    this.selectedTime = time;
     if(time.length < 5)
       time = "0" + time;
-    this.selectedTime = time;
     this.nextAppointmentTime = `T${time}`;
 
     var slotExists = false;
