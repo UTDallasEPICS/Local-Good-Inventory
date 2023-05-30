@@ -16,6 +16,7 @@ const eventRouter = require('./routers/event');
 const appointmentRouter = require('./routers/appointment');
 const settingsRouter = require('./routers/settings');
 const reportRouter = require('./routers/report');
+const setupRouter = require('./routers/setup');
 
 
 const jwtCheck = jwt({
@@ -58,6 +59,7 @@ app.use('/event', eventRouter);
 app.use('/appointment', appointmentRouter);
 app.use('/settings', settingsRouter);
 app.use('/report', reportRouter);
+app.use('/setup', setupRouter);
 
 
 app.listen(port, async () => {

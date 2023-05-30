@@ -29,6 +29,7 @@ import { ExportComponent } from './pages/admin/export/export.component';
 import { EventsComponent } from './pages/admin/events/events.component';
 import { FamilyInfoComponent } from './components/family-info/family-info.component';
 import { PopupComponent } from './pages/popup/popup.component';
+import { AdvancedComponent } from './pages/admin/advanced/advanced.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { PopupComponent } from './pages/popup/popup.component';
     ExportComponent,
     EventsComponent,
     FamilyInfoComponent,
-    PopupComponent
+    PopupComponent,
+    AdvancedComponent
   ],
   imports: [
     BrowserModule,
