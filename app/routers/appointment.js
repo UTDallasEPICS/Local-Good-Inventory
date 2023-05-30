@@ -14,8 +14,6 @@ appointment.get('/', (req, res) => {
       const year = +req.query.date.split('-')[0];
       const query = { date: day, month: month, year: year };
       appointmentsCollection.findOne(query).then((appointment) => {
-        //console.log(`${query}`);
-        //console.log(query);
         res.status(200).json({
           appointment
         });
@@ -30,18 +28,26 @@ appointment.get('/', (req, res) => {
     } else {
       res.status(404);
     }
-  });
+});
   
-  appointment.post('/', (req, res) => {
-      const query = {date: req.body.date, month: req.body.month, year: req.body.year};
-      const newValue = { $set: {
-        date: req.body.date,
-        month: req.body.month,
-        year: req.body.year,
-        timeslots: req.body.timeslots } };
-      appointmentsCollection.updateOne(query, newValue, {upsert: true});
-      res.status(201);
-      console.log("Post Appointment Successful");
-  });
+appointment.post('/', (req, res) => {
+    const query = {date: req.body.date, month: req.body.month, year: req.body.year};
+    const newValue = { $set: {
+      date: req.body.date,
+      month: req.body.month,
+      year: req.body.year,
+      timeslots: req.body.timeslots,
+      eventID: req.body.eventID } };
+    appointmentsCollection.updateOne(query, newValue, {upsert: true});
+    res.status(201);
+    console.log("Post Appointment Successful");
+});
+
+appointment.delete('/all', (req, res) => {
+  const query = {};
+  appointmentsCollection.deleteMany(query);
+  res.status(201);
+  console.log("All appointments deleted");
+});
 
 module.exports = appointment;

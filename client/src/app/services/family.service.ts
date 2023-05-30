@@ -102,4 +102,13 @@ export class FamilyService {
                 .subscribe();
         }
     }
+
+    deleteAppointment(phoneNumber: string, id: string, date: string) {
+        this.http.delete(
+            `${environment.API_URL}/family/${phoneNumber}/appointment?id=${id}&date=${date}`, 
+            {
+                headers: {Authorization: 'Bearer ' + this.accessToken }
+            })
+            .subscribe();
+    }
 }

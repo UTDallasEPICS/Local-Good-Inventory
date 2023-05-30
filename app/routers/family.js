@@ -1,9 +1,11 @@
 const family = require('express').Router();
 const { MongoClient } = require('mongodb');
+const appointment = require('./appointment');
 const mongoClient = new MongoClient(process.env.DB_URL)
 mongoClient.connect();
 const familiesCollection = mongoClient.db('LocalGoodCenter').collection('Families');
 const reportsCollection = mongoClient.db('LocalGoodCenter').collection('Reports');
+const appointmentsCollection = mongoClient.db('LocalGoodCenter').collection('Appointments');
 
 family.get('/', (req, res) => {
     console.log("Get family request");
@@ -42,7 +44,6 @@ family.post('/', (req, res) => {
         seniors: req.body.seniors,
         allergies: req.body.allergies,
         phoneNumber: req.body.phoneNumber,
-        //checkedIn: req.body.checkedIn,
         appointments: req.body.appointments,
         color: req.body.color } };
 
@@ -64,8 +65,6 @@ family.post('/', (req, res) => {
               }
             }
           }
-          //console.log(`DEBUG: family.checkedIn.size == ${family.checkedIn.length}`);
-          //console.log(`DEBUG: Previous checkin: ${family.checkedIn[family.checkedIn.length - 1].date}`);
           if(!previouslyCheckedIn) { //Case: Family has never checked in before
             reportsCollection.findOneAndUpdate(reportsQuery, 
               {$inc: {
@@ -112,6 +111,40 @@ family.delete('/', (req, res) => {
     } else {
       res.status(404);
     }
+});
+
+family.delete('/:phoneNumber/appointment', (req, res) => {
+  if(req.query.date && req.query.id) {
+    const familyQuery = {
+      phoneNumber: req.params.phoneNumber
+    };
+    const familyUpdate = { $pull: {appointments: { id: req.query.id, date: req.query.date }}};
+    familiesCollection.findOneAndUpdate(familyQuery, familyUpdate);
+
+    const day = +req.query.date.split('T')[0].split('-')[2];
+    const month = +req.query.date.split('-')[1];
+    const year = +req.query.date.split('-')[0];
+    const time = req.query.date.split('T')[1];
+    const appointmentQuery= { 
+      date: day, 
+      month: month, 
+      year: year,
+      eventID: req.query.id,
+      timeslots: {$elemMatch: {
+        time: time
+      }}
+    };
+    const appointmentUpdate = {
+      $pull: {
+        "timeslots.$.phoneNumber" : req.params.phoneNumber
+      },
+      $inc: {
+        "timeslots.$.quantity": -1
+      }
+    }
+    appointmentsCollection.findOneAndUpdate(appointmentQuery, appointmentUpdate);
+    res.status(201);
+  }
 });
 
 module.exports = family;

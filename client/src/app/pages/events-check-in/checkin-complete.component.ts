@@ -34,6 +34,8 @@ export class CheckinCompleteComponent implements OnInit {
     for(var appointment of this.family.appointments) {
       var curr = appointment;
       var appointmentDate = new Date(Date.parse(curr.date));
+      console.log("Appointment date:", appointmentDate);
+      console.log("Hour difference:", today.valueOf() - appointmentDate.valueOf()/36e5);
       if(!curr.checkedIn && (today.valueOf() - appointmentDate.valueOf())/36e5 < 48) {
         if(curr.id == null) {
           curr.id = "000000000000000000000000";

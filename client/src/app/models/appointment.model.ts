@@ -7,5 +7,5 @@ export interface Appointment {
   }[];
   month: number;
   year: number;
-  event_id: string;
+  eventID: string;
 }

@@ -39,19 +39,15 @@ export class AppointmentService {
         )
         .subscribe((res) => {
           this.appointment = res.appointment;
-          //console.log("APPOINTMENT API CALL: ");
-          //console.log(res.appointment);
           if(!res.appointment) {
             this.appointment = {
               date: +date.split('-')[2],
               month: +date.split('-')[1],
               year: +date.split('-')[0],
               timeslots: [],
-              event_id: ""
+              eventID: "000000000000000000000000"
             }
           }
-          //console.log("Object Returned from Function: ")
-          //console.log(this.appointment);
           this.appointmentUpdated.next({ ...this.appointment });
           resolve(this.appointment);
         });
@@ -60,11 +56,17 @@ export class AppointmentService {
   }
 
   postAppointment(appointment: Appointment) {
-    //console.log("NEW APPOINTMENT API OBJECT");
-    //console.log(appointment);
     this.http.post(
       `${environment.API_URL}/appointment`, 
       appointment,
+      {
+        headers: { Authorization: 'Bearer ' + this.accessToken }
+      }).subscribe();
+  }
+
+  deleteAllAppointments() {
+    this.http.delete(
+      `${environment.API_URL}/appointment/all`, 
       {
         headers: { Authorization: 'Bearer ' + this.accessToken }
       }).subscribe();

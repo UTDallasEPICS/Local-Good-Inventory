@@ -104,17 +104,14 @@ export class AppointmentComponent implements OnInit {
   }
 
   selectTime(time: string) {
+    if(time.length < 5)
+      time = "0" + time;
     this.selectedTime = time;
     this.nextAppointmentTime = `T${time}`;
 
     var slotExists = false;
-    //console.log("APPOINTMENT OBJECT ON TIME SELECTION");
-    //console.log(this.appointment.timeslots);
-    //console.log(this.appointment.timeslots.length);
     this.appointment.timeslots.forEach(slot => {
-      //console.log(`SLOT TIME: ${slot.time}`);
       if(slot.time == time) {
-        console.log("FOUND A MATCH");
         slot.quantity++;
         slot.phoneNumber.push(this.family.phoneNumber);
         slotExists = true;
@@ -130,11 +127,9 @@ export class AppointmentComponent implements OnInit {
     }
 
 
-    this.appointment.event_id=this.eventService.getEvent().id; //update event_id
-    if(this.appointment.event_id == null)
-      this.appointment.event_id = "000000000000000000000000";
-    //console.log(`TIME SELECTED OBJECT: ${slotExists}\nTime: ${time}\nPhone Number ${this.family.phoneNumber}`);
-    //console.log(this.appointment);
+    this.appointment.eventID=this.eventService.getEvent().id; //update event_id
+    if(this.appointment.eventID == null)
+      this.appointment.eventID = "000000000000000000000000";
   }
 
 
@@ -152,19 +147,8 @@ export class AppointmentComponent implements OnInit {
   }
 
   openPopup(){
-    // this.popup!.classList.add("open-popup");
     document.getElementById("popup")?.classList.toggle("open-popup");
-    // document.body.style.height = '100%';
-// document.body.style.width = '100%';
-// document.documentElement.style.height = '100%';
-// document.documentElement.style.width = '100%';
-    // document.getElementById("popup")?.classList.toggle("open-background");
-    // document.getElementById("popup")?.classList.toggle("active");
   }
-
-  // closePopup(){
-  //     this.popup!.classList.remove("open-popup");
-  // }
 
 }
 
