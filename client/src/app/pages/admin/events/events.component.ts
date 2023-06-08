@@ -29,7 +29,7 @@ export class EventsComponent implements OnInit {
   }
 
   async getEvent(id: string) {
-    console.log(await this.eventService.retrieveEvent(id));
+    console.log(await this.eventService.getEvent(id));
     console.log(await this.eventService.getFutureEvents());
   }
 
