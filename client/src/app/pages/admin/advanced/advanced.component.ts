@@ -21,7 +21,9 @@ export class AdvancedComponent implements OnInit {
   }
 
   deleteAllAppointments() {
-    this.appointmentService.deleteAllAppointments();
+    if(confirm("Are you sure you wish to delete ALL appointments for all families?")) {
+      this.appointmentService.deleteAllAppointments();
+    }
   }
 
 }
