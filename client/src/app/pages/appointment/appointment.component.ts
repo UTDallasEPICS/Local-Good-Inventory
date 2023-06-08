@@ -53,24 +53,20 @@ export class AppointmentComponent implements OnInit {
         this.settings = settings;
       });
 
-    this.family = this.familyService.getFamily();
+    this.family = this.familyService.getCurrentFamily();
     this.familySubscription = this.familyService
       .getFamilyUpdateListener()
       .subscribe((family: Family) => {
         this.family = family;
       });
   }
-  //make appointment time show up on front end
-  //date string to date obj
 
-  //day of week from day obj
-  //output start and end time for that specific date && week of the settings obj
   buttonDisplay() {
     this.selectedTime = '';
     var dateSelected = new Date(this.nextAppointment);
     this.availableTimes = [];
     var dateNumSelected = dateSelected.getDay() + 1;
-    //console.log(`Datenumselected: ${dateNumSelected}`)
+
     if(dateNumSelected > 6) dateNumSelected = 0;
     var settingsDate = this.settings.dates[dateNumSelected];
     if(settingsDate.active && !this.settings.blockOuts.includes(this.nextAppointment)) {
@@ -78,11 +74,9 @@ export class AppointmentComponent implements OnInit {
                       parseInt(settingsDate.startTime.split(':')[1]);
       var endTime = parseInt(settingsDate.endTime.split(':')[0]) * 60 + 
                     parseInt(settingsDate.endTime.split(':')[1]);
-      //console.log(`Start time: ${startTime} End time: ${settingsDate.endTime}`)
-      //console.log("Appointment Object: ")
+
       this.appointmentService.updateAppointment(this.nextAppointment).then((res) => {
         this.appointment = res
-        //console.log(this.appointment);
         
         var full;
         for(var i = startTime; i <= endTime; i+= this.settings.interval) {
@@ -98,8 +92,6 @@ export class AppointmentComponent implements OnInit {
       });
       
     }
-
-    //console.log(this.availableTimes);
     
   }
 
@@ -127,23 +119,17 @@ export class AppointmentComponent implements OnInit {
     }
 
 
-    this.appointment.eventID=this.eventService.getEvent().id; //update event_id
+    this.appointment.eventID=this.eventService.getCurrentEvent().id; //update event_id
     if(this.appointment.eventID == null)
       this.appointment.eventID = "000000000000000000000000";
   }
 
 
   updateAppointment() {
-    this.family = this.familyService.getFamily();
-    if(Array.isArray(this.family.appointments)) {
-      this.family.appointments.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime, checkedIn: false});
-    } else {
-      this.family.appointments = [{id: "000000000000000000000000", date: this.family.appointments, checkedIn: false}];
-      this.family.appointments.push({id: this.eventService.getEvent().id , date: this.nextAppointment + this.nextAppointmentTime, checkedIn: false});
-    }
-    this.familyService.postFamily(this.family);
+    this.family = this.familyService.getCurrentFamily();
+    this.familyService.bookAppointment(this.family.phoneNumber, this.appointment.eventID, this.nextAppointment + this.nextAppointmentTime);
     this.appointmentService.postAppointment(this.appointment);
-    window.alert('Appointment successfully booked for ' + this.family.appointments[this.family.appointments.length-1].date.replace('T', " at "));
+    window.alert(`Appointment successfully booked for ${this.nextAppointment} at ${this.nextAppointmentTime}`);
   }
 
   openPopup(){

@@ -34,7 +34,7 @@ const jwtCheck = jwt({
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-  methods: 'GET, POST, PATCH, DELETE, OPTIONS'
+  methods: 'GET, POST, PUT, PATCH, DELETE, OPTIONS'
 }))
 
 app.use(jwtCheck);

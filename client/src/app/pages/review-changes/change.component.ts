@@ -20,7 +20,7 @@ export class ReviewChangesComponent implements OnInit {
   constructor(public familyService: FamilyService, private router: Router) { }
 
   ngOnInit() {
-    this.family = this.familyService.getFamily();
+    this.family = this.familyService.getCurrentFamily();
     this.familySubscription = this.familyService.getFamilyUpdateListener()
       .subscribe((family: Family) => {
         this.family = family;

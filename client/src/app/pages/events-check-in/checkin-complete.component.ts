@@ -27,7 +27,7 @@ export class CheckinCompleteComponent implements OnInit {
               private eventService: EventService) { }
 
   async ngOnInit(): Promise<void> {
-    this.family = this.familyService.getFamily();
+    this.family = this.familyService.getCurrentFamily();
 
     var today = new Date();
 
@@ -42,7 +42,7 @@ export class CheckinCompleteComponent implements OnInit {
           console.log("null appointment found");
         }
         this.filteredAppointments.push(curr);
-        this.events.set(curr.id, await this.eventService.retrieveEvent(curr.id));
+        this.events.set(curr.id, await this.eventService.getEvent(curr.id));
       }
     }
     console.log(this.family.appointments);
@@ -56,8 +56,7 @@ export class CheckinCompleteComponent implements OnInit {
         appointment.checkedIn = true;
       }
     }
-    //this.family.checkedIn.push({id: eventId, date: formatDate(dateString, 'dd-MM-yyyy', 'en-US', 'CST')});
-    this.familyService.postFamilyDate(this.family, date);
+    this.familyService.checkInToAppointment(this.family.phoneNumber, eventId, date);
     this.eventService.loadEvent(eventId);
   }
 

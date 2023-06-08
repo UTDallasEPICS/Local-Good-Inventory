@@ -4,8 +4,6 @@ import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { AuthService } from "@auth0/auth0-angular";
-import { lastValueFrom } from "rxjs";
-
 
 @Injectable({providedIn: 'root'})
 export class FamilyService {
@@ -20,95 +18,124 @@ export class FamilyService {
         })
     }
 
-    getFamily() {
-        return {...this.family};
-    }
-
-    async pullFamily(phoneNumber: string) {
-        const promiseToken = new Promise<Family>((resolve, reject) => {
-            this.http.get<{family: Family}>(
-                `${environment.API_URL}/family?phoneNumber=${phoneNumber}`,
-                {
-                    headers: { Authorization: 'Bearer ' + this.accessToken }
-                }
-            )
-            .subscribe((family) => {
-                resolve(family.family);
-            });
-        });
-
-        return promiseToken;
-    }
-
-    async getFamilies() {
-        this.http.get<{families: Family[]}>(
-            `${environment.API_URL}/family`,
-            {
-                headers: { Authorization: 'Bearer ' + this.accessToken }
-            }
-        )
-        .subscribe((families) => {
-            return families;
-        });
-    }
-
     getFamilyUpdateListener() {
         return this.familyUpdated.asObservable();
     }
 
-    updateFamily(phoneNumber: string) {
-        const promiseToken = new Promise((resolve, reject) => {
-            if(phoneNumber.length == 10) {
-                this.http.get<{family: Family}>(
-                    `${environment.API_URL}/family?phoneNumber=${phoneNumber}`,
-                    {
-                        headers: { Authorization: 'Bearer ' + this.accessToken }
-                    }
-                )
-                .subscribe((family) => {
-                    this.family = family.family;
-                    this.familyUpdated.next({...this.family});
-                    resolve(family);
-                });
-            } else {
-                reject("Not a valid phone number");
-            }
-        });
-
-        return promiseToken;
-
+    getCurrentFamily() {
+        return {...this.family};
     }
 
-    async postFamily(family: Family): Promise<void> {
-        if(family.phoneNumber.length == 10) {
-            this.http.post(
-                `${environment.API_URL}/family?phoneNumber=${family.phoneNumber}`, 
-                family,
-                {
-                    headers: { Authorization: 'Bearer ' + this.accessToken}
-                })
-            .subscribe();
-        }
-    }
-
-    postFamilyDate(family: Family, date: string): void {
-        if(family.phoneNumber.length == 10) {
-            this.http.post(
-                `${environment.API_URL}/family?phoneNumber=${family.phoneNumber}&date=${date}`, 
-                family,
-                {
-                    headers: {Authorization: 'Bearer ' + this.accessToken }
-                })
-                .subscribe();
-        }
-    }
-
-    deleteAppointment(phoneNumber: string, id: string, date: string) {
-        this.http.delete(
-            `${environment.API_URL}/family/${phoneNumber}/appointment?id=${id}&date=${date}`, 
+    loadFamily(phoneNumber: string) {
+        this.http.get<{family: Family}>(
+            `${environment.API_URL}/family/${phoneNumber}`,
             {
-                headers: {Authorization: 'Bearer ' + this.accessToken }
-            })
-            .subscribe();
+                headers: { Authorization: `Bearer ${this.accessToken}` }
+            }
+        )
+        .subscribe({
+            next: response => { this.family = response.family;
+                                this.familyUpdated.next({...this.family})},
+            error: error => window.alert(error.error)
+        });
+    }
+
+    async getFamily(phoneNumber: string): Promise<Family> {
+        const promiseToken = new Promise<Family>((resolve, reject) => {
+            this.http.get<{family: Family}>(
+                `${environment.API_URL}/family/${phoneNumber}`,
+                {
+                    headers: { Authorization: `Bearer ${this.accessToken}` }
+                }
+            ).subscribe({
+                next: response => resolve(response.family),
+                error: error => window.alert(error.error)
+            });
+        });
+        return promiseToken;
+    }
+
+    async getAllFamilies(): Promise<Family[]> {
+        const promiseToken = new Promise<Family[]>((resolve, reject) => {
+            this.http.get<{families: Family[]}>(
+                `${environment.API_URL}/family`,
+                {
+                    headers: { Authorization: `Bearer ${this.accessToken}` }
+                }
+            )
+            .subscribe({
+                next: response => resolve(response.families),
+                error: error => window.alert(error.error)
+            });
+        });
+        return promiseToken;
+    }
+
+    async uploadFamily(family: Family): Promise<void> {
+        const promiseToken = new Promise<void>((resolve, reject) => {
+            this.http.put(
+                `${environment.API_URL}/family/${family.phoneNumber}`, 
+                family,
+                {
+                    headers: { Authorization: `Bearer ${this.accessToken}` }
+                }).subscribe({
+                    error: error => window.alert(error.error)
+                });
+        });
+        return promiseToken;
+    }
+
+    async bookAppointment(phoneNumber: string, id: string, date: string) {
+        const promiseToken = new Promise<void>((resolve, reject) => {
+            this.http.put(
+                `${environment.API_URL}/family/${phoneNumber}/appointment?id=${id}&date=${date}`,
+                null,
+                {
+                    headers: { Authorization: `Bearer ${this.accessToken}` }
+                }).subscribe({
+                    error: error => window.alert(error.error)
+                });
+        });
+        return promiseToken;
+    }
+
+    async checkInToAppointment(phoneNumber: string, id: string, date: string) {
+        const promiseToken = new Promise<void>((resolve, reject) => {
+            this.http.post(
+                `${environment.API_URL}/family/${phoneNumber}/checkin?id=${id}&date=${date}`,
+                null,
+                {
+                    headers: { Authorization: `Bearer ${this.accessToken}` }
+                }).subscribe({
+                    error: error => window.alert(error.error)
+                });
+        });
+        return promiseToken;
+    }
+
+    async deleteFamily(phoneNumber: string) {
+        const promiseToken = new Promise<void>((resolve, reject) => {
+            this.http.delete(
+                `${environment.API_URL}/family/${phoneNumber}`, 
+                {
+                    headers: {Authorization: `Bearer ${this.accessToken}` }
+                }).subscribe({
+                    error: error => window.alert(error.error)
+                });
+        });
+        return promiseToken;
+    }
+
+    async deleteAppointment(phoneNumber: string, id: string, date: string) {
+        const promiseToken = new Promise<void>((resolve, reject) => {
+            this.http.delete(
+                `${environment.API_URL}/family/${phoneNumber}/appointment?id=${id}&date=${date}`, 
+                {
+                    headers: {Authorization: `Bearer ${this.accessToken}` }
+                }).subscribe({
+                    error: error => window.alert(error.error)
+                });
+        });
+        return promiseToken;
     }
 }

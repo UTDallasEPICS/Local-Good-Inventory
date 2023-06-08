@@ -19,7 +19,6 @@ export class NewRegistrationComponent implements OnInit {
     lastName: "",
     phoneNumber: "", 
     allergies: [],
-    checkedIn: [], 
     appointments: [],
     color: "",
     minors: 0,
@@ -33,7 +32,7 @@ export class NewRegistrationComponent implements OnInit {
   }
 
   onClick(){
-    this.familyService.postFamily(this.family);
+    this.familyService.uploadFamily(this.family);
     this.router.navigate(['/appointment']);
   }
 

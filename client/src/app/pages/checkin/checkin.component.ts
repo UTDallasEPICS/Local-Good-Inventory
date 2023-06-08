@@ -39,20 +39,19 @@ export class CheckinComponent implements OnInit {
     return true;
   }
 
-  onFormSubmit(form: NgForm) {  
+  async onFormSubmit(form: NgForm) {  
     this.isValidFormSubmitted = false;  
     if (form.invalid) {  
       return;  
     }  
-    this.isValidFormSubmitted = true;  
-    this.familyService.updateFamily(this.user.mobileNumber).then(response => {
-      this.family = this.familyService.getFamily();
-      if(this.family.lastName == "") {
-        this.router.navigate(['new-registration'])
-      } else {
-        this.router.navigate(['/events-check-in']);
-      }
-    });
+    this.isValidFormSubmitted = true;
+    this.familyService.loadFamily(this.user.mobileNumber);  
+    this.family = await this.familyService.getFamily(this.user.mobileNumber);
+    if(this.family.lastName == "") {
+      this.router.navigate(['new-registration'])
+    } else {
+      this.router.navigate(['/events-check-in']);
+    }
     
     form.resetForm(); 
     

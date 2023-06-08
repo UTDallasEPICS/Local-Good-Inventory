@@ -24,7 +24,7 @@ export class DietaryPageComponent implements OnInit {
   constructor(public familyService: FamilyService) { }
 
   ngOnInit() {
-    this.family = this.familyService.getFamily();
+    this.family = this.familyService.getCurrentFamily();
     this.familySubscription = this.familyService.getFamilyUpdateListener()
       .subscribe((family: Family) => {
         this.family = family;

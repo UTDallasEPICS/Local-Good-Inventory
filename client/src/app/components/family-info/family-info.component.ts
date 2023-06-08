@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Family } from 'src/app/models/family.model';
 import * as Constants from 'src/app/models/constants.model';
-import { environment } from 'src/environments/environment';
-import { AuthService } from '@auth0/auth0-angular';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { FamilyService } from 'src/app/services/family.service';
 import { Event } from 'src/app/models/event.model';
 import { EventService } from 'src/app/services/event.service';
@@ -25,10 +21,9 @@ export class FamilyInfoComponent implements OnInit {
   @Input() callback: (() => void) | undefined;
 
   @Input() set family(value: string) {
-    this.familyService.pullFamily(value).then(res => {
+    this.familyService.getFamily(value).then(res => {
       this.selectedFamily = res;
       this.sortAppointments();
-      //window.alert("function ran: " + value);
     });
   }
 
@@ -43,7 +38,6 @@ export class FamilyInfoComponent implements OnInit {
     lastName: "",
     phoneNumber: "", 
     allergies: [],
-    checkedIn: [], 
     appointments: [],
     color: "",
     minors: 0,
@@ -63,29 +57,15 @@ export class FamilyInfoComponent implements OnInit {
 
   private accessToken: string = "";
   
-  constructor(private http: HttpClient, 
-              private auth: AuthService,  
-              private familyService: FamilyService,
-              private eventService: EventService) { 
-    auth.getAccessTokenSilently().subscribe(token => {
-      this.accessToken = token;
-    })
-  }
+  constructor(private familyService: FamilyService,
+              private eventService: EventService) { }
 
   ngOnInit(): void {
   }
 
   updateFamily(): void {
     if(this.editMode) {
-      if(this.selectedFamily.phoneNumber.length == 10) {
-        this.http.post(
-          `${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`, 
-          this.selectedFamily,
-          {
-            headers: { Authorization: 'Bearer ' + this.accessToken }
-          })
-        .subscribe();
-      }
+      this.familyService.uploadFamily(this.selectedFamily);
       this.editMode = false;
     } else {
       this.editMode = true;
@@ -104,21 +84,18 @@ export class FamilyInfoComponent implements OnInit {
   }
 
   deleteFamily() {
-    if(this.selectedFamily.phoneNumber.length == 10) {
-      this.http.delete(
-        `${environment.API_URL}/family?phoneNumber=${this.selectedFamily.phoneNumber}`,
-        {
-          headers: { Authorization: 'Bearer ' + this.accessToken }
-        })
-        .subscribe();
+    if(confirm("Are you sure you want to delete this family?")) {
+      this.familyService.deleteFamily(this.selectedFamily.phoneNumber);
     }
   }
 
   deleteAppointment(i: number) {
     //todo: remove index i from this.futureAppointments
     //api call to server
-    this.familyService.deleteAppointment(this.selectedFamily.phoneNumber, this.futureAppointments[i].id, this.futureAppointments[i].date);
-    this.futureAppointments.splice(i, 1);
+    if(confirm("Are you sure you want to delete this appointment?")) {
+      this.familyService.deleteAppointment(this.selectedFamily.phoneNumber, this.futureAppointments[i].id, this.futureAppointments[i].date);
+      this.futureAppointments.splice(i, 1);
+    }
     //window.alert("Appointment Successfully Deleted");
   }
 
@@ -137,7 +114,7 @@ export class FamilyInfoComponent implements OnInit {
       if(appointment.id == null || appointment.id == "")
         appointment.id = "000000000000000000000000";
       if(!this.eventData.has(appointment.id)) {
-        this.eventData.set(appointment.id, await this.eventService.retrieveEvent(appointment.id))
+        this.eventData.set(appointment.id, await this.eventService.getEvent(appointment.id))
       }
     }
   }
@@ -161,7 +138,6 @@ export class FamilyInfoComponent implements OnInit {
       lastName: "",
       phoneNumber: "", 
       allergies: [],
-      checkedIn: [], 
       appointments: [],
       color: "",
       minors: 0,

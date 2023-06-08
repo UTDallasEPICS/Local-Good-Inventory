@@ -19,7 +19,7 @@ export class EventService {
     });
   }
 
-  getEvent() {
+  getCurrentEvent() {
     return { ...this.event };
   }
 
@@ -41,11 +41,11 @@ export class EventService {
       });
   }
 
-  async retrieveEvent(id: string) {
+  async getEvent(id: string) {
     const promiseToken = new Promise<Event>((resolve, reject) => {
     this.http
       .get<{ event: Event }>(
-        `${environment.API_URL}/event?id=${id}`,
+        `${environment.API_URL}/event/id/${id}`,
         {
           headers: { Authorization: 'Bearer ' + this.accessToken }
         }
@@ -62,7 +62,7 @@ export class EventService {
     const promiseToken = new Promise<Event[]>((resolve, reject) => {
     this.http
       .get<{ events: Event[] }>(
-        `${environment.API_URL}/event?date=${new Date().toISOString()}`,
+        `${environment.API_URL}/event/future-events/${new Date().toISOString()}`,
         {
           headers: { Authorization: 'Bearer ' + this.accessToken }
         }
@@ -110,7 +110,7 @@ export class EventService {
   }
 
   postEvent(event: Event) {
-    this.http.post(
+    this.http.put(
       `${environment.API_URL}/event`,
       event,
       {
