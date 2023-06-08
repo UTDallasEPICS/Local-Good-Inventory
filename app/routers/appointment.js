@@ -31,7 +31,10 @@ appointment.get('/', (req, res) => {
 });
   
 appointment.post('/', (req, res) => {
-    const query = {date: req.body.date, month: req.body.month, year: req.body.year};
+  if(req.body.eventID.length < 24) {
+    res.status(400).send('Please include a valid event ID');
+  } else {
+    const query = {date: req.body.date, month: req.body.month, year: req.body.year, eventID: req.body.eventID};
     const newValue = { $set: {
       date: req.body.date,
       month: req.body.month,
@@ -39,15 +42,15 @@ appointment.post('/', (req, res) => {
       timeslots: req.body.timeslots,
       eventID: req.body.eventID } };
     appointmentsCollection.updateOne(query, newValue, {upsert: true});
-    res.status(201);
+    res.status(200);//.send(`Appointment for ${req.body.month}-${req.body.date}-${req.body.year} for event ${req.body.eventID} sucessfully updated`);
     console.log("Post Appointment Successful");
+  }
 });
 
 appointment.delete('/all', (req, res) => {
   const query = {};
   appointmentsCollection.deleteMany(query);
-  res.status(201);
-  console.log("All appointments deleted");
+  res.status(200).send("All appointments deleted");
 });
 
 module.exports = appointment;
