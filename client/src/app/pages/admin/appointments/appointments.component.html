@@ -6,8 +6,23 @@
     
         <table *ngIf="!loading">
             <tr *ngFor="let time of times; let i = index;">
-                <td>{{time}}</td>
-                <td *ngFor="let family of families.get(time)">{{family.lastName}}<br/>{{family.phoneNumber}}</td>
+                <td>{{time.time}}</td>
+                <td *ngFor="let family of families.get(time.time); let j = index;">
+                    <b *ngIf="isCheckedIn(j, time.time, time.id); else noShow">
+                        {{family.firstName}} {{family.lastName}}
+                        <br/>
+                        ({{family.phoneNumber.substring(0,3)}}) {{family.phoneNumber.substring(3,6)}}-{{family.phoneNumber.substring(6,10)}}
+                        <br/>
+                        {{family.allergies.toString()}}
+                    </b>
+                    <ng-template #noShow>
+                        {{family.firstName}} {{family.lastName}}
+                        <br/>
+                        ({{family.phoneNumber.substring(0,3)}}) {{family.phoneNumber.substring(3,6)}}-{{family.phoneNumber.substring(6,10)}}
+                        <br/>
+                        {{family.allergies.toString()}}
+                    </ng-template>
+                </td>
             </tr>
         </table>
     </div>

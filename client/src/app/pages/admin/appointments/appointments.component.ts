@@ -13,7 +13,7 @@ import { FamilyService } from 'src/app/services/family.service';
 export class AppointmentsComponent implements OnInit {
 
   appointment: Appointment = {} as Appointment;
-  times: string[] = [];
+  times: {time: string, id: string}[] = [];
   families = new Map<string, Family[]>();
 
   appointmentString: string = "";
@@ -34,7 +34,7 @@ export class AppointmentsComponent implements OnInit {
     this.families.clear();
     this.appointment = await this.appointmentService.updateAppointment(this.appointmentString);
     for await(var slot of this.appointment.timeslots) {
-      this.times.push(slot.time);
+      this.times.push({time: slot.time, id: this.appointment.eventID});
       var familyArray: Family[] = []
       for await(var phoneNumber of slot.phoneNumber) {
         if(phoneNumber != null) {
@@ -50,12 +50,12 @@ export class AppointmentsComponent implements OnInit {
     this.loading = false;
   }
 
-  sortTimes(a: string, b: string) {
-    var hourA = parseInt(a.split(':')[0]);
-    var hourB = parseInt(b.split(':')[0]);
+  sortTimes(a: {time: string, id: string}, b: {time: string, id: string}) {
+    var hourA = parseInt(a.time.split(':')[0]);
+    var hourB = parseInt(b.time.split(':')[0]);
 
-    var minuteA = parseInt(a.split(':')[1]);
-    var minuteB = parseInt(b.split(':')[1]);
+    var minuteA = parseInt(a.time.split(':')[1]);
+    var minuteB = parseInt(b.time.split(':')[1]);
 
     if(hourA == hourB) {
       if(minuteA == minuteB) {
@@ -64,6 +64,21 @@ export class AppointmentsComponent implements OnInit {
       return minuteA < minuteB ? -1 : 1;
     }
     return hourA < hourB ? -1 : 1;
+  }
+
+  isCheckedIn(index: number, time: string, id: string) {
+    var appointmentDateString = `${this.appointment.year}-`
+    appointmentDateString += `${this.appointment.month < 10 ? '0' + this.appointment.month : this.appointment.month}-`
+    appointmentDateString += `${this.appointment.date < 10 ? '0' + this.appointment.date : this.appointment.date}T`
+    appointmentDateString += time;
+    console.log(`DEBUG: Appointment time: ${appointmentDateString}`);
+    for(var appointment of this.families.get(time)![index]!.appointments) {
+      if(appointment.date ==  appointmentDateString && appointment.id == id) {
+        if(appointment.checkedIn)
+          return true;
+      }
+    }
+    return false;
   }
 
 }
