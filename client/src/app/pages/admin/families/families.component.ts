@@ -79,7 +79,8 @@ export class FamiliesComponent implements OnInit {
   }
 
   getLocalDateString(date: string): string {
-    return date.length >=10 ? new Date(Date.parse(date)).toLocaleString() : "None"
+    var localDateString = new Date(Date.parse(date)).toLocaleString();
+    return localDateString != "Invalid Date" ? localDateString : "None";
   }
 
   showModal(number: string): void {
