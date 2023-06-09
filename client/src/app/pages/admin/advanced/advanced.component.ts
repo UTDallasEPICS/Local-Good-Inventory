@@ -21,8 +21,11 @@ export class AdvancedComponent implements OnInit {
   }
 
   deleteAllAppointments() {
-    if(confirm("Are you sure you wish to delete ALL appointments for all families?")) {
-      this.appointmentService.deleteAllAppointments();
+    if(confirm("Are you sure you wish to delete ALL appointments for ALL families?")) {
+      if(confirm("Are you sure? This will delete all past and future appointments, including ones that have been checked into.\n\nNOTE: This will currently not reset the monthly reports.")) {
+        this.appointmentService.deleteAllAppointments();
+        window.alert("All appointments sucessfully deleted.");
+      }
     }
   }
 
