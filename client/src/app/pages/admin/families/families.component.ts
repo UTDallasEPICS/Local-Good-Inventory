@@ -23,6 +23,8 @@ export class FamiliesComponent implements OnInit {
 
   nextAppointmentFormatted: Date = new Date();
 
+  searchString: string = "";
+
   modalVisible = false;
   editMode = false;
   restrictionsVisble = false;
@@ -45,8 +47,31 @@ export class FamiliesComponent implements OnInit {
         .subscribe((families) => {
             this.families = families.families;
             this.filteredFamilies = families.families.filter(t=>t);
+            this.filteredFamilies.sort(this.sortFamilies);
         });
     })
+  }
+
+  filterFamilies(value: string) {
+    value = value.toLowerCase();
+    this.filteredFamilies = this.families.filter((family) => `${family.firstName} ${family.lastName} ${family.color} ${family.phoneNumber}`.toLowerCase().includes(value));
+    this.filteredFamilies.sort(this.sortFamilies);
+  }
+
+  sortFamilies(a: Family, b: Family) {
+    var colorA = a.color;
+    var colorB = b.color;
+
+    var firstNameA = a.firstName;
+    var firstNameB = b.firstName;
+
+    if(colorA == colorB) {
+      if(firstNameA == firstNameB) {
+        return 0;
+      }
+      return firstNameA < firstNameB ? -1 : 1;
+    }
+    return colorA < colorB ? 1 : -1;
   }
 
   updateFilter(): void {

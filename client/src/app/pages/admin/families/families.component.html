@@ -1,3 +1,16 @@
+<div class="field has-addons">
+    <div class="control is-expanded">
+        <form>
+            <input class="input" name="searchBar" type="text" placeholder="Search by name, color, or phone number" (keyup)="filterFamilies(searchString)" [(ngModel)]="searchString">
+        </form>
+    </div>
+    <div class="control">
+      <a class="button is-info">
+        Search
+      </a>
+    </div>
+  </div>
+
 <table class="table is-hoverable is-fullwidth is-striped is-bordered">
     <thead>
         <tr>
