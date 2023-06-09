@@ -67,18 +67,18 @@ family.put('/:phoneNumber', (req, res) => {
     res.status(400).send("Field 'appointments' must be of type Array");
     return;
   }
-  if(req.body.color.length > 0 && (req.body.color != "blue" || req.body.color != "pink")) {
-    res.status(400).send("Field 'color' must contain either 'blue' or 'pink'");
+  if(req.body.color.length > 0 && (req.body.color != "blue" && req.body.color != "pink")) {
+    res.status(400).send(`Field 'color' must contain either 'blue' or 'pink' (Got ${req.body.color})`);
     return;
   }
 
   const query = { phoneNumber: req.params.phoneNumber };
 
-  if(req.body.minors == null)
+  if(req.body.minors == null || req.body.minors < 0)
     req.body.minors = 0;
-  if(req.body.adults == null)
+  if(req.body.adults == null || req.body.adults < 0)
     req.body.adults = 0;
-  if(req.body.seniors == null)
+  if(req.body.seniors == null || req.body.seniors < 0)
     req.body.seniors = 0;    
   
   const newValue = { $set: { 

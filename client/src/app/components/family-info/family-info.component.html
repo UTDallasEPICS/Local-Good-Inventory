@@ -6,16 +6,16 @@
         </div>
         <div class="modal-card-body">
             <form #f="ngForm">
-                <fieldset [disabled]="!editMode">
+                <fieldset>
                     <label>
                         Name
                     </label>
                     <div class="columns">
                         <div class="column">
-                            <input class="input" type="text" name="firstName" placeholder="First Name" [(ngModel)]="selectedFamily.firstName">
+                            <input class="input" type="text" name="firstName" placeholder="First Name" [(ngModel)]="selectedFamily.firstName" [readOnly]="!editMode">
                         </div>
                         <div class="column">
-                            <input class="input" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="selectedFamily.lastName">
+                            <input class="input" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="selectedFamily.lastName" [readOnly]="!editMode">
                         </div>
                     </div>
                     <label>
@@ -24,28 +24,28 @@
                     <div class="columns">
                         <div class="column">
                             <label>0-17</label>
-                            <input class="input" type="number" name="numMinors" [(ngModel)]="selectedFamily.minors">
+                            <input class="input" type="number" name="numMinors" [(ngModel)]="selectedFamily.minors" [readOnly]="!editMode">
                         </div>
                         <div class="column">
                             <label>18-59</label>
-                            <input class="input" type="number" name="numAdults" [(ngModel)]="selectedFamily.adults">
+                            <input class="input" type="number" name="numAdults" [(ngModel)]="selectedFamily.adults" [readOnly]="!editMode">
                         </div>
                         <div class="column">
                             <label>60+</label>
-                            <input class="input" type="number" name="numSeniors" [(ngModel)]="selectedFamily.seniors">
+                            <input class="input" type="number" name="numSeniors" [(ngModel)]="selectedFamily.seniors" [readOnly]="!editMode">
                         </div>
                     </div>
                     <label>
                         Phone Number
                     </label>
-                    <input class="input" type="text" name="number" [(ngModel)]="selectedFamily.phoneNumber">
+                    <input class="input" type="text" name="number" [(ngModel)]="selectedFamily.phoneNumber" [readOnly]="!editMode">
                     <label>
                         Allergies
                     </label>
                     <br>
                     <div class="dropdown" [ngClass]="this.restrictionsVisble? 'is-active' : ''" style="z-index: 10;">
                         <div class="dropdown-trigger">
-                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2" (click)="this.restrictionsVisble = !this.restrictionsVisble">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2" (click)="this.restrictionsVisble = !this.restrictionsVisble" [disabled]="!editMode">
                             <span>{{this.selectedFamily.allergies.length == 0 ? "No Dietary Restrictions" : this.selectedFamily.allergies.toString()}}</span>
                             <span class="icon is-small">
                                 <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -56,7 +56,7 @@
                             <div class="dropdown-content">
                                 <div *ngFor="let restriction of dietaryRestrictions; let i = index;">
                                     <div class="dropdown-item">
-                                        <input type="checkbox" name="allergy{{i}}" (change)="updateRestriction(restriction)" [checked]="this.selectedFamily.allergies.includes(restriction)">
+                                        <input type="checkbox" name="allergy{{i}}" (change)="updateRestriction(restriction)" [checked]="this.selectedFamily.allergies.includes(restriction)" [readOnly]="!editMode">
                                         {{restriction}}
                                     </div>
                                 </div>
@@ -68,8 +68,8 @@
                         <label>Color</label>
                         <br>
                         <div style="display: inline-flex;" *ngIf="isAdmin">
-                            <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'colorSelected' : ''" (click)="updateColor('blue')">Blue</button>
-                            <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'colorSelected' : ''" (click)="updateColor('pink')" >Pink</button>
+                            <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'is-link' : ''" (click)="updateColor('blue')" [disabled]="!editMode">Blue</button>
+                            <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'is-danger' : ''" (click)="updateColor('pink')" [disabled]="!editMode">Pink</button>
                         </div>
                         <br>
                         <label>
@@ -87,12 +87,12 @@
                                         <td>{{this.eventData.get(appointment.id)?.eventName}}</td>
                                         <td>{{appointment.date}}</td>
                                         <td>
-                                            <button class="button is-danger is-small" (click)="deleteAppointment(i);">Delete</button>
+                                            <button class="button is-danger is-small" (click)="deleteAppointment(i);" [disabled]="!editMode">Delete</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <button class="button is-link">Add Appointment</button>
+                            <button class="button is-link" [disabled]="!editMode">Add Appointment</button>
                         </label>
                         <br>
                         <label>
@@ -116,20 +116,20 @@
                         </label>
                         <label>
                             Referral Source
-                            <input class="input" type="text" name="referralSource" placeholder="Referral Source" [(ngModel)]="selectedFamily.referralSource">
+                            <input class="input" type="text" name="referralSource" placeholder="Referral Source" [(ngModel)]="selectedFamily.referralSource" [readOnly]="!editMode">
                         </label>
                         <label>
                             Invited Date
-                            <input class="input" type="date" name="invitedDate" [(ngModel)]="selectedFamily.invitedDate">
+                            <input class="input" type="date" name="invitedDate" [(ngModel)]="selectedFamily.invitedDate" [readOnly]="!editMode">
                         </label>
                         <label class="checkbox">
                             Needs LGM Application
-                            <input type="checkbox" name="needsLGMApplication" [(ngModel)]="selectedFamily.needsLGMApplication">
+                            <input type="checkbox" name="needsLGMApplication" [(ngModel)]="selectedFamily.needsLGMApplication" [readOnly]="!editMode">
                         </label>
                         <br>
                         <label class="checkbox">
                             Needs TEFARP Form
-                            <input type="checkbox" name="needsTEFAPForm" [(ngModel)]="selectedFamily.needsTEFAPForm">
+                            <input type="checkbox" name="needsTEFAPForm" [(ngModel)]="selectedFamily.needsTEFAPForm" [readOnly]="!editMode">
                         </label>
                         <br>
                         <label>
@@ -139,7 +139,7 @@
                                     <tr>
                                         <th>Date Filled Out</th>
                                         <th>
-                                            <button class="button is-link is-small">
+                                            <button class="button is-link is-small" [disabled]="!editMode">
                                                 <span class="icon">
                                                     <i class="fas fa-plus"></i>
                                                 </span>
@@ -149,14 +149,14 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let tefap of selectedFamily.TEFAPForms">
-                                        <td>tefap</td>
+                                        <td>{{tefap}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </label>
                         <label>
                             Notes
-                            <textarea class="input" type="text" name="notes" placeholder="Notes" [(ngModel)]="selectedFamily.notes"></textarea>
+                            <textarea class="textarea" type="text" name="notes" placeholder="Notes" [(ngModel)]="selectedFamily.notes" [readOnly]="!editMode"></textarea>
                         </label>
                     </div>
                     
