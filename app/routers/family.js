@@ -32,9 +32,10 @@ family.get('/:phoneNumber', (req, res) => { // Get one family by phone number
   }
   const query = { phoneNumber: req.params.phoneNumber };
   familiesCollection.findOne(query).then((family) => {
-    if(family != null)
+    if(family != null) {
+      family.needsTEFAPForm = family.TEFAPForms ? family.TEFAPForms.length <= 0 ? true : false : true;
       res.status(200).json({family});
-    else
+    } else
       res.status(404).send(`Family with phone number ${req.params.phoneNumber} not found.`)
   });
 });
@@ -151,7 +152,7 @@ family.post('/:phoneNumber/checkin', (req, res) => {
     }
 
     var appointmentQuery = {appointments: {$elemMatch: {'id': req.query.id, 'date': req.query.date}}};
-    familiesCollection.findOneAndUpdate(appointmentQuery, {$set: {'appointments.$.checkedIn': true}}).then((res) => console.log(res.value.appointments));
+    familiesCollection.findOneAndUpdate(appointmentQuery, {$set: {'appointments.$.checkedIn': true}});
     
     //If they are checking into the market, update the report.
     if(req.query.id == marketEventID) {
