@@ -33,15 +33,8 @@ export class NewRegistrationComponent implements OnInit {
 
   onClick(){
     this.familyService.uploadFamily(this.family);
+    this.familyService.setCurrentFamily(this.family);
     this.router.navigate(['/appointment']);
-  }
-
-  addMember() {
-    //this.family.members.push({name: "", age: "", lastName: ""})
-  }
-
-  removeMember(index: number) {
-    //this.family.members.splice(index,1);
   }
 
   updateRestriction(restriction: string) {
