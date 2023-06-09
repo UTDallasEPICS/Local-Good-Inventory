@@ -26,6 +26,11 @@ export class FamilyService {
         return {...this.family};
     }
 
+    setCurrentFamily(family: Family) {
+        this.family = family;
+        this.familyUpdated.next({...family});
+    }
+
     loadFamily(phoneNumber: string) {
         this.http.get<{family: Family}>(
             `${environment.API_URL}/family/${phoneNumber}`,
@@ -34,8 +39,7 @@ export class FamilyService {
             }
         )
         .subscribe({
-            next: response => { this.family = response.family;
-                                this.familyUpdated.next({...this.family})},
+            next: response => this.setCurrentFamily(response.family),
             error: error => window.alert(error.error)
         });
     }

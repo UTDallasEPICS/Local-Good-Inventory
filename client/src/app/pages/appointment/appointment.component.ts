@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { Appointment } from 'src/app/models/appointment.model';
 import { EventService } from 'src/app/services/event.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'appointment',
@@ -22,7 +23,7 @@ export class AppointmentComponent implements OnInit {
   private settingsSubscription: Subscription = new Subscription();
   familySubscription: Subscription = new Subscription();
   nextAppointment: string = '';
-  nextAppointmentTime: string = 'T10:00';
+  nextAppointmentTime: string = '';
   selectedTime: string = '';
 
   availableTimes: string[] = [];
@@ -31,7 +32,8 @@ export class AppointmentComponent implements OnInit {
     public familyService: FamilyService,
     private settingsService: SettingsService,
     private appointmentService: AppointmentService,
-    private eventService: EventService
+    private eventService: EventService,
+    private router: Router
   ) {}
 
   isDisplay = false;
@@ -126,10 +128,15 @@ export class AppointmentComponent implements OnInit {
 
 
   updateAppointment() {
-    this.family = this.familyService.getCurrentFamily();
-    this.familyService.bookAppointment(this.family.phoneNumber, this.appointment.eventID, this.nextAppointment + this.nextAppointmentTime);
-    this.appointmentService.postAppointment(this.appointment);
-    window.alert(`Appointment successfully booked for ${this.nextAppointment} at ${this.nextAppointmentTime}`);
+    if(this.nextAppointment.length > 0 && this.nextAppointmentTime.length > 0) {
+      this.family = this.familyService.getCurrentFamily();
+      this.familyService.bookAppointment(this.family.phoneNumber, this.appointment.eventID, this.nextAppointment + this.nextAppointmentTime);
+      this.appointmentService.postAppointment(this.appointment);
+      window.alert(`Appointment successfully booked for ${this.nextAppointment} at ${this.nextAppointmentTime}`);
+      this.router.navigate(['/dietary-page']);
+    } else {
+      window.alert("Please select a date and time for your appointment.");
+    }
   }
 
   openPopup(){

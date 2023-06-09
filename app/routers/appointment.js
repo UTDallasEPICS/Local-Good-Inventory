@@ -31,7 +31,7 @@ appointment.get('/', (req, res) => {
 });
   
 appointment.post('/', (req, res) => {
-  if(req.body.eventID.length < 24) {
+  if(req.body.eventID && req.body.eventID.length < 24) {
     res.status(400).send('Please include a valid event ID');
   } else {
     const query = {date: req.body.date, month: req.body.month, year: req.body.year, eventID: req.body.eventID};
