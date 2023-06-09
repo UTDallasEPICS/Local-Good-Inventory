@@ -79,7 +79,7 @@ export class FamiliesComponent implements OnInit {
   }
 
   getLocalDateString(date: string): string {
-    return new Date(Date.parse(date)).toLocaleString()
+    return date.length >=10 ? new Date(Date.parse(date)).toLocaleString() : "None"
   }
 
   showModal(number: string): void {
