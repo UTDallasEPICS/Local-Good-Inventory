@@ -122,10 +122,16 @@
                             Invited Date
                             <input class="input" type="date" name="invitedDate" [(ngModel)]="selectedFamily.invitedDate">
                         </label>
-                        <label>
+                        <label class="checkbox">
                             Needs LGM Application
-                            <input class="input" type="checkbox" name="needsLGMApplication" [(ngModel)]="selectedFamily.needsLGMApplication">
+                            <input type="checkbox" name="needsLGMApplication" [(ngModel)]="selectedFamily.needsLGMApplication">
                         </label>
+                        <br>
+                        <label class="checkbox">
+                            Needs TEFARP Form
+                            <input type="checkbox" name="needsTEFAPForm" [(ngModel)]="selectedFamily.needsTEFAPForm">
+                        </label>
+                        <br>
                         <label>
                             TEFAP Forms
                             <table class="table is-hoverable is-fullwidth is-striped is-bordered">
@@ -147,10 +153,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </label>
-                        <label>
-                            Needs TEFARP Form
-                            <input class="input" type="checkbox" name="needsTEFAPForm" [(ngModel)]="selectedFamily.needsTEFAPForm">
                         </label>
                         <label>
                             Notes

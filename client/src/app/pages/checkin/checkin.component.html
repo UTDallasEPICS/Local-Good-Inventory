@@ -1,46 +1,41 @@
-
-<section class="section has-text-centered">
-  <div class="content">
-    <h1><i><strong>Welcome to Local Good Center!</strong> </i></h1>
-  </div>
-</section>
-<section class="section">
-  <form accept-charset="utf-8" enctype="multipart/form-data" #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
-    <div class="field">
-        <label class="label is-large" for="number">Phone Number!</label>
-        <div class="control has-icons-right has-icons-left" style="width: 40%;">
+<h1 class="title has-text-centered pt-5">Welcome to the Local Good Center</h1>
+<div class="card is-centered column is-4 is-offset-4">
+  <div class="card-content is-centered py-0">
+    <form class="py-0" accept-charset="utf-8" enctype="multipart/form-data" #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+      <div class="field section px-0 pt-5 pb-2">
+        <label class="label is-large" for="number">Phone Number
+          <div class="control has-icons-left">
             <input class="input is-large"
             [(ngModel)]="user.mobileNumber"
             [pattern]="mobNumberPattern"  
             #mobNumber="ngModel" 
-              type="text"
-              name="mobileNumber"
-              placeholder="(XXX) XXX-XXXX" 
-              mask="(000) 000-0000" 
-              value=""
-              (keypress) = "OnlyNumbersAllowed($event)"
-              #pNumberInput = "ngModel"
-              >
+            type="text"
+            name="mobileNumber"
+            placeholder="(XXX) XXX-XXXX" 
+            mask="(000) 000-0000" 
+            value=""
+            (keypress) = "OnlyNumbersAllowed($event)"
+            #pNumberInput = "ngModel"
+            >
             <span class="icon is-small is-left">
-                <i class="fa-solid fa-phone"></i>
+              <i class="fa-solid fa-phone"></i>
             </span>
-        </div>
-    </div>
-      
-      <div class="field is-grouped mt-6">
-          <div class="control">
-                <button class="button is-link is-medium" type="submit" [disabled]="userForm.invalid">Submit</button>
           </div>
-          <div class="control">
-              <a routerLink = "/">
-                  <button class="button is-link is-medium is-light ml-6">Cancel</button>
-              </a>
-          </div>
+        </label>
       </div>
-  </form>
-</section>
-<section class="section">
-  <a routerLink = "/new-registration">
-    <span class="tag is-warning is-rounded is-large">New Registration</span>
-  </a>
-</section>
+      <div class="field">
+        <button class="button is-link is-medium is-centered" type="submit" [disabled]="userForm.invalid">Check In</button>
+      </div>
+      <section class="section has-text-centered px-0">
+        <a routerLink = "/new-registration">
+          <span class="icon-text">
+            <span class="is-warning">Register for the Local Good Center</span>
+            <span class="icon">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+          </span>
+        </a>
+      </section>
+    </form>
+  </div>
+</div>
