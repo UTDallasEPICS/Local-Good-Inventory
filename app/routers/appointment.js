@@ -6,7 +6,9 @@ mongoClient.connect();
 const appointmentsCollection = mongoClient.db('LocalGoodCenter').collection('Appointments');
 const familiesCollection = mongoClient.db('LocalGoodCenter').collection('Families');
 
-
+/**
+ * Gets one appointment if full date specified, otherwise a list of appointments for a given month and year
+ */
 appointment.get('/', (req, res) => {
     if(req.query.date) {
       const day = +req.query.date.split('-')[2];
@@ -30,9 +32,14 @@ appointment.get('/', (req, res) => {
     }
 });
   
+
+/**
+ * Inserts/updates an appointment
+ */
 appointment.post('/', (req, res) => {
   if(req.body.eventID && req.body.eventID.length < 24) {
     res.status(400).send('Please include a valid event ID');
+    return;
   } else {
     const query = {date: req.body.date, month: req.body.month, year: req.body.year, eventID: req.body.eventID};
     const newValue = { $set: {
@@ -47,6 +54,9 @@ appointment.post('/', (req, res) => {
   }
 });
 
+/**
+ * Deletes all appointments from the appointments database and from each family
+ */
 appointment.delete('/all', (req, res) => {
   const query = {};
   appointmentsCollection.deleteMany(query);
