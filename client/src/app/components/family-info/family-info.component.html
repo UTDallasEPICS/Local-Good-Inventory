@@ -64,55 +64,100 @@
                         </div>
                     </div>
                     <br>
-                    <label>Color</label>
-                    <br>
-                    <div style="display: inline-flex;" *ngIf="isAdmin">
-                        <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'colorSelected' : ''" (click)="updateColor('blue')">Blue</button>
-                        <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'colorSelected' : ''" (click)="updateColor('pink')" >Pink</button>
+                    <div *ngIf="isAdmin">
+                        <label>Color</label>
+                        <br>
+                        <div style="display: inline-flex;" *ngIf="isAdmin">
+                            <button class="button blue" [ngClass]="this.selectedFamily.color == 'blue' ? 'colorSelected' : ''" (click)="updateColor('blue')">Blue</button>
+                            <button class="button pink" [ngClass]="this.selectedFamily.color == 'pink' ? 'colorSelected' : ''" (click)="updateColor('pink')" >Pink</button>
+                        </div>
+                        <br>
+                        <label>
+                            Upcoming Appointments
+                            <table class="table is-hoverable is-fullwidth is-striped is-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Time</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>    
+                                <tbody>
+                                    <tr *ngFor="let appointment of this.futureAppointments; let i = index;">
+                                        <td>{{this.eventData.get(appointment.id)?.eventName}}</td>
+                                        <td>{{appointment.date}}</td>
+                                        <td>
+                                            <button class="button is-danger is-small" (click)="deleteAppointment(i);">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button class="button is-link">Add Appointment</button>
+                        </label>
+                        <br>
+                        <label>
+                            Previous Appointments
+                            <table class="table is-hoverable is-fullwidth is-striped is-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Time</th>
+                                        <th>Checked In</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let appointment of this.pastAppointments">
+                                        <td>{{this.eventData.get(appointment.id)?.eventName}}</td>
+                                        <td>{{appointment.date}}</td>
+                                        <td>{{appointment.checkedIn ? "Yes" : "No"}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </label>
+                        <label>
+                            Referral Source
+                            <input class="input" type="text" name="referralSource" placeholder="Referral Source" [(ngModel)]="selectedFamily.referralSource">
+                        </label>
+                        <label>
+                            Invited Date
+                            <input class="input" type="date" name="invitedDate" [(ngModel)]="selectedFamily.invitedDate">
+                        </label>
+                        <label>
+                            Needs LGM Application
+                            <input class="input" type="checkbox" name="needsLGMApplication" [(ngModel)]="selectedFamily.needsLGMApplication">
+                        </label>
+                        <label>
+                            TEFAP Forms
+                            <table class="table is-hoverable is-fullwidth is-striped is-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Date Filled Out</th>
+                                        <th>
+                                            <button class="button is-link is-small">
+                                                <span class="icon">
+                                                    <i class="fas fa-plus"></i>
+                                                </span>
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tefap of selectedFamily.TEFAPForms">
+                                        <td>tefap</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </label>
+                        <label>
+                            Needs TEFARP Form
+                            <input class="input" type="checkbox" name="needsTEFAPForm" [(ngModel)]="selectedFamily.needsTEFAPForm">
+                        </label>
+                        <label>
+                            Notes
+                            <textarea class="input" type="text" name="notes" placeholder="Notes" [(ngModel)]="selectedFamily.notes"></textarea>
+                        </label>
                     </div>
-                    <br>
-                    <label *ngIf="isAdmin">
-                        Upcoming Appointments
-                        <table class="table is-hoverable is-fullwidth is-striped is-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Event</th>
-                                    <th>Time</th>
-                                    <th></th>
-                                </tr>
-                            </thead>    
-                            <tbody>
-                                <tr *ngFor="let appointment of this.futureAppointments; let i = index;">
-                                    <td>{{this.eventData.get(appointment.id)?.eventName}}</td>
-                                    <td>{{appointment.date}}</td>
-                                    <td>
-                                        <button class="button is-danger" (click)="deleteAppointment(i);">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button class="button is-link">Add Appointment</button>
-                    </label>
-                    <br>
-                    <label>
-                        Previous Appointments
-                        <table class="table is-hoverable is-fullwidth is-striped is-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Event</th>
-                                    <th>Time</th>
-                                    <th>Checked In</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let appointment of this.pastAppointments">
-                                    <td>{{this.eventData.get(appointment.id)?.eventName}}</td>
-                                    <td>{{appointment.date}}</td>
-                                    <td>{{appointment.checkedIn ? "Yes" : "No"}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </label>
+                    
                 </fieldset>
             </form>
         </div>

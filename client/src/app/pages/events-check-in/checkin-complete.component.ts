@@ -6,6 +6,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 import { EventService } from 'src/app/services/event.service';
 import { FamilyService } from 'src/app/services/family.service';
 import { formatDate } from '@angular/common';
+import { FamilyDefaults } from 'src/app/models/constants.model';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { formatDate } from '@angular/common';
 })
 export class CheckinCompleteComponent implements OnInit {
 
-  family: Family = {} as Family;
+  family: Family = FamilyDefaults;
   events = new Map<string, Event>();
   filteredAppointments: {id: string, date: string, checkedIn: boolean}[] = [];
 

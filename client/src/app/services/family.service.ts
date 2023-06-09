@@ -4,10 +4,11 @@ import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { AuthService } from "@auth0/auth0-angular";
+import { FamilyDefaults } from "../models/constants.model";
 
 @Injectable({providedIn: 'root'})
 export class FamilyService {
-    private family: Family = {} as Family;
+    private family: Family = FamilyDefaults;
     private familyUpdated = new Subject<Family>();
 
     private accessToken: string = "";

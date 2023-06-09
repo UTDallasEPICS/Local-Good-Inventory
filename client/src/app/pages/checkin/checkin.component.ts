@@ -3,6 +3,7 @@ import { FamilyService } from 'src/app/services/family.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Family } from 'src/app/models/family.model';
+import { FamilyDefaults } from 'src/app/models/constants.model';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class CheckinComponent implements OnInit {
   mobNumberPattern = "^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$";  
   isValidFormSubmitted = false;  
   user = new User();
-  family: Family = {} as Family;
+  family: Family = FamilyDefaults;
 
   constructor(public familyService: FamilyService, private router: Router) { }
 

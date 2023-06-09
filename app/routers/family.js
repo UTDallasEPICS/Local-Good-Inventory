@@ -89,7 +89,13 @@ family.put('/:phoneNumber', (req, res) => {
     allergies: req.body.allergies,
     phoneNumber: req.body.phoneNumber,
     appointments: req.body.appointments,
-    color: req.body.color } };
+    color: req.body.color,
+    referralSource: req.body.referralSource,
+    notes: req.body.notes,
+    invitedDate: req.body.invitedDate,
+    needsLGMApplication: req.body.needsLGMApplication,
+    needsTEFAPForm: req.body.needsTEFAPForm,
+    TEFAPForms: req.body.TEFAPForms } };
 
   familiesCollection.updateOne(query, newValue, {upsert: true});
   res.status(201);

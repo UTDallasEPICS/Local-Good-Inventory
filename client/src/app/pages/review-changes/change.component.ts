@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { Family } from 'src/app/models/family.model';
 import { FamilyService } from 'src/app/services/family.service';
+import { FamilyDefaults } from 'src/app/models/constants.model';
 
 @Component({
   selector: 'change',
@@ -14,7 +15,7 @@ export class ReviewChangesComponent implements OnInit {
 
   modalVisible: boolean = false;
 
-  family: Family = {} as Family;
+  family: Family = FamilyDefaults;
   private familySubscription: Subscription = new Subscription;
 
   constructor(public familyService: FamilyService, private router: Router) { }

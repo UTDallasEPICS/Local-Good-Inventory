@@ -33,17 +33,7 @@ export class FamilyInfoComponent implements OnInit {
 
   filteredFamilies: Family[] = [];
 
-  selectedFamily: Family = {
-    firstName: "", 
-    lastName: "",
-    phoneNumber: "", 
-    allergies: [],
-    appointments: [],
-    color: "",
-    minors: 0,
-    adults: 0,
-    seniors: 0
-  };
+  selectedFamily: Family = Constants.FamilyDefaults;
 
   eventData = new Map<string, Event>();
 
@@ -90,13 +80,10 @@ export class FamilyInfoComponent implements OnInit {
   }
 
   deleteAppointment(i: number) {
-    //todo: remove index i from this.futureAppointments
-    //api call to server
     if(confirm("Are you sure you want to delete this appointment?")) {
       this.familyService.deleteAppointment(this.selectedFamily.phoneNumber, this.futureAppointments[i].id, this.futureAppointments[i].date);
       this.futureAppointments.splice(i, 1);
     }
-    //window.alert("Appointment Successfully Deleted");
   }
 
   async sortAppointments() {
@@ -128,22 +115,13 @@ export class FamilyInfoComponent implements OnInit {
     })
 
     this.modalVisible = true;
+    this.editMode = false;
     this.modalVisibleChange.emit(this.modalVisible);
   }
 
   hideModal(): void {
     this.modalVisible = false;
-    this.selectedFamily = {
-      firstName: "", 
-      lastName: "",
-      phoneNumber: "", 
-      allergies: [],
-      appointments: [],
-      color: "",
-      minors: 0,
-      adults: 0,
-      seniors: 0
-    };
+    this.selectedFamily = Constants.FamilyDefaults;
     this.editMode = false;
     this.modalVisibleChange.emit(this.modalVisible);
     if(this.callback != undefined) {

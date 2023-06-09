@@ -8,6 +8,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 import { Appointment } from 'src/app/models/appointment.model';
 import { EventService } from 'src/app/services/event.service';
 import { Router } from '@angular/router';
+import { FamilyDefaults } from 'src/app/models/constants.model';
 
 @Component({
   selector: 'appointment',
@@ -17,7 +18,7 @@ import { Router } from '@angular/router';
 export class AppointmentComponent implements OnInit {
   popup = document.getElementById("popup");
 
-  family: Family = {} as Family;
+  family: Family = FamilyDefaults;
   settings: Settings = {} as Settings;
   appointment: Appointment = {} as Appointment;
   private settingsSubscription: Subscription = new Subscription();

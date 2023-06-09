@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { FamilyDefaults } from 'src/app/models/constants.model';
 import { Family } from 'src/app/models/family.model';
 import { FamilyService } from 'src/app/services/family.service';
 
@@ -18,7 +19,7 @@ export class DietaryPageComponent implements OnInit {
     'Diabetes': 'fa-cubes-stacked'
   }
 
-  family: Family = {} as Family;
+  family: Family = FamilyDefaults;
   private familySubscription: Subscription = new Subscription;
 
   constructor(public familyService: FamilyService) { }

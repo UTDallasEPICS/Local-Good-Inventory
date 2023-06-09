@@ -14,17 +14,7 @@ export class NewRegistrationComponent implements OnInit {
 
   dietaryRestrictions = Constants.dietaryRestrictions;
 
-  family: Family = {
-    firstName: "", 
-    lastName: "",
-    phoneNumber: "", 
-    allergies: [],
-    appointments: [],
-    color: "",
-    minors: 0,
-    adults: 0,
-    seniors: 0
-  };
+  family: Family = Constants.FamilyDefaults;
 
   constructor(private familyService: FamilyService, private router: Router) { }
 
