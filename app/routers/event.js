@@ -5,6 +5,8 @@ mongoClient.connect();
 const eventsCollection = mongoClient.db('LocalGoodCenter').collection('Events');
 const ObjectId = require('mongodb').ObjectId;
 const {scrape} = require("../scraper.js");
+const marketEventID = '000000000000000000000000';
+
 
 /**
  * Get a list of all events in the database
@@ -45,7 +47,7 @@ event.put('/', (req, res) => {
  */
 event.get('/future-events/:date', (req, res) => {
   if(!req.params.date.length >= 10) {
-    res.status(400).send("Invalid date");
+    res.status(400).send(`Invalid date: ${req.params.date}`);
     return;
   }
   const query = { dates: {$gt: req.query.date} }
@@ -65,6 +67,7 @@ event.get('/future-events/:date', (req, res) => {
 event.get('/id/:id', (req, res) => {
   if(req.params.id.length != 24) {
     res.status(400).send("Please enter a valid id of length 24");
+    return;
   }
   const query = { _id: ObjectId(req.params.id) }
   eventsCollection.findOne(query).then((event, err) => {
@@ -90,6 +93,23 @@ event.get('/scrape', (req, res) => {
       res.status(200).json({events}); 
     }
   });
+});
+
+/**
+ * Deletes an event with a specified id
+ */
+event.delete('/:id', (req, res) => {
+  if(req.params.id.length != 24) {
+    res.status(400).send("Please enter a valid id of length 24");
+    return;
+  }
+  if(req.params.id == marketEventID) {
+    res.status(400).send(`Cannot delete market event with id ${marketEventID}`);
+    return;
+  }
+  const query = { _id: ObjectId(req.params.id) }
+  eventsCollection.findOneAndDelete(query);
+  res.status(200);
 });
 
 module.exports = event;
