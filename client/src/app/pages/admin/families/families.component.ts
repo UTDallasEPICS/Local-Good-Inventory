@@ -78,6 +78,10 @@ export class FamiliesComponent implements OnInit {
 
   }
 
+  getLocalDateString(date: string): string {
+    return new Date(Date.parse(date)).toLocaleString()
+  }
+
   showModal(number: string): void {
     this.selectedFamily = number;
     this.modalVisible = true;

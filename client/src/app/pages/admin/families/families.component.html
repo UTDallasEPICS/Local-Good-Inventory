@@ -28,7 +28,7 @@
             <td>{{family.firstName}} {{family.lastName}}</td>
             <td>({{family.phoneNumber.slice(0,3)}}) {{family.phoneNumber.slice(3,6)}}-{{family.phoneNumber.slice(6,10)}}</td>
             <td>{{family.color}}</td>
-            <td>{{family.appointments.length > 0 ? family.appointments[family.appointments.length - 1].date : ""}}</td>
+            <td>{{family.appointments.length > 0 ? getLocalDateString(family.appointments[family.appointments.length - 1].date) : ""}}</td>
             <td>{{family.minors}}</td>
             <td>{{family.adults}}</td>
             <td>{{family.seniors}}</td>
