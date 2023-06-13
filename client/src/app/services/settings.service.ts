@@ -11,15 +11,13 @@ import { AuthService } from "@auth0/auth0-angular";
 export class SettingsService {
     private settings: Settings = 
         {
-            dates: [{day: 'Sun', startTime:"09:30", endTime:"11:30", active:false},
-                    {day: 'Mon', startTime:"09:30", endTime:"11:30", active:false},
-                    {day: 'Tue', startTime:"09:30", endTime:"11:30", active:false},
-                    {day: 'Wed', startTime:"09:30", endTime:"11:30", active:false},
-                    {day: 'Thu', startTime:"09:30", endTime:"11:30", active:false},
-                    {day: 'Fri', startTime:"09:30", endTime:"11:30", active:true},
-                    {day: 'Sat', startTime:"09:30", endTime:"11:30", active:true}],
-            interval: 15,
-            quantity: 4,
+            dates: [{day: 'Sun', startTime:"09:30", endTime:"11:30", interval: 15, quantity: 4, active:false},
+                    {day: 'Mon', startTime:"09:30", endTime:"11:30", interval: 15, quantity: 4, active:false},
+                    {day: 'Tue', startTime:"09:30", endTime:"11:30", interval: 15, quantity: 4, active:false},
+                    {day: 'Wed', startTime:"09:30", endTime:"11:30", interval: 15, quantity: 4, active:false},
+                    {day: 'Thu', startTime:"09:30", endTime:"11:30", interval: 15, quantity: 4, active:false},
+                    {day: 'Fri', startTime:"09:30", endTime:"11:30", interval: 15, quantity: 4, active:true},
+                    {day: 'Sat', startTime:"09:30", endTime:"11:30", interval: 15, quantity: 4, active:true}],
             blockOuts: []
         };
     private settingsUpdated = new Subject<Settings>();

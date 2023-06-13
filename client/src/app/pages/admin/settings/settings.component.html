@@ -1,20 +1,13 @@
 <div>
-
-
     <form styly="display: flex;">
         <!--Dates: <input type="text" name="dates" [(ngModel)]="settings.dates">-->
         <div class="field is-horizontal">
-            <div class="field">
-                <label class="label">Interval (mins)</label><input class="input" type="number" name="interval" [(ngModel)]="settings.interval" min="10" max="60">
-            </div>
-            <div class="field">
-                <label class="label">Quantity (people/timeslot)</label><input class="input" type="number" name="quantity" [(ngModel)]="settings.quantity" min="1">
-            </div>
+            
         </div>
         <label class="label">Days</label>
         <div class="field is-grouped">
             <div class="control" *ngFor="let day of settings.dates; let i = index;">
-                <button style="padding-right: 77px;" [ngClass]="day.active ? 'has-background-link has-text-white':''" class="button" (click)="day.active = !day.active">{{day.day}}</button>
+                <button style="padding-right: 100px;" [ngClass]="day.active ? 'has-background-link has-text-white':''" class="button" (click)="day.active = !day.active">{{day.day}}</button>
                 <div *ngIf="day.active">
                     <br>
                     <div class="field">
@@ -22,6 +15,12 @@
                     </div>
                     <div class="field">
                         <label class="label">End Time</label><input class="input" type="time" name="endTime{{i}}" [(ngModel)]="day.endTime">
+                    </div>
+                    <div class="field">
+                        <label class="label">Interval (mins)</label><input class="input" type="number" name="interval{{i}}" [(ngModel)]="day.interval" min="10" max="60">
+                    </div>
+                    <div class="field">
+                        <label class="label">Quantity (people)</label><input class="input" type="number" name="quantity{{i}}" [(ngModel)]="day.quantity" min="10" max="60">
                     </div>
                 </div>
             </div>
