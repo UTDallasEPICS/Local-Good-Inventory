@@ -6,22 +6,22 @@
     </div>
 
     <div *ngIf="pages[0].active" class="card">
-        <app-stats></app-stats>
-    </div>
-    <div *ngIf="pages[1].active" class="card">
-        <app-settings></app-settings>
-    </div>
-    <div *ngIf="pages[2].active" class="card">
         <app-families></app-families>
     </div>
-    <div *ngIf="pages[3].active" class="card">
+    <div *ngIf="pages[1].active" class="card">
         <app-appointments></app-appointments>
     </div>
-    <div *ngIf="pages[4].active" class="card">
-      <app-export></app-export>
+    <div *ngIf="pages[2].active" class="card">
+        <app-stats></app-stats>
     </div>
-    <div *ngIf="pages[5].active" class="card">
+    <div *ngIf="pages[3].active" class="card">
       <app-events></app-events>
+    </div>
+    <div *ngIf="pages[4].active" class="card">
+        <app-export></app-export>
+      </div>
+    <div *ngIf="pages[5].active" class="card">
+        <app-settings></app-settings>
     </div>
     <div *ngIf="pages[6].active" class="card">
       <app-advanced></app-advanced>

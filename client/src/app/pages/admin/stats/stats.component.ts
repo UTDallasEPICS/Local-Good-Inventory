@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Family } from 'src/app/models/family.model';
 import { Report } from 'src/app/models/report.model';
+import { FamilyService } from 'src/app/services/family.service';
 import { ReportService } from 'src/app/services/report.service';
 
 @Component({
@@ -9,36 +11,34 @@ import { ReportService } from 'src/app/services/report.service';
 })
 export class StatsComponent implements OnInit {
 
-  breakfastCount = 0;
-  lunchCount = 0;
-  dinnerCount = 0;
-  supplementalSnackCount = 0;
-  totalDaysDistributed = 8;
-  totalHouseholdsServed = 49;
-  totalIndividualsServed = 97;
-  totalNewHouseholdsServed = 12;
-  totalClientsUnder17 = 107;
-  totalClients18to59 = 126;
-  totalClients60andOver = 25;
-  percentFoodUsedFromNFTB = 90;
+  selectedField: string = "";
+
+  familyList: {family: Family, date: string}[] = [];
 
   report: Report = {
     month: 0,
     year: 0,
     daysDistributed: 0,
     households: 0,
+    householdsList: [],
     individualHouseholds: 0,
+    individualHouseholdsList: [],
     newHouseholds: 0,
+    newHouseholdsList: [],
     numberOfClients: 0,
+    clientsList: [],
     numberOfYouth: 0,
-    numberOfSeniors: 0
+    youthList: [],
+    numberOfSeniors: 0,
+    seniorsList: []
 }
 
   today: Date = new Date();
   selectedMonth = this.today.getMonth() + 1;
   selectedYear = this.today.getFullYear();
 
-  constructor(private reportsService: ReportService) { }
+  constructor(private reportsService: ReportService,
+              private familyService: FamilyService) { }
 
   ngOnInit(): void {
     this.reportsService.updateReport(this.selectedMonth, this.selectedYear).then((report) => {
@@ -63,6 +63,37 @@ export class StatsComponent implements OnInit {
       }
       this.report = report as Report;
     });
+  }
+
+  async loadFamilies(list: {phone: string, date: string}[]) {
+    this.familyList = [];
+    list.forEach(async x => {
+      this.familyList.push({family: await this.familyService.getFamily(x.phone), date: x.date});
+    });
+  }
+
+  async select(field: string) {
+    if(this.selectedField == field) {
+      this.selectedField = ""
+    } else {
+      this.selectedField = field;
+    }
+
+    switch(this.selectedField) {
+      case 'individualHouseholds':
+        await this.loadFamilies(this.report.individualHouseholdsList); break;
+      case 'households':
+        await this.loadFamilies(this.report.householdsList); break;
+      case 'newHouseholds':
+        await this.loadFamilies(this.report.newHouseholdsList); break;
+      case 'numberOfSeniors':
+        await this.loadFamilies(this.report.seniorsList); break;
+      case 'numberOfYouth':
+        await this.loadFamilies(this.report.youthList); break;
+      case 'numberOfClients':
+        await this.loadFamilies(this.report.clientsList); break;
+    }
+
   }
 
 }

@@ -14,6 +14,21 @@
   width: 90%;
 }
 
+tr:hover {
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.rotated > td > span > i {
+  transform: rotate(90deg);
+  transition: .4s ease;
+}
+
+td > span > i {
+  transform: rotate(0deg);
+  transition: .4s ease;
+}
+
 .box{
   /* background-color: #eee; */
   box-shadow: none;

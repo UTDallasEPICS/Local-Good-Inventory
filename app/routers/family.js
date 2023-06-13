@@ -171,6 +171,14 @@ family.post('/:phoneNumber/checkin', (req, res) => {
             numberOfClients: family.adults,
             numberOfYouth: family.minors,
             numberOfSeniors: family.seniors
+          },
+          $push: {
+            householdsList: {phone: family.phoneNumber, date: req.query.date},
+            individualHouseholdsList: {phone: family.phoneNumber, date: req.query.date},
+            newHouseholdsList: {phone: family.phoneNumber, date: req.query.date},
+            clientsList: {phone: family.phoneNumber, date: req.query.date},
+            youthList: {phone: family.phoneNumber, date: req.query.date},
+            seniorsList: {phone: family.phoneNumber, date: req.query.date}
           }}
         );
       } else if (!checkedInThisMonth) {  //Case: They haven't checked into the market yet this month
@@ -181,12 +189,22 @@ family.post('/:phoneNumber/checkin', (req, res) => {
             numberOfClients: family.adults,
             numberOfYouth: family.minors,
             numberOfSeniors: family.seniors
+          },
+          $push: {
+            householdsList: {phone: family.phoneNumber, date: req.query.date},
+            individualHouseholdsList: {phone: family.phoneNumber, date: req.query.date},
+            clientsList: {phone: family.phoneNumber, date: req.query.date},
+            youthList: {phone: family.phoneNumber, date: req.query.date},
+            seniorsList: {phone: family.phoneNumber, date: req.query.date}
           }}
         );
       } else { // Case: They've already checked in before this month
         reportsCollection.findOneAndUpdate(reportsQuery, 
           {$inc: {
             households: 1 // Only increase the total number of households served
+          },
+          $push: {
+            householdsList: {phone: family.phoneNumber, date: req.query.date}
           }});
       }
     }

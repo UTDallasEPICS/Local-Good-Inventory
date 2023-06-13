@@ -1,36 +1,71 @@
 <div class="container">
   <div class ="table">
 
-    <tr>
+    <tr [ngClass]="{'rotated':this.selectedField == 'individualHouseholds'}" (click)="select('individualHouseholds')">
       <td class = "title">Total Number of Individual Households Served this Month</td>
       <td>{{report.individualHouseholds ? report.individualHouseholds : 0}}</td>
+      <td><span class="icon"><i class="fas fa-chevron-right"></i></span></td>
     </tr>
+    <div *ngIf="this.selectedField == 'individualHouseholds'">
+      <tr *ngFor="let family of this.familyList">
+        {{family.family.firstName}} {{family.family.lastName}} {{family.date}}
+      </tr>
+    </div>
 
-    <tr>
+    <tr [ngClass]="{'rotated':this.selectedField == 'households'}" (click)="select('households')">
       <td class = "title">Total Number of Households Served this Month</td>
       <td>{{report.households ? report.households : 0}}</td>
+      <td><span class="icon"><i class="fas fa-chevron-right"></i></span></td>
     </tr>
+    <div *ngIf="this.selectedField == 'households'">
+      <tr *ngFor="let family of this.familyList">
+        {{family.family.firstName}} {{family.family.lastName}} {{family.date}}
+      </tr>
+    </div>
 
-    <tr>
+    <tr [ngClass]="{'rotated':this.selectedField == 'newHouseholds'}" (click)="select('newHouseholds')">
       <td class = "title">Total Number of New Households Served this Month</td>
       <td>{{report.newHouseholds ? report.newHouseholds : 0}}</td>
+      <td><span class="icon"><i class="fas fa-chevron-right"></i></span></td>
     </tr>
+    <div *ngIf="this.selectedField == 'newHouseholds'">
+      <tr *ngFor="let family of this.familyList">
+        {{family.family.firstName}} {{family.family.lastName}} {{family.date}}
+      </tr>
+    </div>
 
-    <tr>
+    <tr [ngClass]="{'rotated':this.selectedField == 'numberOfYouth'}" (click)="select('numberOfYouth')">
       <td class = "title">Number of Clients 17 and Under</td>
       <td>{{report.numberOfYouth ? report.numberOfYouth : 0 }}</td>
+      <td><span class="icon"><i class="fas fa-chevron-right"></i></span></td>
     </tr>
+    <div *ngIf="this.selectedField == 'numberOfYouth'">
+      <tr *ngFor="let family of this.familyList">
+        {{family.family.firstName}} {{family.family.lastName}} {{family.date}} {{family.family.minors}} age 0-17
+      </tr>
+    </div>
 
-
-    <tr>
+    <tr [ngClass]="{'rotated':this.selectedField == 'numberOfClients'}" (click)="select('numberOfClients')">
       <td class = "title">Number of Clients 18 to 59</td>
       <td>{{report.numberOfClients ? report.numberOfClients : 0}}</td>
+      <td><span class="icon"><i class="fas fa-chevron-right"></i></span></td>
     </tr>
+    <div *ngIf="this.selectedField == 'numberOfClients'">
+      <tr *ngFor="let family of this.familyList">
+        {{family.family.firstName}} {{family.family.lastName}} {{family.date}} {{family.family.adults}} age 18-59
+      </tr>
+    </div>
 
-    <tr>
+    <tr [ngClass]="{'rotated':this.selectedField == 'numberOfSeniors'}" (click)="select('numberOfSeniors')">
       <td class = "title">Number of Clients 60 and Over</td>
       <td>{{report.numberOfSeniors ? report.numberOfSeniors : 0}}</td>
+      <td><span class="icon"><i class="fas fa-chevron-right"></i></span></td>
     </tr>
+    <div *ngIf="this.selectedField == 'numberOfSeniors'">
+      <tr *ngFor="let family of this.familyList">
+        {{family.family.firstName}} {{family.family.lastName}} {{family.date}} {{family.family.seniors}} age 60+
+      </tr>
+    </div>
 
   </div>
   <div class="box">

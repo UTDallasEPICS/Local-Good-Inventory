@@ -8,12 +8,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  public pages = [{page: "Stats", active: true},
-                  {page: "Settings", active: false},
-                  {page: "Families", active: false},
+  public pages = [{page: "Families", active: true},
                   {page: "Appointments", active: false},
-                  {page: "Import", active: false},
+                  {page: "Stats", active: false},
                   {page: "Events", active: false},
+                  {page: "Import", active: false},
+                  {page: "Settings", active: false},
                   {page: "Advanced", active: false}];
 
   constructor(private http: HttpClient) { }
