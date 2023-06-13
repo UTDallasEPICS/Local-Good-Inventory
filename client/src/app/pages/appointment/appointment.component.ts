@@ -79,14 +79,16 @@ export class AppointmentComponent implements OnInit {
                     parseInt(settingsDate.endTime.split(':')[1]);
 
       this.appointmentService.updateAppointment(this.nextAppointment).then((res) => {
-        this.appointment = res
+        this.appointment = res;
         
         var full;
         for(var i = startTime; i <= endTime; i+= settingsDate.interval) {
           full = false;
           this.appointment.timeslots.forEach(slot => { // Check if the timeslot that's being pushed has met maximum capacity
+            if(slot.time == `0${Math.floor(i / 60)}:${(i % 60) == 0 ? "00" : i % 60}` && slot.quantity >= settingsDate.quantity)
+              full = true;
             if(slot.time == `${Math.floor(i / 60)}:${(i % 60) == 0 ? "00" : i % 60}` && slot.quantity >= settingsDate.quantity)
-            full = true;
+              full = true;
           });
 
           if(!full)
