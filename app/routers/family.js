@@ -99,8 +99,8 @@ family.put('/:phoneNumber', (req, res) => {
     TEFAPForms: req.body.TEFAPForms } };
 
   familiesCollection.updateOne(query, newValue, {upsert: true});
-  res.status(201);
-  console.log(`Family with phone number ${req.params.phoneNumber} successfully created/updated.`)
+  res.status(201).json({message: `Family with phone number ${req.params.phoneNumber} successfully created/updated.`});
+  //console.log(`Family with phone number ${req.params.phoneNumber} successfully created/updated.`);
 });
 
 /**
@@ -210,8 +210,8 @@ family.post('/:phoneNumber/checkin', (req, res) => {
     }
 
   });
-  res.status(200);
-  console.log(`Sucessfully checked in family for appointment ${req.query.date} and event id ${req.query.id}`);
+  res.status(200).json({message: `Sucessfully checked in family for appointment ${req.query.date} and event id ${req.query.id}`});
+  //console.log(`Sucessfully checked in family for appointment ${req.query.date} and event id ${req.query.id}`);
 });
 
 /**
@@ -241,8 +241,8 @@ family.put('/:phoneNumber/appointment', (req, res) => {
 
   const familyQuery = {phoneNumber: req.params.phoneNumber};
   familiesCollection.findOneAndUpdate(familyQuery, {$push: {appointments: { $each: [{id:req.query.id, date: req.query.date, checkedIn: false}], $sort: {date: 1} }}});
-  res.status(201);
-  console.log(`Appointment with date ${req.query.date} and id ${req.query.id} sucessfully created.`);
+  res.status(201).json({message: `Appointment with date ${req.query.date} and id ${req.query.id} sucessfully created.`});
+  //console.log(`Appointment with date ${req.query.date} and id ${req.query.id} sucessfully created.`);
 }); 
   
 /**
