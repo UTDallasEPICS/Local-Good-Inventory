@@ -43,7 +43,8 @@ export class CheckinCompleteComponent implements OnInit {
           console.log("null appointment found");
         }
         this.filteredAppointments.push(curr);
-        this.events.set(curr.id, await this.eventService.getEvent(curr.id));
+        if(!this.events.has(curr.id))
+          this.events.set(curr.id, await this.eventService.getEvent(curr.id));
       }
     }
     console.log(this.family.appointments);
