@@ -151,7 +151,7 @@ family.post('/:phoneNumber/checkin', (req, res) => {
       return;
     }
 
-    var appointmentQuery = {appointments: {$elemMatch: {'id': req.query.id, 'date': req.query.date}}};
+    var appointmentQuery = {phoneNumber: req.params.phoneNumber, appointments: {$elemMatch: {'id': req.query.id, 'date': req.query.date}}};
     familiesCollection.findOneAndUpdate(appointmentQuery, {$set: {'appointments.$.checkedIn': true}});
     
     //If they are checking into the market, update the report.
