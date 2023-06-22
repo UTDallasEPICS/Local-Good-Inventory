@@ -24,8 +24,8 @@ setup.post('/events', (req, res) => {
   }};
 
   eventsCollection.updateOne(query, newValue, {upsert: true});
-  console.log("Events Database Initialized")
-  res.status(201);
+  //console.log("Events Database Initialized");
+  res.status(201).json({message: "Events Database Initialized"});
 });
 
 setup.post('/settings', (req, res) => {

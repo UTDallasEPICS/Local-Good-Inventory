@@ -38,8 +38,8 @@ event.put('/', (req, res) => {
     formURL: req.body.formURL
   };
   eventsCollection.insertOne(newValue);
-  res.status(201);
-  console.log(`Sucessfully inserted event with name ${req.body.eventName}`);
+  res.status(201).json({message: `Sucessfully inserted event with name ${req.body.eventName}`});
+  //console.log(`Sucessfully inserted event with name ${req.body.eventName}`);
 });
 
 /**

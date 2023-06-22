@@ -49,8 +49,8 @@ appointment.post('/', (req, res) => {
       timeslots: req.body.timeslots,
       eventID: req.body.eventID } };
     appointmentsCollection.updateOne(query, newValue, {upsert: true});
-    res.status(200);
-    console.log(`Appointment for ${req.body.month}-${req.body.date}-${req.body.year} for event ${req.body.eventID} sucessfully updated`);
+    res.status(200).json({message: `Appointment for ${req.body.month}-${req.body.date}-${req.body.year} for event ${req.body.eventID} sucessfully updated`});
+    //console.log(`Appointment for ${req.body.month}-${req.body.date}-${req.body.year} for event ${req.body.eventID} sucessfully updated`);
   }
 });
 

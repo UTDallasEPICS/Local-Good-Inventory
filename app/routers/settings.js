@@ -24,8 +24,8 @@ settings.get('/', (req, res) => {
       blockOuts: req.body.blockOuts } };
     const query = {};
     settingsCollection.updateOne(query, newValue, {upsert: true});
-    res.status(201);
-    console.log("Post Settings Successful");
+    res.status(201).json({message: "Post Settings Successful"});
+    //console.log("Post Settings Successful");
   });
 
 module.exports = settings;
