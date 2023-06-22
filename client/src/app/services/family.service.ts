@@ -32,17 +32,25 @@ export class FamilyService {
         this.familyUpdated.next({...family});
     }
 
-    loadFamily(phoneNumber: string) {
-        this.http.get<{family: Family}>(
-            `${environment.API_URL}/family/${phoneNumber}`,
-            {
-                headers: { Authorization: `Bearer ${this.accessToken}` }
-            }
-        )
-        .subscribe({
-            next: response => this.setCurrentFamily(response.family),
-            error: error => window.alert(error.error)
+    async loadFamily(phoneNumber: string) {
+        const promiseToken = new Promise<void>((resolve, reject) => {
+            this.http.get<{family: Family}>(
+                `${environment.API_URL}/family/${phoneNumber}`,
+                {
+                    headers: { Authorization: `Bearer ${this.accessToken}` }
+                }
+            )
+            .subscribe({
+                next: response => {
+                    this.setCurrentFamily(response.family); 
+                    resolve();
+                }, error: error => {
+                    window.alert(error.error),
+                    reject(error.text);
+                }
+            });
         });
+        return promiseToken;
     }
 
     async getFamily(phoneNumber: string): Promise<Family> {
@@ -112,7 +120,12 @@ export class FamilyService {
                 {
                     headers: { Authorization: `Bearer ${this.accessToken}` }
                 }).subscribe({
-                    error: error => window.alert(error.error)
+                    next: response => resolve(),
+                    error: error => {
+                        window.alert(error.error.text); 
+                        console.log(error);
+                        reject(error.error.text);
+                    }
                 });
         });
         return promiseToken;

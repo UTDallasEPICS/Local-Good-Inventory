@@ -46,11 +46,11 @@ export class CheckinComponent implements OnInit {
       return;  
     }  
     this.isValidFormSubmitted = true;
-    this.familyService.loadFamily(this.user.mobileNumber);  
     this.family = await this.familyService.getFamily(this.user.mobileNumber);
     if(this.family.lastName == "") {
       this.router.navigate(['new-registration'])
     } else {
+      await this.familyService.loadFamily(this.user.mobileNumber);  
       this.router.navigate(['/events-check-in']);
     }
     
